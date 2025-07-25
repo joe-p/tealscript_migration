@@ -6,6 +6,7 @@ import {
   Account,
   Application,
   bytes,
+  Bytes,
   assert,
   Txn,
   Global,
@@ -97,8 +98,8 @@ export class AbstractedAccount extends Contract {
     this.admin.value = newAdmin
   }
 
-  public arc58_getAdmin(): bytes {
-    return this.admin.value.bytes
+  public arc58_getAdmin(): arc4.Address {
+    return new arc4.Address(this.admin.value)
   }
 
   public arc58_verifyAuthAddr(): void {
@@ -153,8 +154,8 @@ export class AbstractedAccount extends Contract {
     this.verifyRekeyToAbstractedAccount()
   }
 
-  public arc58_rekeyToNamedPlugin(name: bytes): void {
-    this.arc58_rekeyToPlugin(this.namedPlugins(name).value.application)
+  public arc58_rekeyToNamedPlugin(name: string): void {
+    this.arc58_rekeyToPlugin(this.namedPlugins(Bytes(name)).value.application)
   }
 
   public arc58_addPlugin(
@@ -182,7 +183,7 @@ export class AbstractedAccount extends Contract {
   }
 
   public arc58_addNamedPlugin(
-    name: bytes,
+    name: string,
     app: Application,
     allowedCaller: Account,
     lastValidRound: uint64,
@@ -190,10 +191,11 @@ export class AbstractedAccount extends Contract {
     adminPrivileges: boolean,
   ): void {
     assertMatch(Txn, { sender: this.admin.value })
-    assert(!this.namedPlugins(name).exists)
+    const nameBytes = Bytes(name)
+    assert(!this.namedPlugins(nameBytes).exists)
 
     const key: PluginsKey = { application: app, allowedCaller: allowedCaller }
-    this.namedPlugins(name).value = clone(key)
+    this.namedPlugins(nameBytes).value = clone(key)
     this.plugins(key).value = {
       lastValidRound: lastValidRound,
       cooldown: cooldown,
@@ -202,11 +204,12 @@ export class AbstractedAccount extends Contract {
     }
   }
 
-  public arc58_removeNamedPlugin(name: bytes): void {
+  public arc58_removeNamedPlugin(name: string): void {
     assertMatch(Txn, { sender: this.admin.value })
 
-    const app = clone(this.namedPlugins(name).value)
-    this.namedPlugins(name).delete()
+    const nameBytes = Bytes(name)
+    const app = clone(this.namedPlugins(nameBytes).value)
+    this.namedPlugins(nameBytes).delete()
     this.plugins(app).delete()
   }
 }
