@@ -2,5 +2,7 @@ Below are links to a TEALScript contract and the location for a desired Algorand
 
 The source code for Alogrand TypeScript, docs, and examples can be found at: <https://github.com/algorandfoundation/puya-ts>
 
-TEALScript Contract: `tealscript/arc58.algo.ts.tealscript`
-Algorand TypeScript Contract: `smart_contracts/arc58/contract.algo.ts`
+TEALScript Contract: `tealscript/reti/stakingPool.algo.ts.tealscript` (note it imports from `tealscript/reti/constants.algo.ts.tealscript`)
+Algorand TypeScript Contract: `smart_contracts/reti/stakingPool.algo.ts` (also include constants.algo.ts)
+
+You MUST preserve all comments as much as possible. This is especially true for header typedoc comments, which should never be removed.
