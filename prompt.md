@@ -2,5 +2,5 @@ Below are links to a TEALScript contract and the location for a desired Algorand
 
 The source code for Alogrand TypeScript, docs, and examples can be found at: <https://github.com/algorandfoundation/puya-ts>
 
-TEALScript Contract: `tealscript/merkle.algo.ts.tealscript`
-Algorand TypeScript Contract: `smart_contracts/merkle/contract.algo.ts`
+TEALScript Contract: `tealscript/arc58.algo.ts.tealscript`
+Algorand TypeScript Contract: `smart_contracts/arc58/contract.algo.ts`
