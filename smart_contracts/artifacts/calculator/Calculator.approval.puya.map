@@ -1,0 +1,492 @@
+{
+  "version": 3,
+  "sources": [
+    "/Users/joe/git/joe-p/tealscript_migration/smart_contracts/calculator/contract.algo.ts"
+  ],
+  "mappings": ";AAEA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;;AAUE;;AAAA;AAAA;AAAA;;AAAA;AAVF;;;AAAA;AAAA;;;AAAA;AAAA;;;AAAA;;;AAUE;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;;AAVF;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;;AAUE;;;AAGM;;AAAc;;;;;AAAd;AAAJ;;;AAXM;;AAAA;;AAAiB;AAmBvB;AANW;;AAAc;;;;;;;;;;;;AAAd;AAAJ;AARA;;AAAA;;AAAA;AAAA;;;AAAS;;AAAA;;AAAA;AAchB;AAdwB;;AAAA;;AAAA;AAcxB",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "@algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram",
+      "params": {},
+      "block": "main",
+      "stack_in": [],
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "3": {
+      "op": "bz main_bare_routing@6",
+      "stack_out": []
+    },
+    "6": {
+      "op": "pushbytes 0x76a7ef33 // method \"doMath(uint64,uint64,string)uint64\"",
+      "defined_out": [
+        "Method(doMath(uint64,uint64,string)uint64)"
+      ],
+      "stack_out": [
+        "Method(doMath(uint64,uint64,string)uint64)"
+      ]
+    },
+    "12": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(doMath(uint64,uint64,string)uint64)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(doMath(uint64,uint64,string)uint64)",
+        "tmp%2#0"
+      ]
+    },
+    "15": {
+      "op": "match main_doMath_route@3",
+      "stack_out": []
+    },
+    "19": {
+      "block": "main_after_if_else@10",
+      "stack_in": [],
+      "op": "pushint 0 // 0",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "21": {
+      "op": "return",
+      "stack_out": []
+    },
+    "22": {
+      "block": "main_doMath_route@3",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "24": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "25": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "26": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "28": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "29": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "reinterpret_bytes[8]%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_bytes[8]%0#0"
+      ]
+    },
+    "32": {
+      "op": "btoi",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "33": {
+      "op": "txna ApplicationArgs 2",
+      "defined_out": [
+        "reinterpret_bytes[8]%1#0",
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0",
+        "reinterpret_bytes[8]%1#0"
+      ]
+    },
+    "36": {
+      "op": "btoi",
+      "defined_out": [
+        "tmp%7#0",
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%7#0",
+        "tmp%8#0"
+      ]
+    },
+    "37": {
+      "op": "txna ApplicationArgs 3",
+      "defined_out": [
+        "tmp%7#0",
+        "tmp%8#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%7#0",
+        "tmp%8#0",
+        "tmp%9#0"
+      ]
+    },
+    "40": {
+      "op": "extract 2 0",
+      "defined_out": [
+        "tmp%10#0",
+        "tmp%7#0",
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%7#0",
+        "tmp%8#0",
+        "tmp%10#0"
+      ]
+    },
+    "43": {
+      "callsub": "smart_contracts/calculator/contract.algo.ts::Calculator.doMath",
+      "op": "callsub doMath",
+      "defined_out": [
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "to_encode%0#0"
+      ]
+    },
+    "46": {
+      "op": "itob",
+      "defined_out": [
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0"
+      ]
+    },
+    "47": {
+      "op": "pushbytes 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0",
+        "0x151f7c75"
+      ]
+    },
+    "53": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "val_as_bytes%0#0"
+      ]
+    },
+    "54": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%11#0"
+      ]
+    },
+    "55": {
+      "op": "log",
+      "stack_out": []
+    },
+    "56": {
+      "op": "pushint 1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "58": {
+      "op": "return",
+      "stack_out": []
+    },
+    "59": {
+      "block": "main_bare_routing@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "61": {
+      "op": "bnz main_after_if_else@10",
+      "stack_out": []
+    },
+    "64": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%13#0"
+      ]
+    },
+    "66": {
+      "op": "!",
+      "defined_out": [
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "tmp%14#0"
+      ]
+    },
+    "67": {
+      "error": "can only call when creating",
+      "op": "assert // can only call when creating",
+      "stack_out": []
+    },
+    "68": {
+      "op": "pushint 1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "70": {
+      "op": "return",
+      "stack_out": []
+    },
+    "71": {
+      "subroutine": "smart_contracts/calculator/contract.algo.ts::Calculator.doMath",
+      "params": {
+        "a#0": "uint64",
+        "b#0": "uint64",
+        "operation#0": "bytes"
+      },
+      "block": "doMath",
+      "stack_in": [],
+      "op": "proto 3 1"
+    },
+    "74": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "operation#0 (copy)"
+      ],
+      "stack_out": [
+        "operation#0 (copy)"
+      ]
+    },
+    "76": {
+      "op": "pushbytes \"sum\"",
+      "defined_out": [
+        "\"sum\"",
+        "operation#0 (copy)"
+      ],
+      "stack_out": [
+        "operation#0 (copy)",
+        "\"sum\""
+      ]
+    },
+    "81": {
+      "op": "==",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "82": {
+      "op": "bz doMath_else_body@2",
+      "stack_out": []
+    },
+    "85": {
+      "op": "frame_dig -3",
+      "defined_out": [
+        "a#0 (copy)"
+      ],
+      "stack_out": [
+        "a#0 (copy)"
+      ]
+    },
+    "87": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "a#0 (copy)",
+        "b#0 (copy)"
+      ],
+      "stack_out": [
+        "a#0 (copy)",
+        "b#0 (copy)"
+      ]
+    },
+    "89": {
+      "op": "+",
+      "defined_out": [
+        "result#1"
+      ],
+      "stack_out": [
+        "result#1"
+      ]
+    },
+    "90": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "91": {
+      "block": "doMath_else_body@2",
+      "stack_in": [],
+      "op": "frame_dig -1",
+      "defined_out": [
+        "operation#0 (copy)"
+      ],
+      "stack_out": [
+        "operation#0 (copy)"
+      ]
+    },
+    "93": {
+      "op": "pushbytes \"difference\"",
+      "defined_out": [
+        "\"difference\"",
+        "operation#0 (copy)"
+      ],
+      "stack_out": [
+        "operation#0 (copy)",
+        "\"difference\""
+      ]
+    },
+    "105": {
+      "op": "==",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "106": {
+      "error": "Invalid operation",
+      "op": "assert // Invalid operation",
+      "stack_out": []
+    },
+    "107": {
+      "op": "frame_dig -3",
+      "defined_out": [
+        "a#0 (copy)"
+      ],
+      "stack_out": [
+        "a#0 (copy)"
+      ]
+    },
+    "109": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "a#0 (copy)",
+        "b#0 (copy)"
+      ],
+      "stack_out": [
+        "a#0 (copy)",
+        "b#0 (copy)"
+      ]
+    },
+    "111": {
+      "op": ">=",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "112": {
+      "op": "bz doMath_ternary_false@9",
+      "stack_out": []
+    },
+    "115": {
+      "op": "frame_dig -3",
+      "stack_out": [
+        "a#0 (copy)"
+      ]
+    },
+    "117": {
+      "op": "frame_dig -2",
+      "stack_out": [
+        "a#0 (copy)",
+        "b#0 (copy)"
+      ]
+    },
+    "119": {
+      "op": "-",
+      "defined_out": [
+        "result#1"
+      ],
+      "stack_out": [
+        "result#1"
+      ]
+    },
+    "120": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "121": {
+      "block": "doMath_ternary_false@9",
+      "stack_in": [],
+      "op": "frame_dig -2",
+      "defined_out": [
+        "b#0 (copy)"
+      ],
+      "stack_out": [
+        "b#0 (copy)"
+      ]
+    },
+    "123": {
+      "op": "frame_dig -3",
+      "defined_out": [
+        "a#0 (copy)",
+        "b#0 (copy)"
+      ],
+      "stack_out": [
+        "b#0 (copy)",
+        "a#0 (copy)"
+      ]
+    },
+    "125": {
+      "op": "-",
+      "defined_out": [
+        "result#1"
+      ],
+      "stack_out": [
+        "result#1"
+      ]
+    },
+    "126": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}

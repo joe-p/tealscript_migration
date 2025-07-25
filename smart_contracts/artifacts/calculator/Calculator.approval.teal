@@ -1,0 +1,107 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    // smart_contracts/calculator/contract.algo.ts:3
+    // export class Calculator extends Contract {
+    txn NumAppArgs
+    bz main_bare_routing@6
+    pushbytes 0x76a7ef33 // method "doMath(uint64,uint64,string)uint64"
+    txna ApplicationArgs 0
+    match main_doMath_route@3
+
+main_after_if_else@10:
+    // smart_contracts/calculator/contract.algo.ts:3
+    // export class Calculator extends Contract {
+    pushint 0 // 0
+    return
+
+main_doMath_route@3:
+    // smart_contracts/calculator/contract.algo.ts:13
+    // public doMath(a: uint64, b: uint64, operation: string): uint64 {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/calculator/contract.algo.ts:3
+    // export class Calculator extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    txna ApplicationArgs 2
+    btoi
+    txna ApplicationArgs 3
+    extract 2 0
+    // smart_contracts/calculator/contract.algo.ts:13
+    // public doMath(a: uint64, b: uint64, operation: string): uint64 {
+    callsub doMath
+    itob
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_bare_routing@6:
+    // smart_contracts/calculator/contract.algo.ts:3
+    // export class Calculator extends Contract {
+    txn OnCompletion
+    bnz main_after_if_else@10
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    pushint 1 // 1
+    return
+
+
+// smart_contracts/calculator/contract.algo.ts::Calculator.doMath(a: uint64, b: uint64, operation: bytes) -> uint64:
+doMath:
+    // smart_contracts/calculator/contract.algo.ts:13
+    // public doMath(a: uint64, b: uint64, operation: string): uint64 {
+    proto 3 1
+    // smart_contracts/calculator/contract.algo.ts:16
+    // if (operation === 'sum') {
+    frame_dig -1
+    pushbytes "sum"
+    ==
+    bz doMath_else_body@2
+    // smart_contracts/calculator/contract.algo.ts:5
+    // const result: uint64 = a + b
+    frame_dig -3
+    frame_dig -2
+    +
+    // smart_contracts/calculator/contract.algo.ts:24
+    // return result
+    retsub
+
+doMath_else_body@2:
+    // smart_contracts/calculator/contract.algo.ts:18
+    // } else if (operation === 'difference') {
+    frame_dig -1
+    pushbytes "difference"
+    ==
+    assert // Invalid operation
+    // smart_contracts/calculator/contract.algo.ts:10
+    // return a >= b ? a - b : b - a
+    frame_dig -3
+    frame_dig -2
+    >=
+    bz doMath_ternary_false@9
+    frame_dig -3
+    frame_dig -2
+    -
+    // smart_contracts/calculator/contract.algo.ts:24
+    // return result
+    retsub
+
+doMath_ternary_false@9:
+    // smart_contracts/calculator/contract.algo.ts:10
+    // return a >= b ? a - b : b - a
+    frame_dig -2
+    frame_dig -3
+    -
+    // smart_contracts/calculator/contract.algo.ts:24
+    // return result
+    retsub
