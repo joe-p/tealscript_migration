@@ -336,6 +336,7 @@ class AppCaller extends LogicSig {
 
 In TEALScript, all of the type are injecting into the global namespace. This means no importing is required for most functions and objects.
 Algorand Typescript, however, requires explicit importing of every type, allowing for better LSP discovery.
+asset3_txn.assetName === Bytes('AST3'),
 
 ##### TEALScript
 
@@ -493,4 +494,24 @@ b.push(4)
 
 assertMatch(a, [1, 2, 3])
 assertMatch(b, [1, 2, 3, 4]) // a and b are different arrays
+```
+
+### String & Bytes
+
+In TEALScript, strings and bytes are interchangeable. In Algorand TypeScript, bytes are a distinct type. This means that strings must be converted to bytes before being used in places that expect bytes (i.e comparing against protocol value). To preserve current ABI signatures, any `string` string argument to a function should remain as `strnig`, but once use it's recommended to convert it to bytes using the `Bytes` constructor.
+
+##### TEALScript
+
+```ts
+function(asa: AssetID, expectedName: string) {
+  assert(asa.assetName === expectedName);
+}
+```
+
+##### Algorand TypeScript
+
+```ts
+function(asa: Asset, expectedName: string) {
+  assertMatch(asa.assetName, Bytes(expectedName));
+}
 ```
