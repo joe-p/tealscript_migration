@@ -240,6 +240,14 @@ assert(result === 'hello world')
 
 TODO: For 1.0 we will probably have similar types to TEALScript (i.e. `AppID` that is an ABI `uint64`) but exact API is TBD
 
+For now use the following table:
+
+| TEALScript Type | Algorand TypeScript Arg | Algorand TypeScript Return (Or Type in Another Type) |
+| ---------------- | ----------------------- | ----------------------------------------------------- |
+| `AssetID` | `Asset` | `uint64` |
+| `AppID` | `Application` | `uint64` |
+| `Address` | `Account` | `arc4.Address` |
+
 ### Compiled Contract Information
 
 TEALScript contracts have static methods for getting the contract programs and schema. In Algorand TypeScript, you must first explicitly
