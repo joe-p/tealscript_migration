@@ -28,14 +28,14 @@ export class MerkleTree extends Contract {
     let result = Bytes.fromHex(EMPTY_HASH)
 
     for (let i: uint64 = 0; i < TREE_DEPTH; i = i + 1) {
-      result = op.sha256(op.concat(result, result))
+      result = Bytes(op.sha256(op.concat(result, result)))
     }
 
     return result
   }
 
   private hashConcat(left: bytes, right: bytes): bytes {
-    return op.sha256(op.concat(left, right))
+    return Bytes(op.sha256(op.concat(left, right)))
   }
 
   private isRightSibling(elem: Branch): boolean {
@@ -67,22 +67,22 @@ export class MerkleTree extends Contract {
   }
 
   public verify(data: bytes, path: Path): void {
-    assert(this.root.value === this.calcRoot(op.sha256(data), path))
+    assert(this.root.value === this.calcRoot(Bytes(op.sha256(data)), path))
   }
 
   public appendLeaf(data: bytes, path: Path): void {
     assert(data !== Bytes(''))
     assert(this.root.value === this.calcRoot(Bytes.fromHex(EMPTY_HASH), path))
 
-    this.root.value = this.calcRoot(op.sha256(data), path)
+    this.root.value = this.calcRoot(Bytes(op.sha256(data)), path)
 
     this.size.value = this.size.value + 1
   }
 
   public updateLeaf(oldData: bytes, newData: bytes, path: Path): void {
     assert(newData !== Bytes(''))
-    assert(this.root.value === this.calcRoot(op.sha256(oldData), path))
+    assert(this.root.value === this.calcRoot(Bytes(op.sha256(oldData)), path))
 
-    this.root.value = this.calcRoot(op.sha256(newData), path)
+    this.root.value = this.calcRoot(Bytes(op.sha256(newData)), path)
   }
 }

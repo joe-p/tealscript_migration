@@ -3,7 +3,7 @@
   "sources": [
     "/Users/joe/git/joe-p/tealscript_migration/smart_contracts/calculator/contract.algo.ts"
   ],
-  "mappings": ";AAEA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;;AAUE;;AAAA;AAAA;AAAA;;AAAA;AAVF;;;AAAA;AAAA;;;AAAA;AAAA;;;AAAA;;;AAUE;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;;AAVF;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;;AAUE;;;AAGM;;AAAc;;;;;AAAd;AAAJ;;;AAXM;;AAAA;;AAAiB;AAmBvB;AANW;;AAAc;;;;;;;;;;;;AAAd;AAAJ;AARA;;AAAA;;AAAA;AAAA;;;AAAS;;AAAA;;AAAA;AAchB;AAdwB;;AAAA;;AAAA;AAcxB",
+  "mappings": ";AAEA;;AAAA;;;AAAA;;;;;;AAAA;;;AAAA;;;;AAAA;;;AAUE;;AAAA;AAAA;AAAA;;AAAA;AAVF;;;AAAA;AAAA;;;AAAA;AAAA;;;AAAA;;;AAUE;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;;AAVF;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;;AAUE;;;AAGM;;AAAc;;;;;AAAd;AAAJ;;;AAXuB;;AAAA;;AAAA;AAmBvB;AANW;;AAAc;;;;;;;;;;;;AAAd;AAAJ;AARA;;AAAA;;AAAA;AAAA;;;AAAS;;AAAA;;AAAA;AAchB;AAdwB;;AAAA;;AAAA;AAcxB",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -104,10 +104,10 @@
     "29": {
       "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "reinterpret_bytes[8]%0#0"
+        "reinterpret_Encoded(uint64)%0#0"
       ],
       "stack_out": [
-        "reinterpret_bytes[8]%0#0"
+        "reinterpret_Encoded(uint64)%0#0"
       ]
     },
     "32": {
@@ -122,12 +122,12 @@
     "33": {
       "op": "txna ApplicationArgs 2",
       "defined_out": [
-        "reinterpret_bytes[8]%1#0",
+        "reinterpret_Encoded(uint64)%1#0",
         "tmp%7#0"
       ],
       "stack_out": [
         "tmp%7#0",
-        "reinterpret_bytes[8]%1#0"
+        "reinterpret_Encoded(uint64)%1#0"
       ]
     },
     "36": {
@@ -144,56 +144,56 @@
     "37": {
       "op": "txna ApplicationArgs 3",
       "defined_out": [
-        "tmp%7#0",
-        "tmp%8#0",
-        "tmp%9#0"
-      ],
-      "stack_out": [
-        "tmp%7#0",
-        "tmp%8#0",
-        "tmp%9#0"
-      ]
-    },
-    "40": {
-      "op": "extract 2 0",
-      "defined_out": [
-        "tmp%10#0",
+        "reinterpret_Encoded(len+utf8[])%0#0",
         "tmp%7#0",
         "tmp%8#0"
       ],
       "stack_out": [
         "tmp%7#0",
         "tmp%8#0",
-        "tmp%10#0"
+        "reinterpret_Encoded(len+utf8[])%0#0"
+      ]
+    },
+    "40": {
+      "op": "extract 2 0",
+      "defined_out": [
+        "tmp%7#0",
+        "tmp%8#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%7#0",
+        "tmp%8#0",
+        "tmp%9#0"
       ]
     },
     "43": {
       "callsub": "smart_contracts/calculator/contract.algo.ts::Calculator.doMath",
       "op": "callsub doMath",
       "defined_out": [
-        "to_encode%0#0"
+        "tmp%10#0"
       ],
       "stack_out": [
-        "to_encode%0#0"
+        "tmp%10#0"
       ]
     },
     "46": {
       "op": "itob",
       "defined_out": [
-        "val_as_bytes%0#0"
+        "aggregate%val_as_bytes%0#0"
       ],
       "stack_out": [
-        "val_as_bytes%0#0"
+        "aggregate%val_as_bytes%0#0"
       ]
     },
     "47": {
       "op": "pushbytes 0x151f7c75",
       "defined_out": [
         "0x151f7c75",
-        "val_as_bytes%0#0"
+        "aggregate%val_as_bytes%0#0"
       ],
       "stack_out": [
-        "val_as_bytes%0#0",
+        "aggregate%val_as_bytes%0#0",
         "0x151f7c75"
       ]
     },
@@ -201,16 +201,16 @@
       "op": "swap",
       "stack_out": [
         "0x151f7c75",
-        "val_as_bytes%0#0"
+        "aggregate%val_as_bytes%0#0"
       ]
     },
     "54": {
       "op": "concat",
       "defined_out": [
-        "tmp%11#0"
+        "tmp%12#0"
       ],
       "stack_out": [
-        "tmp%11#0"
+        "tmp%12#0"
       ]
     },
     "55": {
@@ -235,10 +235,10 @@
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%12#0"
+        "tmp%13#0"
       ],
       "stack_out": [
-        "tmp%12#0"
+        "tmp%13#0"
       ]
     },
     "61": {
@@ -248,19 +248,19 @@
     "64": {
       "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%13#0"
+        "tmp%14#0"
       ],
       "stack_out": [
-        "tmp%13#0"
+        "tmp%14#0"
       ]
     },
     "66": {
       "op": "!",
       "defined_out": [
-        "tmp%14#0"
+        "tmp%15#0"
       ],
       "stack_out": [
-        "tmp%14#0"
+        "tmp%15#0"
       ]
     },
     "67": {
@@ -383,10 +383,10 @@
     "105": {
       "op": "==",
       "defined_out": [
-        "tmp%1#0"
+        "tmp%2#0"
       ],
       "stack_out": [
-        "tmp%1#0"
+        "tmp%2#0"
       ]
     },
     "106": {

@@ -1,0 +1,364 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    intcblock 0 1 3 33
+    bytecblock "root" 0xe3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 "" "size"
+    // smart_contracts/merkle/contract.algo.ts:22
+    // export class MerkleTree extends Contract {
+    txn NumAppArgs
+    bz main_after_if_else@11
+    pushbytess 0x2487c32c 0xb8447b36 0x506cb8d8 0x04f63238 0x255d93e3 // method "deleteApplication()void", method "createApplication()void", method "verify(byte[],byte[33][3])void", method "appendLeaf(byte[],byte[33][3])void", method "updateLeaf(byte[],byte[],byte[33][3])void"
+    txna ApplicationArgs 0
+    match main_deleteApplication_route@3 main_createApplication_route@4 main_verify_route@5 main_appendLeaf_route@6 main_updateLeaf_route@7
+
+main_after_if_else@11:
+    // smart_contracts/merkle/contract.algo.ts:22
+    // export class MerkleTree extends Contract {
+    intc_0 // 0
+    return
+
+main_updateLeaf_route@7:
+    // smart_contracts/merkle/contract.algo.ts:82
+    // public updateLeaf(oldData: bytes, newData: bytes, path: Path): void {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/merkle/contract.algo.ts:22
+    // export class MerkleTree extends Contract {
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    extract 2 0
+    txna ApplicationArgs 3
+    // smart_contracts/merkle/contract.algo.ts:82
+    // public updateLeaf(oldData: bytes, newData: bytes, path: Path): void {
+    callsub updateLeaf
+    intc_1 // 1
+    return
+
+main_appendLeaf_route@6:
+    // smart_contracts/merkle/contract.algo.ts:73
+    // public appendLeaf(data: bytes, path: Path): void {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/merkle/contract.algo.ts:22
+    // export class MerkleTree extends Contract {
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    // smart_contracts/merkle/contract.algo.ts:73
+    // public appendLeaf(data: bytes, path: Path): void {
+    callsub appendLeaf
+    intc_1 // 1
+    return
+
+main_verify_route@5:
+    // smart_contracts/merkle/contract.algo.ts:69
+    // public verify(data: bytes, path: Path): void {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/merkle/contract.algo.ts:22
+    // export class MerkleTree extends Contract {
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    // smart_contracts/merkle/contract.algo.ts:69
+    // public verify(data: bytes, path: Path): void {
+    callsub verify
+    intc_1 // 1
+    return
+
+main_createApplication_route@4:
+    // smart_contracts/merkle/contract.algo.ts:65
+    // public createApplication(): void {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    callsub createApplication
+    intc_1 // 1
+    return
+
+main_deleteApplication_route@3:
+    // smart_contracts/merkle/contract.algo.ts:61
+    // public deleteApplication(): void {
+    txn OnCompletion
+    pushint 5 // DeleteApplication
+    ==
+    assert // OnCompletion is not DeleteApplication
+    txn ApplicationID
+    assert // can only call when not creating
+    callsub deleteApplication
+    intc_1 // 1
+    return
+
+
+// smart_contracts/merkle/contract.algo.ts::MerkleTree.calcRoot(leaf: bytes, path: bytes) -> bytes, bytes:
+calcRoot:
+    // smart_contracts/merkle/contract.algo.ts:45
+    // private calcRoot(leaf: bytes, path: Path): bytes {
+    proto 2 2
+    // smart_contracts/merkle/contract.algo.ts:48
+    // for (let i: uint64 = 0; i < TREE_DEPTH; i = i + 1) {
+    intc_0 // 0
+    frame_dig -2
+
+calcRoot_while_top@1:
+    // smart_contracts/merkle/contract.algo.ts:48
+    // for (let i: uint64 = 0; i < TREE_DEPTH; i = i + 1) {
+    frame_dig 0
+    intc_2 // 3
+    <
+    bz calcRoot_after_while@6
+    // smart_contracts/merkle/contract.algo.ts:49
+    // const elem = path[i]
+    frame_dig 0
+    intc_3 // 33
+    *
+    frame_dig -1
+    swap
+    intc_3 // 33
+    extract3 // on error: index access is out of bounds
+    dup
+    // smart_contracts/merkle/contract.algo.ts:42
+    // return op.getByte(elem, 0) === RIGHT_SIBLING_PREFIX
+    intc_0 // 0
+    getbyte
+    pushint 170 // 170
+    ==
+    // smart_contracts/merkle/contract.algo.ts:51
+    // if (this.isRightSibling(elem)) {
+    bz calcRoot_else_body@4
+    // smart_contracts/merkle/contract.algo.ts:52
+    // result = this.hashConcat(result, op.extract(elem, 1, 32))
+    extract 1 32
+    // smart_contracts/merkle/contract.algo.ts:38
+    // return Bytes(op.sha256(op.concat(left, right)))
+    frame_dig 1
+    swap
+    concat
+    sha256
+    frame_bury 1
+
+calcRoot_after_if_else@5:
+    // smart_contracts/merkle/contract.algo.ts:48
+    // for (let i: uint64 = 0; i < TREE_DEPTH; i = i + 1) {
+    frame_dig 0
+    intc_1 // 1
+    +
+    frame_bury 0
+    b calcRoot_while_top@1
+
+calcRoot_else_body@4:
+    // smart_contracts/merkle/contract.algo.ts:54
+    // result = this.hashConcat(op.extract(elem, 1, 32), result)
+    extract 1 32
+    // smart_contracts/merkle/contract.algo.ts:38
+    // return Bytes(op.sha256(op.concat(left, right)))
+    frame_dig 1
+    concat
+    sha256
+    frame_bury 1
+    b calcRoot_after_if_else@5
+
+calcRoot_after_while@6:
+    // smart_contracts/merkle/contract.algo.ts:58
+    // return result
+    frame_dig 1
+    frame_dig -1
+    uncover 3
+    uncover 3
+    retsub
+
+
+// smart_contracts/merkle/contract.algo.ts::MerkleTree.deleteApplication() -> void:
+deleteApplication:
+    // smart_contracts/merkle/contract.algo.ts:62
+    // assertMatch(Txn, { sender: Global.creatorAddress })
+    txn Sender
+    global CreatorAddress
+    ==
+    assert // assert target is match for conditions
+    retsub
+
+
+// smart_contracts/merkle/contract.algo.ts::MerkleTree.createApplication() -> void:
+createApplication:
+    // smart_contracts/merkle/contract.algo.ts:65
+    // public createApplication(): void {
+    proto 0 0
+    // smart_contracts/merkle/contract.algo.ts:28
+    // let result = Bytes.fromHex(EMPTY_HASH)
+    bytec_1 // 0xe3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    // smart_contracts/merkle/contract.algo.ts:30
+    // for (let i: uint64 = 0; i < TREE_DEPTH; i = i + 1) {
+    intc_0 // 0
+
+createApplication_while_top@2:
+    // smart_contracts/merkle/contract.algo.ts:30
+    // for (let i: uint64 = 0; i < TREE_DEPTH; i = i + 1) {
+    frame_dig 1
+    intc_2 // 3
+    <
+    bz createApplication_after_while@4
+    // smart_contracts/merkle/contract.algo.ts:31
+    // result = Bytes(op.sha256(op.concat(result, result)))
+    frame_dig 0
+    dup
+    concat
+    sha256
+    frame_bury 0
+    // smart_contracts/merkle/contract.algo.ts:30
+    // for (let i: uint64 = 0; i < TREE_DEPTH; i = i + 1) {
+    frame_dig 1
+    intc_1 // 1
+    +
+    frame_bury 1
+    b createApplication_while_top@2
+
+createApplication_after_while@4:
+    // smart_contracts/merkle/contract.algo.ts:23
+    // public root = GlobalState<bytes>()
+    bytec_0 // "root"
+    // smart_contracts/merkle/contract.algo.ts:66
+    // this.root.value = this.calcInitRoot()
+    frame_dig 0
+    app_global_put
+    retsub
+
+
+// smart_contracts/merkle/contract.algo.ts::MerkleTree.verify(data: bytes, path: bytes) -> void:
+verify:
+    // smart_contracts/merkle/contract.algo.ts:69
+    // public verify(data: bytes, path: Path): void {
+    proto 2 0
+    // smart_contracts/merkle/contract.algo.ts:23
+    // public root = GlobalState<bytes>()
+    intc_0 // 0
+    bytec_0 // "root"
+    app_global_get_ex
+    assert // check GlobalState exists
+    // smart_contracts/merkle/contract.algo.ts:70
+    // assert(this.root.value === this.calcRoot(Bytes(op.sha256(data)), path))
+    frame_dig -2
+    sha256
+    frame_dig -1
+    callsub calcRoot
+    frame_bury -1
+    ==
+    assert
+    retsub
+
+
+// smart_contracts/merkle/contract.algo.ts::MerkleTree.appendLeaf(data: bytes, path: bytes) -> void:
+appendLeaf:
+    // smart_contracts/merkle/contract.algo.ts:73
+    // public appendLeaf(data: bytes, path: Path): void {
+    proto 2 0
+    // smart_contracts/merkle/contract.algo.ts:74
+    // assert(data !== Bytes(''))
+    frame_dig -2
+    bytec_2 // ""
+    !=
+    assert
+    // smart_contracts/merkle/contract.algo.ts:23
+    // public root = GlobalState<bytes>()
+    intc_0 // 0
+    bytec_0 // "root"
+    app_global_get_ex
+    assert // check GlobalState exists
+    // smart_contracts/merkle/contract.algo.ts:75
+    // assert(this.root.value === this.calcRoot(Bytes.fromHex(EMPTY_HASH), path))
+    bytec_1 // 0xe3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    frame_dig -1
+    callsub calcRoot
+    frame_bury -1
+    ==
+    assert
+    // smart_contracts/merkle/contract.algo.ts:77
+    // this.root.value = this.calcRoot(Bytes(op.sha256(data)), path)
+    frame_dig -2
+    sha256
+    frame_dig -1
+    callsub calcRoot
+    frame_bury -1
+    // smart_contracts/merkle/contract.algo.ts:23
+    // public root = GlobalState<bytes>()
+    bytec_0 // "root"
+    // smart_contracts/merkle/contract.algo.ts:77
+    // this.root.value = this.calcRoot(Bytes(op.sha256(data)), path)
+    swap
+    app_global_put
+    // smart_contracts/merkle/contract.algo.ts:25
+    // public size = GlobalState<uint64>()
+    intc_0 // 0
+    bytec_3 // "size"
+    app_global_get_ex
+    assert // check GlobalState exists
+    // smart_contracts/merkle/contract.algo.ts:79
+    // this.size.value = this.size.value + 1
+    intc_1 // 1
+    +
+    // smart_contracts/merkle/contract.algo.ts:25
+    // public size = GlobalState<uint64>()
+    bytec_3 // "size"
+    // smart_contracts/merkle/contract.algo.ts:79
+    // this.size.value = this.size.value + 1
+    swap
+    app_global_put
+    retsub
+
+
+// smart_contracts/merkle/contract.algo.ts::MerkleTree.updateLeaf(oldData: bytes, newData: bytes, path: bytes) -> void:
+updateLeaf:
+    // smart_contracts/merkle/contract.algo.ts:82
+    // public updateLeaf(oldData: bytes, newData: bytes, path: Path): void {
+    proto 3 0
+    // smart_contracts/merkle/contract.algo.ts:83
+    // assert(newData !== Bytes(''))
+    frame_dig -2
+    bytec_2 // ""
+    !=
+    assert
+    // smart_contracts/merkle/contract.algo.ts:23
+    // public root = GlobalState<bytes>()
+    intc_0 // 0
+    bytec_0 // "root"
+    app_global_get_ex
+    assert // check GlobalState exists
+    // smart_contracts/merkle/contract.algo.ts:84
+    // assert(this.root.value === this.calcRoot(Bytes(op.sha256(oldData)), path))
+    frame_dig -3
+    sha256
+    frame_dig -1
+    callsub calcRoot
+    frame_bury -1
+    ==
+    assert
+    // smart_contracts/merkle/contract.algo.ts:86
+    // this.root.value = this.calcRoot(Bytes(op.sha256(newData)), path)
+    frame_dig -2
+    sha256
+    frame_dig -1
+    callsub calcRoot
+    frame_bury -1
+    // smart_contracts/merkle/contract.algo.ts:23
+    // public root = GlobalState<bytes>()
+    bytec_0 // "root"
+    // smart_contracts/merkle/contract.algo.ts:86
+    // this.root.value = this.calcRoot(Bytes(op.sha256(newData)), path)
+    swap
+    app_global_put
+    retsub
