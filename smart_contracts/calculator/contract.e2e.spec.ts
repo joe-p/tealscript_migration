@@ -31,6 +31,4 @@ describe('Calculator contract', () => {
 
     expect(result.return).toBe('Hello World')
   })
-
 })
-

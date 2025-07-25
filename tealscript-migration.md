@@ -4,27 +4,27 @@ This document is up-to-date as of TEALScript v0.107.0 and Algorand TypeScript v1
 
 ## Migration Table
 
-| TEALScript | Algorand TypeScript | Notes |
-| --- | --- | --- |
-| JS Object | JS Object | Algorand TypeScript does not yet support nested dynamic types in JavaScript objects. TEALScript allows one level of nesting. For nested dynamic types, see [Objects](#objects) |
-| JS Array | JS Array | Algorand TypeScript does not yet support nested dynamic types in JavaScript arrays. TEALScript allows one level ofnesting. For nested dynamic types, see [Arrays](#arrays) |
-| `EventLogger` | [`emit`](https://dev.algorand.co/reference/algorand-typescript/api-reference/index/functions/emit) ||
-| `BoxKey` | [`Box`](TOOD: link to box docs) | The crate method has new parameters as shown [here](TODO: link to box section) |
-| `Txn` | `Transaction` ||
-| `PayTxn` | `PaymentTxn` ||
-| `AppCallTxn` | `ApplicationCallTxn` ||
-| `KeyRegTxn` | `KeyRegistrationTxn` ||
-| `OnCompletion` | `OnCompleteAction` ||
-| Eliptic curve opcodes (i.e `ecAdd`) | Now under [`ElipticCurve`](TODO: link to EC docs) (i.e. `ElipticCurve.add`) ||
-| `GlobalStateKey` | `GlobalState` ||
-| `LocalStateKey` | `LocalState` ||
-| `GlobalStateMap` | Not yet supported ||
-| `LocalStateMap` | Not yet supported ||
-| `isOptedInToApp` and `isOptedInToAsset` | [`isOptedIn`](TODO: link to isOptedInDocs) ||
-| `this.txn` | [`Txn`](TOOD: link to Txn docs) ||
-| `verify...Txn` | `assertMatch` | `assertMatch` can be used on any txn type or any object |
-| `globals` | [`Global`](TODO: link to Global docs) ||
-| `StaticArray` | `FixedArray` | May not cover all cases. See the array section for more details |
+| TEALScript                              | Algorand TypeScript                                                                                | Notes                                                                                                                                                                          |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| JS Object                               | JS Object                                                                                          | Algorand TypeScript does not yet support nested dynamic types in JavaScript objects. TEALScript allows one level of nesting. For nested dynamic types, see [Objects](#objects) |
+| JS Array                                | JS Array                                                                                           | Algorand TypeScript does not yet support nested dynamic types in JavaScript arrays. TEALScript allows one level ofnesting. For nested dynamic types, see [Arrays](#arrays)     |
+| `EventLogger`                           | [`emit`](https://dev.algorand.co/reference/algorand-typescript/api-reference/index/functions/emit) |                                                                                                                                                                                |
+| `BoxKey`                                | [`Box`](TOOD: link to box docs)                                                                    | The crate method has new parameters as shown [here](TODO: link to box section)                                                                                                 |
+| `Txn`                                   | `Transaction`                                                                                      |                                                                                                                                                                                |
+| `PayTxn`                                | `PaymentTxn`                                                                                       |                                                                                                                                                                                |
+| `AppCallTxn`                            | `ApplicationCallTxn`                                                                               |                                                                                                                                                                                |
+| `KeyRegTxn`                             | `KeyRegistrationTxn`                                                                               |                                                                                                                                                                                |
+| `OnCompletion`                          | `OnCompleteAction`                                                                                 |                                                                                                                                                                                |
+| Eliptic curve opcodes (i.e `ecAdd`)     | Now under [`ElipticCurve`](TODO: link to EC docs) (i.e. `ElipticCurve.add`)                        |                                                                                                                                                                                |
+| `GlobalStateKey`                        | `GlobalState`                                                                                      |                                                                                                                                                                                |
+| `LocalStateKey`                         | `LocalState`                                                                                       |                                                                                                                                                                                |
+| `GlobalStateMap`                        | Not yet supported                                                                                  |                                                                                                                                                                                |
+| `LocalStateMap`                         | Not yet supported                                                                                  |                                                                                                                                                                                |
+| `isOptedInToApp` and `isOptedInToAsset` | [`isOptedIn`](TODO: link to isOptedInDocs)                                                         |                                                                                                                                                                                |
+| `this.txn`                              | [`Txn`](TOOD: link to Txn docs)                                                                    |                                                                                                                                                                                |
+| `verify...Txn`                          | `assertMatch`                                                                                      | `assertMatch` can be used on any txn type or any object                                                                                                                        |
+| `globals`                               | [`Global`](TODO: link to Global docs)                                                              |                                                                                                                                                                                |
+| `StaticArray`                           | `FixedArray`                                                                                       | May not cover all cases. See the array section for more details                                                                                                                |
 
 ## Migrations
 
@@ -120,50 +120,50 @@ log(asset1_txn.createdAsset.id)
 ##### TEALScript
 
 ```ts
-    this.pendingGroup.addAssetCreation({
-      configAssetTotal: 1000,
-      configAssetName: 'AST3',
-      configAssetUnitName: 'unit',
-      configAssetDecimals: 3,
-      configAssetManager: this.app.address,
-      configAssetReserve: this.app.address,
-    });
+this.pendingGroup.addAssetCreation({
+  configAssetTotal: 1000,
+  configAssetName: 'AST3',
+  configAssetUnitName: 'unit',
+  configAssetDecimals: 3,
+  configAssetManager: this.app.address,
+  configAssetReserve: this.app.address,
+})
 
-    this.pendingGroup.addAppCall({
-      approvalProgram: APPROVE,
-      clearStateProgram: APPROVE,
-      fee: 0,
-    });
+this.pendingGroup.addAppCall({
+  approvalProgram: APPROVE,
+  clearStateProgram: APPROVE,
+  fee: 0,
+})
 
-    const appCreateTxn = this.lastInnerGroup[0];
-    const asset3_txn = this.lastInnerGroup[1];
+const appCreateTxn = this.lastInnerGroup[0]
+const asset3_txn = this.lastInnerGroup[1]
 
-    assert(appCreateTxn.createdApplicationID, 'app is created');
-    assert(asset3_txn.createdAssetID === 'AST3', 'asset3_txn is correct');
+assert(appCreateTxn.createdApplicationID, 'app is created')
+assert(asset3_txn.createdAssetID === 'AST3', 'asset3_txn is correct')
 ```
 
 ##### Algorand TypeScript
 
 ```ts
-    const assetParams = itxn.assetConfig({
-      total: 1000,
-      assetName: 'AST3',
-      unitName: 'unit',
-      decimals: 3,
-      manager: Global.currentApplicationAddress,
-      reserve: Global.currentApplicationAddress,
-    })
+const assetParams = itxn.assetConfig({
+  total: 1000,
+  assetName: 'AST3',
+  unitName: 'unit',
+  decimals: 3,
+  manager: Global.currentApplicationAddress,
+  reserve: Global.currentApplicationAddress,
+})
 
-    const appCreateParams = itxn.applicationCall({
-      approvalProgram: APPROVE,
-      clearStateProgram: APPROVE,
-      fee: 0,
-    })
+const appCreateParams = itxn.applicationCall({
+  approvalProgram: APPROVE,
+  clearStateProgram: APPROVE,
+  fee: 0,
+})
 
-    const [appCreateTxn, asset3_txn] = itxn.submitGroup(appCreateParams, assetParams)
+const [appCreateTxn, asset3_txn] = itxn.submitGroup(appCreateParams, assetParams)
 
-    assert(appCreateTxn.createdApp, 'app is created')
-    assert(asset3_txn.assetName === Bytes('AST3'), 'asset3_txn is correct')
+assert(appCreateTxn.createdApp, 'app is created')
+assert(asset3_txn.assetName === Bytes('AST3'), 'asset3_txn is correct')
 ```
 
 #### Typed Method Calls
@@ -178,7 +178,7 @@ These examples are for calling a contract method with the signature `greet(name:
 const result = sendMethodCall<typeof Hello.prototype.greet>({
   applicationID: app,
   methodArgs: ['algo dev'],
-});
+})
 
 assert(result === 'hello algo dev')
 ```
@@ -205,14 +205,14 @@ sendMethodCall<typeof Greeter.prototype.createApplication>({
   approvalProgram: Greeter.approvalProgram(),
   globalNumUint: Greeter.schema.global.numUint,
   methodArgs: ['hello'],
-});
+})
 
-const app = this.itxn.createdApplicationId;
+const app = this.itxn.createdApplicationId
 
 const result = sendMethodCall<typeof Greeter.prototype.greet>({
   applicationID: app,
   methodArgs: ['world'],
-});
+})
 
 assert(result == 'hello world')
 ```
@@ -225,7 +225,7 @@ const compiled = compileArc4(Greeter)
 
 const app = compiled.call.createApplication({
   args: ['hello'],
-  globalNumUint: compiled.globalUints
+  globalNumUint: compiled.globalUints,
 }).itxn.createdApp
 
 const result = compiled.call.greet({
@@ -254,7 +254,7 @@ sendMethodCall<typeof Greeter.prototype.createApplication>({
   approvalProgram: Greeter.approvalProgram(),
   globalNumUint: Greeter.schema.global.numUint,
   methodArgs: ['hello'],
-});
+})
 ```
 
 ##### Algorand TypeScript
@@ -266,7 +266,7 @@ const compiled = compileArc4(Greeter)
 // Then access program information on the compiled object
 const app = compiled.call.createApplication({
   args: ['hello'],
-  globalNumUint: compiled.globalUints
+  globalNumUint: compiled.globalUints,
 }).itxn.createdApp
 ```
 
@@ -306,10 +306,10 @@ In TEALScript, template variables must be properties of a contract. In Algorand 
 
 ```ts
 class AppCaller extends LogicSig {
-  APP_ID = TemplateVar<AppID>();
+  APP_ID = TemplateVar<AppID>()
 
   logic(): void {
-    assert(this.txn.applicationID === this.APP_ID);
+    assert(this.txn.applicationID === this.APP_ID)
   }
 }
 ```
@@ -319,7 +319,7 @@ class AppCaller extends LogicSig {
 ```ts
 class AppCaller extends LogicSig {
   logic(): void {
-    assert(this.txn.applicationID === TemplateVar<uint64>('APP_ID'));
+    assert(this.txn.applicationID === TemplateVar<uint64>('APP_ID'))
   }
 }
 ```
@@ -337,7 +337,7 @@ import { LogicSig } from '@algorandfoundation/tealscript'
 class AppCaller extends LogicSig {
   logic(): void {
     // No need to import assert
-    assert(this.txn.applicationID === 1234);
+    assert(this.txn.applicationID === 1234)
   }
 }
 ```
@@ -349,7 +349,7 @@ import { LogicSig, Txn, assert, uint64 } from '@algorandfoundation/tealscript'
 
 class AppCaller extends LogicSig {
   logic(): uint64 {
-    assert(Txn.applicationID === 1234);
+    assert(Txn.applicationID === 1234)
 
     return 1
   }
