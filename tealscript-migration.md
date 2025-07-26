@@ -243,10 +243,10 @@ TODO: For 1.0 we will probably have similar types to TEALScript (i.e. `AppID` th
 For now use the following table:
 
 | TEALScript Type | Algorand TypeScript Arg | Algorand TypeScript Return (Or Type in Another Type) |
-| ---------------- | ----------------------- | ----------------------------------------------------- |
-| `AssetID` | `Asset` | `uint64` |
-| `AppID` | `Application` | `uint64` |
-| `Address` | `Account` | `arc4.Address` |
+| --------------- | ----------------------- | ---------------------------------------------------- |
+| `AssetID`       | `Asset`                 | `uint64`                                             |
+| `AppID`         | `Application`           | `uint64`                                             |
+| `Address`       | `Account`               | `arc4.Address`                                       |
 
 ### Compiled Contract Information
 
