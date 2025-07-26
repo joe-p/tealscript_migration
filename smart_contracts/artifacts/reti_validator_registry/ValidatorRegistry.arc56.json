@@ -1,0 +1,1243 @@
+{
+    "name": "ValidatorRegistry",
+    "structs": {
+        "Constraints": [
+            {
+                "name": "epochPayoutRoundsMin",
+                "type": "uint64"
+            },
+            {
+                "name": "epochPayoutRoundsMax",
+                "type": "uint64"
+            },
+            {
+                "name": "minPctToValidatorWFourDecimals",
+                "type": "uint64"
+            },
+            {
+                "name": "maxPctToValidatorWFourDecimals",
+                "type": "uint64"
+            },
+            {
+                "name": "minEntryStake",
+                "type": "uint64"
+            },
+            {
+                "name": "maxAlgoPerPool",
+                "type": "uint64"
+            },
+            {
+                "name": "maxAlgoPerValidator",
+                "type": "uint64"
+            },
+            {
+                "name": "amtConsideredSaturated",
+                "type": "uint64"
+            },
+            {
+                "name": "maxNodes",
+                "type": "uint64"
+            },
+            {
+                "name": "maxPoolsPerNode",
+                "type": "uint64"
+            },
+            {
+                "name": "maxStakersPerPool",
+                "type": "uint64"
+            }
+        ],
+        "MbrAmounts": [
+            {
+                "name": "addValidatorMbr",
+                "type": "uint64"
+            },
+            {
+                "name": "addPoolMbr",
+                "type": "uint64"
+            },
+            {
+                "name": "poolInitMbr",
+                "type": "uint64"
+            },
+            {
+                "name": "addStakerMbr",
+                "type": "uint64"
+            }
+        ],
+        "NodePoolAssignmentConfig": [
+            {
+                "name": "nodes",
+                "type": "(uint64[3])[8]"
+            }
+        ],
+        "PoolInfo": [
+            {
+                "name": "poolAppId",
+                "type": "uint64"
+            },
+            {
+                "name": "totalStakers",
+                "type": "uint64"
+            },
+            {
+                "name": "totalAlgoStaked",
+                "type": "uint64"
+            }
+        ],
+        "PoolTokenPayoutRatio": [
+            {
+                "name": "poolPctOfWhole",
+                "type": "uint64[24]"
+            },
+            {
+                "name": "updatedForPayout",
+                "type": "uint64"
+            }
+        ],
+        "ValidatorConfig": [
+            {
+                "name": "id",
+                "type": "uint64"
+            },
+            {
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "name": "manager",
+                "type": "address"
+            },
+            {
+                "name": "nfdForInfo",
+                "type": "uint64"
+            },
+            {
+                "name": "entryGatingType",
+                "type": "uint64"
+            },
+            {
+                "name": "entryGatingAddress",
+                "type": "address"
+            },
+            {
+                "name": "entryGatingAssets",
+                "type": "uint64[4]"
+            },
+            {
+                "name": "gatingAssetMinBalance",
+                "type": "uint64"
+            },
+            {
+                "name": "rewardTokenId",
+                "type": "uint64"
+            },
+            {
+                "name": "rewardPerPayout",
+                "type": "uint64"
+            },
+            {
+                "name": "epochRoundLength",
+                "type": "uint64"
+            },
+            {
+                "name": "percentToValidator",
+                "type": "uint64"
+            },
+            {
+                "name": "validatorCommissionAddress",
+                "type": "address"
+            },
+            {
+                "name": "minEntryStake",
+                "type": "uint64"
+            },
+            {
+                "name": "maxAlgoPerPool",
+                "type": "uint64"
+            },
+            {
+                "name": "poolsPerNode",
+                "type": "uint64"
+            },
+            {
+                "name": "sunsettingOn",
+                "type": "uint64"
+            },
+            {
+                "name": "sunsettingTo",
+                "type": "uint64"
+            }
+        ],
+        "ValidatorCurState": [
+            {
+                "name": "numPools",
+                "type": "uint64"
+            },
+            {
+                "name": "totalStakers",
+                "type": "uint64"
+            },
+            {
+                "name": "totalAlgoStaked",
+                "type": "uint64"
+            },
+            {
+                "name": "rewardTokenHeldBack",
+                "type": "uint64"
+            }
+        ],
+        "ValidatorInfo": [
+            {
+                "name": "config",
+                "type": "ValidatorConfig"
+            },
+            {
+                "name": "state",
+                "type": "ValidatorCurState"
+            },
+            {
+                "name": "pools",
+                "type": "(uint64,uint64,uint64)[24]"
+            },
+            {
+                "name": "tokenPayoutRatio",
+                "type": "PoolTokenPayoutRatio"
+            },
+            {
+                "name": "nodePoolAssignments",
+                "type": "NodePoolAssignmentConfig"
+            }
+        ],
+        "ValidatorPoolKey": [
+            {
+                "name": "id",
+                "type": "uint64"
+            },
+            {
+                "name": "poolId",
+                "type": "uint64"
+            },
+            {
+                "name": "poolAppId",
+                "type": "uint64"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "updateApplication",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "UpdateApplication"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "createApplication",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "initStakingContract",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "approvalProgramSize"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "loadStakingContractData",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "offset"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "data"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "finalizeStakingContract",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "gas",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getMbrAmounts",
+            "args": [],
+            "returns": {
+                "type": "(uint64,uint64,uint64,uint64)",
+                "struct": "MbrAmounts"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getProtocolConstraints",
+            "args": [],
+            "returns": {
+                "type": "(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64)",
+                "struct": "Constraints"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getNumValidators",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getValidatorConfig",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                }
+            ],
+            "returns": {
+                "type": "(uint64,address,address,uint64,uint64,address,uint64[4],uint64,uint64,uint64,uint64,uint64,address,uint64,uint64,uint64,uint64,uint64)",
+                "struct": "ValidatorConfig"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getValidatorState",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                }
+            ],
+            "returns": {
+                "type": "(uint64,uint64,uint64,uint64)",
+                "struct": "ValidatorCurState"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getValidatorOwnerAndManager",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                }
+            ],
+            "returns": {
+                "type": "(address,address)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getPools",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                }
+            ],
+            "returns": {
+                "type": "(uint64,uint64,uint64)[]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getPoolAppId",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "poolId"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getPoolInfo",
+            "args": [
+                {
+                    "type": "(uint64,uint64,uint64)",
+                    "struct": "ValidatorPoolKey",
+                    "name": "poolKey"
+                }
+            ],
+            "returns": {
+                "type": "(uint64,uint64,uint64)",
+                "struct": "PoolInfo"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getCurMaxStakePerPool",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "doesStakerNeedToPayMBR",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "staker"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getStakedPoolsForAccount",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "staker"
+                }
+            ],
+            "returns": {
+                "type": "(uint64,uint64,uint64)[]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getTokenPayoutRatio",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                }
+            ],
+            "returns": {
+                "type": "(uint64[24],uint64)",
+                "struct": "PoolTokenPayoutRatio"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getNodePoolAssignments",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                }
+            ],
+            "returns": {
+                "type": "((uint64[3])[8])",
+                "struct": "NodePoolAssignmentConfig"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getNFDRegistryID",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "addValidator",
+            "args": [
+                {
+                    "type": "byte[]",
+                    "name": "nfdName"
+                },
+                {
+                    "type": "(uint64,address,address,uint64,uint64,address,uint64[4],uint64,uint64,uint64,uint64,uint64,address,uint64,uint64,uint64,uint64,uint64)",
+                    "struct": "ValidatorConfig",
+                    "name": "config"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "changeValidatorManager",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "address",
+                    "name": "manager"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "changeValidatorSunsetInfo",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "sunsettingOn"
+                },
+                {
+                    "type": "uint64",
+                    "name": "sunsettingTo"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "changeValidatorNFD",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "nfdAppID"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "nfdName"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "changeValidatorCommissionAddress",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "address",
+                    "name": "commissionAddress"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "changeValidatorRewardInfo",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "EntryGatingType"
+                },
+                {
+                    "type": "address",
+                    "name": "EntryGatingAddress"
+                },
+                {
+                    "type": "uint64[4]",
+                    "name": "EntryGatingAssets"
+                },
+                {
+                    "type": "uint64",
+                    "name": "GatingAssetMinBalance"
+                },
+                {
+                    "type": "uint64",
+                    "name": "RewardPerPayout"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "addPool",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "nodeNum"
+                }
+            ],
+            "returns": {
+                "type": "(uint64,uint64,uint64)",
+                "struct": "ValidatorPoolKey"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "addStake",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "valueToVerify"
+                }
+            ],
+            "returns": {
+                "type": "(uint64,uint64,uint64)",
+                "struct": "ValidatorPoolKey"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setTokenPayoutRatio",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                }
+            ],
+            "returns": {
+                "type": "(uint64[24],uint64)",
+                "struct": "PoolTokenPayoutRatio"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "stakeUpdatedViaRewards",
+            "args": [
+                {
+                    "type": "(uint64,uint64,uint64)",
+                    "struct": "ValidatorPoolKey",
+                    "name": "poolKey"
+                },
+                {
+                    "type": "uint64",
+                    "name": "algoToAdd"
+                },
+                {
+                    "type": "uint64",
+                    "name": "rewardTokenAmountReserved"
+                },
+                {
+                    "type": "uint64",
+                    "name": "validatorCommission"
+                },
+                {
+                    "type": "uint64",
+                    "name": "saturatedBurnToFeeSink"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "stakeRemoved",
+            "args": [
+                {
+                    "type": "(uint64,uint64,uint64)",
+                    "struct": "ValidatorPoolKey",
+                    "name": "poolKey"
+                },
+                {
+                    "type": "address",
+                    "name": "staker"
+                },
+                {
+                    "type": "uint64",
+                    "name": "amountRemoved"
+                },
+                {
+                    "type": "uint64",
+                    "name": "rewardRemoved"
+                },
+                {
+                    "type": "bool",
+                    "name": "stakerRemoved"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "findPoolForStaker",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "address",
+                    "name": "staker"
+                },
+                {
+                    "type": "uint64",
+                    "name": "amountToStake"
+                }
+            ],
+            "returns": {
+                "type": "((uint64,uint64,uint64),bool,bool)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "movePoolToNode",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "poolAppId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "nodeNum"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "emptyTokenRewards",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "validatorId"
+                },
+                {
+                    "type": "address",
+                    "name": "receiver"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "ValidatorRegistry is the 'master contract' for the reti pooling protocol.\nA single immutable instance of this is deployed.  All state for all validators including information about their\npools and nodes is stored via this contract in global state and box storage.  Data in the pools themselves is stored\nwithin the StakingPool contract instance, also in global state and box storage.\nSee the StakingPool contract comments for details on how this contract creates new instances of them.",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 4,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "stakingPoolInitialized": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "aW5pdA=="
+                },
+                "numValidators": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "bnVtVg=="
+                },
+                "numStakers": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "bnVtU3Rha2Vycw=="
+                },
+                "totalAlgoStaked": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "c3Rha2Vk"
+                }
+            },
+            "local": {},
+            "box": {
+                "stakingPoolApprovalProgram": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "cG9vbFRlbXBsYXRlQXBwcm92YWxCeXRlcw=="
+                }
+            }
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "validatorList": {
+                    "keyType": "uint64",
+                    "valueType": "ValidatorInfo",
+                    "prefix": "dg=="
+                },
+                "stakerPoolSet": {
+                    "keyType": "address",
+                    "valueType": "(uint64,uint64,uint64)[6]",
+                    "prefix": "c3Bz"
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        362,
+                        373,
+                        382,
+                        423,
+                        432,
+                        441,
+                        461,
+                        472,
+                        483,
+                        492,
+                        501,
+                        510,
+                        519,
+                        528,
+                        539,
+                        550,
+                        570,
+                        590,
+                        601,
+                        618,
+                        629,
+                        640,
+                        651,
+                        662,
+                        742,
+                        754,
+                        1035,
+                        1046,
+                        1150,
+                        1162,
+                        1171,
+                        1180,
+                        1189,
+                        1198
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        1210
+                    ],
+                    "errorMessage": "OnCompletion is not UpdateApplication"
+                },
+                {
+                    "pc": [
+                        1202
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        365,
+                        376,
+                        385,
+                        426,
+                        435,
+                        444,
+                        464,
+                        475,
+                        486,
+                        495,
+                        504,
+                        513,
+                        522,
+                        531,
+                        542,
+                        553,
+                        573,
+                        593,
+                        604,
+                        621,
+                        632,
+                        643,
+                        654,
+                        665,
+                        745,
+                        757,
+                        1038,
+                        1049,
+                        1153,
+                        1165,
+                        1174,
+                        1183,
+                        1192,
+                        1213
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDE5MgogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMCAweDE1MWY3Yzc1IDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgMHgxNTFmN2M3NTAwMDAgMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjEwOQogICAgLy8gZXhwb3J0IGNsYXNzIFZhbGlkYXRvclJlZ2lzdHJ5IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYWZ0ZXJfaWZfZWxzZUA0MQogICAgcHVzaGJ5dGVzcyAweDQ2Zjc2NTMzIDB4Yjg0NDdiMzYgMHgxYjVlODJjNiAweDc5NDcyZDgzIDB4NWY3YWNmZDkgMHgzMTcyY2E5ZCAweDhhODcxNDJkIDB4ZDEzNjZjYzMgMHgzYjA0NWM1YyAweDNiYWI1YzIyIDB4OWE3YzIyNDggMHgyZmEyMmM0YiAweDc3MmE3ZGU0IDB4NTcyNzY3ZDEgMHgzNDU0ODViOSAweGZiYzYzMTc4IDB4MjQ0OThjZjQgMHhmODQ2ZGQ3YSAweDgzMDUwNTAxIDB4N2JiYjZjOGQgMHhmODM5NDE0YSAweDExZDczN2ZmIDB4M2UyODg5NzIgMHhkZDVmYWFkYSAweGRkNDNkN2JmIDB4Zjk5ZWY1NGQgMHhiZjdmYzdlMyAweDNiODg5Yjg0IDB4YjE2YjNiNDAgMHg0ZGY4ZDg2ZSAweDQxOGZjZWZjIDB4YTJkYzUxYjUgMHgyODczZjUwNCAweDA1NDdmNGZlIDB4Y2I2NjgzNTggLy8gbWV0aG9kICJ1cGRhdGVBcHBsaWNhdGlvbigpdm9pZCIsIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiLCBtZXRob2QgImluaXRTdGFraW5nQ29udHJhY3QodWludDY0KXZvaWQiLCBtZXRob2QgImxvYWRTdGFraW5nQ29udHJhY3REYXRhKHVpbnQ2NCxieXRlW10pdm9pZCIsIG1ldGhvZCAiZmluYWxpemVTdGFraW5nQ29udHJhY3QoKXZvaWQiLCBtZXRob2QgImdhcygpdm9pZCIsIG1ldGhvZCAiZ2V0TWJyQW1vdW50cygpKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCkiLCBtZXRob2QgImdldFByb3RvY29sQ29uc3RyYWludHMoKSh1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KSIsIG1ldGhvZCAiZ2V0TnVtVmFsaWRhdG9ycygpdWludDY0IiwgbWV0aG9kICJnZXRWYWxpZGF0b3JDb25maWcodWludDY0KSh1aW50NjQsYWRkcmVzcyxhZGRyZXNzLHVpbnQ2NCx1aW50NjQsYWRkcmVzcyx1aW50NjRbNF0sdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCxhZGRyZXNzLHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpIiwgbWV0aG9kICJnZXRWYWxpZGF0b3JTdGF0ZSh1aW50NjQpKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCkiLCBtZXRob2QgImdldFZhbGlkYXRvck93bmVyQW5kTWFuYWdlcih1aW50NjQpKGFkZHJlc3MsYWRkcmVzcykiLCBtZXRob2QgImdldFBvb2xzKHVpbnQ2NCkodWludDY0LHVpbnQ2NCx1aW50NjQpW10iLCBtZXRob2QgImdldFBvb2xBcHBJZCh1aW50NjQsdWludDY0KXVpbnQ2NCIsIG1ldGhvZCAiZ2V0UG9vbEluZm8oKHVpbnQ2NCx1aW50NjQsdWludDY0KSkodWludDY0LHVpbnQ2NCx1aW50NjQpIiwgbWV0aG9kICJnZXRDdXJNYXhTdGFrZVBlclBvb2wodWludDY0KXVpbnQ2NCIsIG1ldGhvZCAiZG9lc1N0YWtlck5lZWRUb1BheU1CUihhZGRyZXNzKWJvb2wiLCBtZXRob2QgImdldFN0YWtlZFBvb2xzRm9yQWNjb3VudChhZGRyZXNzKSh1aW50NjQsdWludDY0LHVpbnQ2NClbXSIsIG1ldGhvZCAiZ2V0VG9rZW5QYXlvdXRSYXRpbyh1aW50NjQpKHVpbnQ2NFsyNF0sdWludDY0KSIsIG1ldGhvZCAiZ2V0Tm9kZVBvb2xBc3NpZ25tZW50cyh1aW50NjQpKCh1aW50NjRbM10pWzhdKSIsIG1ldGhvZCAiZ2V0TkZEUmVnaXN0cnlJRCgpdWludDY0IiwgbWV0aG9kICJhZGRWYWxpZGF0b3IoYnl0ZVtdLCh1aW50NjQsYWRkcmVzcyxhZGRyZXNzLHVpbnQ2NCx1aW50NjQsYWRkcmVzcyx1aW50NjRbNF0sdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCxhZGRyZXNzLHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpKXVpbnQ2NCIsIG1ldGhvZCAiY2hhbmdlVmFsaWRhdG9yTWFuYWdlcih1aW50NjQsYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJjaGFuZ2VWYWxpZGF0b3JTdW5zZXRJbmZvKHVpbnQ2NCx1aW50NjQsdWludDY0KXZvaWQiLCBtZXRob2QgImNoYW5nZVZhbGlkYXRvck5GRCh1aW50NjQsdWludDY0LGJ5dGVbXSl2b2lkIiwgbWV0aG9kICJjaGFuZ2VWYWxpZGF0b3JDb21taXNzaW9uQWRkcmVzcyh1aW50NjQsYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJjaGFuZ2VWYWxpZGF0b3JSZXdhcmRJbmZvKHVpbnQ2NCx1aW50NjQsYWRkcmVzcyx1aW50NjRbNF0sdWludDY0LHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJhZGRQb29sKHVpbnQ2NCx1aW50NjQpKHVpbnQ2NCx1aW50NjQsdWludDY0KSIsIG1ldGhvZCAiYWRkU3Rha2UodWludDY0LHVpbnQ2NCkodWludDY0LHVpbnQ2NCx1aW50NjQpIiwgbWV0aG9kICJzZXRUb2tlblBheW91dFJhdGlvKHVpbnQ2NCkodWludDY0WzI0XSx1aW50NjQpIiwgbWV0aG9kICJzdGFrZVVwZGF0ZWRWaWFSZXdhcmRzKCh1aW50NjQsdWludDY0LHVpbnQ2NCksdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KXZvaWQiLCBtZXRob2QgInN0YWtlUmVtb3ZlZCgodWludDY0LHVpbnQ2NCx1aW50NjQpLGFkZHJlc3MsdWludDY0LHVpbnQ2NCxib29sKXZvaWQiLCBtZXRob2QgImZpbmRQb29sRm9yU3Rha2VyKHVpbnQ2NCxhZGRyZXNzLHVpbnQ2NCkoKHVpbnQ2NCx1aW50NjQsdWludDY0KSxib29sLGJvb2wpIiwgbWV0aG9kICJtb3ZlUG9vbFRvTm9kZSh1aW50NjQsdWludDY0LHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJlbXB0eVRva2VuUmV3YXJkcyh1aW50NjQsYWRkcmVzcyl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VwZGF0ZUFwcGxpY2F0aW9uX3JvdXRlQDMgbWFpbl9jcmVhdGVBcHBsaWNhdGlvbl9yb3V0ZUA0IG1haW5faW5pdFN0YWtpbmdDb250cmFjdF9yb3V0ZUA1IG1haW5fbG9hZFN0YWtpbmdDb250cmFjdERhdGFfcm91dGVANiBtYWluX2ZpbmFsaXplU3Rha2luZ0NvbnRyYWN0X3JvdXRlQDcgbWFpbl9nYXNfcm91dGVAOCBtYWluX2dldE1ickFtb3VudHNfcm91dGVAOSBtYWluX2dldFByb3RvY29sQ29uc3RyYWludHNfcm91dGVAMTAgbWFpbl9nZXROdW1WYWxpZGF0b3JzX3JvdXRlQDExIG1haW5fZ2V0VmFsaWRhdG9yQ29uZmlnX3JvdXRlQDEyIG1haW5fZ2V0VmFsaWRhdG9yU3RhdGVfcm91dGVAMTMgbWFpbl9nZXRWYWxpZGF0b3JPd25lckFuZE1hbmFnZXJfcm91dGVAMTQgbWFpbl9nZXRQb29sc19yb3V0ZUAxNSBtYWluX2dldFBvb2xBcHBJZF9yb3V0ZUAxNiBtYWluX2dldFBvb2xJbmZvX3JvdXRlQDE3IG1haW5fZ2V0Q3VyTWF4U3Rha2VQZXJQb29sX3JvdXRlQDE4IG1haW5fZG9lc1N0YWtlck5lZWRUb1BheU1CUl9yb3V0ZUAxOSBtYWluX2dldFN0YWtlZFBvb2xzRm9yQWNjb3VudF9yb3V0ZUAyMCBtYWluX2dldFRva2VuUGF5b3V0UmF0aW9fcm91dGVAMjEgbWFpbl9nZXROb2RlUG9vbEFzc2lnbm1lbnRzX3JvdXRlQDIyIG1haW5fZ2V0TkZEUmVnaXN0cnlJRF9yb3V0ZUAyMyBtYWluX2FkZFZhbGlkYXRvcl9yb3V0ZUAyNCBtYWluX2NoYW5nZVZhbGlkYXRvck1hbmFnZXJfcm91dGVAMjUgbWFpbl9jaGFuZ2VWYWxpZGF0b3JTdW5zZXRJbmZvX3JvdXRlQDI2IG1haW5fY2hhbmdlVmFsaWRhdG9yTkZEX3JvdXRlQDI3IG1haW5fY2hhbmdlVmFsaWRhdG9yQ29tbWlzc2lvbkFkZHJlc3Nfcm91dGVAMjggbWFpbl9jaGFuZ2VWYWxpZGF0b3JSZXdhcmRJbmZvX3JvdXRlQDI5IG1haW5fYWRkUG9vbF9yb3V0ZUAzMCBtYWluX2FkZFN0YWtlX3JvdXRlQDMxIG1haW5fc2V0VG9rZW5QYXlvdXRSYXRpb19yb3V0ZUAzMiBtYWluX3N0YWtlVXBkYXRlZFZpYVJld2FyZHNfcm91dGVAMzMgbWFpbl9zdGFrZVJlbW92ZWRfcm91dGVAMzQgbWFpbl9maW5kUG9vbEZvclN0YWtlcl9yb3V0ZUAzNSBtYWluX21vdmVQb29sVG9Ob2RlX3JvdXRlQDM2IG1haW5fZW1wdHlUb2tlblJld2FyZHNfcm91dGVAMzcKCm1haW5fYWZ0ZXJfaWZfZWxzZUA0MToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjEwOQogICAgLy8gZXhwb3J0IGNsYXNzIFZhbGlkYXRvclJlZ2lzdHJ5IGV4dGVuZHMgQ29udHJhY3QgewogICAgaW50Y18xIC8vIDAKICAgIHJldHVybgoKbWFpbl9lbXB0eVRva2VuUmV3YXJkc19yb3V0ZUAzNzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjMxOAogICAgLy8gZW1wdHlUb2tlblJld2FyZHModmFsaWRhdG9ySWQ6IFZhbGlkYXRvcklkVHlwZSwgcmVjZWl2ZXI6IGFyYzQuQWRkcmVzcyk6IHVpbnQ2NCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9tb3ZlUG9vbFRvTm9kZV9yb3V0ZUAzNjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjMxNgogICAgLy8gbW92ZVBvb2xUb05vZGUodmFsaWRhdG9ySWQ6IFZhbGlkYXRvcklkVHlwZSwgcG9vbEFwcElkOiB1aW50NjQsIG5vZGVOdW06IHVpbnQ2NCk6IHZvaWQge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9maW5kUG9vbEZvclN0YWtlcl9yb3V0ZUAzNToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjMwMC0zMDQKICAgIC8vIGZpbmRQb29sRm9yU3Rha2VyKAogICAgLy8gICB2YWxpZGF0b3JJZDogVmFsaWRhdG9ySWRUeXBlLAogICAgLy8gICBzdGFrZXI6IGFyYzQuQWRkcmVzcywKICAgIC8vICAgYW1vdW50VG9TdGFrZTogdWludDY0LAogICAgLy8gKTogW1ZhbGlkYXRvclBvb2xLZXksIGJvb2xlYW4sIGJvb2xlYW5dIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3N0YWtlUmVtb3ZlZF9yb3V0ZUAzNDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjI5Mi0yOTgKICAgIC8vIHN0YWtlUmVtb3ZlZCgKICAgIC8vICAgcG9vbEtleTogVmFsaWRhdG9yUG9vbEtleSwKICAgIC8vICAgc3Rha2VyOiBhcmM0LkFkZHJlc3MsCiAgICAvLyAgIGFtb3VudFJlbW92ZWQ6IHVpbnQ2NCwKICAgIC8vICAgcmV3YXJkUmVtb3ZlZDogdWludDY0LAogICAgLy8gICBzdGFrZXJSZW1vdmVkOiBib29sZWFuLAogICAgLy8gKTogdm9pZCB7fQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3N0YWtlVXBkYXRlZFZpYVJld2FyZHNfcm91dGVAMzM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyODQtMjkwCiAgICAvLyBzdGFrZVVwZGF0ZWRWaWFSZXdhcmRzKAogICAgLy8gICBwb29sS2V5OiBWYWxpZGF0b3JQb29sS2V5LAogICAgLy8gICBhbGdvVG9BZGQ6IHVpbnQ2NCwKICAgIC8vICAgcmV3YXJkVG9rZW5BbW91bnRSZXNlcnZlZDogdWludDY0LAogICAgLy8gICB2YWxpZGF0b3JDb21taXNzaW9uOiB1aW50NjQsCiAgICAvLyAgIHNhdHVyYXRlZEJ1cm5Ub0ZlZVNpbms6IHVpbnQ2NCwKICAgIC8vICk6IHZvaWQge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9zZXRUb2tlblBheW91dFJhdGlvX3JvdXRlQDMyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6Mjc3CiAgICAvLyBzZXRUb2tlblBheW91dFJhdGlvKHZhbGlkYXRvcklkOiBWYWxpZGF0b3JJZFR5cGUpOiBQb29sVG9rZW5QYXlvdXRSYXRpbyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjEwOQogICAgLy8gZXhwb3J0IGNsYXNzIFZhbGlkYXRvclJlZ2lzdHJ5IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6Mjc3CiAgICAvLyBzZXRUb2tlblBheW91dFJhdGlvKHZhbGlkYXRvcklkOiBWYWxpZGF0b3JJZFR5cGUpOiBQb29sVG9rZW5QYXlvdXRSYXRpbyB7CiAgICBjYWxsc3ViIHNldFRva2VuUGF5b3V0UmF0aW8KICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYWRkU3Rha2Vfcm91dGVAMzE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyNjkKICAgIC8vIGFkZFN0YWtlKHZhbGlkYXRvcklkOiBWYWxpZGF0b3JJZFR5cGUsIHZhbHVlVG9WZXJpZnk6IHVpbnQ2NCk6IFZhbGlkYXRvclBvb2xLZXkgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZGRQb29sX3JvdXRlQDMwOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjYxCiAgICAvLyBhZGRQb29sKHZhbGlkYXRvcklkOiBWYWxpZGF0b3JJZFR5cGUsIG5vZGVOdW06IHVpbnQ2NCk6IFZhbGlkYXRvclBvb2xLZXkgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9jaGFuZ2VWYWxpZGF0b3JSZXdhcmRJbmZvX3JvdXRlQDI5OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjUyLTI1OQogICAgLy8gY2hhbmdlVmFsaWRhdG9yUmV3YXJkSW5mbygKICAgIC8vICAgdmFsaWRhdG9ySWQ6IFZhbGlkYXRvcklkVHlwZSwKICAgIC8vICAgRW50cnlHYXRpbmdUeXBlOiB1aW50NjQsCiAgICAvLyAgIEVudHJ5R2F0aW5nQWRkcmVzczogYXJjNC5BZGRyZXNzLAogICAgLy8gICBFbnRyeUdhdGluZ0Fzc2V0czogRml4ZWRBcnJheTx1aW50NjQsIDQ+LAogICAgLy8gICBHYXRpbmdBc3NldE1pbkJhbGFuY2U6IHVpbnQ2NCwKICAgIC8vICAgUmV3YXJkUGVyUGF5b3V0OiB1aW50NjQsCiAgICAvLyApOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY2hhbmdlVmFsaWRhdG9yQ29tbWlzc2lvbkFkZHJlc3Nfcm91dGVAMjg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyNTAKICAgIC8vIGNoYW5nZVZhbGlkYXRvckNvbW1pc3Npb25BZGRyZXNzKHZhbGlkYXRvcklkOiBWYWxpZGF0b3JJZFR5cGUsIGNvbW1pc3Npb25BZGRyZXNzOiBhcmM0LkFkZHJlc3MpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY2hhbmdlVmFsaWRhdG9yTkZEX3JvdXRlQDI3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjQ4CiAgICAvLyBjaGFuZ2VWYWxpZGF0b3JORkQodmFsaWRhdG9ySWQ6IFZhbGlkYXRvcklkVHlwZSwgbmZkQXBwSUQ6IHVpbnQ2NCwgbmZkTmFtZTogYXJjNC5EeW5hbWljQnl0ZXMpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY2hhbmdlVmFsaWRhdG9yU3Vuc2V0SW5mb19yb3V0ZUAyNjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjI0NgogICAgLy8gY2hhbmdlVmFsaWRhdG9yU3Vuc2V0SW5mbyh2YWxpZGF0b3JJZDogVmFsaWRhdG9ySWRUeXBlLCBzdW5zZXR0aW5nT246IHVpbnQ2NCwgc3Vuc2V0dGluZ1RvOiBWYWxpZGF0b3JJZFR5cGUpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY2hhbmdlVmFsaWRhdG9yTWFuYWdlcl9yb3V0ZUAyNToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjI0NAogICAgLy8gY2hhbmdlVmFsaWRhdG9yTWFuYWdlcih2YWxpZGF0b3JJZDogVmFsaWRhdG9ySWRUeXBlLCBtYW5hZ2VyOiBhcmM0LkFkZHJlc3MpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYWRkVmFsaWRhdG9yX3JvdXRlQDI0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjQwCiAgICAvLyBhZGRWYWxpZGF0b3IobmZkTmFtZTogYXJjNC5EeW5hbWljQnl0ZXMsIGNvbmZpZzogVmFsaWRhdG9yQ29uZmlnKTogdWludDY0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldE5GRFJlZ2lzdHJ5SURfcm91dGVAMjM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyMzYKICAgIC8vIGdldE5GRFJlZ2lzdHJ5SUQoKTogdWludDY0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldE5vZGVQb29sQXNzaWdubWVudHNfcm91dGVAMjI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyMzAKICAgIC8vIGdldE5vZGVQb29sQXNzaWdubWVudHModmFsaWRhdG9ySWQ6IHVpbnQ2NCk6IE5vZGVQb29sQXNzaWdubWVudENvbmZpZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjEwOQogICAgLy8gZXhwb3J0IGNsYXNzIFZhbGlkYXRvclJlZ2lzdHJ5IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjMwCiAgICAvLyBnZXROb2RlUG9vbEFzc2lnbm1lbnRzKHZhbGlkYXRvcklkOiB1aW50NjQpOiBOb2RlUG9vbEFzc2lnbm1lbnRDb25maWcgewogICAgY2FsbHN1YiBnZXROb2RlUG9vbEFzc2lnbm1lbnRzCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFRva2VuUGF5b3V0UmF0aW9fcm91dGVAMjE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyMjMKICAgIC8vIGdldFRva2VuUGF5b3V0UmF0aW8odmFsaWRhdG9ySWQ6IFZhbGlkYXRvcklkVHlwZSk6IFBvb2xUb2tlblBheW91dFJhdGlvIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MTA5CiAgICAvLyBleHBvcnQgY2xhc3MgVmFsaWRhdG9yUmVnaXN0cnkgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyMjMKICAgIC8vIGdldFRva2VuUGF5b3V0UmF0aW8odmFsaWRhdG9ySWQ6IFZhbGlkYXRvcklkVHlwZSk6IFBvb2xUb2tlblBheW91dFJhdGlvIHsKICAgIGNhbGxzdWIgZ2V0VG9rZW5QYXlvdXRSYXRpbwogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRTdGFrZWRQb29sc0ZvckFjY291bnRfcm91dGVAMjA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyMTkKICAgIC8vIGdldFN0YWtlZFBvb2xzRm9yQWNjb3VudChzdGFrZXI6IGFyYzQuQWRkcmVzcyk6IFZhbGlkYXRvclBvb2xLZXlbXSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NTAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9kb2VzU3Rha2VyTmVlZFRvUGF5TUJSX3JvdXRlQDE5OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjE1CiAgICAvLyBkb2VzU3Rha2VyTmVlZFRvUGF5TUJSKHN0YWtlcjogYXJjNC5BZGRyZXNzKTogYm9vbGVhbiB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRDdXJNYXhTdGFrZVBlclBvb2xfcm91dGVAMTg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyMTEKICAgIC8vIGdldEN1ck1heFN0YWtlUGVyUG9vbCh2YWxpZGF0b3JJZDogVmFsaWRhdG9ySWRUeXBlKTogdWludDY0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFBvb2xJbmZvX3JvdXRlQDE3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjAzCiAgICAvLyBnZXRQb29sSW5mbyhwb29sS2V5OiBWYWxpZGF0b3JQb29sS2V5KTogUG9vbEluZm8gewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRQb29sQXBwSWRfcm91dGVAMTY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoxOTkKICAgIC8vIGdldFBvb2xBcHBJZCh2YWxpZGF0b3JJZDogdWludDY0LCBwb29sSWQ6IHVpbnQ2NCk6IHVpbnQ2NCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRQb29sc19yb3V0ZUAxNToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjE5NQogICAgLy8gZ2V0UG9vbHModmFsaWRhdG9ySWQ6IFZhbGlkYXRvcklkVHlwZSk6IFBvb2xJbmZvW10gewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUwMDAwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0VmFsaWRhdG9yT3duZXJBbmRNYW5hZ2VyX3JvdXRlQDE0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MTkxCiAgICAvLyBnZXRWYWxpZGF0b3JPd25lckFuZE1hbmFnZXIodmFsaWRhdG9ySWQ6IFZhbGlkYXRvcklkVHlwZSk6IFthcmM0LkFkZHJlc3MsIGFyYzQuQWRkcmVzc10gewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgYmFzZTMyKENVUFhZNUlBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUEpCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0VmFsaWRhdG9yU3RhdGVfcm91dGVAMTM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoxODIKICAgIC8vIGdldFZhbGlkYXRvclN0YXRlKHZhbGlkYXRvcklkOiBWYWxpZGF0b3JJZFR5cGUpOiBWYWxpZGF0b3JDdXJTdGF0ZSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGJ5dGVjIDQgLy8gMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRWYWxpZGF0b3JDb25maWdfcm91dGVAMTI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoxNTkKICAgIC8vIGdldFZhbGlkYXRvckNvbmZpZyh2YWxpZGF0b3JJZDogVmFsaWRhdG9ySWRUeXBlKTogVmFsaWRhdG9yQ29uZmlnIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIGJhc2UzMihDVVBYWTVJQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUEpCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0TnVtVmFsaWRhdG9yc19yb3V0ZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjE1NQogICAgLy8gZ2V0TnVtVmFsaWRhdG9ycygpOiB1aW50NjQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0UHJvdG9jb2xDb25zdHJhaW50c19yb3V0ZUAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjEzOQogICAgLy8gZ2V0UHJvdG9jb2xDb25zdHJhaW50cygpOiBDb25zdHJhaW50cyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRNYnJBbW91bnRzX3JvdXRlQDk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoxMzAKICAgIC8vIGdldE1ickFtb3VudHMoKTogTWJyQW1vdW50cyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGJ5dGVjIDQgLy8gMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nYXNfcm91dGVAODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjEyOAogICAgLy8gZ2FzKCk6IHZvaWQge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9maW5hbGl6ZVN0YWtpbmdDb250cmFjdF9yb3V0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MTI2CiAgICAvLyBmaW5hbGl6ZVN0YWtpbmdDb250cmFjdCgpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fbG9hZFN0YWtpbmdDb250cmFjdERhdGFfcm91dGVANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjEyNAogICAgLy8gbG9hZFN0YWtpbmdDb250cmFjdERhdGEob2Zmc2V0OiB1aW50NjQsIGRhdGE6IGJ5dGVzKTogdm9pZCB7fQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2luaXRTdGFraW5nQ29udHJhY3Rfcm91dGVANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjEyMgogICAgLy8gaW5pdFN0YWtpbmdDb250cmFjdChhcHByb3ZhbFByb2dyYW1TaXplOiB1aW50NjQpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjEyMAogICAgLy8gY3JlYXRlQXBwbGljYXRpb24oKTogdm9pZCB7fQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fdXBkYXRlQXBwbGljYXRpb25fcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjExOAogICAgLy8gdXBkYXRlQXBwbGljYXRpb24oKTogdm9pZCB7fQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA0IC8vIFVwZGF0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgVXBkYXRlQXBwbGljYXRpb24KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjpWYWxpZGF0b3JSZWdpc3RyeS5nZXRUb2tlblBheW91dFJhdGlvKHZhbGlkYXRvcklkOiB1aW50NjQpIC0+IGJ5dGVzOgpnZXRUb2tlblBheW91dFJhdGlvOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjIzCiAgICAvLyBnZXRUb2tlblBheW91dFJhdGlvKHZhbGlkYXRvcklkOiBWYWxpZGF0b3JJZFR5cGUpOiBQb29sVG9rZW5QYXlvdXRSYXRpbyB7CiAgICBwcm90byAxIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjIyNQogICAgLy8gcG9vbFBjdE9mV2hvbGU6IG5ldyBGaXhlZEFycmF5PHVpbnQ2NCwgMjQ+KCksCiAgICBpbnRjXzIgLy8gMTkyCiAgICBiemVybwogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjI2CiAgICAvLyB1cGRhdGVkRm9yUGF5b3V0OiAwLAogICAgaW50Y18xIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjIyNC0yMjcKICAgIC8vIHJldHVybiB7CiAgICAvLyAgIHBvb2xQY3RPZldob2xlOiBuZXcgRml4ZWRBcnJheTx1aW50NjQsIDI0PigpLAogICAgLy8gICB1cGRhdGVkRm9yUGF5b3V0OiAwLAogICAgLy8gfQogICAgaXRvYgogICAgY29uY2F0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czo6VmFsaWRhdG9yUmVnaXN0cnkuZ2V0Tm9kZVBvb2xBc3NpZ25tZW50cyh2YWxpZGF0b3JJZDogdWludDY0KSAtPiBieXRlczoKZ2V0Tm9kZVBvb2xBc3NpZ25tZW50czoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjIzMAogICAgLy8gZ2V0Tm9kZVBvb2xBc3NpZ25tZW50cyh2YWxpZGF0b3JJZDogdWludDY0KTogTm9kZVBvb2xBc3NpZ25tZW50Q29uZmlnIHsKICAgIHByb3RvIDEgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjMyCiAgICAvLyBub2RlczogbmV3IEZpeGVkQXJyYXk8Tm9kZUNvbmZpZywgdHlwZW9mIE1BWF9OT0RFUz4oKSwKICAgIGludGNfMiAvLyAxOTIKICAgIGJ6ZXJvCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV92YWxpZGF0b3JfcmVnaXN0cnkvdmFsaWRhdG9yUmVnaXN0cnkuYWxnby50czoyMzEtMjMzCiAgICAvLyByZXR1cm4gewogICAgLy8gICBub2RlczogbmV3IEZpeGVkQXJyYXk8Tm9kZUNvbmZpZywgdHlwZW9mIE1BWF9OT0RFUz4oKSwKICAgIC8vIH0KICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjpWYWxpZGF0b3JSZWdpc3RyeS5zZXRUb2tlblBheW91dFJhdGlvKHZhbGlkYXRvcklkOiB1aW50NjQpIC0+IGJ5dGVzOgpzZXRUb2tlblBheW91dFJhdGlvOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6Mjc3CiAgICAvLyBzZXRUb2tlblBheW91dFJhdGlvKHZhbGlkYXRvcklkOiBWYWxpZGF0b3JJZFR5cGUpOiBQb29sVG9rZW5QYXlvdXRSYXRpbyB7CiAgICBwcm90byAxIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjI3OQogICAgLy8gcG9vbFBjdE9mV2hvbGU6IG5ldyBGaXhlZEFycmF5PHVpbnQ2NCwgMjQ+KCksCiAgICBpbnRjXzIgLy8gMTkyCiAgICBiemVybwogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfdmFsaWRhdG9yX3JlZ2lzdHJ5L3ZhbGlkYXRvclJlZ2lzdHJ5LmFsZ28udHM6MjgwCiAgICAvLyB1cGRhdGVkRm9yUGF5b3V0OiAwLAogICAgaW50Y18xIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3ZhbGlkYXRvcl9yZWdpc3RyeS92YWxpZGF0b3JSZWdpc3RyeS5hbGdvLnRzOjI3OC0yODEKICAgIC8vIHJldHVybiB7CiAgICAvLyAgIHBvb2xQY3RPZldob2xlOiBuZXcgRml4ZWRBcnJheTx1aW50NjQsIDI0PigpLAogICAgLy8gICB1cGRhdGVkRm9yUGF5b3V0OiAwLAogICAgLy8gfQogICAgaXRvYgogICAgY29uY2F0CiAgICByZXRzdWIK",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiADAQDAASYFDBUffHUAAAAAAAAAAAQVH3x1HBUffHUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGFR98dQAAJBUffHUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADEbQQD8giMERvdlMwS4RHs2BBtegsYEeUctgwRfes/ZBDFyyp0EiocULQTRNmzDBDsEXFwEO6tcIgSafCJIBC+iLEsEdyp95ARXJ2fRBDRUhbkE+8YxeAQkSYz0BPhG3XoEgwUFAQR7u2yNBPg5QUoEEdc3/wQ+KIlyBN1fqtoE3UPXvwT5nvVNBL9/x+MEO4ibhASxaztABE342G4EQY/O/ASi3FG1BChz9QQEBUf0/gTLZoNYNhoAjiMDUANGAz0DNAMrAyIDFgKuAqMBigF+AS4BIwEYAQ0BAgDxAOYA0gC+ALMAqACfAJYAjQCEAHsAcABlAFEASAA/ABYADQACI0MxGRREMRhEKLAiQzEZFEQxGEQiQzEZFEQxGESAHRUffHUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsCJDMRkURDEYRCJDMRkURDEYRCJDMRkURDEYRDYaAReIAwspTFCwIkMxGRREMRhEKrAiQzEZFEQxGEQqsCJDMRkURDEYRCJDMRkURDEYRCJDMRkURDEYRCJDMRkURDEYRCJDMRkURDEYRCJDMRkURDEYRCiwIkMxGRREMRhEKLAiQzEZFEQxGEQ2GgEXiAKYKUxQsCJDMRkURDEYRDYaAReIAnspTFCwIkMxGRREMRhEK7AiQzEZFEQxGESABRUffHUAsCJDMRkURDEYRCiwIkMxGRREMRhEKrAiQzEZFEQxGEQosCJDMRkURDEYRCuwIkMxGRREMRhEgEQVH3x1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALAiQzEZFEQxGEQnBLAiQzEZFEQxGESAjAIVH3x1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsCJDMRkURDEYRCiwIkMxGRREMRhEgFwVH3x1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALAiQzEZFEQxGEQnBLAiQzEZFEQxGEQiQzEZFEQxGEQiQzEZFEQxGEQiQzEZFEQxGEQiQzEZFEQxGBREIkMxGYEEEkQxGEQiQ4oBASSvIxZQiYoBASSviYoBASSvIxZQiQ==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 0,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

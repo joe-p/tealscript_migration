@@ -1,0 +1,229 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    intcblock 1 0
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:36
+    // export class StakingPool extends Contract {
+    txn NumAppArgs
+    bz main_after_if_else@21
+    pushbytess 0x46f76533 0x59e90aa6 0x3172ca9d 0x8a2e32c4 0xc3f54e57 0x421b5abe 0xf5892d56 0x5cfbb057 0x63f3f28b 0xa7d7969e 0xefc2608d 0xb8680372 0x51ef3b21 0xe38411ae 0x0c2245e1 // method "updateApplication()void", method "createApplication(uint64,uint64,uint64,uint64)void", method "gas()void", method "initStorage()void", method "addStake(address)uint64", method "removeStake(address,uint64)void", method "claimTokens()void", method "getStakerInfo(address)(address,uint64,uint64,uint64,uint64)", method "payTokenReward(address,uint64,uint64)void", method "updateAlgodVer(byte[])void", method "epochBalanceUpdate()void", method "goOnline(byte[],byte[],byte[],uint64,uint64,uint64)void", method "goOffline()void", method "linkToNFD(uint64,byte[])void", method "proxiedSetTokenPayoutRatio((uint64,uint64,uint64))(uint64[24],uint64)"
+    txna ApplicationArgs 0
+    match main_updateApplication_route@3 main_createApplication_route@4 main_gas_route@5 main_initStorage_route@6 main_addStake_route@7 main_removeStake_route@8 main_claimTokens_route@9 main_getStakerInfo_route@10 main_payTokenReward_route@11 main_updateAlgodVer_route@12 main_epochBalanceUpdate_route@13 main_goOnline_route@14 main_goOffline_route@15 main_linkToNFD_route@16 main_proxiedSetTokenPayoutRatio_route@17
+
+main_after_if_else@21:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:36
+    // export class StakingPool extends Contract {
+    intc_1 // 0
+    return
+
+main_proxiedSetTokenPayoutRatio_route@17:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:98
+    // proxiedSetTokenPayoutRatio(poolKey: ValidatorPoolKey): PoolTokenPayoutRatio {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:36
+    // export class StakingPool extends Contract {
+    txna ApplicationArgs 1
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:98
+    // proxiedSetTokenPayoutRatio(poolKey: ValidatorPoolKey): PoolTokenPayoutRatio {
+    callsub proxiedSetTokenPayoutRatio
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_linkToNFD_route@16:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:96
+    // linkToNFD(nfdAppId: uint64, nfdName: arc4.DynamicBytes): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_goOffline_route@15:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:94
+    // goOffline(): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_goOnline_route@14:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:85-92
+    // goOnline(
+    //   votePK: bytes,
+    //   selectionPK: bytes,
+    //   stateProofPK: bytes,
+    //   voteFirst: uint64,
+    //   voteLast: uint64,
+    //   voteKeyDilution: uint64,
+    // ): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_epochBalanceUpdate_route@13:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:83
+    // epochBalanceUpdate(): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_updateAlgodVer_route@12:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:81
+    // updateAlgodVer(algodVer: arc4.DynamicBytes): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_payTokenReward_route@11:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:79
+    // payTokenReward(staker: arc4.Address, rewardToken: uint64, amountToSend: uint64): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_getStakerInfo_route@10:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:69
+    // getStakerInfo(staker: arc4.Address): StakedInfo {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    pushbytes base32(CUPXY5IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA)
+    log
+    intc_0 // 1
+    return
+
+main_claimTokens_route@9:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:67
+    // claimTokens(): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_removeStake_route@8:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:65
+    // removeStake(staker: arc4.Address, amountToUnstake: uint64): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_addStake_route@7:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:61
+    // addStake(staker: arc4.Address): uint64 {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    pushbytes 0x151f7c750000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_initStorage_route@6:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:59
+    // initStorage(): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_gas_route@5:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:57
+    // gas(): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_createApplication_route@4:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:55
+    // createApplication(creatingContractId: uint64, validatorId: uint64, poolId: uint64, minEntryStake: uint64): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_0 // 1
+    return
+
+main_updateApplication_route@3:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:53
+    // updateApplication(): void {}
+    txn OnCompletion
+    pushint 4 // UpdateApplication
+    ==
+    assert // OnCompletion is not UpdateApplication
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+
+// smart_contracts/reti_staking_pool/stakingPool.algo.ts::StakingPool.proxiedSetTokenPayoutRatio(poolKey: bytes) -> bytes:
+proxiedSetTokenPayoutRatio:
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:98
+    // proxiedSetTokenPayoutRatio(poolKey: ValidatorPoolKey): PoolTokenPayoutRatio {
+    proto 1 1
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:100
+    // poolPctOfWhole: new FixedArray<uint64, 24>(),
+    pushint 192 // 192
+    bzero
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:101
+    // updatedForPayout: 0,
+    intc_1 // 0
+    // smart_contracts/reti_staking_pool/stakingPool.algo.ts:99-102
+    // return {
+    //   poolPctOfWhole: new FixedArray<uint64, 24>(),
+    //   updatedForPayout: 0,
+    // }
+    itob
+    concat
+    retsub

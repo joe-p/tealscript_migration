@@ -1,0 +1,440 @@
+{
+    "hints": {
+        "updateApplication()void": {
+            "call_config": {
+                "update_application": "CALL"
+            }
+        },
+        "createApplication(uint64,uint64,uint64,uint64)void": {
+            "call_config": {
+                "no_op": "CREATE"
+            }
+        },
+        "gas()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "initStorage()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "addStake(address)uint64": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "removeStake(address,uint64)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "claimTokens()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "getStakerInfo(address)(address,uint64,uint64,uint64,uint64)": {
+            "call_config": {
+                "no_op": "CALL"
+            },
+            "structs": {
+                "output": {
+                    "name": "StakedInfo",
+                    "elements": [
+                        [
+                            "account",
+                            "address"
+                        ],
+                        [
+                            "balance",
+                            "uint64"
+                        ],
+                        [
+                            "totalRewarded",
+                            "uint64"
+                        ],
+                        [
+                            "rewardTokenBalance",
+                            "uint64"
+                        ],
+                        [
+                            "entryRound",
+                            "uint64"
+                        ]
+                    ]
+                }
+            }
+        },
+        "payTokenReward(address,uint64,uint64)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "updateAlgodVer(byte[])void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "epochBalanceUpdate()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "goOnline(byte[],byte[],byte[],uint64,uint64,uint64)void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "goOffline()void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "linkToNFD(uint64,byte[])void": {
+            "call_config": {
+                "no_op": "CALL"
+            }
+        },
+        "proxiedSetTokenPayoutRatio((uint64,uint64,uint64))(uint64[24],uint64)": {
+            "call_config": {
+                "no_op": "CALL"
+            },
+            "structs": {
+                "poolKey": {
+                    "name": "ValidatorPoolKey",
+                    "elements": [
+                        [
+                            "id",
+                            "uint64"
+                        ],
+                        [
+                            "poolId",
+                            "uint64"
+                        ],
+                        [
+                            "poolAppId",
+                            "uint64"
+                        ]
+                    ]
+                },
+                "output": {
+                    "name": "PoolTokenPayoutRatio",
+                    "elements": [
+                        [
+                            "poolPctOfWhole",
+                            "uint64[24]"
+                        ],
+                        [
+                            "updatedForPayout",
+                            "uint64"
+                        ]
+                    ]
+                }
+            }
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV9zdGFraW5nX3Bvb2wvc3Rha2luZ1Bvb2wuYWxnby50czozNgogICAgLy8gZXhwb3J0IGNsYXNzIFN0YWtpbmdQb29sIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYWZ0ZXJfaWZfZWxzZUAyMQogICAgcHVzaGJ5dGVzcyAweDQ2Zjc2NTMzIDB4NTllOTBhYTYgMHgzMTcyY2E5ZCAweDhhMmUzMmM0IDB4YzNmNTRlNTcgMHg0MjFiNWFiZSAweGY1ODkyZDU2IDB4NWNmYmIwNTcgMHg2M2YzZjI4YiAweGE3ZDc5NjllIDB4ZWZjMjYwOGQgMHhiODY4MDM3MiAweDUxZWYzYjIxIDB4ZTM4NDExYWUgMHgwYzIyNDVlMSAvLyBtZXRob2QgInVwZGF0ZUFwcGxpY2F0aW9uKCl2b2lkIiwgbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbih1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpdm9pZCIsIG1ldGhvZCAiZ2FzKCl2b2lkIiwgbWV0aG9kICJpbml0U3RvcmFnZSgpdm9pZCIsIG1ldGhvZCAiYWRkU3Rha2UoYWRkcmVzcyl1aW50NjQiLCBtZXRob2QgInJlbW92ZVN0YWtlKGFkZHJlc3MsdWludDY0KXZvaWQiLCBtZXRob2QgImNsYWltVG9rZW5zKCl2b2lkIiwgbWV0aG9kICJnZXRTdGFrZXJJbmZvKGFkZHJlc3MpKGFkZHJlc3MsdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KSIsIG1ldGhvZCAicGF5VG9rZW5SZXdhcmQoYWRkcmVzcyx1aW50NjQsdWludDY0KXZvaWQiLCBtZXRob2QgInVwZGF0ZUFsZ29kVmVyKGJ5dGVbXSl2b2lkIiwgbWV0aG9kICJlcG9jaEJhbGFuY2VVcGRhdGUoKXZvaWQiLCBtZXRob2QgImdvT25saW5lKGJ5dGVbXSxieXRlW10sYnl0ZVtdLHVpbnQ2NCx1aW50NjQsdWludDY0KXZvaWQiLCBtZXRob2QgImdvT2ZmbGluZSgpdm9pZCIsIG1ldGhvZCAibGlua1RvTkZEKHVpbnQ2NCxieXRlW10pdm9pZCIsIG1ldGhvZCAicHJveGllZFNldFRva2VuUGF5b3V0UmF0aW8oKHVpbnQ2NCx1aW50NjQsdWludDY0KSkodWludDY0WzI0XSx1aW50NjQpIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl91cGRhdGVBcHBsaWNhdGlvbl9yb3V0ZUAzIG1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVANCBtYWluX2dhc19yb3V0ZUA1IG1haW5faW5pdFN0b3JhZ2Vfcm91dGVANiBtYWluX2FkZFN0YWtlX3JvdXRlQDcgbWFpbl9yZW1vdmVTdGFrZV9yb3V0ZUA4IG1haW5fY2xhaW1Ub2tlbnNfcm91dGVAOSBtYWluX2dldFN0YWtlckluZm9fcm91dGVAMTAgbWFpbl9wYXlUb2tlblJld2FyZF9yb3V0ZUAxMSBtYWluX3VwZGF0ZUFsZ29kVmVyX3JvdXRlQDEyIG1haW5fZXBvY2hCYWxhbmNlVXBkYXRlX3JvdXRlQDEzIG1haW5fZ29PbmxpbmVfcm91dGVAMTQgbWFpbl9nb09mZmxpbmVfcm91dGVAMTUgbWFpbl9saW5rVG9ORkRfcm91dGVAMTYgbWFpbl9wcm94aWVkU2V0VG9rZW5QYXlvdXRSYXRpb19yb3V0ZUAxNwoKbWFpbl9hZnRlcl9pZl9lbHNlQDIxOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6MzYKICAgIC8vIGV4cG9ydCBjbGFzcyBTdGFraW5nUG9vbCBleHRlbmRzIENvbnRyYWN0IHsKICAgIGludGNfMSAvLyAwCiAgICByZXR1cm4KCm1haW5fcHJveGllZFNldFRva2VuUGF5b3V0UmF0aW9fcm91dGVAMTc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV9zdGFraW5nX3Bvb2wvc3Rha2luZ1Bvb2wuYWxnby50czo5OAogICAgLy8gcHJveGllZFNldFRva2VuUGF5b3V0UmF0aW8ocG9vbEtleTogVmFsaWRhdG9yUG9vbEtleSk6IFBvb2xUb2tlblBheW91dFJhdGlvIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6MzYKICAgIC8vIGV4cG9ydCBjbGFzcyBTdGFraW5nUG9vbCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3N0YWtpbmdfcG9vbC9zdGFraW5nUG9vbC5hbGdvLnRzOjk4CiAgICAvLyBwcm94aWVkU2V0VG9rZW5QYXlvdXRSYXRpbyhwb29sS2V5OiBWYWxpZGF0b3JQb29sS2V5KTogUG9vbFRva2VuUGF5b3V0UmF0aW8gewogICAgY2FsbHN1YiBwcm94aWVkU2V0VG9rZW5QYXlvdXRSYXRpbwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2xpbmtUb05GRF9yb3V0ZUAxNjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3N0YWtpbmdfcG9vbC9zdGFraW5nUG9vbC5hbGdvLnRzOjk2CiAgICAvLyBsaW5rVG9ORkQobmZkQXBwSWQ6IHVpbnQ2NCwgbmZkTmFtZTogYXJjNC5EeW5hbWljQnl0ZXMpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ29PZmZsaW5lX3JvdXRlQDE1OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6OTQKICAgIC8vIGdvT2ZmbGluZSgpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ29PbmxpbmVfcm91dGVAMTQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV9zdGFraW5nX3Bvb2wvc3Rha2luZ1Bvb2wuYWxnby50czo4NS05MgogICAgLy8gZ29PbmxpbmUoCiAgICAvLyAgIHZvdGVQSzogYnl0ZXMsCiAgICAvLyAgIHNlbGVjdGlvblBLOiBieXRlcywKICAgIC8vICAgc3RhdGVQcm9vZlBLOiBieXRlcywKICAgIC8vICAgdm90ZUZpcnN0OiB1aW50NjQsCiAgICAvLyAgIHZvdGVMYXN0OiB1aW50NjQsCiAgICAvLyAgIHZvdGVLZXlEaWx1dGlvbjogdWludDY0LAogICAgLy8gKTogdm9pZCB7fQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2Vwb2NoQmFsYW5jZVVwZGF0ZV9yb3V0ZUAxMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3N0YWtpbmdfcG9vbC9zdGFraW5nUG9vbC5hbGdvLnRzOjgzCiAgICAvLyBlcG9jaEJhbGFuY2VVcGRhdGUoKTogdm9pZCB7fQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3VwZGF0ZUFsZ29kVmVyX3JvdXRlQDEyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6ODEKICAgIC8vIHVwZGF0ZUFsZ29kVmVyKGFsZ29kVmVyOiBhcmM0LkR5bmFtaWNCeXRlcyk6IHZvaWQge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9wYXlUb2tlblJld2FyZF9yb3V0ZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3N0YWtpbmdfcG9vbC9zdGFraW5nUG9vbC5hbGdvLnRzOjc5CiAgICAvLyBwYXlUb2tlblJld2FyZChzdGFrZXI6IGFyYzQuQWRkcmVzcywgcmV3YXJkVG9rZW46IHVpbnQ2NCwgYW1vdW50VG9TZW5kOiB1aW50NjQpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0U3Rha2VySW5mb19yb3V0ZUAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3N0YWtpbmdfcG9vbC9zdGFraW5nUG9vbC5hbGdvLnRzOjY5CiAgICAvLyBnZXRTdGFrZXJJbmZvKHN0YWtlcjogYXJjNC5BZGRyZXNzKTogU3Rha2VkSW5mbyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyBiYXNlMzIoQ1VQWFk1SUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQSkKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9jbGFpbVRva2Vuc19yb3V0ZUA5OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6NjcKICAgIC8vIGNsYWltVG9rZW5zKCk6IHZvaWQge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9yZW1vdmVTdGFrZV9yb3V0ZUA4OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6NjUKICAgIC8vIHJlbW92ZVN0YWtlKHN0YWtlcjogYXJjNC5BZGRyZXNzLCBhbW91bnRUb1Vuc3Rha2U6IHVpbnQ2NCk6IHZvaWQge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZGRTdGFrZV9yb3V0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6NjEKICAgIC8vIGFkZFN0YWtlKHN0YWtlcjogYXJjNC5BZGRyZXNzKTogdWludDY0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5faW5pdFN0b3JhZ2Vfcm91dGVANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3N0YWtpbmdfcG9vbC9zdGFraW5nUG9vbC5hbGdvLnRzOjU5CiAgICAvLyBpbml0U3RvcmFnZSgpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2FzX3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV9zdGFraW5nX3Bvb2wvc3Rha2luZ1Bvb2wuYWxnby50czo1NwogICAgLy8gZ2FzKCk6IHZvaWQge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9jcmVhdGVBcHBsaWNhdGlvbl9yb3V0ZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6NTUKICAgIC8vIGNyZWF0ZUFwcGxpY2F0aW9uKGNyZWF0aW5nQ29udHJhY3RJZDogdWludDY0LCB2YWxpZGF0b3JJZDogdWludDY0LCBwb29sSWQ6IHVpbnQ2NCwgbWluRW50cnlTdGFrZTogdWludDY0KTogdm9pZCB7fQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fdXBkYXRlQXBwbGljYXRpb25fcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3N0YWtpbmdfcG9vbC9zdGFraW5nUG9vbC5hbGdvLnRzOjUzCiAgICAvLyB1cGRhdGVBcHBsaWNhdGlvbigpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDQgLy8gVXBkYXRlQXBwbGljYXRpb24KICAgID09CiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBVcGRhdGVBcHBsaWNhdGlvbgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6OlN0YWtpbmdQb29sLnByb3hpZWRTZXRUb2tlblBheW91dFJhdGlvKHBvb2xLZXk6IGJ5dGVzKSAtPiBieXRlczoKcHJveGllZFNldFRva2VuUGF5b3V0UmF0aW86CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV9zdGFraW5nX3Bvb2wvc3Rha2luZ1Bvb2wuYWxnby50czo5OAogICAgLy8gcHJveGllZFNldFRva2VuUGF5b3V0UmF0aW8ocG9vbEtleTogVmFsaWRhdG9yUG9vbEtleSk6IFBvb2xUb2tlblBheW91dFJhdGlvIHsKICAgIHByb3RvIDEgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGlfc3Rha2luZ19wb29sL3N0YWtpbmdQb29sLmFsZ28udHM6MTAwCiAgICAvLyBwb29sUGN0T2ZXaG9sZTogbmV3IEZpeGVkQXJyYXk8dWludDY0LCAyND4oKSwKICAgIHB1c2hpbnQgMTkyIC8vIDE5MgogICAgYnplcm8KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpX3N0YWtpbmdfcG9vbC9zdGFraW5nUG9vbC5hbGdvLnRzOjEwMQogICAgLy8gdXBkYXRlZEZvclBheW91dDogMCwKICAgIGludGNfMSAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aV9zdGFraW5nX3Bvb2wvc3Rha2luZ1Bvb2wuYWxnby50czo5OS0xMDIKICAgIC8vIHJldHVybiB7CiAgICAvLyAgIHBvb2xQY3RPZldob2xlOiBuZXcgRml4ZWRBcnJheTx1aW50NjQsIDI0PigpLAogICAgLy8gICB1cGRhdGVkRm9yUGF5b3V0OiAwLAogICAgLy8gfQogICAgaXRvYgogICAgY29uY2F0CiAgICByZXRzdWIK",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "state": {
+        "global": {
+            "num_byte_slices": 3,
+            "num_uints": 11
+        },
+        "local": {
+            "num_byte_slices": 0,
+            "num_uints": 0
+        }
+    },
+    "schema": {
+        "global": {
+            "declared": {
+                "algodVer": {
+                    "type": "bytes",
+                    "key": "algodVer"
+                },
+                "binRoundStart": {
+                    "type": "uint64",
+                    "key": "binRoundStart"
+                },
+                "creatingValidatorContractAppId": {
+                    "type": "uint64",
+                    "key": "creatorApp"
+                },
+                "epochNumber": {
+                    "type": "uint64",
+                    "key": "epochNumber"
+                },
+                "lastPayout": {
+                    "type": "uint64",
+                    "key": "lastPayout"
+                },
+                "minEntryStake": {
+                    "type": "uint64",
+                    "key": "minEntryStake"
+                },
+                "numStakers": {
+                    "type": "uint64",
+                    "key": "numStakers"
+                },
+                "poolId": {
+                    "type": "uint64",
+                    "key": "poolId"
+                },
+                "rewardAccumulator": {
+                    "type": "uint64",
+                    "key": "rewardAccumulator"
+                },
+                "roundsPerDay": {
+                    "type": "uint64",
+                    "key": "roundsPerDay"
+                },
+                "stakeAccumulator": {
+                    "type": "bytes",
+                    "key": "stakeAccumulator"
+                },
+                "totalAlgoStaked": {
+                    "type": "uint64",
+                    "key": "staked"
+                },
+                "validatorId": {
+                    "type": "uint64",
+                    "key": "validatorId"
+                },
+                "weightedMovingAverage": {
+                    "type": "bytes",
+                    "key": "ewma"
+                }
+            },
+            "reserved": {}
+        },
+        "local": {
+            "declared": {},
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "StakingPool",
+        "desc": "StakingPool contract has a new instance deployed per staking pool added by any validator.  A single instance\nis initially immutably deployed, and the id of that instance is used as a construction parameter in the immutable\ninstance of the master ValidatorRegistry contract.  It then uses that StakingPool instance as a 'factory template'\nfor subsequent pool creations - using the on-chain bytecode of that deployed instance to create a new identical\ninstance.\n\nEach instance is explicitly 'linked' to the validator master via its creation parameters.  The validator master\ncontract only allows calls from staking pool contract instances that match data that only the validator master\nauthoritatively has (validator id X, pool Y - has to come from contract address of that pool).  Calls the pools\nvalidate coming from the validator are only allowed if it matches the validator id it was created with.",
+        "methods": [
+            {
+                "name": "updateApplication",
+                "args": [],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "createApplication",
+                "args": [
+                    {
+                        "type": "uint64",
+                        "name": "creatingContractId"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "validatorId"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "poolId"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "minEntryStake"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "gas",
+                "args": [],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "initStorage",
+                "args": [],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "addStake",
+                "args": [
+                    {
+                        "type": "address",
+                        "name": "staker"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "uint64"
+                }
+            },
+            {
+                "name": "removeStake",
+                "args": [
+                    {
+                        "type": "address",
+                        "name": "staker"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "amountToUnstake"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "claimTokens",
+                "args": [],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "getStakerInfo",
+                "args": [
+                    {
+                        "type": "address",
+                        "name": "staker"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "(address,uint64,uint64,uint64,uint64)"
+                }
+            },
+            {
+                "name": "payTokenReward",
+                "args": [
+                    {
+                        "type": "address",
+                        "name": "staker"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "rewardToken"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "amountToSend"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "updateAlgodVer",
+                "args": [
+                    {
+                        "type": "byte[]",
+                        "name": "algodVer"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "epochBalanceUpdate",
+                "args": [],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "goOnline",
+                "args": [
+                    {
+                        "type": "byte[]",
+                        "name": "votePK"
+                    },
+                    {
+                        "type": "byte[]",
+                        "name": "selectionPK"
+                    },
+                    {
+                        "type": "byte[]",
+                        "name": "stateProofPK"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "voteFirst"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "voteLast"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "voteKeyDilution"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "goOffline",
+                "args": [],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "linkToNFD",
+                "args": [
+                    {
+                        "type": "uint64",
+                        "name": "nfdAppId"
+                    },
+                    {
+                        "type": "byte[]",
+                        "name": "nfdName"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "proxiedSetTokenPayoutRatio",
+                "args": [
+                    {
+                        "type": "(uint64,uint64,uint64)",
+                        "name": "poolKey"
+                    }
+                ],
+                "readonly": false,
+                "returns": {
+                    "type": "(uint64[24],uint64)"
+                }
+            }
+        ],
+        "networks": {}
+    },
+    "bare_call_config": {}
+}

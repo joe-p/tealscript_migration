@@ -1,0 +1,559 @@
+#pragma version 10
+#pragma typetrack false
+
+// @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
+main:
+    intcblock 1 0 192
+    bytecblock 0x151f7c750000000000000000 0x151f7c75 0x151f7c75000000000000000000000000000000000000000000000000 0x151f7c750000 0x151f7c750000000000000000000000000000000000000000000000000000000000000000
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:109
+    // export class ValidatorRegistry extends Contract {
+    txn NumAppArgs
+    bz main_after_if_else@41
+    pushbytess 0x46f76533 0xb8447b36 0x1b5e82c6 0x79472d83 0x5f7acfd9 0x3172ca9d 0x8a87142d 0xd1366cc3 0x3b045c5c 0x3bab5c22 0x9a7c2248 0x2fa22c4b 0x772a7de4 0x572767d1 0x345485b9 0xfbc63178 0x24498cf4 0xf846dd7a 0x83050501 0x7bbb6c8d 0xf839414a 0x11d737ff 0x3e288972 0xdd5faada 0xdd43d7bf 0xf99ef54d 0xbf7fc7e3 0x3b889b84 0xb16b3b40 0x4df8d86e 0x418fcefc 0xa2dc51b5 0x2873f504 0x0547f4fe 0xcb668358 // method "updateApplication()void", method "createApplication()void", method "initStakingContract(uint64)void", method "loadStakingContractData(uint64,byte[])void", method "finalizeStakingContract()void", method "gas()void", method "getMbrAmounts()(uint64,uint64,uint64,uint64)", method "getProtocolConstraints()(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64)", method "getNumValidators()uint64", method "getValidatorConfig(uint64)(uint64,address,address,uint64,uint64,address,uint64[4],uint64,uint64,uint64,uint64,uint64,address,uint64,uint64,uint64,uint64,uint64)", method "getValidatorState(uint64)(uint64,uint64,uint64,uint64)", method "getValidatorOwnerAndManager(uint64)(address,address)", method "getPools(uint64)(uint64,uint64,uint64)[]", method "getPoolAppId(uint64,uint64)uint64", method "getPoolInfo((uint64,uint64,uint64))(uint64,uint64,uint64)", method "getCurMaxStakePerPool(uint64)uint64", method "doesStakerNeedToPayMBR(address)bool", method "getStakedPoolsForAccount(address)(uint64,uint64,uint64)[]", method "getTokenPayoutRatio(uint64)(uint64[24],uint64)", method "getNodePoolAssignments(uint64)((uint64[3])[8])", method "getNFDRegistryID()uint64", method "addValidator(byte[],(uint64,address,address,uint64,uint64,address,uint64[4],uint64,uint64,uint64,uint64,uint64,address,uint64,uint64,uint64,uint64,uint64))uint64", method "changeValidatorManager(uint64,address)void", method "changeValidatorSunsetInfo(uint64,uint64,uint64)void", method "changeValidatorNFD(uint64,uint64,byte[])void", method "changeValidatorCommissionAddress(uint64,address)void", method "changeValidatorRewardInfo(uint64,uint64,address,uint64[4],uint64,uint64)void", method "addPool(uint64,uint64)(uint64,uint64,uint64)", method "addStake(uint64,uint64)(uint64,uint64,uint64)", method "setTokenPayoutRatio(uint64)(uint64[24],uint64)", method "stakeUpdatedViaRewards((uint64,uint64,uint64),uint64,uint64,uint64,uint64)void", method "stakeRemoved((uint64,uint64,uint64),address,uint64,uint64,bool)void", method "findPoolForStaker(uint64,address,uint64)((uint64,uint64,uint64),bool,bool)", method "movePoolToNode(uint64,uint64,uint64)void", method "emptyTokenRewards(uint64,address)uint64"
+    txna ApplicationArgs 0
+    match main_updateApplication_route@3 main_createApplication_route@4 main_initStakingContract_route@5 main_loadStakingContractData_route@6 main_finalizeStakingContract_route@7 main_gas_route@8 main_getMbrAmounts_route@9 main_getProtocolConstraints_route@10 main_getNumValidators_route@11 main_getValidatorConfig_route@12 main_getValidatorState_route@13 main_getValidatorOwnerAndManager_route@14 main_getPools_route@15 main_getPoolAppId_route@16 main_getPoolInfo_route@17 main_getCurMaxStakePerPool_route@18 main_doesStakerNeedToPayMBR_route@19 main_getStakedPoolsForAccount_route@20 main_getTokenPayoutRatio_route@21 main_getNodePoolAssignments_route@22 main_getNFDRegistryID_route@23 main_addValidator_route@24 main_changeValidatorManager_route@25 main_changeValidatorSunsetInfo_route@26 main_changeValidatorNFD_route@27 main_changeValidatorCommissionAddress_route@28 main_changeValidatorRewardInfo_route@29 main_addPool_route@30 main_addStake_route@31 main_setTokenPayoutRatio_route@32 main_stakeUpdatedViaRewards_route@33 main_stakeRemoved_route@34 main_findPoolForStaker_route@35 main_movePoolToNode_route@36 main_emptyTokenRewards_route@37
+
+main_after_if_else@41:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:109
+    // export class ValidatorRegistry extends Contract {
+    intc_1 // 0
+    return
+
+main_emptyTokenRewards_route@37:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:318
+    // emptyTokenRewards(validatorId: ValidatorIdType, receiver: arc4.Address): uint64 {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_0 // 0x151f7c750000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_movePoolToNode_route@36:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:316
+    // movePoolToNode(validatorId: ValidatorIdType, poolAppId: uint64, nodeNum: uint64): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_findPoolForStaker_route@35:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:300-304
+    // findPoolForStaker(
+    //   validatorId: ValidatorIdType,
+    //   staker: arc4.Address,
+    //   amountToStake: uint64,
+    // ): [ValidatorPoolKey, boolean, boolean] {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    pushbytes 0x151f7c7500000000000000000000000000000000000000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_stakeRemoved_route@34:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:292-298
+    // stakeRemoved(
+    //   poolKey: ValidatorPoolKey,
+    //   staker: arc4.Address,
+    //   amountRemoved: uint64,
+    //   rewardRemoved: uint64,
+    //   stakerRemoved: boolean,
+    // ): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_stakeUpdatedViaRewards_route@33:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:284-290
+    // stakeUpdatedViaRewards(
+    //   poolKey: ValidatorPoolKey,
+    //   algoToAdd: uint64,
+    //   rewardTokenAmountReserved: uint64,
+    //   validatorCommission: uint64,
+    //   saturatedBurnToFeeSink: uint64,
+    // ): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_setTokenPayoutRatio_route@32:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:277
+    // setTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:109
+    // export class ValidatorRegistry extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:277
+    // setTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
+    callsub setTokenPayoutRatio
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_addStake_route@31:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:269
+    // addStake(validatorId: ValidatorIdType, valueToVerify: uint64): ValidatorPoolKey {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_2 // 0x151f7c75000000000000000000000000000000000000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_addPool_route@30:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:261
+    // addPool(validatorId: ValidatorIdType, nodeNum: uint64): ValidatorPoolKey {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_2 // 0x151f7c75000000000000000000000000000000000000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_changeValidatorRewardInfo_route@29:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:252-259
+    // changeValidatorRewardInfo(
+    //   validatorId: ValidatorIdType,
+    //   EntryGatingType: uint64,
+    //   EntryGatingAddress: arc4.Address,
+    //   EntryGatingAssets: FixedArray<uint64, 4>,
+    //   GatingAssetMinBalance: uint64,
+    //   RewardPerPayout: uint64,
+    // ): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_changeValidatorCommissionAddress_route@28:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:250
+    // changeValidatorCommissionAddress(validatorId: ValidatorIdType, commissionAddress: arc4.Address): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_changeValidatorNFD_route@27:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:248
+    // changeValidatorNFD(validatorId: ValidatorIdType, nfdAppID: uint64, nfdName: arc4.DynamicBytes): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_changeValidatorSunsetInfo_route@26:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:246
+    // changeValidatorSunsetInfo(validatorId: ValidatorIdType, sunsettingOn: uint64, sunsettingTo: ValidatorIdType): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_changeValidatorManager_route@25:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:244
+    // changeValidatorManager(validatorId: ValidatorIdType, manager: arc4.Address): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_addValidator_route@24:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:240
+    // addValidator(nfdName: arc4.DynamicBytes, config: ValidatorConfig): uint64 {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_0 // 0x151f7c750000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_getNFDRegistryID_route@23:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:236
+    // getNFDRegistryID(): uint64 {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_0 // 0x151f7c750000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_getNodePoolAssignments_route@22:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:230
+    // getNodePoolAssignments(validatorId: uint64): NodePoolAssignmentConfig {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:109
+    // export class ValidatorRegistry extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:230
+    // getNodePoolAssignments(validatorId: uint64): NodePoolAssignmentConfig {
+    callsub getNodePoolAssignments
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_getTokenPayoutRatio_route@21:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:223
+    // getTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:109
+    // export class ValidatorRegistry extends Contract {
+    txna ApplicationArgs 1
+    btoi
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:223
+    // getTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
+    callsub getTokenPayoutRatio
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    return
+
+main_getStakedPoolsForAccount_route@20:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:219
+    // getStakedPoolsForAccount(staker: arc4.Address): ValidatorPoolKey[] {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_3 // 0x151f7c750000
+    log
+    intc_0 // 1
+    return
+
+main_doesStakerNeedToPayMBR_route@19:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:215
+    // doesStakerNeedToPayMBR(staker: arc4.Address): boolean {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    pushbytes 0x151f7c7500
+    log
+    intc_0 // 1
+    return
+
+main_getCurMaxStakePerPool_route@18:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:211
+    // getCurMaxStakePerPool(validatorId: ValidatorIdType): uint64 {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_0 // 0x151f7c750000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_getPoolInfo_route@17:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:203
+    // getPoolInfo(poolKey: ValidatorPoolKey): PoolInfo {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_2 // 0x151f7c75000000000000000000000000000000000000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_getPoolAppId_route@16:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:199
+    // getPoolAppId(validatorId: uint64, poolId: uint64): uint64 {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_0 // 0x151f7c750000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_getPools_route@15:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:195
+    // getPools(validatorId: ValidatorIdType): PoolInfo[] {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_3 // 0x151f7c750000
+    log
+    intc_0 // 1
+    return
+
+main_getValidatorOwnerAndManager_route@14:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:191
+    // getValidatorOwnerAndManager(validatorId: ValidatorIdType): [arc4.Address, arc4.Address] {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    pushbytes base32(CUPXY5IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA)
+    log
+    intc_0 // 1
+    return
+
+main_getValidatorState_route@13:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:182
+    // getValidatorState(validatorId: ValidatorIdType): ValidatorCurState {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec 4 // 0x151f7c750000000000000000000000000000000000000000000000000000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_getValidatorConfig_route@12:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:159
+    // getValidatorConfig(validatorId: ValidatorIdType): ValidatorConfig {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    pushbytes base32(CUPXY5IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA)
+    log
+    intc_0 // 1
+    return
+
+main_getNumValidators_route@11:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:155
+    // getNumValidators(): uint64 {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec_0 // 0x151f7c750000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_getProtocolConstraints_route@10:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:139
+    // getProtocolConstraints(): Constraints {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    pushbytes 0x151f7c7500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_getMbrAmounts_route@9:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:130
+    // getMbrAmounts(): MbrAmounts {
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    bytec 4 // 0x151f7c750000000000000000000000000000000000000000000000000000000000000000
+    log
+    intc_0 // 1
+    return
+
+main_gas_route@8:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:128
+    // gas(): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_finalizeStakingContract_route@7:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:126
+    // finalizeStakingContract(): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_loadStakingContractData_route@6:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:124
+    // loadStakingContractData(offset: uint64, data: bytes): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_initStakingContract_route@5:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:122
+    // initStakingContract(approvalProgramSize: uint64): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+main_createApplication_route@4:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:120
+    // createApplication(): void {}
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    intc_0 // 1
+    return
+
+main_updateApplication_route@3:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:118
+    // updateApplication(): void {}
+    txn OnCompletion
+    pushint 4 // UpdateApplication
+    ==
+    assert // OnCompletion is not UpdateApplication
+    txn ApplicationID
+    assert // can only call when not creating
+    intc_0 // 1
+    return
+
+
+// smart_contracts/reti_validator_registry/validatorRegistry.algo.ts::ValidatorRegistry.getTokenPayoutRatio(validatorId: uint64) -> bytes:
+getTokenPayoutRatio:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:223
+    // getTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
+    proto 1 1
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:225
+    // poolPctOfWhole: new FixedArray<uint64, 24>(),
+    intc_2 // 192
+    bzero
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:226
+    // updatedForPayout: 0,
+    intc_1 // 0
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:224-227
+    // return {
+    //   poolPctOfWhole: new FixedArray<uint64, 24>(),
+    //   updatedForPayout: 0,
+    // }
+    itob
+    concat
+    retsub
+
+
+// smart_contracts/reti_validator_registry/validatorRegistry.algo.ts::ValidatorRegistry.getNodePoolAssignments(validatorId: uint64) -> bytes:
+getNodePoolAssignments:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:230
+    // getNodePoolAssignments(validatorId: uint64): NodePoolAssignmentConfig {
+    proto 1 1
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:232
+    // nodes: new FixedArray<NodeConfig, typeof MAX_NODES>(),
+    intc_2 // 192
+    bzero
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:231-233
+    // return {
+    //   nodes: new FixedArray<NodeConfig, typeof MAX_NODES>(),
+    // }
+    retsub
+
+
+// smart_contracts/reti_validator_registry/validatorRegistry.algo.ts::ValidatorRegistry.setTokenPayoutRatio(validatorId: uint64) -> bytes:
+setTokenPayoutRatio:
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:277
+    // setTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
+    proto 1 1
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:279
+    // poolPctOfWhole: new FixedArray<uint64, 24>(),
+    intc_2 // 192
+    bzero
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:280
+    // updatedForPayout: 0,
+    intc_1 // 0
+    // smart_contracts/reti_validator_registry/validatorRegistry.algo.ts:278-281
+    // return {
+    //   poolPctOfWhole: new FixedArray<uint64, 24>(),
+    //   updatedForPayout: 0,
+    // }
+    itob
+    concat
+    retsub

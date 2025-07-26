@@ -1,0 +1,1063 @@
+{
+  "version": 3,
+  "sources": [
+    "/Users/joe/git/joe-p/tealscript_migration/smart_contracts/reti_staking_pool/stakingPool.algo.ts"
+  ],
+  "mappings": ";;;;;AAmCA;;AAAA;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;AA8DE;;AAAA;AAAA;AAAA;;AAAA;AA9DF;;;AA8DE;;;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AATA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAVA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAJA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;;;;;;;;;;;;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAFA;;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA;;AAFA;;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AA6CA;;;AAEoB;;;AAAA;AACE;AAFb;AAAA;AAAP",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "@algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram",
+      "params": {},
+      "block": "main",
+      "stack_in": [],
+      "op": "intcblock 1 0"
+    },
+    "5": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#1"
+      ],
+      "stack_out": [
+        "tmp%0#1"
+      ]
+    },
+    "7": {
+      "op": "bz main_after_if_else@21",
+      "stack_out": []
+    },
+    "10": {
+      "op": "pushbytess 0x46f76533 0x59e90aa6 0x3172ca9d 0x8a2e32c4 0xc3f54e57 0x421b5abe 0xf5892d56 0x5cfbb057 0x63f3f28b 0xa7d7969e 0xefc2608d 0xb8680372 0x51ef3b21 0xe38411ae 0x0c2245e1 // method \"updateApplication()void\", method \"createApplication(uint64,uint64,uint64,uint64)void\", method \"gas()void\", method \"initStorage()void\", method \"addStake(address)uint64\", method \"removeStake(address,uint64)void\", method \"claimTokens()void\", method \"getStakerInfo(address)(address,uint64,uint64,uint64,uint64)\", method \"payTokenReward(address,uint64,uint64)void\", method \"updateAlgodVer(byte[])void\", method \"epochBalanceUpdate()void\", method \"goOnline(byte[],byte[],byte[],uint64,uint64,uint64)void\", method \"goOffline()void\", method \"linkToNFD(uint64,byte[])void\", method \"proxiedSetTokenPayoutRatio((uint64,uint64,uint64))(uint64[24],uint64)\"",
+      "defined_out": [
+        "Method(addStake(address)uint64)",
+        "Method(claimTokens()void)",
+        "Method(createApplication(uint64,uint64,uint64,uint64)void)",
+        "Method(epochBalanceUpdate()void)",
+        "Method(gas()void)",
+        "Method(getStakerInfo(address)(address,uint64,uint64,uint64,uint64))",
+        "Method(goOffline()void)",
+        "Method(goOnline(byte[],byte[],byte[],uint64,uint64,uint64)void)",
+        "Method(initStorage()void)",
+        "Method(linkToNFD(uint64,byte[])void)",
+        "Method(payTokenReward(address,uint64,uint64)void)",
+        "Method(proxiedSetTokenPayoutRatio((uint64,uint64,uint64))(uint64[24],uint64))",
+        "Method(removeStake(address,uint64)void)",
+        "Method(updateAlgodVer(byte[])void)",
+        "Method(updateApplication()void)"
+      ],
+      "stack_out": [
+        "Method(updateApplication()void)",
+        "Method(createApplication(uint64,uint64,uint64,uint64)void)",
+        "Method(gas()void)",
+        "Method(initStorage()void)",
+        "Method(addStake(address)uint64)",
+        "Method(removeStake(address,uint64)void)",
+        "Method(claimTokens()void)",
+        "Method(getStakerInfo(address)(address,uint64,uint64,uint64,uint64))",
+        "Method(payTokenReward(address,uint64,uint64)void)",
+        "Method(updateAlgodVer(byte[])void)",
+        "Method(epochBalanceUpdate()void)",
+        "Method(goOnline(byte[],byte[],byte[],uint64,uint64,uint64)void)",
+        "Method(goOffline()void)",
+        "Method(linkToNFD(uint64,byte[])void)",
+        "Method(proxiedSetTokenPayoutRatio((uint64,uint64,uint64))(uint64[24],uint64))"
+      ]
+    },
+    "87": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(addStake(address)uint64)",
+        "Method(claimTokens()void)",
+        "Method(createApplication(uint64,uint64,uint64,uint64)void)",
+        "Method(epochBalanceUpdate()void)",
+        "Method(gas()void)",
+        "Method(getStakerInfo(address)(address,uint64,uint64,uint64,uint64))",
+        "Method(goOffline()void)",
+        "Method(goOnline(byte[],byte[],byte[],uint64,uint64,uint64)void)",
+        "Method(initStorage()void)",
+        "Method(linkToNFD(uint64,byte[])void)",
+        "Method(payTokenReward(address,uint64,uint64)void)",
+        "Method(proxiedSetTokenPayoutRatio((uint64,uint64,uint64))(uint64[24],uint64))",
+        "Method(removeStake(address,uint64)void)",
+        "Method(updateAlgodVer(byte[])void)",
+        "Method(updateApplication()void)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(updateApplication()void)",
+        "Method(createApplication(uint64,uint64,uint64,uint64)void)",
+        "Method(gas()void)",
+        "Method(initStorage()void)",
+        "Method(addStake(address)uint64)",
+        "Method(removeStake(address,uint64)void)",
+        "Method(claimTokens()void)",
+        "Method(getStakerInfo(address)(address,uint64,uint64,uint64,uint64))",
+        "Method(payTokenReward(address,uint64,uint64)void)",
+        "Method(updateAlgodVer(byte[])void)",
+        "Method(epochBalanceUpdate()void)",
+        "Method(goOnline(byte[],byte[],byte[],uint64,uint64,uint64)void)",
+        "Method(goOffline()void)",
+        "Method(linkToNFD(uint64,byte[])void)",
+        "Method(proxiedSetTokenPayoutRatio((uint64,uint64,uint64))(uint64[24],uint64))",
+        "tmp%2#0"
+      ]
+    },
+    "90": {
+      "op": "match main_updateApplication_route@3 main_createApplication_route@4 main_gas_route@5 main_initStorage_route@6 main_addStake_route@7 main_removeStake_route@8 main_claimTokens_route@9 main_getStakerInfo_route@10 main_payTokenReward_route@11 main_updateAlgodVer_route@12 main_epochBalanceUpdate_route@13 main_goOnline_route@14 main_goOffline_route@15 main_linkToNFD_route@16 main_proxiedSetTokenPayoutRatio_route@17",
+      "stack_out": []
+    },
+    "122": {
+      "block": "main_after_if_else@21",
+      "stack_in": [],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "123": {
+      "op": "return",
+      "stack_out": []
+    },
+    "124": {
+      "block": "main_proxiedSetTokenPayoutRatio_route@17",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%78#0"
+      ],
+      "stack_out": [
+        "tmp%78#0"
+      ]
+    },
+    "126": {
+      "op": "!",
+      "defined_out": [
+        "tmp%79#0"
+      ],
+      "stack_out": [
+        "tmp%79#0"
+      ]
+    },
+    "127": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "128": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%80#0"
+      ],
+      "stack_out": [
+        "tmp%80#0"
+      ]
+    },
+    "130": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "131": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "reinterpret_Encoded(uint64,uint64,uint64)%0#0"
+      ],
+      "stack_out": [
+        "reinterpret_Encoded(uint64,uint64,uint64)%0#0"
+      ]
+    },
+    "134": {
+      "callsub": "smart_contracts/reti_staking_pool/stakingPool.algo.ts::StakingPool.proxiedSetTokenPayoutRatio",
+      "op": "callsub proxiedSetTokenPayoutRatio",
+      "defined_out": [
+        "tmp%82#0"
+      ],
+      "stack_out": [
+        "tmp%82#0"
+      ]
+    },
+    "137": {
+      "op": "pushbytes 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%82#0"
+      ],
+      "stack_out": [
+        "tmp%82#0",
+        "0x151f7c75"
+      ]
+    },
+    "143": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%82#0"
+      ]
+    },
+    "144": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%83#0"
+      ],
+      "stack_out": [
+        "tmp%83#0"
+      ]
+    },
+    "145": {
+      "op": "log",
+      "stack_out": []
+    },
+    "146": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "147": {
+      "op": "return",
+      "stack_out": []
+    },
+    "148": {
+      "block": "main_linkToNFD_route@16",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%73#0"
+      ],
+      "stack_out": [
+        "tmp%73#0"
+      ]
+    },
+    "150": {
+      "op": "!",
+      "defined_out": [
+        "tmp%74#0"
+      ],
+      "stack_out": [
+        "tmp%74#0"
+      ]
+    },
+    "151": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "152": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%75#0"
+      ],
+      "stack_out": [
+        "tmp%75#0"
+      ]
+    },
+    "154": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "155": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "156": {
+      "op": "return",
+      "stack_out": []
+    },
+    "157": {
+      "block": "main_goOffline_route@15",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%69#0"
+      ],
+      "stack_out": [
+        "tmp%69#0"
+      ]
+    },
+    "159": {
+      "op": "!",
+      "defined_out": [
+        "tmp%70#0"
+      ],
+      "stack_out": [
+        "tmp%70#0"
+      ]
+    },
+    "160": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "161": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%71#0"
+      ],
+      "stack_out": [
+        "tmp%71#0"
+      ]
+    },
+    "163": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "164": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "165": {
+      "op": "return",
+      "stack_out": []
+    },
+    "166": {
+      "block": "main_goOnline_route@14",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%59#0"
+      ],
+      "stack_out": [
+        "tmp%59#0"
+      ]
+    },
+    "168": {
+      "op": "!",
+      "defined_out": [
+        "tmp%60#0"
+      ],
+      "stack_out": [
+        "tmp%60#0"
+      ]
+    },
+    "169": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "170": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%61#0"
+      ],
+      "stack_out": [
+        "tmp%61#0"
+      ]
+    },
+    "172": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "173": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "174": {
+      "op": "return",
+      "stack_out": []
+    },
+    "175": {
+      "block": "main_epochBalanceUpdate_route@13",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%55#0"
+      ],
+      "stack_out": [
+        "tmp%55#0"
+      ]
+    },
+    "177": {
+      "op": "!",
+      "defined_out": [
+        "tmp%56#0"
+      ],
+      "stack_out": [
+        "tmp%56#0"
+      ]
+    },
+    "178": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "179": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%57#0"
+      ],
+      "stack_out": [
+        "tmp%57#0"
+      ]
+    },
+    "181": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "182": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "183": {
+      "op": "return",
+      "stack_out": []
+    },
+    "184": {
+      "block": "main_updateAlgodVer_route@12",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%51#0"
+      ],
+      "stack_out": [
+        "tmp%51#0"
+      ]
+    },
+    "186": {
+      "op": "!",
+      "defined_out": [
+        "tmp%52#0"
+      ],
+      "stack_out": [
+        "tmp%52#0"
+      ]
+    },
+    "187": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "188": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%53#0"
+      ],
+      "stack_out": [
+        "tmp%53#0"
+      ]
+    },
+    "190": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "191": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "192": {
+      "op": "return",
+      "stack_out": []
+    },
+    "193": {
+      "block": "main_payTokenReward_route@11",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%45#0"
+      ],
+      "stack_out": [
+        "tmp%45#0"
+      ]
+    },
+    "195": {
+      "op": "!",
+      "defined_out": [
+        "tmp%46#0"
+      ],
+      "stack_out": [
+        "tmp%46#0"
+      ]
+    },
+    "196": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "197": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%47#0"
+      ],
+      "stack_out": [
+        "tmp%47#0"
+      ]
+    },
+    "199": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "200": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "201": {
+      "op": "return",
+      "stack_out": []
+    },
+    "202": {
+      "block": "main_getStakerInfo_route@10",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%39#0"
+      ],
+      "stack_out": [
+        "tmp%39#0"
+      ]
+    },
+    "204": {
+      "op": "!",
+      "defined_out": [
+        "tmp%40#0"
+      ],
+      "stack_out": [
+        "tmp%40#0"
+      ]
+    },
+    "205": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "206": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%41#0"
+      ],
+      "stack_out": [
+        "tmp%41#0"
+      ]
+    },
+    "208": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "209": {
+      "op": "pushbytes base32(CUPXY5IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA)",
+      "defined_out": [
+        "CUPXY5IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      ],
+      "stack_out": [
+        "CUPXY5IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      ]
+    },
+    "279": {
+      "op": "log",
+      "stack_out": []
+    },
+    "280": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "281": {
+      "op": "return",
+      "stack_out": []
+    },
+    "282": {
+      "block": "main_claimTokens_route@9",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%35#0"
+      ],
+      "stack_out": [
+        "tmp%35#0"
+      ]
+    },
+    "284": {
+      "op": "!",
+      "defined_out": [
+        "tmp%36#0"
+      ],
+      "stack_out": [
+        "tmp%36#0"
+      ]
+    },
+    "285": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "286": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%37#0"
+      ],
+      "stack_out": [
+        "tmp%37#0"
+      ]
+    },
+    "288": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "289": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "290": {
+      "op": "return",
+      "stack_out": []
+    },
+    "291": {
+      "block": "main_removeStake_route@8",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%30#0"
+      ],
+      "stack_out": [
+        "tmp%30#0"
+      ]
+    },
+    "293": {
+      "op": "!",
+      "defined_out": [
+        "tmp%31#0"
+      ],
+      "stack_out": [
+        "tmp%31#0"
+      ]
+    },
+    "294": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "295": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%32#0"
+      ],
+      "stack_out": [
+        "tmp%32#0"
+      ]
+    },
+    "297": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "298": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "299": {
+      "op": "return",
+      "stack_out": []
+    },
+    "300": {
+      "block": "main_addStake_route@7",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%23#0"
+      ],
+      "stack_out": [
+        "tmp%23#0"
+      ]
+    },
+    "302": {
+      "op": "!",
+      "defined_out": [
+        "tmp%24#0"
+      ],
+      "stack_out": [
+        "tmp%24#0"
+      ]
+    },
+    "303": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "304": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%25#0"
+      ],
+      "stack_out": [
+        "tmp%25#0"
+      ]
+    },
+    "306": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "307": {
+      "op": "pushbytes 0x151f7c750000000000000000",
+      "defined_out": [
+        "0x151f7c750000000000000000"
+      ],
+      "stack_out": [
+        "0x151f7c750000000000000000"
+      ]
+    },
+    "321": {
+      "op": "log",
+      "stack_out": []
+    },
+    "322": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "323": {
+      "op": "return",
+      "stack_out": []
+    },
+    "324": {
+      "block": "main_initStorage_route@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "tmp%19#0"
+      ]
+    },
+    "326": {
+      "op": "!",
+      "defined_out": [
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "tmp%20#0"
+      ]
+    },
+    "327": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "328": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "tmp%21#0"
+      ]
+    },
+    "330": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "331": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "332": {
+      "op": "return",
+      "stack_out": []
+    },
+    "333": {
+      "block": "main_gas_route@5",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%15#0"
+      ]
+    },
+    "335": {
+      "op": "!",
+      "defined_out": [
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "tmp%16#0"
+      ]
+    },
+    "336": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "337": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "tmp%17#0"
+      ]
+    },
+    "339": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "340": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "341": {
+      "op": "return",
+      "stack_out": []
+    },
+    "342": {
+      "block": "main_createApplication_route@4",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "344": {
+      "op": "!",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
+    },
+    "345": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "346": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "348": {
+      "op": "!",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
+    },
+    "349": {
+      "error": "can only call when creating",
+      "op": "assert // can only call when creating",
+      "stack_out": []
+    },
+    "350": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "351": {
+      "op": "return",
+      "stack_out": []
+    },
+    "352": {
+      "block": "main_updateApplication_route@3",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "354": {
+      "op": "pushint 4 // UpdateApplication",
+      "defined_out": [
+        "UpdateApplication",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0",
+        "UpdateApplication"
+      ]
+    },
+    "356": {
+      "op": "==",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "357": {
+      "error": "OnCompletion is not UpdateApplication",
+      "op": "assert // OnCompletion is not UpdateApplication",
+      "stack_out": []
+    },
+    "358": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "360": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "361": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "362": {
+      "op": "return",
+      "stack_out": []
+    },
+    "363": {
+      "subroutine": "smart_contracts/reti_staking_pool/stakingPool.algo.ts::StakingPool.proxiedSetTokenPayoutRatio",
+      "params": {
+        "poolKey#0": "bytes"
+      },
+      "block": "proxiedSetTokenPayoutRatio",
+      "stack_in": [],
+      "op": "proto 1 1"
+    },
+    "366": {
+      "op": "pushint 192 // 192",
+      "defined_out": [
+        "192"
+      ],
+      "stack_out": [
+        "192"
+      ]
+    },
+    "369": {
+      "op": "bzero",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "370": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "0"
+      ]
+    },
+    "371": {
+      "op": "itob",
+      "defined_out": [
+        "aggregate%val_as_bytes%0#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "aggregate%val_as_bytes%0#0"
+      ]
+    },
+    "372": {
+      "op": "concat",
+      "defined_out": [
+        "aggregate%head%1#0"
+      ],
+      "stack_out": [
+        "aggregate%head%1#0"
+      ]
+    },
+    "373": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}
