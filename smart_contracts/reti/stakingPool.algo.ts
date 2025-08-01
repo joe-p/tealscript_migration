@@ -102,10 +102,6 @@ export class StakingPool extends Contract {
 
   // ---
 
-  nfdRegistryAppId = TemplateVar<uint64>('nfdregistryAppId')
-
-  feeSinkAddr = TemplateVar<Address>('feeSinkAddr')
-
   // TODO - TEMPORARY!  just want these upgradeable until prior to final release so users don't have to keep
   // resetting every validator, and refund every staker.
   updateApplication(): void {
@@ -179,8 +175,8 @@ export class StakingPool extends Contract {
     }).returnValue
 
     const isTokenEligible = validatorConfig.rewardTokenId !== 0
-    const extraMBR = isTokenEligible && this.poolId.value === 1 ? ASSET_HOLDING_FEE : 0
-    const PoolInitMbr = ALGORAND_ACCOUNT_MIN_BALANCE + extraMBR
+    const extraMBR: uint64 = isTokenEligible && this.poolId.value === 1 ? ASSET_HOLDING_FEE : 0
+    const PoolInitMbr: uint64 = ALGORAND_ACCOUNT_MIN_BALANCE + extraMBR
     // TODO: len<TYPE> + this.costForBoxStorage(7 /* 'stakers' name */ + op.len<StakedInfo>() * MAX_STAKERS_PER_POOL)
     // the pay transaction must exactly match our MBR requirement.
 
@@ -233,18 +229,18 @@ export class StakingPool extends Contract {
 
     // See if the account staking is already in our ledger of stakers - if so, they're just adding to their stake
     // track first empty slot as we go along as well.
-    const entryRound = Global.round + ALGORAND_STAKING_BLOCK_DELAY
-    let firstEmpty = 0
+    const entryRound: uint64 = Global.round + ALGORAND_STAKING_BLOCK_DELAY
+    let firstEmpty: uint64 = 0
 
     this.totalAlgoStaked.value += stakedAmountPayment.amount
 
-    const roundsLeftInBin = this.binRoundStart.value + this.roundsPerDay.value - Global.round
+    const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     this.stakeAccumulator.value = new Uint128(
       this.stakeAccumulator.value.native + BigUint(stakedAmountPayment.amount) * BigUint(roundsLeftInBin),
     )
 
     // firstEmpty should represent 1-based index to first empty slot we find - 0 means none were found
-    for (let i = 0; i < this.stakers.value.length; i += 1) {
+    for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
       if (Global.opcodeBudget < 300) {
         // TODO: increaseOpcodeBudget()
       }
@@ -255,7 +251,7 @@ export class StakingPool extends Contract {
         cmpStaker.entryRound = entryRound
 
         // Update the box w/ the new data
-        this.stakers.value[i] = cmpStaker
+        this.stakers.value[i] = clone(cmpStaker)
 
         return entryRound
       }
@@ -266,7 +262,7 @@ export class StakingPool extends Contract {
 
     if (firstEmpty === 0) {
       // nothing was found - pool is full and this staker can't fit
-      throw Error('Staking pool full')
+      assert(false, 'Staking pool full')
     }
     // This is a new staker to the pool, so first ensure they're adding required minimum, then
     // initialize slot and add to the stakers.
@@ -311,7 +307,7 @@ export class StakingPool extends Contract {
 
     const registry = compileArc4(ValidatorRegistry)
 
-    for (let i = 0; i < this.stakers.value.length; i += 1) {
+    for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
       if (Global.opcodeBudget < 300) {
         // TODO: increaseOpcodeBudget()
       }
@@ -322,12 +318,12 @@ export class StakingPool extends Contract {
           amountToUnstake = cmpStaker.balance
         }
         if (cmpStaker.balance < amountToUnstake) {
-          throw Error('Insufficient balance')
+          assert(false, 'Insufficient balance')
         }
         cmpStaker.balance -= amountToUnstake
         this.totalAlgoStaked.value -= amountToUnstake
 
-        let amountRewardTokenRemoved = 0
+        let amountRewardTokenRemoved: uint64 = 0
         if (cmpStaker.rewardTokenBalance > 0) {
           // If and only if this is pool 1 (where the reward token is held - then we can pay it out)
           if (this.poolId.value === 1) {
@@ -385,9 +381,9 @@ export class StakingPool extends Contract {
           stakerRemoved = true
         }
         // Update the box w/ the new staker data
-        this.stakers.value[i] = cmpStaker
+        this.stakers.value[i] = clone(cmpStaker)
 
-        const roundsLeftInBin = this.binRoundStart.value + this.roundsPerDay.value - Global.round
+        const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
         const subtractAmount = BigUint(amountToUnstake * roundsLeftInBin)
         this.stakeAccumulator.value = new Uint128(this.stakeAccumulator.value.native - subtractAmount)
 
@@ -407,7 +403,7 @@ export class StakingPool extends Contract {
         return
       }
     }
-    throw Error('account not found')
+    assert(false, 'account not found')
   }
 
   /**
@@ -423,7 +419,7 @@ export class StakingPool extends Contract {
 
     const registry = compileArc4(ValidatorRegistry)
 
-    for (let i = 0; i < this.stakers.value.length; i += 1) {
+    for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
       if (Global.opcodeBudget < 300) {
         // TODO: increaseOpcodeBudget()
       }
@@ -432,7 +428,7 @@ export class StakingPool extends Contract {
         if (cmpStaker.rewardTokenBalance === 0) {
           return
         }
-        let amountRewardTokenRemoved = 0
+        let amountRewardTokenRemoved: uint64 = 0
         // If and only if this is pool 1 (where the reward token is held - then we can pay it out)
         if (this.poolId.value === 1) {
           const validatorConfig = registry.call.getValidatorConfig({
@@ -458,7 +454,7 @@ export class StakingPool extends Contract {
         }
 
         // Update the box w/ the new staker balance data (rewardTokenBalance being zeroed)
-        this.stakers.value[i] = cmpStaker
+        this.stakers.value[i] = clone(cmpStaker)
 
         // Call the validator contract and tell it we're removing stake
         // It'll verify we're a valid staking pool id and update it
@@ -476,7 +472,7 @@ export class StakingPool extends Contract {
         return
       }
     }
-    throw Error('account not found')
+    assert(false, 'account not found')
   }
 
   /**
@@ -488,7 +484,7 @@ export class StakingPool extends Contract {
    */
   // @abi.readonly
   getStakerInfo(staker: Address): StakedInfo {
-    for (let i = 0; i < this.stakers.value.length; i += 1) {
+    for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
       if (Global.opcodeBudget < 200) {
         // TODO: increaseOpcodeBudget()
       }
@@ -496,7 +492,7 @@ export class StakingPool extends Contract {
         return this.stakers.value[i]
       }
     }
-    throw Error('account not found')
+    assert(false, 'account not found')
   }
 
   /**
@@ -566,11 +562,11 @@ export class StakingPool extends Contract {
     // =====
     const epochRoundLength = validatorConfig.epochRoundLength.native
     const curRound = Global.round
-    const thisEpochBegin = curRound - (curRound % epochRoundLength)
+    const thisEpochBegin: uint64 = curRound - (curRound % epochRoundLength)
 
     // check which epoch we're currently in and if it's outside of last payout epoch.
     if (this.lastPayout.hasValue) {
-      const lastPayoutEpoch = this.lastPayout.value - (this.lastPayout.value % epochRoundLength)
+      const lastPayoutEpoch: uint64 = this.lastPayout.value - (this.lastPayout.value % epochRoundLength)
       // log(concat('thisEpoch: ', thisEpochBegin.toString()))
       // log(concat('lastpayoutEpoch: ', lastPayoutEpoch.toString()))
       // We've had one payout - so we need to be at least one epoch past the last payout.
@@ -635,7 +631,7 @@ export class StakingPool extends Contract {
     // =====
     // total reward available is current balance - amount staked (so if 100 was staked but balance is 120 - reward is 20)
     // [not counting MBR which should never be counted - it's not payable]
-    let algoRewardAvail =
+    let algoRewardAvail: uint64 =
       Global.currentApplicationAddress.balance -
       this.totalAlgoStaked.value -
       Global.currentApplicationAddress.minBalance
@@ -655,12 +651,12 @@ export class StakingPool extends Contract {
     // if tokens are rewarded by this validator and determine how much we have to hand out
     // we'll track amount we actually assign out and let our validator know, so it can mark that amount
     // as being held back (for tracking what has been assigned for payout)
-    let tokenRewardAvail = 0
-    let tokenRewardPaidOut = 0
-    let validatorCommissionPaidOut = 0
-    let excessToFeeSink = 0
+    let tokenRewardAvail: uint64 = 0
+    let tokenRewardPaidOut: uint64 = 0
+    let validatorCommissionPaidOut: uint64 = 0
+    let excessToFeeSink: uint64 = 0
     if (isTokenEligible) {
-      const tokenRewardBal =
+      const tokenRewardBal: uint64 =
         op.AssetHolding.assetBalance(poolOneAddress, validatorConfig.rewardTokenId)[0] - rewardTokenHeldBack
 
       // if they have less tokens available then min payout - just ignore and act like no reward is avail
@@ -720,7 +716,7 @@ export class StakingPool extends Contract {
       if (validatorCommissionPaidOut > 0) {
         // Just to make sure the manager account (which triggers the epochBalanceUpdate calls!) doesn't
         // run out of funds - we'll take up to 2.1 ALGO off our commission to keep it running.
-        let managerTopOff = 0
+        let managerTopOff: uint64 = 0
         if (
           validatorConfig.manager !== validatorConfig.validatorCommissionAddress &&
           validatorConfig.manager.native.balance - validatorConfig.manager.native.minBalance < 2_100_000
@@ -748,7 +744,7 @@ export class StakingPool extends Contract {
 
     // We'll track the amount of stake we add to stakers based on payouts
     // If any dust is remaining in account it'll be considered part of reward in next epoch.
-    let increasedStake = 0
+    let increasedStake: uint64 = 0
 
     /**
      * assume A)lice and B)ob have equal stake... and there is a reward of 100 to divide
@@ -774,7 +770,7 @@ export class StakingPool extends Contract {
     // remaining participants.
     if (algoRewardAvail !== 0 || tokenRewardAvail !== 0) {
       let partialStakersTotalStake: uint64 = 0
-      for (let i = 0; i < this.stakers.value.length; i += 1) {
+      for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
         if (Global.opcodeBudget < 400) {
           // TODO: increaseOpcodeBudget()
         }
@@ -787,7 +783,7 @@ export class StakingPool extends Contract {
           } else {
             // Reward is % of users stake in pool,
             // but we deduct based on time away from our payout time
-            const timeInPool = thisEpochBegin - cmpStaker.entryRound
+            const timeInPool: uint64 = thisEpochBegin - cmpStaker.entryRound
             let timePercentage: uint64
             // get % of time in pool (in tenths precision)
             // ie: 34.7% becomes 347
@@ -827,7 +823,7 @@ export class StakingPool extends Contract {
                 increasedStake += stakerReward
               }
               // Update the box w/ the new data
-              this.stakers.value[i] = cmpStaker
+              this.stakers.value[i] = clone(cmpStaker)
             }
           }
         }
@@ -835,13 +831,13 @@ export class StakingPool extends Contract {
 
       // Reduce the virtual 'total staked in pool' amount based on removing the totals of the stakers we just paid
       // partial amounts.  This is so that all that remains is the stake of the 100% 'time in epoch' people.
-      const newPoolTotalStake = this.totalAlgoStaked.value - partialStakersTotalStake
+      const newPoolTotalStake: uint64 = this.totalAlgoStaked.value - partialStakersTotalStake
 
       // It's technically possible for newPoolTotalStake to be 0, if EVERY staker is new then there'll be nothing to
       // hand out this epoch because we'll have reduced the amount to 'count' towards stake by the entire stake
       if (newPoolTotalStake > 0) {
         // Now go back through the list AGAIN and pay out the full-timers their rewards + excess
-        for (let i = 0; i < this.stakers.value.length; i += 1) {
+        for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
           if (Global.opcodeBudget < 200) {
             // TODO: increaseOpcodeBudget()
           }
@@ -873,7 +869,7 @@ export class StakingPool extends Contract {
               }
 
               // Update the box w/ the new data
-              this.stakers.value[i] = cmpStaker
+              this.stakers.value[i] = clone(cmpStaker)
             }
           }
         }
@@ -883,7 +879,7 @@ export class StakingPool extends Contract {
     // We've paid out the validator and updated the stakers new balances to reflect the rewards, now update
     // our 'total staked' value as well based on what we paid to validator and updated in staker balances as we
     // determined stake increases
-    const roundsLeftInBin = this.binRoundStart.value + this.roundsPerDay.value - Global.round
+    const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     this.totalAlgoStaked.value += increasedStake
     this.stakeAccumulator.value = new Uint128(
       this.stakeAccumulator.value.native + BigUint(increasedStake) * BigUint(roundsLeftInBin),
@@ -932,7 +928,7 @@ export class StakingPool extends Contract {
     const extraFee = this.getGoOnlineFee()
     assertMatch(feePayment, { receiver: Global.currentApplicationAddress, amount: extraFee })
     itxn.keyRegistration({
-      voteKey: Bytes<32>(votePK),
+      voteKey: votePK as bytes<32>,
       selectionKey: Bytes<32>(selectionPK),
       stateProofKey: Bytes<64>(stateProofPK),
       voteFirst: voteFirst,
@@ -964,8 +960,13 @@ export class StakingPool extends Contract {
     assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
 
     itxn.applicationCall({
-      appId: this.nfdRegistryAppId,
-      appArgs: ['verify_nfd_addr', nfdName, op.itob(nfdAppId), new Address(Global.currentApplicationAddress).bytes],
+      appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
+      appArgs: [
+        Bytes('verify_nfd_addr'),
+        Bytes(nfdName),
+        op.itob(nfdAppId),
+        new Address(Global.currentApplicationAddress).bytes,
+      ],
       apps: [nfdAppId],
     })
   }
@@ -1005,7 +1006,7 @@ export class StakingPool extends Contract {
   }
 
   private getFeeSink(): Address {
-    return this.feeSinkAddr
+    return TemplateVar<Address>('FEE_SINK_ADDR')
     // TODO will be like: txn FirstValid; int 1; -; block BlkFeeSink
     // once available in AVM
   }

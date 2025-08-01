@@ -22,6 +22,8 @@ import {
   OnCompleteAction,
   Asset,
   Global,
+  biguint,
+  assert,
 } from '@algorandfoundation/algorand-typescript'
 import {
   Address,
@@ -51,7 +53,6 @@ import {
   SSC_VALUE_BYTES,
   SSC_VALUE_UINT,
 } from './constants.algo'
-import { assert } from 'vitest'
 
 const MAX_NODES = 8 // more just as a reasonable limit and cap on contract storage
 const MAX_POOLS_PER_NODE = 3 // max number of pools per node
@@ -194,7 +195,7 @@ type Constraints = {
  * See the StakingPool contract comments for details on how this contract creates new instances of them.
  */
 export class ValidatorRegistry extends Contract {
-  programVersion = 10
+  programVersion = GlobalState<uint64>({ key: 'programVersion' })
 
   // ======
   // GLOBAL STATE AND TEMPLATES
@@ -219,15 +220,16 @@ export class ValidatorRegistry extends Contract {
   // We use this to find a particular addresses deposits (in up to X independent pools w/ any validators)
   stakerPoolSet = BoxMap<Address, FixedArray<ValidatorPoolKey, typeof MAX_POOLS_PER_STAKER>>({ keyPrefix: 'sps' })
 
-  nfdRegistryAppId = TemplateVar<uint64>('nfdRegistryAppId')
-
   // ======
   // PUBLIC CONTRACT METHODS
   // ======
   // TODO - TEMPORARY!  just want these upgradeable until prior to final release so users don't have to keep
   // resetting every validator, and refund every staker.
   updateApplication(): void {
-    assert(Txn.sender === Account('LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXZ6ZAFIQ'))
+    assert(
+      Txn.sender === Account('LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXZ6ZAFIQ'),
+      'Temporary: contract is upgradeable but only during testing and only from a development account',
+    )
     // reset our stored staking pool code as well so the new version can be loaded into box storage
     this.stakingPoolApprovalProgram.delete()
     this.stakingPoolInitialized.value = false
@@ -238,6 +240,7 @@ export class ValidatorRegistry extends Contract {
     this.numValidators.value = 0
     this.numStakers.value = 0
     this.totalAlgoStaked.value = 0
+    this.programVersion.value = 10
   }
 
   initStakingContract(approvalProgramSize: uint64): void {
@@ -246,7 +249,7 @@ export class ValidatorRegistry extends Contract {
   }
 
   loadStakingContractData(offset: uint64, data: bytes): void {
-    assert(!this.stakingPoolInitialized.value)
+    assert(!this.stakingPoolInitialized.value, 'staking pool already initialized')
     this.stakingPoolApprovalProgram.ref.replace(offset, data)
   }
 
@@ -345,7 +348,7 @@ export class ValidatorRegistry extends Contract {
   getPools(validatorId: ValidatorIdType): PoolInfo[] {
     const retData: PoolInfo[] = []
     const poolSet = clone(this.validatorList(validatorId).value.pools)
-    for (let i = 0; i < poolSet.length; i += 1) {
+    for (let i: uint64 = 0; i < poolSet.length; i += 1) {
       if (poolSet[i].poolAppId === 0) {
         // reached end of list...  we don't replace values here because pools can't be removed
         break
@@ -381,7 +384,7 @@ export class ValidatorRegistry extends Contract {
    */
   getCurMaxStakePerPool(validatorId: ValidatorIdType): uint64 {
     const numPools = this.validatorList(validatorId).value.state.numPools
-    const hardMaxDividedBetweenPools = this.maxAllowedStake() / numPools.native
+    const hardMaxDividedBetweenPools: uint64 = this.maxAllowedStake() / numPools.native
     let maxPerPool: uint64 = this.validatorList(validatorId).value.config.maxAlgoPerPool
     if (maxPerPool === 0) {
       maxPerPool = this.maxAlgoAllowedPerPool()
@@ -413,7 +416,7 @@ export class ValidatorRegistry extends Contract {
     }
     const retData: ValidatorPoolKey[] = []
     const poolSet = clone(this.stakerPoolSet(staker).value)
-    for (let i = 0; i < poolSet.length; i += 1) {
+    for (let i: uint64 = 0; i < poolSet.length; i += 1) {
       if (poolSet[i].id !== 0) {
         retData.push(poolSet[i])
       }
@@ -441,7 +444,7 @@ export class ValidatorRegistry extends Contract {
   }
 
   getNFDRegistryID(): uint64 {
-    return this.nfdRegistryAppId
+    return TemplateVar<uint64>('NFD_REGISTRY_APP_ID')
   }
 
   /** Adds a new validator
@@ -463,11 +466,11 @@ export class ValidatorRegistry extends Contract {
     assert(mbrPayment.fee > 10 * 1000000, 'fee must be 10 ALGO or more to prevent spamming of validators')
 
     // We're adding a new validator - same owner might have multiple - we don't care.
-    const validatorId = this.numValidators.value + 1
+    const validatorId: uint64 = this.numValidators.value + 1
     this.numValidators.value = validatorId
 
     this.validatorList(validatorId).create()
-    this.validatorList(validatorId).value.config = config
+    this.validatorList(validatorId).value.config = clone(config)
     this.validatorList(validatorId).value.config.id = validatorId
     // all other values being 0 is correct (for 'state' for eg)
 
@@ -475,8 +478,8 @@ export class ValidatorRegistry extends Contract {
       // verify nfd is real, matches provided name, and owned by sender
       itxn
         .applicationCall({
-          appId: Application(this.nfdRegistryAppId),
-          appArgs: ['is_valid_nfd_appid', nfdName, op.itob(config.nfdForInfo)],
+          appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
+          appArgs: [Bytes('is_valid_nfd_appid'), Bytes(nfdName), op.itob(config.nfdForInfo)],
           apps: [Application(config.nfdForInfo)],
         })
         .submit()
@@ -543,7 +546,7 @@ export class ValidatorRegistry extends Contract {
       'can only be called by validator owner',
     )
     itxn.applicationCall({
-      appId: this.nfdRegistryAppId,
+      appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
       onCompletion: OnCompleteAction.NoOp,
       accounts: [Txn.sender],
       appArgs: [Bytes('is_valid_nfd_appid'), Bytes(nfdName), op.itob(nfdAppID)],
@@ -586,7 +589,7 @@ export class ValidatorRegistry extends Contract {
 
     this.validatorList(validatorId).value.config.entryGatingType = EntryGatingType
     this.validatorList(validatorId).value.config.entryGatingAddress = EntryGatingAddress
-    this.validatorList(validatorId).value.config.entryGatingAssets = EntryGatingAssets
+    this.validatorList(validatorId).value.config.entryGatingAssets = clone(EntryGatingAssets)
     this.validatorList(validatorId).value.config.gatingAssetMinBalance = GatingAssetMinBalance
     this.validatorList(validatorId).value.config.rewardPerPayout = RewardPerPayout
   }
@@ -617,7 +620,7 @@ export class ValidatorRegistry extends Contract {
 
     let numPools: uint64 = this.validatorList(validatorId).value.state.numPools.native
     if ((numPools as uint64) >= MAX_POOLS) {
-      throw Error('already at max pool size')
+      assert(false, 'already at max pool size')
     }
     numPools += 1
 
@@ -718,11 +721,11 @@ export class ValidatorRegistry extends Contract {
     // find existing slot where staker is already in a pool w/ this validator, or if none found, then ensure they're
     // putting in minimum amount for this validator.
     const findRet = this.findPoolForStaker(validatorId, staker, realAmount)
-    const poolKey = findRet[0]
+    const poolKey = clone(findRet[0])
     const isNewStakerToValidator = findRet[1]
     const isNewStakerToProtocol = findRet[2]
     if (poolKey.poolId === 0) {
-      throw Error('No pool available with free stake.  Validator needs to add another pool')
+      assert(false, 'No pool available with free stake.  Validator needs to add another pool')
     }
 
     // Update StakerPoolList for this found pool (new or existing)
@@ -777,7 +780,7 @@ export class ValidatorRegistry extends Contract {
         return this.validatorList(validatorId).value.tokenPayoutRatio
       }
       const epochRoundLength = this.validatorList(validatorId).value.config.epochRoundLength.native
-      const thisEpochBegin = curRound - (curRound % epochRoundLength)
+      const thisEpochBegin: uint64 = curRound - (curRound % epochRoundLength)
       // Make sure our last payout epoch isn't still within the current epoch - we need to be at least one epoch past the last payout.
       if (lastPayoutUpdate - (lastPayoutUpdate % epochRoundLength) === thisEpochBegin) {
         return this.validatorList(validatorId).value.tokenPayoutRatio
@@ -787,7 +790,7 @@ export class ValidatorRegistry extends Contract {
 
     const curNumPools = this.validatorList(validatorId).value.state.numPools.native
     const totalStakeForValidator = this.validatorList(validatorId).value.state.totalAlgoStaked
-    for (let i = 0; i < curNumPools; i += 1) {
+    for (let i: uint64 = 0; i < curNumPools; i += 1) {
       // ie: this pool 2 has 1000 algo staked and the validator has 10,000 staked total (9000 pool 1, 1000 pool 2)
       // so this pool is 10% of the total and thus it gets 10% of the avail community token reward.
       // Get our pools pct of all stake w/ 4 decimals
@@ -925,11 +928,11 @@ export class ValidatorRegistry extends Contract {
       const totalStakers = this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalStakers.native
       this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalStakers = new Uint16(totalStakers - 1)
       // then update the staker set.
-      const removeRet = this.removeFromStakerPoolSet(staker, <ValidatorPoolKey>{
+      const removeRet = this.removeFromStakerPoolSet(staker, {
         id: poolKey.id,
         poolId: poolKey.poolId,
         poolAppId: poolKey.poolAppId,
-      })
+      } as ValidatorPoolKey)
       const stakerOutOfThisValidator = removeRet[0]
       const stakerOutOfProtocol = removeRet[1]
       // then remove as a staker from validator stats if they're 'out' of that validators pools
@@ -974,7 +977,7 @@ export class ValidatorRegistry extends Contract {
     if (this.stakerPoolSet(staker).exists) {
       const poolSet = clone(this.stakerPoolSet(staker).value)
       assert(validatorId !== 0)
-      for (let i = 0; i < poolSet.length; i += 1) {
+      for (let i: uint64 = 0; i < poolSet.length; i += 1) {
         if (Global.opcodeBudget < 300) {
           // TODO: increaseOpcodeBudget()
         }
@@ -1004,7 +1007,7 @@ export class ValidatorRegistry extends Contract {
     // Walk their desired validators pools and find free space
     const pools = clone(this.validatorList(validatorId).value.pools)
     const curNumPools = this.validatorList(validatorId).value.state.numPools.native
-    for (let i = 0; i < curNumPools; i += 1) {
+    for (let i: uint64 = 0; i < curNumPools; i += 1) {
       if (pools[i].totalAlgoStaked + amountToStake <= maxPerPool) {
         return [
           { id: validatorId, poolId: i + 1, poolAppId: pools[i].poolAppId },
@@ -1041,7 +1044,7 @@ export class ValidatorRegistry extends Contract {
     const nodePoolAssignments = clone(this.validatorList(validatorId).value.nodePoolAssignments)
     assert(nodeNum >= 1 && nodeNum <= MAX_NODES, 'node number out of allowable range')
     // iterate  all the poolAppIds slots to find the specified poolAppId
-    for (let srcNodeIdx = 0; srcNodeIdx < MAX_NODES; srcNodeIdx += 1) {
+    for (let srcNodeIdx: uint64 = 0; srcNodeIdx < MAX_NODES; srcNodeIdx += 1) {
       for (let i = 0; i < MAX_POOLS_PER_NODE; i += 1) {
         if (nodePoolAssignments.nodes[srcNodeIdx].poolAppIds[i] === poolAppId) {
           assert(nodeNum - 1 !== srcNodeIdx, "can't move to same node")
@@ -1059,7 +1062,7 @@ export class ValidatorRegistry extends Contract {
         }
       }
     }
-    throw Error("couldn't find pool app id in nodes to move")
+    assert(false, "couldn't find pool app id in nodes to move")
   }
 
   /**
@@ -1220,7 +1223,7 @@ export class ValidatorRegistry extends Contract {
    * @param {ValidatorIdType} validatorId - The id of the validator whose data should be re-evaluated.
    */
   private reverifyNFDOwnership(validatorId: ValidatorIdType): void {
-    const validatorConfig = this.validatorList(validatorId).value.config
+    const validatorConfig = clone(this.validatorList(validatorId).value.config)
     if (validatorConfig.nfdForInfo !== 0) {
       // We already verified the nfd id and name were correct at creation time - so we don't need to verify
       // the nfd is real anymore, just that its still owned by the validator.
@@ -1336,8 +1339,8 @@ export class ValidatorRegistry extends Contract {
     assert(this.stakerPoolSet(staker).exists)
 
     const poolSet = clone(this.stakerPoolSet(staker).value)
-    let firstEmpty = 0
-    for (let i = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
+    let firstEmpty: uint64 = 0
+    for (let i: uint64 = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
       if (poolSet[i] === poolKey) {
         // all bytes compare - already in pool set
         return
@@ -1362,12 +1365,12 @@ export class ValidatorRegistry extends Contract {
    */
   private removeFromStakerPoolSet(staker: Address, poolKey: ValidatorPoolKey): [boolean, boolean] {
     // track how many pools staker is in, so we  can know if they remove all stake from all pools of this validator
-    let inSameValidatorPoolCount = 0
-    let inAnyPoolCount = 0
+    let inSameValidatorPoolCount: uint64 = 0
+    let inAnyPoolCount: uint64 = 0
     let found = false
 
     const poolSet = clone(this.stakerPoolSet(staker).value)
-    for (let i = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
+    for (let i: uint64 = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
       if (poolSet[i].id === 0) {
         continue
       }
@@ -1383,7 +1386,7 @@ export class ValidatorRegistry extends Contract {
       }
     }
     if (!found) {
-      throw Error('No matching slot found when told to remove a pool from the stakers set')
+      assert(false, 'No matching slot found when told to remove a pool from the stakers set')
     }
     // Are they completely out of the staking pool ?
     return [inSameValidatorPoolCount === 0, inAnyPoolCount === 0]
@@ -1395,14 +1398,14 @@ export class ValidatorRegistry extends Contract {
     // add the new staking pool to the specified node number - if there is room
     assert(nodeNum >= 1 && nodeNum <= MAX_NODES, 'node number not in valid range')
     // iterate all the poolAppIds slots to see if any are free (appid of 0)
-    for (let i = 0; i < maxPoolsPerNodeForThisValidator; i += 1) {
+    for (let i: uint64 = 0; i < maxPoolsPerNodeForThisValidator; i += 1) {
       if (nodePoolAssignments.nodes[nodeNum - 1].poolAppIds[i] === 0) {
         // update box data
         this.validatorList(validatorId).value.nodePoolAssignments.nodes[nodeNum - 1].poolAppIds[i] = poolAppId
         return
       }
     }
-    throw Error('no available space in specified node for this pool')
+    assert(false, 'no available space in specified node for this pool')
   }
 
   /**
@@ -1495,8 +1498,8 @@ export class ValidatorRegistry extends Contract {
     const [userOfferedNFDName] = op.AppGlobal.getExBytes(nfdAppID, Bytes('i.name'))
 
     itxn.applicationCall({
-      appId: this.nfdRegistryAppId,
-      appArgs: ['is_valid_nfd_appid', userOfferedNFDName, op.itob(nfdAppID)],
+      appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
+      appArgs: [Bytes('is_valid_nfd_appid'), Bytes(userOfferedNFDName), op.itob(nfdAppID)],
       apps: [nfdAppID],
     })
     return op.btoi(op.ITxn.lastLog) === 1
@@ -1513,10 +1516,10 @@ export class ValidatorRegistry extends Contract {
   private isAddressInNFDCAAlgoList(nfdAppID: uint64, addrToFind: Address): boolean {
     itxn.applicationCall({
       appId: Application(nfdAppID),
-      appArgs: ['read_property', 'v.caAlgo.0.as'],
+      appArgs: [Bytes('read_property'), Bytes('v.caAlgo.0.as')],
     })
     const caAlgoData = op.ITxn.lastLog
-    for (let i = 0; i < caAlgoData.length; i += 32) {
+    for (let i: uint64 = 0; i < caAlgoData.length; i += 32) {
       const addr = new Address(op.extract(caAlgoData, i, 32))
       if (addr.native !== Global.zeroAddress && addr === addrToFind) {
         return true
@@ -1570,7 +1573,7 @@ export class ValidatorRegistry extends Contract {
     globalInts: uint64,
     globalBytes: uint64,
   ): uint64 {
-    let minBal = ALGORAND_ACCOUNT_MIN_BALANCE
+    let minBal: uint64 = ALGORAND_ACCOUNT_MIN_BALANCE
     minBal += contracts * APPLICATION_BASE_FEE
     minBal += extraPages * APPLICATION_BASE_FEE
     minBal += assets * ASSET_HOLDING_FEE
