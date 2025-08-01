@@ -25,7 +25,7 @@ import {
   biguint,
   assert,
 } from '@algorandfoundation/algorand-typescript'
-import { Address, Uint8, Uint32, Uint16, methodSelector } from '@algorandfoundation/algorand-typescript/arc4'
+import { Address, Uint8, Uint32, Uint16, methodSelector, abiCall } from '@algorandfoundation/algorand-typescript/arc4'
 import { StakedInfo, StakingPool } from './stakingPool.algo'
 import {
   ALGORAND_ACCOUNT_MIN_BALANCE,
@@ -885,7 +885,7 @@ export class ValidatorRegistry extends Contract {
       // rewardTokenHeldBack value and then call method in the pool that can only be called by us (the
       // validator), and can only be called on pool 1 [Index 0] - to have it do the token payout.
       if (poolKey.poolId !== 1) {
-        stakingPool().call.payTokenReward({
+        abiCall(StakingPool.prototype.payTokenReward, {
           appId: this.validatorList(poolKey.id).value.pools[0].poolAppId,
           args: [staker, rewardTokenID, rewardRemoved],
         })
@@ -1039,7 +1039,7 @@ export class ValidatorRegistry extends Contract {
           this.validatorList(validatorId).value.nodePoolAssignments.nodes[srcNodeIdx].poolAppIds[i] = 0
 
           // Force that pool offline since it's moving nodes !
-          stakingPool().call.goOffline({
+          abiCall(StakingPool.prototype.goOffline, {
             appId: poolAppId,
           })
 
@@ -1076,7 +1076,7 @@ export class ValidatorRegistry extends Contract {
     let [tokenRewardBal] = op.AssetHolding.assetBalance(poolOneAppId.address, rewardTokenId)
     tokenRewardBal = tokenRewardBal - rewardTokenHeldBack
 
-    stakingPool().call.payTokenReward({
+    abiCall(StakingPool.prototype.payTokenReward, {
       appId: poolOneAppId.id,
       args: [receiver, rewardTokenId, tokenRewardBal],
     })
@@ -1287,7 +1287,7 @@ export class ValidatorRegistry extends Contract {
     //     stakedAmountPayment.sender,
     //   ],
     // })
-    stakingPool().call.addStake({
+    abiCall(StakingPool.prototype.addStake, {
       appId: poolAppId,
       args: [
         // =======
