@@ -25,14 +25,7 @@ import {
   biguint,
   assert,
 } from '@algorandfoundation/algorand-typescript'
-import {
-  Address,
-  Uint8,
-  Uint32,
-  Uint16,
-  compileArc4,
-  methodSelector,
-} from '@algorandfoundation/algorand-typescript/arc4'
+import { Address, Uint8, Uint32, Uint16, methodSelector } from '@algorandfoundation/algorand-typescript/arc4'
 import { StakedInfo, StakingPool } from './stakingPool.algo'
 import {
   ALGORAND_ACCOUNT_MIN_BALANCE,
@@ -53,6 +46,7 @@ import {
   SSC_VALUE_BYTES,
   SSC_VALUE_UINT,
 } from './constants.algo'
+import { stakingPool } from './compiled.algo'
 
 const MAX_NODES = 8 // more just as a reasonable limit and cap on contract storage
 const MAX_POOLS_PER_NODE = 3 // max number of pools per node
@@ -272,7 +266,6 @@ export class ValidatorRegistry extends Contract {
    * ]
    */
   getMbrAmounts(): MbrAmounts {
-    const stakingPool = compileArc4(StakingPool)
     // Cost for creator of validator contract itself is (but not really our problem - it's a bootstrap issue only)
     // this.minBalanceForAccount(0, 0, 0, 0, 0, 4, 0)
     return {
@@ -286,8 +279,8 @@ export class ValidatorRegistry extends Contract {
         0,
         0,
         0,
-        stakingPool.globalUints,
-        stakingPool.globalBytes,
+        stakingPool().globalUints,
+        stakingPool().globalBytes,
       ),
       poolInitMbr: ALGORAND_ACCOUNT_MIN_BALANCE + this.costForBoxStorage(7 /* 'stakers' name */), // TODO: len<T> + len<StakedInfo>() * MAX_STAKERS_PER_POOL),
       addStakerMbr:
@@ -624,8 +617,6 @@ export class ValidatorRegistry extends Contract {
     }
     numPools += 1
 
-    const stakingPool = compileArc4(StakingPool)
-
     // Create the actual staker pool contract instance
     itxn.applicationCall({
       onCompletion: OnCompleteAction.NoOp,
@@ -633,9 +624,9 @@ export class ValidatorRegistry extends Contract {
         this.stakingPoolApprovalProgram.ref.extract(0, 4096),
         this.stakingPoolApprovalProgram.ref.extract(4096, this.stakingPoolApprovalProgram.ref.length - 4096),
       ],
-      clearStateProgram: stakingPool.clearStateProgram,
-      globalNumUint: stakingPool.globalUints,
-      globalNumBytes: stakingPool.globalBytes,
+      clearStateProgram: stakingPool().clearStateProgram,
+      globalNumUint: stakingPool().globalUints,
+      globalNumBytes: stakingPool().globalBytes,
       extraProgramPages: 3,
       appArgs: [
         // creatingContractID, validatorId, poolId, minEntryStake
@@ -890,13 +881,11 @@ export class ValidatorRegistry extends Contract {
       // update the rewardTokenHeldBack value and that's it.
       this.validatorList(poolKey.id).value.state.rewardTokenHeldBack -= rewardRemoved
 
-      const stakingPool = compileArc4(StakingPool)
-
       // If a different pool called us, then they CAN'T send the token - we've already updated the
       // rewardTokenHeldBack value and then call method in the pool that can only be called by us (the
       // validator), and can only be called on pool 1 [Index 0] - to have it do the token payout.
       if (poolKey.poolId !== 1) {
-        stakingPool.call.payTokenReward({
+        stakingPool().call.payTokenReward({
           appId: this.validatorList(poolKey.id).value.pools[0].poolAppId,
           args: [staker, rewardTokenID, rewardRemoved],
         })
@@ -1039,8 +1028,6 @@ export class ValidatorRegistry extends Contract {
       'can only be called by owner or manager of validator',
     )
 
-    const stakingPool = compileArc4(StakingPool)
-
     const nodePoolAssignments = clone(this.validatorList(validatorId).value.nodePoolAssignments)
     assert(nodeNum >= 1 && nodeNum <= MAX_NODES, 'node number out of allowable range')
     // iterate  all the poolAppIds slots to find the specified poolAppId
@@ -1052,7 +1039,7 @@ export class ValidatorRegistry extends Contract {
           this.validatorList(validatorId).value.nodePoolAssignments.nodes[srcNodeIdx].poolAppIds[i] = 0
 
           // Force that pool offline since it's moving nodes !
-          stakingPool.call.goOffline({
+          stakingPool().call.goOffline({
             appId: poolAppId,
           })
 
@@ -1089,8 +1076,7 @@ export class ValidatorRegistry extends Contract {
     let [tokenRewardBal] = op.AssetHolding.assetBalance(poolOneAppId.address, rewardTokenId)
     tokenRewardBal = tokenRewardBal - rewardTokenHeldBack
 
-    const stakingPool = compileArc4(StakingPool)
-    stakingPool.call.payTokenReward({
+    stakingPool().call.payTokenReward({
       appId: poolOneAppId.id,
       args: [receiver, rewardTokenId, tokenRewardBal],
     })
@@ -1289,8 +1275,6 @@ export class ValidatorRegistry extends Contract {
   ): void {
     const poolAppId = this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].poolAppId
 
-    const stakingPool = compileArc4(StakingPool)
-
     // forward the payment on to the pool via 2 txns
     // payment + 'add stake' call
     // sendMethodCall<typeof StakingPool.prototype.addStake, uint64>({
@@ -1303,7 +1287,7 @@ export class ValidatorRegistry extends Contract {
     //     stakedAmountPayment.sender,
     //   ],
     // })
-    stakingPool.call.addStake({
+    stakingPool().call.addStake({
       appId: poolAppId,
       args: [
         // =======

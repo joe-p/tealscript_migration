@@ -515,3 +515,7 @@ function(asa: Asset, expectedName: string) {
   assertMatch(asa.assetName, Bytes(expectedName));
 }
 ```
+
+### Circular Compilation
+
+TODO

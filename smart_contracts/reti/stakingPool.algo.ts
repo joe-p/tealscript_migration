@@ -21,7 +21,7 @@ import {
   log,
   biguint,
 } from '@algorandfoundation/algorand-typescript'
-import { Address, Uint128, compileArc4 } from '@algorandfoundation/algorand-typescript/arc4'
+import { Address, Uint128 } from '@algorandfoundation/algorand-typescript/arc4'
 
 import { PoolTokenPayoutRatio, ValidatorPoolKey, ValidatorRegistry } from './validatorRegistry.algo'
 import {
@@ -31,6 +31,7 @@ import {
   MAX_VALIDATOR_SOFT_PCT_OF_ONLINE_1DECIMAL,
   MIN_ALGO_STAKE_PER_POOL,
 } from './constants.algo'
+import { registry, stakingPool } from './compiled.algo'
 
 const ALGORAND_STAKING_BLOCK_DELAY = 320 // # of blocks until algorand sees online balance changes in staking
 const AVG_ROUNDS_PER_DAY = 30857 // approx 'daily' rounds for APR bins (60*60*24/2.8)
@@ -166,10 +167,8 @@ export class StakingPool extends Contract {
   initStorage(mbrPayment: gtxn.PaymentTxn): void {
     assert(!this.stakers.exists, 'staking pool already initialized')
 
-    const registry = compileArc4(ValidatorRegistry)
-
     // Get the config of our validator to determine if we issue reward tokens
-    const validatorConfig = registry.call.getValidatorConfig({
+    const validatorConfig = registry().call.getValidatorConfig({
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
@@ -305,8 +304,6 @@ export class StakingPool extends Contract {
     // Update APR data
     this.checkIfBinClosed()
 
-    const registry = compileArc4(ValidatorRegistry)
-
     for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
       if (Global.opcodeBudget < 300) {
         // TODO: increaseOpcodeBudget()
@@ -327,7 +324,7 @@ export class StakingPool extends Contract {
         if (cmpStaker.rewardTokenBalance > 0) {
           // If and only if this is pool 1 (where the reward token is held - then we can pay it out)
           if (this.poolId.value === 1) {
-            const validatorConfig = registry.call.getValidatorConfig({
+            const validatorConfig = registry().call.getValidatorConfig({
               appId: this.creatingValidatorContractAppId.value,
               args: [this.validatorId.value],
             }).returnValue
@@ -390,7 +387,7 @@ export class StakingPool extends Contract {
         // Call the validator contract and tell it we're removing stake
         // It'll verify we're a valid staking pool id and update it
         // stakeRemoved(poolKey: ValidatorPoolKey, staker: Address, amountRemoved: uint64, rewardRemoved: uint64, stakerRemoved: boolean): void
-        registry.call.stakeRemoved({
+        registry().call.stakeRemoved({
           appId: this.creatingValidatorContractAppId.value,
           args: [
             { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
@@ -417,8 +414,6 @@ export class StakingPool extends Contract {
     // account calling us has to be account removing stake
     const staker = Txn.sender
 
-    const registry = compileArc4(ValidatorRegistry)
-
     for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
       if (Global.opcodeBudget < 300) {
         // TODO: increaseOpcodeBudget()
@@ -431,7 +426,7 @@ export class StakingPool extends Contract {
         let amountRewardTokenRemoved: uint64 = 0
         // If and only if this is pool 1 (where the reward token is held - then we can pay it out)
         if (this.poolId.value === 1) {
-          const validatorConfig = registry.call.getValidatorConfig({
+          const validatorConfig = registry().call.getValidatorConfig({
             appId: this.creatingValidatorContractAppId.value,
             args: [this.validatorId.value],
           }).returnValue
@@ -459,7 +454,7 @@ export class StakingPool extends Contract {
         // Call the validator contract and tell it we're removing stake
         // It'll verify we're a valid staking pool id and update it
         // stakeRemoved(poolKey: ValidatorPoolKey, staker: Address, amountRemoved: uint64, rewardRemoved: uint64, stakerRemoved: boolean): void
-        registry.call.stakeRemoved({
+        registry().call.stakeRemoved({
           appId: this.creatingValidatorContractAppId.value,
           args: [
             { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
@@ -547,11 +542,8 @@ export class StakingPool extends Contract {
    * Note: ANYONE can call this.
    */
   epochBalanceUpdate(): void {
-    const registry = compileArc4(ValidatorRegistry)
-    const stakingPool = compileArc4(StakingPool)
-
     // call the validator contract to get our payout config data
-    const validatorConfig = registry.call.getValidatorConfig({
+    const validatorConfig = registry().call.getValidatorConfig({
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
@@ -596,7 +588,7 @@ export class StakingPool extends Contract {
         //   applicationID: AppID.fromUint64(this.creatingValidatorContractAppId.value),
         //   methodArgs: [this.validatorId.value, 1],
         // })
-        poolOneAppID = registry.call.getPoolAppId({
+        poolOneAppID = registry().call.getPoolAppId({
           appId: this.creatingValidatorContractAppId.value,
           args: [this.validatorId.value, 1],
         }).returnValue
@@ -606,13 +598,13 @@ export class StakingPool extends Contract {
       // Snapshot the ratio of token stake per pool across the pools so the token rewards across pools
       // can be based on a stable cross-pool ratio.
       if (this.poolId.value === 1) {
-        tokenPayoutRatio = registry.call.setTokenPayoutRatio({
+        tokenPayoutRatio = registry().call.setTokenPayoutRatio({
           appId: this.creatingValidatorContractAppId.value,
           args: [this.validatorId.value],
         }).returnValue
       } else {
         // This isn't pool 2 - so call pool 1 to then ask IT to call the validator to call setTokenPayoutRatio
-        stakingPool.call.proxiedSetTokenPayoutRatio({
+        stakingPool().call.proxiedSetTokenPayoutRatio({
           appId: poolOneAppID,
           args: [{ id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id }],
         })
@@ -621,7 +613,7 @@ export class StakingPool extends Contract {
 
     // Get the validator state as well - so we know the total staked for the entire validator, and how much token
     // has been held back
-    const validatorState = registry.call.getValidatorState({
+    const validatorState = registry().call.getValidatorState({
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
@@ -890,7 +882,7 @@ export class StakingPool extends Contract {
     // It'll verify we're a valid staking pool id and update the various stats, also logging an event to
     // track the data.
     // stakeUpdatedViaRewards(poolKey,algoToAdd,rewardTokenAmountReserved,validatorCommission,saturatedBurnToFeeSink)
-    registry.call.stakeUpdatedViaRewards({
+    registry().call.stakeUpdatedViaRewards({
       appId: this.creatingValidatorContractAppId.value,
       args: [
         { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
@@ -982,8 +974,7 @@ export class StakingPool extends Contract {
     assert(this.poolId.value === 1, 'callee must be pool 1')
     assert(poolKey.poolId !== 1, 'caller must NOT be pool 1')
 
-    const registry = compileArc4(ValidatorRegistry)
-    const callerPoolAppID = registry.call.getPoolAppId({
+    const callerPoolAppID = registry().call.getPoolAppId({
       appId: this.creatingValidatorContractAppId.value,
       args: [poolKey.id, poolKey.poolId],
     }).returnValue
@@ -991,14 +982,14 @@ export class StakingPool extends Contract {
     assert(callerPoolAppID === poolKey.poolAppId)
     assert(Txn.sender === Application(poolKey.poolAppId).address)
 
-    return registry.call.setTokenPayoutRatio({
+    return registry().call.setTokenPayoutRatio({
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
   }
 
   private isOwnerOrManagerCaller(): boolean {
-    const OwnerAndManager = compileArc4(ValidatorRegistry).call.getValidatorOwnerAndManager({
+    const OwnerAndManager = registry().call.getValidatorOwnerAndManager({
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
