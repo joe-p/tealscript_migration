@@ -21,6 +21,7 @@ import {
   Bytes,
   OnCompleteAction,
   Asset,
+  Global,
 } from '@algorandfoundation/algorand-typescript'
 import {
   Address,
@@ -51,7 +52,6 @@ import {
   SSC_VALUE_UINT,
 } from './constants.algo'
 import { assert } from 'vitest'
-import { Global } from '@algorandfoundation/algorand-typescript-testing/impl/global'
 
 const MAX_NODES = 8 // more just as a reasonable limit and cap on contract storage
 const MAX_POOLS_PER_NODE = 3 // max number of pools per node

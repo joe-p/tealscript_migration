@@ -398,7 +398,7 @@ export class StakingPool extends Contract {
           appId: this.creatingValidatorContractAppId.value,
           args: [
             { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
-            staker.native,
+            staker,
             amountToUnstake,
             amountRewardTokenRemoved,
             stakerRemoved,
@@ -467,7 +467,7 @@ export class StakingPool extends Contract {
           appId: this.creatingValidatorContractAppId.value,
           args: [
             { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
-            staker,
+            new Address(staker),
             0, // no algo removed
             amountRewardTokenRemoved,
             false, // staker isn't being removed.
@@ -552,6 +552,7 @@ export class StakingPool extends Contract {
    */
   epochBalanceUpdate(): void {
     const registry = compileArc4(ValidatorRegistry)
+    const stakingPool = compileArc4(StakingPool)
 
     // call the validator contract to get our payout config data
     const validatorConfig = registry.call.getValidatorConfig({
@@ -563,7 +564,7 @@ export class StakingPool extends Contract {
     // Establish base 'epoch' info for future calcs and ensure full Epoch has passed before allowing a new
     // Epoch update to occur.
     // =====
-    const epochRoundLength = validatorConfig.epochRoundLength as uint64
+    const epochRoundLength = validatorConfig.epochRoundLength.native
     const curRound = Global.round
     const thisEpochBegin = curRound - (curRound % epochRoundLength)
 
@@ -615,9 +616,9 @@ export class StakingPool extends Contract {
         }).returnValue
       } else {
         // This isn't pool 2 - so call pool 1 to then ask IT to call the validator to call setTokenPayoutRatio
-        registry.call.proxiedSetTokenPayoutRatio({
+        stakingPool.call.proxiedSetTokenPayoutRatio({
           appId: poolOneAppID,
-          args: [{ id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId }],
+          args: [{ id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id }],
         })
       }
     }
@@ -700,7 +701,7 @@ export class StakingPool extends Contract {
       })
       // then distribute the smaller reward amount like normal (skipping validator payout entirely)
       algoRewardAvail = diminishedReward
-    } else if (validatorConfig.percentToValidator !== 0) {
+    } else if (validatorConfig.percentToValidator.native !== 0) {
       // determine the % that goes to validator...
       // ie: 100[algo] * 50_000 (5% w/4 decimals) / 1_000_000 == 5 [algo]
       // TODO: wideRatio validatorCommissionPaidOut = wideRatio(
@@ -722,19 +723,19 @@ export class StakingPool extends Contract {
         let managerTopOff = 0
         if (
           validatorConfig.manager !== validatorConfig.validatorCommissionAddress &&
-          validatorConfig.manager.balance - validatorConfig.manager.minBalance < 2_100_000
+          validatorConfig.manager.native.balance - validatorConfig.manager.native.minBalance < 2_100_000
         ) {
           managerTopOff = validatorCommissionPaidOut < 2_100_000 ? validatorCommissionPaidOut : 2_100_000
           itxn.payment({
             amount: managerTopOff,
-            receiver: validatorConfig.manager,
+            receiver: validatorConfig.manager.native,
             note: 'validator reward to manager for funding epoch updates',
           })
         }
         if (validatorCommissionPaidOut - managerTopOff > 0) {
           itxn.payment({
             amount: validatorCommissionPaidOut - managerTopOff,
-            receiver: validatorConfig.validatorCommissionAddress,
+            receiver: validatorConfig.validatorCommissionAddress.native,
             note: 'validator reward',
           })
         }
@@ -1000,7 +1001,7 @@ export class StakingPool extends Contract {
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
-    return Txn.sender === OwnerAndManager[0] || Txn.sender === OwnerAndManager[1]
+    return Txn.sender === OwnerAndManager[0].native || Txn.sender === OwnerAndManager[1].native
   }
 
   private getFeeSink(): Address {
