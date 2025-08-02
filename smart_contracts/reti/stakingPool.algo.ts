@@ -829,7 +829,7 @@ export class StakingPool extends Contract {
           }
           const cmpStaker = clone(this.stakers.value[i])
           if (cmpStaker.account.native !== Global.zeroAddress && cmpStaker.entryRound < thisEpochBegin) {
-            const timeInPool = thisEpochBegin - cmpStaker.entryRound
+            const timeInPool: uint64 = thisEpochBegin - cmpStaker.entryRound
             // We're now only paying out people who've been in pool an entire epoch.
             if (timeInPool >= epochRoundLength) {
               // we're in for 100%, so it's just % of stakers balance vs 'new total' for their
@@ -914,7 +914,7 @@ export class StakingPool extends Contract {
     const extraFee = this.getGoOnlineFee()
     assertMatch(feePayment, { receiver: Global.currentApplicationAddress, amount: extraFee })
     itxn.keyRegistration({
-      voteKey: votePK as bytes<32>,
+      voteKey: Bytes<32>(votePK),
       selectionKey: Bytes<32>(selectionPK),
       stateProofKey: Bytes<64>(stateProofPK),
       voteFirst: voteFirst,
@@ -1044,7 +1044,7 @@ export class StakingPool extends Contract {
 
         let alpha = BigUint(10) // .1
         // at 300k algo go to alpha of .9
-        if (avgStake > 300000000000) {
+        if (avgStake > BigUint(300000000000)) {
           alpha = BigUint(90) // .9
         }
         this.weightedMovingAverage.value = new Uint128(

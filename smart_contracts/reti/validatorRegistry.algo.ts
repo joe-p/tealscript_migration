@@ -25,7 +25,15 @@ import {
   biguint,
   assert,
 } from '@algorandfoundation/algorand-typescript'
-import { Address, Uint8, Uint32, Uint16, methodSelector, abiCall } from '@algorandfoundation/algorand-typescript/arc4'
+import {
+  Address,
+  Uint8,
+  Uint32,
+  Uint16,
+  methodSelector,
+  abiCall,
+  encodeArc4,
+} from '@algorandfoundation/algorand-typescript/arc4'
 import { StakedInfo, StakingPool } from './stakingPool.algo'
 import {
   ALGORAND_ACCOUNT_MIN_BALANCE,
@@ -1033,7 +1041,7 @@ export class ValidatorRegistry extends Contract {
     assert(nodeNum >= 1 && nodeNum <= MAX_NODES, 'node number out of allowable range')
     // iterate  all the poolAppIds slots to find the specified poolAppId
     for (let srcNodeIdx: uint64 = 0; srcNodeIdx < MAX_NODES; srcNodeIdx += 1) {
-      for (let i = 0; i < MAX_POOLS_PER_NODE; i += 1) {
+      for (let i: uint64 = 0; i < MAX_POOLS_PER_NODE; i += 1) {
         if (nodePoolAssignments.nodes[srcNodeIdx].poolAppIds[i] === poolAppId) {
           assert(nodeNum - 1 !== srcNodeIdx, "can't move to same node")
           // found it - clear this slot
@@ -1326,7 +1334,7 @@ export class ValidatorRegistry extends Contract {
     const poolSet = clone(this.stakerPoolSet(staker).value)
     let firstEmpty: uint64 = 0
     for (let i: uint64 = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
-      if (poolSet[i] === poolKey) {
+      if (encodeArc4(poolSet[i]) === encodeArc4(poolKey)) {
         // all bytes compare - already in pool set
         return
       }
@@ -1335,9 +1343,9 @@ export class ValidatorRegistry extends Contract {
       }
     }
     if (firstEmpty === 0) {
-      throw Error('No empty slot available in the staker pool set')
+      assert(false, 'No empty slot available in the staker pool set')
     }
-    this.stakerPoolSet(staker).value[firstEmpty - 1] = poolKey
+    this.stakerPoolSet(staker).value[firstEmpty - 1] = clone(poolKey)
   }
 
   /**
@@ -1361,7 +1369,7 @@ export class ValidatorRegistry extends Contract {
       }
       inAnyPoolCount += 1
       if (poolSet[i].id === poolKey.id) {
-        if (poolSet[i] === poolKey) {
+        if (encodeArc4(poolSet[i]) === encodeArc4(poolKey)) {
           found = true
           // 'zero' it out
           this.stakerPoolSet(staker).value[i] = { id: 0, poolId: 0, poolAppId: 0 }
