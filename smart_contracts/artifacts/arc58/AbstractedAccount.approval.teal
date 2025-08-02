@@ -9,9 +9,9 @@ main:
     // export class AbstractedAccount extends Contract {
     txn NumAppArgs
     bz main_after_if_else@18
-    pushbytess 0x5bcfc19a 0x0177ed5d 0xd1ec61fe 0x13bc44e4 // method "createApplication(account,account)void", method "arc58_changeAdmin(account)void", method "arc58_pluginChangeAdmin(application,account,account)void", method "arc58_getAdmin()address"
+    pushbytess 0xb4c77d71 0xd24b7556 0x5fa449c6 0x13bc44e4 // method "createApplication(address,address)void", method "arc58_changeAdmin(address)void", method "arc58_pluginChangeAdmin(uint64,address,address)void", method "arc58_getAdmin()address"
     bytec 4 // method "arc58_verifyAuthAddr()void"
-    pushbytess 0x3bcc1e56 0xea061081 0x56f28b58 0xd67a380d 0x2024e196 0xdee0faa5 0xe350b9d4 // method "arc58_rekeyTo(account,bool)void", method "arc58_rekeyToPlugin(application)void", method "arc58_rekeyToNamedPlugin(string)void", method "arc58_addPlugin(application,account,uint64,uint64,bool)void", method "arc58_removePlugin(application,account)void", method "arc58_addNamedPlugin(string,application,account,uint64,uint64,bool)void", method "arc58_removeNamedPlugin(string)void"
+    pushbytess 0xc95a5d3d 0x7c766ddc 0x56f28b58 0xd12dcb61 0x4d372355 0x8a72a750 0xe350b9d4 // method "arc58_rekeyTo(address,bool)void", method "arc58_rekeyToPlugin(uint64)void", method "arc58_rekeyToNamedPlugin(string)void", method "arc58_addPlugin(uint64,address,uint64,uint64,bool)void", method "arc58_removePlugin(uint64,address)void", method "arc58_addNamedPlugin(string,uint64,address,uint64,uint64,bool)void", method "arc58_removeNamedPlugin(string)void"
     txna ApplicationArgs 0
     match main_createApplication_route@3 main_arc58_changeAdmin_route@4 main_arc58_pluginChangeAdmin_route@5 main_arc58_getAdmin_route@6 main_arc58_verifyAuthAddr_route@7 main_arc58_rekeyTo_route@8 main_arc58_rekeyToPlugin_route@9 main_arc58_rekeyToNamedPlugin_route@10 main_arc58_addPlugin_route@11 main_arc58_removePlugin_route@12 main_arc58_addNamedPlugin_route@13 main_arc58_removeNamedPlugin_route@14
 
@@ -60,10 +60,7 @@ main_arc58_addNamedPlugin_route@13:
     extract 2 0
     txna ApplicationArgs 2
     btoi
-    txnas Applications
     txna ApplicationArgs 3
-    btoi
-    txnas Accounts
     txna ApplicationArgs 4
     btoi
     txna ApplicationArgs 5
@@ -96,10 +93,7 @@ main_arc58_removePlugin_route@12:
     // export class AbstractedAccount extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Applications
     txna ApplicationArgs 2
-    btoi
-    txnas Accounts
     // smart_contracts/arc58/contract.algo.ts:178
     // public arc58_removePlugin(app: Application, allowedCaller: Account): void {
     callsub arc58_removePlugin
@@ -124,10 +118,7 @@ main_arc58_addPlugin_route@11:
     // export class AbstractedAccount extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Applications
     txna ApplicationArgs 2
-    btoi
-    txnas Accounts
     txna ApplicationArgs 3
     btoi
     txna ApplicationArgs 4
@@ -177,7 +168,6 @@ main_arc58_rekeyToPlugin_route@9:
     // export class AbstractedAccount extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Applications
     // smart_contracts/arc58/contract.algo.ts:134
     // public arc58_rekeyToPlugin(plugin: Application): void {
     callsub arc58_rekeyToPlugin
@@ -195,8 +185,6 @@ main_arc58_rekeyTo_route@8:
     // smart_contracts/arc58/contract.algo.ts:33
     // export class AbstractedAccount extends Contract {
     txna ApplicationArgs 1
-    btoi
-    txnas Accounts
     txna ApplicationArgs 2
     intc_0 // 0
     getbit
@@ -246,13 +234,8 @@ main_arc58_pluginChangeAdmin_route@5:
     // export class AbstractedAccount extends Contract {
     txna ApplicationArgs 1
     btoi
-    txnas Applications
     txna ApplicationArgs 2
-    btoi
-    txnas Accounts
     txna ApplicationArgs 3
-    btoi
-    txnas Accounts
     // smart_contracts/arc58/contract.algo.ts:88
     // public arc58_pluginChangeAdmin(plugin: Application, allowedCaller: Account, newAdmin: Account): void {
     callsub arc58_pluginChangeAdmin
@@ -270,8 +253,6 @@ main_arc58_changeAdmin_route@4:
     // smart_contracts/arc58/contract.algo.ts:33
     // export class AbstractedAccount extends Contract {
     txna ApplicationArgs 1
-    btoi
-    txnas Accounts
     // smart_contracts/arc58/contract.algo.ts:83
     // public arc58_changeAdmin(newAdmin: Account): void {
     callsub arc58_changeAdmin
@@ -290,11 +271,7 @@ main_createApplication_route@3:
     // smart_contracts/arc58/contract.algo.ts:33
     // export class AbstractedAccount extends Contract {
     txna ApplicationArgs 1
-    btoi
-    txnas Accounts
     txna ApplicationArgs 2
-    btoi
-    txnas Accounts
     // smart_contracts/arc58/contract.algo.ts:73
     // public createApplication(controlledAddress: Account, admin: Account): void {
     callsub createApplication
@@ -325,26 +302,26 @@ verifyRekeyToAbstractedAccount_while_top@1:
     // if (txn.sender === this.controlledAddress.value && txn.rekeyTo === this.controlledAddress.value) {
     frame_dig 1
     gtxns Sender
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:36
     // public controlledAddress = GlobalState<Account>({ key: 'c' })
-    intc_0 // 0
     bytec_1 // "c"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:48
     // if (txn.sender === this.controlledAddress.value && txn.rekeyTo === this.controlledAddress.value) {
+    app_global_get_ex
+    assert // check GlobalState exists
     ==
     bz verifyRekeyToAbstractedAccount_after_if_else@5
     frame_dig 1
     gtxns RekeyTo
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:36
     // public controlledAddress = GlobalState<Account>({ key: 'c' })
-    intc_0 // 0
     bytec_1 // "c"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:48
     // if (txn.sender === this.controlledAddress.value && txn.rekeyTo === this.controlledAddress.value) {
+    app_global_get_ex
+    assert // check GlobalState exists
     ==
     bz verifyRekeyToAbstractedAccount_after_if_else@5
     // smart_contracts/arc58/contract.algo.ts:49
@@ -494,14 +471,14 @@ arc58_changeAdmin:
     // smart_contracts/arc58/contract.algo.ts:84
     // assertMatch(Txn, { sender: this.admin.value })
     txn Sender
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:34
     // public admin = GlobalState<Account>({ key: 'a' })
-    intc_0 // 0
     bytec_0 // "a"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:84
     // assertMatch(Txn, { sender: this.admin.value })
+    app_global_get_ex
+    assert // check GlobalState exists
     ==
     assert // assert target is match for conditions
     // smart_contracts/arc58/contract.algo.ts:34
@@ -527,14 +504,16 @@ arc58_pluginChangeAdmin:
     assert // application exists
     ==
     assert // assert target is match for conditions
-    // smart_contracts/arc58/contract.algo.ts:36
-    // public controlledAddress = GlobalState<Account>({ key: 'c' })
-    intc_0 // 0
-    bytec_1 // "c"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:90
     // assert(this.controlledAddress.value.authAddress === plugin.address, 'This plugin is not in control of the account')
+    intc_0 // 0
+    // smart_contracts/arc58/contract.algo.ts:36
+    // public controlledAddress = GlobalState<Account>({ key: 'c' })
+    bytec_1 // "c"
+    // smart_contracts/arc58/contract.algo.ts:90
+    // assert(this.controlledAddress.value.authAddress === plugin.address, 'This plugin is not in control of the account')
+    app_global_get_ex
+    assert // check GlobalState exists
     acct_params_get AcctAuthAddr
     assert // account funded
     frame_dig -3
@@ -590,14 +569,16 @@ arc58_pluginChangeAdmin_bool_false@3:
 
 // smart_contracts/arc58/contract.algo.ts::AbstractedAccount.arc58_getAdmin() -> bytes:
 arc58_getAdmin:
-    // smart_contracts/arc58/contract.algo.ts:34
-    // public admin = GlobalState<Account>({ key: 'a' })
-    intc_0 // 0
-    bytec_0 // "a"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:102
     // return new arc4.Address(this.admin.value)
+    intc_0 // 0
+    // smart_contracts/arc58/contract.algo.ts:34
+    // public admin = GlobalState<Account>({ key: 'a' })
+    bytec_0 // "a"
+    // smart_contracts/arc58/contract.algo.ts:102
+    // return new arc4.Address(this.admin.value)
+    app_global_get_ex
+    assert // check GlobalState exists
     retsub
 
 
@@ -606,14 +587,16 @@ arc58_verifyAuthAddr:
     // smart_contracts/arc58/contract.algo.ts:105
     // public arc58_verifyAuthAddr(): void {
     proto 0 0
-    // smart_contracts/arc58/contract.algo.ts:36
-    // public controlledAddress = GlobalState<Account>({ key: 'c' })
-    intc_0 // 0
-    bytec_1 // "c"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:106
     // assert(this.controlledAddress.value.authAddress === this.getAuthAddr())
+    intc_0 // 0
+    // smart_contracts/arc58/contract.algo.ts:36
+    // public controlledAddress = GlobalState<Account>({ key: 'c' })
+    bytec_1 // "c"
+    // smart_contracts/arc58/contract.algo.ts:106
+    // assert(this.controlledAddress.value.authAddress === this.getAuthAddr())
+    app_global_get_ex
+    assert // check GlobalState exists
     dup
     acct_params_get AcctAuthAddr
     swap
@@ -655,14 +638,14 @@ arc58_rekeyTo:
     // smart_contracts/arc58/contract.algo.ts:110
     // assertMatch(Txn, { sender: this.admin.value })
     txn Sender
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:34
     // public admin = GlobalState<Account>({ key: 'a' })
-    intc_0 // 0
     bytec_0 // "a"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:110
     // assertMatch(Txn, { sender: this.admin.value })
+    app_global_get_ex
+    assert // check GlobalState exists
     ==
     assert // assert target is match for conditions
     // smart_contracts/arc58/contract.algo.ts:112-119
@@ -675,10 +658,14 @@ arc58_rekeyTo:
     //   })
     //   .submit()
     itxn_begin
+    // smart_contracts/arc58/contract.algo.ts:114
+    // sender: this.controlledAddress.value,
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:36
     // public controlledAddress = GlobalState<Account>({ key: 'c' })
-    intc_0 // 0
     bytec_1 // "c"
+    // smart_contracts/arc58/contract.algo.ts:114
+    // sender: this.controlledAddress.value,
     app_global_get_ex
     assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:117
@@ -831,10 +818,14 @@ arc58_rekeyToPlugin_after_if_else@2:
     //   })
     //   .submit()
     itxn_begin
+    // smart_contracts/arc58/contract.algo.ts:142
+    // sender: this.controlledAddress.value,
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:36
     // public controlledAddress = GlobalState<Account>({ key: 'c' })
-    intc_0 // 0
     bytec_1 // "c"
+    // smart_contracts/arc58/contract.algo.ts:142
+    // sender: this.controlledAddress.value,
     app_global_get_ex
     assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:144
@@ -953,14 +944,14 @@ arc58_addPlugin:
     // smart_contracts/arc58/contract.algo.ts:168
     // assertMatch(Txn, { sender: this.admin.value })
     txn Sender
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:34
     // public admin = GlobalState<Account>({ key: 'a' })
-    intc_0 // 0
     bytec_0 // "a"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:168
     // assertMatch(Txn, { sender: this.admin.value })
+    app_global_get_ex
+    assert // check GlobalState exists
     ==
     assert // assert target is match for conditions
     // smart_contracts/arc58/contract.algo.ts:169
@@ -1023,14 +1014,14 @@ arc58_removePlugin:
     // smart_contracts/arc58/contract.algo.ts:179
     // assertMatch(Txn, { sender: this.admin.value })
     txn Sender
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:34
     // public admin = GlobalState<Account>({ key: 'a' })
-    intc_0 // 0
     bytec_0 // "a"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:179
     // assertMatch(Txn, { sender: this.admin.value })
+    app_global_get_ex
+    assert // check GlobalState exists
     ==
     assert // assert target is match for conditions
     // smart_contracts/arc58/contract.algo.ts:181
@@ -1066,14 +1057,14 @@ arc58_addNamedPlugin:
     // smart_contracts/arc58/contract.algo.ts:193
     // assertMatch(Txn, { sender: this.admin.value })
     txn Sender
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:34
     // public admin = GlobalState<Account>({ key: 'a' })
-    intc_0 // 0
     bytec_0 // "a"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:193
     // assertMatch(Txn, { sender: this.admin.value })
+    app_global_get_ex
+    assert // check GlobalState exists
     ==
     assert // assert target is match for conditions
     // smart_contracts/arc58/contract.algo.ts:40
@@ -1153,14 +1144,14 @@ arc58_removeNamedPlugin:
     // smart_contracts/arc58/contract.algo.ts:208
     // assertMatch(Txn, { sender: this.admin.value })
     txn Sender
+    intc_0 // 0
     // smart_contracts/arc58/contract.algo.ts:34
     // public admin = GlobalState<Account>({ key: 'a' })
-    intc_0 // 0
     bytec_0 // "a"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/arc58/contract.algo.ts:208
     // assertMatch(Txn, { sender: this.admin.value })
+    app_global_get_ex
+    assert // check GlobalState exists
     ==
     assert // assert target is match for conditions
     // smart_contracts/arc58/contract.algo.ts:40

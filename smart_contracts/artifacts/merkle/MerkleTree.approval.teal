@@ -244,14 +244,16 @@ verify:
     // smart_contracts/merkle/contract.algo.ts:69
     // public verify(data: bytes, path: Path): void {
     proto 2 0
-    // smart_contracts/merkle/contract.algo.ts:23
-    // public root = GlobalState<bytes>()
-    intc_0 // 0
-    bytec_0 // "root"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/merkle/contract.algo.ts:70
     // assert(this.root.value === this.calcRoot(Bytes(op.sha256(data)), path))
+    intc_0 // 0
+    // smart_contracts/merkle/contract.algo.ts:23
+    // public root = GlobalState<bytes>()
+    bytec_0 // "root"
+    // smart_contracts/merkle/contract.algo.ts:70
+    // assert(this.root.value === this.calcRoot(Bytes(op.sha256(data)), path))
+    app_global_get_ex
+    assert // check GlobalState exists
     frame_dig -2
     sha256
     frame_dig -1
@@ -273,14 +275,16 @@ appendLeaf:
     bytec_2 // ""
     !=
     assert
-    // smart_contracts/merkle/contract.algo.ts:23
-    // public root = GlobalState<bytes>()
-    intc_0 // 0
-    bytec_0 // "root"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/merkle/contract.algo.ts:75
     // assert(this.root.value === this.calcRoot(Bytes.fromHex(EMPTY_HASH), path))
+    intc_0 // 0
+    // smart_contracts/merkle/contract.algo.ts:23
+    // public root = GlobalState<bytes>()
+    bytec_0 // "root"
+    // smart_contracts/merkle/contract.algo.ts:75
+    // assert(this.root.value === this.calcRoot(Bytes.fromHex(EMPTY_HASH), path))
+    app_global_get_ex
+    assert // check GlobalState exists
     bytec_1 // 0xe3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
     frame_dig -1
     callsub calcRoot
@@ -301,14 +305,16 @@ appendLeaf:
     // this.root.value = this.calcRoot(Bytes(op.sha256(data)), path)
     swap
     app_global_put
-    // smart_contracts/merkle/contract.algo.ts:25
-    // public size = GlobalState<uint64>()
-    intc_0 // 0
-    bytec_3 // "size"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/merkle/contract.algo.ts:79
     // this.size.value = this.size.value + 1
+    intc_0 // 0
+    // smart_contracts/merkle/contract.algo.ts:25
+    // public size = GlobalState<uint64>()
+    bytec_3 // "size"
+    // smart_contracts/merkle/contract.algo.ts:79
+    // this.size.value = this.size.value + 1
+    app_global_get_ex
+    assert // check GlobalState exists
     intc_1 // 1
     +
     // smart_contracts/merkle/contract.algo.ts:25
@@ -332,14 +338,16 @@ updateLeaf:
     bytec_2 // ""
     !=
     assert
-    // smart_contracts/merkle/contract.algo.ts:23
-    // public root = GlobalState<bytes>()
-    intc_0 // 0
-    bytec_0 // "root"
-    app_global_get_ex
-    assert // check GlobalState exists
     // smart_contracts/merkle/contract.algo.ts:84
     // assert(this.root.value === this.calcRoot(Bytes(op.sha256(oldData)), path))
+    intc_0 // 0
+    // smart_contracts/merkle/contract.algo.ts:23
+    // public root = GlobalState<bytes>()
+    bytec_0 // "root"
+    // smart_contracts/merkle/contract.algo.ts:84
+    // assert(this.root.value === this.calcRoot(Bytes(op.sha256(oldData)), path))
+    app_global_get_ex
+    assert // check GlobalState exists
     frame_dig -3
     sha256
     frame_dig -1
