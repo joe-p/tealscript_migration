@@ -20,6 +20,7 @@ import {
   Bytes,
   log,
   biguint,
+  ensureBudget,
 } from '@algorandfoundation/algorand-typescript'
 import { abiCall, Address, Uint128 } from '@algorandfoundation/algorand-typescript/arc4'
 
@@ -240,9 +241,8 @@ export class StakingPool extends Contract {
 
     // firstEmpty should represent 1-based index to first empty slot we find - 0 means none were found
     for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
-      if (Global.opcodeBudget < 300) {
-        // TODO: increaseOpcodeBudget()
-      }
+      ensureBudget(300)
+
       const cmpStaker = clone(this.stakers.value[i])
       if (cmpStaker.account === staker) {
         // We're just adding more stake to their existing stake within a pool
@@ -305,9 +305,8 @@ export class StakingPool extends Contract {
     this.checkIfBinClosed()
 
     for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
-      if (Global.opcodeBudget < 300) {
-        // TODO: increaseOpcodeBudget()
-      }
+      ensureBudget(300)
+
       const cmpStaker = clone(this.stakers.value[i])
       if (cmpStaker.account === staker) {
         if (amountToUnstake === 0) {
@@ -414,9 +413,8 @@ export class StakingPool extends Contract {
     const staker = Txn.sender
 
     for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
-      if (Global.opcodeBudget < 300) {
-        // TODO: increaseOpcodeBudget()
-      }
+      ensureBudget(300)
+
       const cmpStaker = clone(this.stakers.value[i])
       if (cmpStaker.account.native === staker) {
         if (cmpStaker.rewardTokenBalance === 0) {
@@ -480,9 +478,7 @@ export class StakingPool extends Contract {
   // @abi.readonly
   getStakerInfo(staker: Address): StakedInfo {
     for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
-      if (Global.opcodeBudget < 200) {
-        // TODO: increaseOpcodeBudget()
-      }
+      ensureBudget(200)
       if (this.stakers.value[i].account === staker) {
         return this.stakers.value[i]
       }
@@ -765,9 +761,8 @@ export class StakingPool extends Contract {
     if (algoRewardAvail !== 0 || tokenRewardAvail !== 0) {
       let partialStakersTotalStake: uint64 = 0
       for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
-        if (Global.opcodeBudget < 400) {
-          // TODO: increaseOpcodeBudget()
-        }
+        ensureBudget(400)
+
         const cmpStaker = clone(this.stakers.value[i])
         if (cmpStaker.account.native !== Global.zeroAddress) {
           if (cmpStaker.entryRound >= thisEpochBegin) {
@@ -832,9 +827,8 @@ export class StakingPool extends Contract {
       if (newPoolTotalStake > 0) {
         // Now go back through the list AGAIN and pay out the full-timers their rewards + excess
         for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
-          if (Global.opcodeBudget < 200) {
-            // TODO: increaseOpcodeBudget()
-          }
+          ensureBudget(200)
+
           const cmpStaker = clone(this.stakers.value[i])
           if (cmpStaker.account.native !== Global.zeroAddress && cmpStaker.entryRound < thisEpochBegin) {
             const timeInPool: uint64 = thisEpochBegin - cmpStaker.entryRound
@@ -1041,9 +1035,8 @@ export class StakingPool extends Contract {
   private checkIfBinClosed() {
     const currentBinSize = BigUint(this.roundsPerDay.value)
     if (Global.round >= this.binRoundStart.value + this.roundsPerDay.value) {
-      if (Global.opcodeBudget < 300) {
-        // TODO: increaseOpcodeBudget()
-      }
+      ensureBudget(300)
+
       const approxRoundsPerYear: biguint = currentBinSize * BigUint(365)
       const avgStake: biguint = this.stakeAccumulator.value.native / currentBinSize
       if (avgStake !== BigUint(0)) {

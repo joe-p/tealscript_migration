@@ -24,6 +24,7 @@ import {
   Global,
   biguint,
   assert,
+  ensureBudget,
 } from '@algorandfoundation/algorand-typescript'
 import {
   Address,
@@ -869,9 +870,8 @@ export class ValidatorRegistry extends Contract {
     rewardRemoved: uint64,
     stakerRemoved: boolean,
   ): void {
-    if (Global.opcodeBudget < 300) {
-      // TODO: increaseOpcodeBudget()
-    }
+    ensureBudget(300)
+
     this.verifyPoolKeyCaller(poolKey)
 
     // Yup - we've been called by an official staking pool telling us about stake that was removed from it,
@@ -980,9 +980,8 @@ export class ValidatorRegistry extends Contract {
       const poolSet = clone(this.stakerPoolSet(staker).value)
       assert(validatorId !== 0)
       for (let i: uint64 = 0; i < poolSet.length; i += 1) {
-        if (Global.opcodeBudget < 300) {
-          // TODO: increaseOpcodeBudget()
-        }
+        ensureBudget(300)
+
         if (poolSet[i].id === 0) {
           continue
         }
@@ -1310,9 +1309,7 @@ export class ValidatorRegistry extends Contract {
         new Address(stakedAmountPayment.sender),
       ],
     })
-    if (Global.opcodeBudget < 500) {
-      // TODO: increaseOpcodeBudget()
-    }
+    ensureBudget(500)
 
     // Stake has been added to the pool - get its new totals and add to our own tracking data
     const [poolNumStakers] = op.AppGlobal.getExUint64(poolAppId, Bytes('numStakers'))
