@@ -4,8 +4,8 @@
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
     intcblock 0 1 18 24 268 432 700 200 900 192 TMPL_NFD_REGISTRY_APP_ID 226 1000000 209 4096 278 252
-    bytecblock "v" 0x151f7c75 "" "staked" "poolTemplateApprovalBytes" "numStakers" 0x00 "sps" "init" "numV" "i.owner.a" 0x0000 "is_valid_nfd_appid" 0x63f3f28b
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    bytecblock "v" 0x151f7c75 "" "staked" "poolTemplateApprovalBytes" "numStakers" 0x00 "sps" "init" "numV" "i.owner.a" 0x0000 "is_valid_nfd_appid" 0x068101 0x63f3f28b
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txn NumAppArgs
     bz main_after_if_else@41
@@ -14,25 +14,25 @@ main:
     match main_updateApplication_route@3 main_createApplication_route@4 main_initStakingContract_route@5 main_loadStakingContractData_route@6 main_finalizeStakingContract_route@7 main_gas_route@8 main_getMbrAmounts_route@9 main_getProtocolConstraints_route@10 main_getNumValidators_route@11 main_getValidatorConfig_route@12 main_getValidatorState_route@13 main_getValidatorOwnerAndManager_route@14 main_getPools_route@15 main_getPoolAppId_route@16 main_getPoolInfo_route@17 main_getCurMaxStakePerPool_route@18 main_doesStakerNeedToPayMBR_route@19 main_getStakedPoolsForAccount_route@20 main_getTokenPayoutRatio_route@21 main_getNodePoolAssignments_route@22 main_getNFDRegistryID_route@23 main_addValidator_route@24 main_changeValidatorManager_route@25 main_changeValidatorSunsetInfo_route@26 main_changeValidatorNFD_route@27 main_changeValidatorCommissionAddress_route@28 main_changeValidatorRewardInfo_route@29 main_addPool_route@30 main_addStake_route@31 main_setTokenPayoutRatio_route@32 main_stakeUpdatedViaRewards_route@33 main_stakeRemoved_route@34 main_findPoolForStaker_route@35 main_movePoolToNode_route@36 main_emptyTokenRewards_route@37
 
 main_after_if_else@41:
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     intc_0 // 0
     return
 
 main_emptyTokenRewards_route@37:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1079
+    // smart_contracts/reti/validatorRegistry.algo.ts:1078
     // emptyTokenRewards(validatorId: ValidatorIdType, receiver: Address): uint64 {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:1079
+    // smart_contracts/reti/validatorRegistry.algo.ts:1078
     // emptyTokenRewards(validatorId: ValidatorIdType, receiver: Address): uint64 {
     callsub emptyTokenRewards
     itob
@@ -44,14 +44,14 @@ main_emptyTokenRewards_route@37:
     return
 
 main_movePoolToNode_route@36:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1036
+    // smart_contracts/reti/validatorRegistry.algo.ts:1035
     // movePoolToNode(validatorId: ValidatorIdType, poolAppId: uint64, nodeNum: uint64): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
@@ -59,7 +59,7 @@ main_movePoolToNode_route@36:
     btoi
     txna ApplicationArgs 3
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:1036
+    // smart_contracts/reti/validatorRegistry.algo.ts:1035
     // movePoolToNode(validatorId: ValidatorIdType, poolAppId: uint64, nodeNum: uint64): void {
     callsub movePoolToNode
     intc_1 // 1
@@ -77,7 +77,7 @@ main_findPoolForStaker_route@35:
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
@@ -99,7 +99,7 @@ main_findPoolForStaker_route@35:
     return
 
 main_stakeRemoved_route@34:
-    // smart_contracts/reti/validatorRegistry.algo.ts:865-871
+    // smart_contracts/reti/validatorRegistry.algo.ts:866-872
     // stakeRemoved(
     //   poolKey: ValidatorPoolKey,
     //   staker: Address,
@@ -112,7 +112,7 @@ main_stakeRemoved_route@34:
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     txna ApplicationArgs 2
@@ -123,7 +123,7 @@ main_stakeRemoved_route@34:
     txna ApplicationArgs 5
     intc_0 // 0
     getbit
-    // smart_contracts/reti/validatorRegistry.algo.ts:865-871
+    // smart_contracts/reti/validatorRegistry.algo.ts:866-872
     // stakeRemoved(
     //   poolKey: ValidatorPoolKey,
     //   staker: Address,
@@ -136,7 +136,7 @@ main_stakeRemoved_route@34:
     return
 
 main_stakeUpdatedViaRewards_route@33:
-    // smart_contracts/reti/validatorRegistry.algo.ts:823-829
+    // smart_contracts/reti/validatorRegistry.algo.ts:824-830
     // stakeUpdatedViaRewards(
     //   poolKey: ValidatorPoolKey,
     //   algoToAdd: uint64,
@@ -149,7 +149,7 @@ main_stakeUpdatedViaRewards_route@33:
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     txna ApplicationArgs 2
@@ -160,7 +160,7 @@ main_stakeUpdatedViaRewards_route@33:
     btoi
     txna ApplicationArgs 5
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:823-829
+    // smart_contracts/reti/validatorRegistry.algo.ts:824-830
     // stakeUpdatedViaRewards(
     //   poolKey: ValidatorPoolKey,
     //   algoToAdd: uint64,
@@ -173,18 +173,18 @@ main_stakeUpdatedViaRewards_route@33:
     return
 
 main_setTokenPayoutRatio_route@32:
-    // smart_contracts/reti/validatorRegistry.algo.ts:766
+    // smart_contracts/reti/validatorRegistry.algo.ts:767
     // setTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:766
+    // smart_contracts/reti/validatorRegistry.algo.ts:767
     // setTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
     callsub setTokenPayoutRatio
     bytec_1 // 0x151f7c75
@@ -195,7 +195,7 @@ main_setTokenPayoutRatio_route@32:
     return
 
 main_addStake_route@31:
-    // smart_contracts/reti/validatorRegistry.algo.ts:679-683
+    // smart_contracts/reti/validatorRegistry.algo.ts:680-684
     // addStake(
     //   stakedAmountPayment: gtxn.PaymentTxn,
     //   validatorId: ValidatorIdType,
@@ -206,7 +206,7 @@ main_addStake_route@31:
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txn GroupIndex
     intc_1 // 1
@@ -220,7 +220,7 @@ main_addStake_route@31:
     btoi
     txna ApplicationArgs 2
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:679-683
+    // smart_contracts/reti/validatorRegistry.algo.ts:680-684
     // addStake(
     //   stakedAmountPayment: gtxn.PaymentTxn,
     //   validatorId: ValidatorIdType,
@@ -235,14 +235,14 @@ main_addStake_route@31:
     return
 
 main_addPool_route@30:
-    // smart_contracts/reti/validatorRegistry.algo.ts:612
+    // smart_contracts/reti/validatorRegistry.algo.ts:613
     // addPool(mbrPayment: gtxn.PaymentTxn, validatorId: ValidatorIdType, nodeNum: uint64): ValidatorPoolKey {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txn GroupIndex
     intc_1 // 1
@@ -256,7 +256,7 @@ main_addPool_route@30:
     btoi
     txna ApplicationArgs 2
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:612
+    // smart_contracts/reti/validatorRegistry.algo.ts:613
     // addPool(mbrPayment: gtxn.PaymentTxn, validatorId: ValidatorIdType, nodeNum: uint64): ValidatorPoolKey {
     callsub addPool
     bytec_1 // 0x151f7c75
@@ -267,7 +267,7 @@ main_addPool_route@30:
     return
 
 main_changeValidatorRewardInfo_route@29:
-    // smart_contracts/reti/validatorRegistry.algo.ts:581-588
+    // smart_contracts/reti/validatorRegistry.algo.ts:582-589
     // changeValidatorRewardInfo(
     //   validatorId: ValidatorIdType,
     //   EntryGatingType: Uint8,
@@ -281,7 +281,7 @@ main_changeValidatorRewardInfo_route@29:
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
@@ -292,7 +292,7 @@ main_changeValidatorRewardInfo_route@29:
     btoi
     txna ApplicationArgs 6
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:581-588
+    // smart_contracts/reti/validatorRegistry.algo.ts:582-589
     // changeValidatorRewardInfo(
     //   validatorId: ValidatorIdType,
     //   EntryGatingType: Uint8,
@@ -306,33 +306,33 @@ main_changeValidatorRewardInfo_route@29:
     return
 
 main_changeValidatorCommissionAddress_route@28:
-    // smart_contracts/reti/validatorRegistry.algo.ts:568
+    // smart_contracts/reti/validatorRegistry.algo.ts:569
     // changeValidatorCommissionAddress(validatorId: ValidatorIdType, commissionAddress: Address): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:568
+    // smart_contracts/reti/validatorRegistry.algo.ts:569
     // changeValidatorCommissionAddress(validatorId: ValidatorIdType, commissionAddress: Address): void {
     callsub changeValidatorCommissionAddress
     intc_1 // 1
     return
 
 main_changeValidatorNFD_route@27:
-    // smart_contracts/reti/validatorRegistry.algo.ts:544
+    // smart_contracts/reti/validatorRegistry.algo.ts:545
     // changeValidatorNFD(validatorId: ValidatorIdType, nfdAppID: uint64, nfdName: string): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
@@ -340,21 +340,21 @@ main_changeValidatorNFD_route@27:
     btoi
     txna ApplicationArgs 3
     extract 2 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:544
+    // smart_contracts/reti/validatorRegistry.algo.ts:545
     // changeValidatorNFD(validatorId: ValidatorIdType, nfdAppID: uint64, nfdName: string): void {
     callsub changeValidatorNFD
     intc_1 // 1
     return
 
 main_changeValidatorSunsetInfo_route@26:
-    // smart_contracts/reti/validatorRegistry.algo.ts:527
+    // smart_contracts/reti/validatorRegistry.algo.ts:528
     // changeValidatorSunsetInfo(validatorId: ValidatorIdType, sunsettingOn: uint64, sunsettingTo: ValidatorIdType): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
@@ -362,40 +362,40 @@ main_changeValidatorSunsetInfo_route@26:
     btoi
     txna ApplicationArgs 3
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:527
+    // smart_contracts/reti/validatorRegistry.algo.ts:528
     // changeValidatorSunsetInfo(validatorId: ValidatorIdType, sunsettingOn: uint64, sunsettingTo: ValidatorIdType): void {
     callsub changeValidatorSunsetInfo
     intc_1 // 1
     return
 
 main_changeValidatorManager_route@25:
-    // smart_contracts/reti/validatorRegistry.algo.ts:511
+    // smart_contracts/reti/validatorRegistry.algo.ts:512
     // changeValidatorManager(validatorId: ValidatorIdType, manager: Address): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:511
+    // smart_contracts/reti/validatorRegistry.algo.ts:512
     // changeValidatorManager(validatorId: ValidatorIdType, manager: Address): void {
     callsub changeValidatorManager
     intc_1 // 1
     return
 
 main_addValidator_route@24:
-    // smart_contracts/reti/validatorRegistry.algo.ts:460
+    // smart_contracts/reti/validatorRegistry.algo.ts:461
     // addValidator(mbrPayment: gtxn.PaymentTxn, nfdName: string, config: ValidatorConfig): uint64 {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txn GroupIndex
     intc_1 // 1
@@ -408,7 +408,7 @@ main_addValidator_route@24:
     txna ApplicationArgs 1
     extract 2 0
     txna ApplicationArgs 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:460
+    // smart_contracts/reti/validatorRegistry.algo.ts:461
     // addValidator(mbrPayment: gtxn.PaymentTxn, nfdName: string, config: ValidatorConfig): uint64 {
     callsub addValidator
     itob
@@ -420,17 +420,17 @@ main_addValidator_route@24:
     return
 
 main_getNFDRegistryID_route@23:
-    // smart_contracts/reti/validatorRegistry.algo.ts:448
+    // smart_contracts/reti/validatorRegistry.algo.ts:449
     // getNFDRegistryID(): uint64 {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:449
+    // smart_contracts/reti/validatorRegistry.algo.ts:450
     // return TemplateVar<uint64>('NFD_REGISTRY_APP_ID')
     intc 10 // TMPL_NFD_REGISTRY_APP_ID
-    // smart_contracts/reti/validatorRegistry.algo.ts:448
+    // smart_contracts/reti/validatorRegistry.algo.ts:449
     // getNFDRegistryID(): uint64 {
     itob
     bytec_1 // 0x151f7c75
@@ -441,18 +441,18 @@ main_getNFDRegistryID_route@23:
     return
 
 main_getNodePoolAssignments_route@22:
-    // smart_contracts/reti/validatorRegistry.algo.ts:442
+    // smart_contracts/reti/validatorRegistry.algo.ts:443
     // getNodePoolAssignments(validatorId: uint64): NodePoolAssignmentConfig {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:442
+    // smart_contracts/reti/validatorRegistry.algo.ts:443
     // getNodePoolAssignments(validatorId: uint64): NodePoolAssignmentConfig {
     callsub getNodePoolAssignments
     bytec_1 // 0x151f7c75
@@ -463,18 +463,18 @@ main_getNodePoolAssignments_route@22:
     return
 
 main_getTokenPayoutRatio_route@21:
-    // smart_contracts/reti/validatorRegistry.algo.ts:437
+    // smart_contracts/reti/validatorRegistry.algo.ts:438
     // getTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:437
+    // smart_contracts/reti/validatorRegistry.algo.ts:438
     // getTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
     callsub getTokenPayoutRatio
     bytec_1 // 0x151f7c75
@@ -485,17 +485,17 @@ main_getTokenPayoutRatio_route@21:
     return
 
 main_getStakedPoolsForAccount_route@20:
-    // smart_contracts/reti/validatorRegistry.algo.ts:415
+    // smart_contracts/reti/validatorRegistry.algo.ts:416
     // getStakedPoolsForAccount(staker: Address): ValidatorPoolKey[] {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:415
+    // smart_contracts/reti/validatorRegistry.algo.ts:416
     // getStakedPoolsForAccount(staker: Address): ValidatorPoolKey[] {
     callsub getStakedPoolsForAccount
     bytec_1 // 0x151f7c75
@@ -506,17 +506,17 @@ main_getStakedPoolsForAccount_route@20:
     return
 
 main_doesStakerNeedToPayMBR_route@19:
-    // smart_contracts/reti/validatorRegistry.algo.ts:405
+    // smart_contracts/reti/validatorRegistry.algo.ts:406
     // doesStakerNeedToPayMBR(staker: Address): boolean {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:405
+    // smart_contracts/reti/validatorRegistry.algo.ts:406
     // doesStakerNeedToPayMBR(staker: Address): boolean {
     callsub doesStakerNeedToPayMBR
     bytec 6 // 0x00
@@ -531,18 +531,18 @@ main_doesStakerNeedToPayMBR_route@19:
     return
 
 main_getCurMaxStakePerPool_route@18:
-    // smart_contracts/reti/validatorRegistry.algo.ts:387
+    // smart_contracts/reti/validatorRegistry.algo.ts:388
     // getCurMaxStakePerPool(validatorId: ValidatorIdType): uint64 {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:387
+    // smart_contracts/reti/validatorRegistry.algo.ts:388
     // getCurMaxStakePerPool(validatorId: ValidatorIdType): uint64 {
     callsub getCurMaxStakePerPool
     itob
@@ -554,17 +554,17 @@ main_getCurMaxStakePerPool_route@18:
     return
 
 main_getPoolInfo_route@17:
-    // smart_contracts/reti/validatorRegistry.algo.ts:376
+    // smart_contracts/reti/validatorRegistry.algo.ts:377
     // getPoolInfo(poolKey: ValidatorPoolKey): PoolInfo {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:376
+    // smart_contracts/reti/validatorRegistry.algo.ts:377
     // getPoolInfo(poolKey: ValidatorPoolKey): PoolInfo {
     callsub getPoolInfo
     bytec_1 // 0x151f7c75
@@ -575,20 +575,20 @@ main_getPoolInfo_route@17:
     return
 
 main_getPoolAppId_route@16:
-    // smart_contracts/reti/validatorRegistry.algo.ts:367
+    // smart_contracts/reti/validatorRegistry.algo.ts:368
     // getPoolAppId(validatorId: uint64, poolId: uint64): uint64 {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:367
+    // smart_contracts/reti/validatorRegistry.algo.ts:368
     // getPoolAppId(validatorId: uint64, poolId: uint64): uint64 {
     callsub getPoolAppId
     itob
@@ -600,18 +600,18 @@ main_getPoolAppId_route@16:
     return
 
 main_getPools_route@15:
-    // smart_contracts/reti/validatorRegistry.algo.ts:350
+    // smart_contracts/reti/validatorRegistry.algo.ts:351
     // getPools(validatorId: ValidatorIdType): PoolInfo[] {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:350
+    // smart_contracts/reti/validatorRegistry.algo.ts:351
     // getPools(validatorId: ValidatorIdType): PoolInfo[] {
     callsub getPools
     bytec_1 // 0x151f7c75
@@ -622,18 +622,18 @@ main_getPools_route@15:
     return
 
 main_getValidatorOwnerAndManager_route@14:
-    // smart_contracts/reti/validatorRegistry.algo.ts:339
+    // smart_contracts/reti/validatorRegistry.algo.ts:340
     // getValidatorOwnerAndManager(validatorId: ValidatorIdType): [Address, Address] {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:339
+    // smart_contracts/reti/validatorRegistry.algo.ts:340
     // getValidatorOwnerAndManager(validatorId: ValidatorIdType): [Address, Address] {
     callsub getValidatorOwnerAndManager
     bytec_1 // 0x151f7c75
@@ -644,18 +644,18 @@ main_getValidatorOwnerAndManager_route@14:
     return
 
 main_getValidatorState_route@13:
-    // smart_contracts/reti/validatorRegistry.algo.ts:334
+    // smart_contracts/reti/validatorRegistry.algo.ts:335
     // getValidatorState(validatorId: ValidatorIdType): ValidatorCurState {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:334
+    // smart_contracts/reti/validatorRegistry.algo.ts:335
     // getValidatorState(validatorId: ValidatorIdType): ValidatorCurState {
     callsub getValidatorState
     bytec_1 // 0x151f7c75
@@ -666,18 +666,18 @@ main_getValidatorState_route@13:
     return
 
 main_getValidatorConfig_route@12:
-    // smart_contracts/reti/validatorRegistry.algo.ts:329
+    // smart_contracts/reti/validatorRegistry.algo.ts:330
     // getValidatorConfig(validatorId: ValidatorIdType): ValidatorConfig {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:329
+    // smart_contracts/reti/validatorRegistry.algo.ts:330
     // getValidatorConfig(validatorId: ValidatorIdType): ValidatorConfig {
     callsub getValidatorConfig
     bytec_1 // 0x151f7c75
@@ -688,7 +688,7 @@ main_getValidatorConfig_route@12:
     return
 
 main_getNumValidators_route@11:
-    // smart_contracts/reti/validatorRegistry.algo.ts:324
+    // smart_contracts/reti/validatorRegistry.algo.ts:325
     // getNumValidators(): uint64 {
     txn OnCompletion
     !
@@ -705,7 +705,7 @@ main_getNumValidators_route@11:
     return
 
 main_getProtocolConstraints_route@10:
-    // smart_contracts/reti/validatorRegistry.algo.ts:304
+    // smart_contracts/reti/validatorRegistry.algo.ts:305
     // getProtocolConstraints(): Constraints {
     txn OnCompletion
     !
@@ -718,7 +718,7 @@ main_getProtocolConstraints_route@10:
     return
 
 main_getMbrAmounts_route@9:
-    // smart_contracts/reti/validatorRegistry.algo.ts:277
+    // smart_contracts/reti/validatorRegistry.algo.ts:278
     // getMbrAmounts(): MbrAmounts {
     txn OnCompletion
     !
@@ -731,7 +731,7 @@ main_getMbrAmounts_route@9:
     return
 
 main_gas_route@8:
-    // smart_contracts/reti/validatorRegistry.algo.ts:266
+    // smart_contracts/reti/validatorRegistry.algo.ts:267
     // gas(): void {}
     txn OnCompletion
     !
@@ -742,7 +742,7 @@ main_gas_route@8:
     return
 
 main_finalizeStakingContract_route@7:
-    // smart_contracts/reti/validatorRegistry.algo.ts:259
+    // smart_contracts/reti/validatorRegistry.algo.ts:260
     // finalizeStakingContract(): void {
     txn OnCompletion
     !
@@ -754,45 +754,45 @@ main_finalizeStakingContract_route@7:
     return
 
 main_loadStakingContractData_route@6:
-    // smart_contracts/reti/validatorRegistry.algo.ts:254
+    // smart_contracts/reti/validatorRegistry.algo.ts:255
     // loadStakingContractData(offset: uint64, data: bytes): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
     extract 2 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:254
+    // smart_contracts/reti/validatorRegistry.algo.ts:255
     // loadStakingContractData(offset: uint64, data: bytes): void {
     callsub loadStakingContractData
     intc_1 // 1
     return
 
 main_initStakingContract_route@5:
-    // smart_contracts/reti/validatorRegistry.algo.ts:249
+    // smart_contracts/reti/validatorRegistry.algo.ts:250
     // initStakingContract(approvalProgramSize: uint64): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/validatorRegistry.algo.ts:200
+    // smart_contracts/reti/validatorRegistry.algo.ts:201
     // export class ValidatorRegistry extends Contract {
     txna ApplicationArgs 1
     btoi
-    // smart_contracts/reti/validatorRegistry.algo.ts:249
+    // smart_contracts/reti/validatorRegistry.algo.ts:250
     // initStakingContract(approvalProgramSize: uint64): void {
     callsub initStakingContract
     intc_1 // 1
     return
 
 main_createApplication_route@4:
-    // smart_contracts/reti/validatorRegistry.algo.ts:241
+    // smart_contracts/reti/validatorRegistry.algo.ts:242
     // createApplication(): void {
     txn OnCompletion
     !
@@ -805,7 +805,7 @@ main_createApplication_route@4:
     return
 
 main_updateApplication_route@3:
-    // smart_contracts/reti/validatorRegistry.algo.ts:231
+    // smart_contracts/reti/validatorRegistry.algo.ts:232
     // updateApplication(): void {
     txn OnCompletion
     pushint 4 // UpdateApplication
@@ -818,30 +818,72 @@ main_updateApplication_route@3:
     return
 
 
+// _puya_lib.util.ensure_budget(required_budget: uint64, fee_source: uint64) -> void:
+ensure_budget:
+    proto 2 0
+    frame_dig -2
+    pushint 10 // 10
+    +
+
+ensure_budget_while_top@1:
+    frame_dig 0
+    global OpcodeBudget
+    >
+    bz ensure_budget_after_while@7
+    itxn_begin
+    pushint 6 // appl
+    itxn_field TypeEnum
+    pushint 5 // DeleteApplication
+    itxn_field OnCompletion
+    bytec 13 // 0x068101
+    itxn_field ApprovalProgram
+    bytec 13 // 0x068101
+    itxn_field ClearStateProgram
+    frame_dig -1
+    switch ensure_budget_switch_case_0@3 ensure_budget_switch_case_1@4
+
+ensure_budget_switch_case_next@6:
+    itxn_submit
+    b ensure_budget_while_top@1
+
+ensure_budget_switch_case_1@4:
+    global MinTxnFee
+    itxn_field Fee
+    b ensure_budget_switch_case_next@6
+
+ensure_budget_switch_case_0@3:
+    intc_0 // 0
+    itxn_field Fee
+    b ensure_budget_switch_case_next@6
+
+ensure_budget_after_while@7:
+    retsub
+
+
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.updateApplication() -> void:
 updateApplication:
-    // smart_contracts/reti/validatorRegistry.algo.ts:233
+    // smart_contracts/reti/validatorRegistry.algo.ts:234
     // Txn.sender === Account('LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXZ6ZAFIQ'),
     txn Sender
     pushbytes base32(LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXQ) // addr LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXZ6ZAFIQ
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:232-235
+    // smart_contracts/reti/validatorRegistry.algo.ts:233-236
     // assert(
     //   Txn.sender === Account('LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXZ6ZAFIQ'),
     //   'Temporary: contract is upgradeable but only during testing and only from a development account',
     // )
     assert // Temporary: contract is upgradeable but only during testing and only from a development account
-    // smart_contracts/reti/validatorRegistry.algo.ts:206
+    // smart_contracts/reti/validatorRegistry.algo.ts:207
     // stakingPoolApprovalProgram = Box<bytes>({ key: 'poolTemplateApprovalBytes' })
     bytec 4 // "poolTemplateApprovalBytes"
-    // smart_contracts/reti/validatorRegistry.algo.ts:237
+    // smart_contracts/reti/validatorRegistry.algo.ts:238
     // this.stakingPoolApprovalProgram.delete()
     box_del
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:208
+    // smart_contracts/reti/validatorRegistry.algo.ts:209
     // stakingPoolInitialized = GlobalState<boolean>({ key: 'init' })
     bytec 8 // "init"
-    // smart_contracts/reti/validatorRegistry.algo.ts:238
+    // smart_contracts/reti/validatorRegistry.algo.ts:239
     // this.stakingPoolInitialized.value = false
     intc_0 // 0
     app_global_put
@@ -850,38 +892,38 @@ updateApplication:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.createApplication() -> void:
 createApplication:
-    // smart_contracts/reti/validatorRegistry.algo.ts:208
+    // smart_contracts/reti/validatorRegistry.algo.ts:209
     // stakingPoolInitialized = GlobalState<boolean>({ key: 'init' })
     bytec 8 // "init"
-    // smart_contracts/reti/validatorRegistry.algo.ts:242
+    // smart_contracts/reti/validatorRegistry.algo.ts:243
     // this.stakingPoolInitialized.value = false
     intc_0 // 0
     app_global_put
-    // smart_contracts/reti/validatorRegistry.algo.ts:210
+    // smart_contracts/reti/validatorRegistry.algo.ts:211
     // numValidators = GlobalState<uint64>({ key: 'numV' })
     bytec 9 // "numV"
-    // smart_contracts/reti/validatorRegistry.algo.ts:243
+    // smart_contracts/reti/validatorRegistry.algo.ts:244
     // this.numValidators.value = 0
     intc_0 // 0
     app_global_put
-    // smart_contracts/reti/validatorRegistry.algo.ts:213
+    // smart_contracts/reti/validatorRegistry.algo.ts:214
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 5 // "numStakers"
-    // smart_contracts/reti/validatorRegistry.algo.ts:244
+    // smart_contracts/reti/validatorRegistry.algo.ts:245
     // this.numStakers.value = 0
     intc_0 // 0
     app_global_put
-    // smart_contracts/reti/validatorRegistry.algo.ts:216
+    // smart_contracts/reti/validatorRegistry.algo.ts:217
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec_3 // "staked"
-    // smart_contracts/reti/validatorRegistry.algo.ts:245
+    // smart_contracts/reti/validatorRegistry.algo.ts:246
     // this.totalAlgoStaked.value = 0
     intc_0 // 0
     app_global_put
-    // smart_contracts/reti/validatorRegistry.algo.ts:201
+    // smart_contracts/reti/validatorRegistry.algo.ts:202
     // programVersion = GlobalState<uint64>({ key: 'programVersion' })
     pushbytes "programVersion"
-    // smart_contracts/reti/validatorRegistry.algo.ts:246
+    // smart_contracts/reti/validatorRegistry.algo.ts:247
     // this.programVersion.value = 10
     pushint 10 // 10
     app_global_put
@@ -890,13 +932,13 @@ createApplication:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.initStakingContract(approvalProgramSize: uint64) -> void:
 initStakingContract:
-    // smart_contracts/reti/validatorRegistry.algo.ts:249
+    // smart_contracts/reti/validatorRegistry.algo.ts:250
     // initStakingContract(approvalProgramSize: uint64): void {
     proto 1 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:206
+    // smart_contracts/reti/validatorRegistry.algo.ts:207
     // stakingPoolApprovalProgram = Box<bytes>({ key: 'poolTemplateApprovalBytes' })
     bytec 4 // "poolTemplateApprovalBytes"
-    // smart_contracts/reti/validatorRegistry.algo.ts:251
+    // smart_contracts/reti/validatorRegistry.algo.ts:252
     // this.stakingPoolApprovalProgram.create({ size: approvalProgramSize })
     frame_dig -1
     box_create
@@ -906,25 +948,25 @@ initStakingContract:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.loadStakingContractData(offset: uint64, data: bytes) -> void:
 loadStakingContractData:
-    // smart_contracts/reti/validatorRegistry.algo.ts:254
+    // smart_contracts/reti/validatorRegistry.algo.ts:255
     // loadStakingContractData(offset: uint64, data: bytes): void {
     proto 2 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:255
+    // smart_contracts/reti/validatorRegistry.algo.ts:256
     // assert(!this.stakingPoolInitialized.value, 'staking pool already initialized')
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:208
+    // smart_contracts/reti/validatorRegistry.algo.ts:209
     // stakingPoolInitialized = GlobalState<boolean>({ key: 'init' })
     bytec 8 // "init"
-    // smart_contracts/reti/validatorRegistry.algo.ts:255
+    // smart_contracts/reti/validatorRegistry.algo.ts:256
     // assert(!this.stakingPoolInitialized.value, 'staking pool already initialized')
     app_global_get_ex
     assert // check GlobalState exists
     !
     assert // staking pool already initialized
-    // smart_contracts/reti/validatorRegistry.algo.ts:206
+    // smart_contracts/reti/validatorRegistry.algo.ts:207
     // stakingPoolApprovalProgram = Box<bytes>({ key: 'poolTemplateApprovalBytes' })
     bytec 4 // "poolTemplateApprovalBytes"
-    // smart_contracts/reti/validatorRegistry.algo.ts:256
+    // smart_contracts/reti/validatorRegistry.algo.ts:257
     // this.stakingPoolApprovalProgram.ref.replace(offset, data)
     frame_dig -2
     frame_dig -1
@@ -934,10 +976,10 @@ loadStakingContractData:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.finalizeStakingContract() -> void:
 finalizeStakingContract:
-    // smart_contracts/reti/validatorRegistry.algo.ts:208
+    // smart_contracts/reti/validatorRegistry.algo.ts:209
     // stakingPoolInitialized = GlobalState<boolean>({ key: 'init' })
     bytec 8 // "init"
-    // smart_contracts/reti/validatorRegistry.algo.ts:260
+    // smart_contracts/reti/validatorRegistry.algo.ts:261
     // this.stakingPoolInitialized.value = true
     intc_1 // 1
     app_global_put
@@ -946,13 +988,13 @@ finalizeStakingContract:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getNumValidators() -> uint64:
 getNumValidators:
-    // smart_contracts/reti/validatorRegistry.algo.ts:325
+    // smart_contracts/reti/validatorRegistry.algo.ts:326
     // return this.numValidators.value
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:210
+    // smart_contracts/reti/validatorRegistry.algo.ts:211
     // numValidators = GlobalState<uint64>({ key: 'numV' })
     bytec 9 // "numV"
-    // smart_contracts/reti/validatorRegistry.algo.ts:325
+    // smart_contracts/reti/validatorRegistry.algo.ts:326
     // return this.numValidators.value
     app_global_get_ex
     assert // check GlobalState exists
@@ -961,19 +1003,19 @@ getNumValidators:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getValidatorConfig(validatorId: uint64) -> bytes:
 getValidatorConfig:
-    // smart_contracts/reti/validatorRegistry.algo.ts:329
+    // smart_contracts/reti/validatorRegistry.algo.ts:330
     // getValidatorConfig(validatorId: ValidatorIdType): ValidatorConfig {
     proto 1 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:330
+    // smart_contracts/reti/validatorRegistry.algo.ts:331
     // return this.validatorList(validatorId).value.config
     frame_dig -1
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:330
+    // smart_contracts/reti/validatorRegistry.algo.ts:331
     // return this.validatorList(validatorId).value.config
     box_get
     assert // Box must have value
@@ -983,19 +1025,19 @@ getValidatorConfig:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getValidatorState(validatorId: uint64) -> bytes:
 getValidatorState:
-    // smart_contracts/reti/validatorRegistry.algo.ts:334
+    // smart_contracts/reti/validatorRegistry.algo.ts:335
     // getValidatorState(validatorId: ValidatorIdType): ValidatorCurState {
     proto 1 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:335
+    // smart_contracts/reti/validatorRegistry.algo.ts:336
     // return this.validatorList(validatorId).value.state
     frame_dig -1
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:335
+    // smart_contracts/reti/validatorRegistry.algo.ts:336
     // return this.validatorList(validatorId).value.state
     box_get
     assert // Box must have value
@@ -1005,19 +1047,19 @@ getValidatorState:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getValidatorOwnerAndManager(validatorId: uint64) -> bytes:
 getValidatorOwnerAndManager:
-    // smart_contracts/reti/validatorRegistry.algo.ts:339
+    // smart_contracts/reti/validatorRegistry.algo.ts:340
     // getValidatorOwnerAndManager(validatorId: ValidatorIdType): [Address, Address] {
     proto 1 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:340
+    // smart_contracts/reti/validatorRegistry.algo.ts:341
     // return [this.validatorList(validatorId).value.config.owner, this.validatorList(validatorId).value.config.manager]
     frame_dig -1
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:340
+    // smart_contracts/reti/validatorRegistry.algo.ts:341
     // return [this.validatorList(validatorId).value.config.owner, this.validatorList(validatorId).value.config.manager]
     box_get
     assert // Box must have value
@@ -1032,38 +1074,38 @@ getValidatorOwnerAndManager:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getPools(validatorId: uint64) -> bytes:
 getPools:
-    // smart_contracts/reti/validatorRegistry.algo.ts:350
+    // smart_contracts/reti/validatorRegistry.algo.ts:351
     // getPools(validatorId: ValidatorIdType): PoolInfo[] {
     proto 1 1
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:351
+    // smart_contracts/reti/validatorRegistry.algo.ts:352
     // const retData: PoolInfo[] = []
     bytec 11 // 0x0000
-    // smart_contracts/reti/validatorRegistry.algo.ts:352
+    // smart_contracts/reti/validatorRegistry.algo.ts:353
     // const poolSet = clone(this.validatorList(validatorId).value.pools)
     frame_dig -1
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:352
+    // smart_contracts/reti/validatorRegistry.algo.ts:353
     // const poolSet = clone(this.validatorList(validatorId).value.pools)
     box_get
     assert // Box must have value
-    // smart_contracts/reti/validatorRegistry.algo.ts:353
+    // smart_contracts/reti/validatorRegistry.algo.ts:354
     // for (let i: uint64 = 0; i < poolSet.length; i += 1) {
     intc_0 // 0
 
 getPools_while_top@1:
-    // smart_contracts/reti/validatorRegistry.algo.ts:353
+    // smart_contracts/reti/validatorRegistry.algo.ts:354
     // for (let i: uint64 = 0; i < poolSet.length; i += 1) {
     frame_dig 3
     intc_3 // 24
     <
     bz getPools_block@6
-    // smart_contracts/reti/validatorRegistry.algo.ts:354
+    // smart_contracts/reti/validatorRegistry.algo.ts:355
     // if (poolSet[i].poolAppId === 0) {
     frame_dig 2
     intc 4 // 268
@@ -1079,7 +1121,7 @@ getPools_while_top@1:
     intc_0 // 0
     extract_uint64
     bz getPools_block@6
-    // smart_contracts/reti/validatorRegistry.algo.ts:358
+    // smart_contracts/reti/validatorRegistry.algo.ts:359
     // retData.push(poolSet[i])
     frame_dig 1
     dup
@@ -1094,7 +1136,7 @@ getPools_while_top@1:
     extract 6 2
     replace2 0
     frame_bury 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:353
+    // smart_contracts/reti/validatorRegistry.algo.ts:354
     // for (let i: uint64 = 0; i < poolSet.length; i += 1) {
     frame_dig 3
     intc_1 // 1
@@ -1103,7 +1145,7 @@ getPools_while_top@1:
     b getPools_while_top@1
 
 getPools_block@6:
-    // smart_contracts/reti/validatorRegistry.algo.ts:360
+    // smart_contracts/reti/validatorRegistry.algo.ts:361
     // return retData
     frame_dig 1
     frame_bury 0
@@ -1112,21 +1154,21 @@ getPools_block@6:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getPoolAppId(validatorId: uint64, poolId: uint64) -> uint64:
 getPoolAppId:
-    // smart_contracts/reti/validatorRegistry.algo.ts:367
+    // smart_contracts/reti/validatorRegistry.algo.ts:368
     // getPoolAppId(validatorId: uint64, poolId: uint64): uint64 {
     proto 2 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:369
+    // smart_contracts/reti/validatorRegistry.algo.ts:370
     // poolId !== 0 && poolId <= this.validatorList(validatorId).value.pools.length,
     frame_dig -1
     bz getPoolAppId_bool_false@3
     frame_dig -2
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:369
+    // smart_contracts/reti/validatorRegistry.algo.ts:370
     // poolId !== 0 && poolId <= this.validatorList(validatorId).value.pools.length,
     box_len
     bury 1
@@ -1138,22 +1180,22 @@ getPoolAppId:
     intc_1 // 1
 
 getPoolAppId_bool_merge@4:
-    // smart_contracts/reti/validatorRegistry.algo.ts:368-371
+    // smart_contracts/reti/validatorRegistry.algo.ts:369-372
     // assert(
     //   poolId !== 0 && poolId <= this.validatorList(validatorId).value.pools.length,
     //   'pool id must be between 1 and number of pools for this validator',
     // )
     assert // pool id must be between 1 and number of pools for this validator
-    // smart_contracts/reti/validatorRegistry.algo.ts:372
+    // smart_contracts/reti/validatorRegistry.algo.ts:373
     // return this.validatorList(validatorId).value.pools[poolId - 1].poolAppId
     frame_dig -2
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:372
+    // smart_contracts/reti/validatorRegistry.algo.ts:373
     // return this.validatorList(validatorId).value.pools[poolId - 1].poolAppId
     box_get
     assert // Box must have value
@@ -1180,21 +1222,21 @@ getPoolAppId_bool_false@3:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getPoolInfo(poolKey: bytes) -> bytes:
 getPoolInfo:
-    // smart_contracts/reti/validatorRegistry.algo.ts:376
+    // smart_contracts/reti/validatorRegistry.algo.ts:377
     // getPoolInfo(poolKey: ValidatorPoolKey): PoolInfo {
     proto 1 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:377
+    // smart_contracts/reti/validatorRegistry.algo.ts:378
     // return this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1]
     frame_dig -1
     intc_0 // 0
     extract_uint64
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:377
+    // smart_contracts/reti/validatorRegistry.algo.ts:378
     // return this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1]
     box_get
     assert // Box must have value
@@ -1217,47 +1259,47 @@ getPoolInfo:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getCurMaxStakePerPool(validatorId: uint64) -> uint64:
 getCurMaxStakePerPool:
-    // smart_contracts/reti/validatorRegistry.algo.ts:387
+    // smart_contracts/reti/validatorRegistry.algo.ts:388
     // getCurMaxStakePerPool(validatorId: ValidatorIdType): uint64 {
     proto 1 1
     bytec_2 // ""
-    // smart_contracts/reti/validatorRegistry.algo.ts:388
+    // smart_contracts/reti/validatorRegistry.algo.ts:389
     // const numPools = this.validatorList(validatorId).value.state.numPools
     frame_dig -1
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:388
+    // smart_contracts/reti/validatorRegistry.algo.ts:389
     // const numPools = this.validatorList(validatorId).value.state.numPools
     box_get
     assert // Box must have value
     dup
     extract 242 26
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:389
+    // smart_contracts/reti/validatorRegistry.algo.ts:390
     // const hardMaxDividedBetweenPools: uint64 = this.maxAllowedStake() / numPools.native
     extract_uint16
-    // smart_contracts/reti/validatorRegistry.algo.ts:1552
+    // smart_contracts/reti/validatorRegistry.algo.ts:1549
     // return 0
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:389
+    // smart_contracts/reti/validatorRegistry.algo.ts:390
     // const hardMaxDividedBetweenPools: uint64 = this.maxAllowedStake() / numPools.native
     swap
     /
     swap
-    // smart_contracts/reti/validatorRegistry.algo.ts:390
+    // smart_contracts/reti/validatorRegistry.algo.ts:391
     // let maxPerPool: uint64 = this.validatorList(validatorId).value.config.maxAlgoPerPool
     extract 0 242
     pushint 217 // 217
     extract_uint64
     dup
-    // smart_contracts/reti/validatorRegistry.algo.ts:391
+    // smart_contracts/reti/validatorRegistry.algo.ts:392
     // if (maxPerPool === 0) {
     bnz getCurMaxStakePerPool_after_if_else@2
-    // smart_contracts/reti/validatorRegistry.algo.ts:1560
+    // smart_contracts/reti/validatorRegistry.algo.ts:1557
     // return 70_000_000_000_000 // 70m ALGO in microAlgo
     pushint 70000000000000 // 70000000000000
     frame_bury 2
@@ -1266,7 +1308,7 @@ getCurMaxStakePerPool_after_if_else@2:
     frame_dig 2
     dup
     frame_bury 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:394
+    // smart_contracts/reti/validatorRegistry.algo.ts:395
     // if (hardMaxDividedBetweenPools < maxPerPool) {
     frame_dig 1
     >
@@ -1275,22 +1317,22 @@ getCurMaxStakePerPool_after_if_else@2:
     frame_bury 0
 
 getCurMaxStakePerPool_after_if_else@4:
-    // smart_contracts/reti/validatorRegistry.algo.ts:397
+    // smart_contracts/reti/validatorRegistry.algo.ts:398
     // return maxPerPool
     retsub
 
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.doesStakerNeedToPayMBR(staker: bytes) -> uint64:
 doesStakerNeedToPayMBR:
-    // smart_contracts/reti/validatorRegistry.algo.ts:405
+    // smart_contracts/reti/validatorRegistry.algo.ts:406
     // doesStakerNeedToPayMBR(staker: Address): boolean {
     proto 1 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:224
+    // smart_contracts/reti/validatorRegistry.algo.ts:225
     // stakerPoolSet = BoxMap<Address, FixedArray<ValidatorPoolKey, typeof MAX_POOLS_PER_STAKER>>({ keyPrefix: 'sps' })
     bytec 7 // "sps"
     frame_dig -1
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:406
+    // smart_contracts/reti/validatorRegistry.algo.ts:407
     // return !this.stakerPoolSet(staker).exists
     box_len
     bury 1
@@ -1300,54 +1342,54 @@ doesStakerNeedToPayMBR:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getStakedPoolsForAccount(staker: bytes) -> bytes:
 getStakedPoolsForAccount:
-    // smart_contracts/reti/validatorRegistry.algo.ts:415
+    // smart_contracts/reti/validatorRegistry.algo.ts:416
     // getStakedPoolsForAccount(staker: Address): ValidatorPoolKey[] {
     proto 1 1
     intc_0 // 0
     dupn 3
     bytec_2 // ""
-    // smart_contracts/reti/validatorRegistry.algo.ts:224
+    // smart_contracts/reti/validatorRegistry.algo.ts:225
     // stakerPoolSet = BoxMap<Address, FixedArray<ValidatorPoolKey, typeof MAX_POOLS_PER_STAKER>>({ keyPrefix: 'sps' })
     bytec 7 // "sps"
     frame_dig -1
     concat
     dup
-    // smart_contracts/reti/validatorRegistry.algo.ts:416
+    // smart_contracts/reti/validatorRegistry.algo.ts:417
     // if (!this.stakerPoolSet(staker).exists) {
     box_len
     bury 1
     bnz getStakedPoolsForAccount_after_if_else@2
-    // smart_contracts/reti/validatorRegistry.algo.ts:417
+    // smart_contracts/reti/validatorRegistry.algo.ts:418
     // return []
     bytec 11 // 0x0000
     frame_bury 0
     retsub
 
 getStakedPoolsForAccount_after_if_else@2:
-    // smart_contracts/reti/validatorRegistry.algo.ts:419
+    // smart_contracts/reti/validatorRegistry.algo.ts:420
     // const retData: ValidatorPoolKey[] = []
     bytec 11 // 0x0000
     frame_bury 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:420
+    // smart_contracts/reti/validatorRegistry.algo.ts:421
     // const poolSet = clone(this.stakerPoolSet(staker).value)
     frame_dig 5
     box_get
     swap
     frame_bury 1
     assert // Box must have value
-    // smart_contracts/reti/validatorRegistry.algo.ts:421
+    // smart_contracts/reti/validatorRegistry.algo.ts:422
     // for (let i: uint64 = 0; i < poolSet.length; i += 1) {
     intc_0 // 0
     frame_bury 4
 
 getStakedPoolsForAccount_while_top@3:
-    // smart_contracts/reti/validatorRegistry.algo.ts:421
+    // smart_contracts/reti/validatorRegistry.algo.ts:422
     // for (let i: uint64 = 0; i < poolSet.length; i += 1) {
     frame_dig 4
     pushint 6 // 6
     <
     bz getStakedPoolsForAccount_after_while@7
-    // smart_contracts/reti/validatorRegistry.algo.ts:422
+    // smart_contracts/reti/validatorRegistry.algo.ts:423
     // if (poolSet[i].id !== 0) {
     frame_dig 4
     intc_3 // 24
@@ -1363,7 +1405,7 @@ getStakedPoolsForAccount_while_top@3:
     frame_dig 2
     frame_bury 3
     bz getStakedPoolsForAccount_after_if_else@6
-    // smart_contracts/reti/validatorRegistry.algo.ts:423
+    // smart_contracts/reti/validatorRegistry.algo.ts:424
     // retData.push(poolSet[i])
     frame_dig 2
     dup
@@ -1382,7 +1424,7 @@ getStakedPoolsForAccount_while_top@3:
 getStakedPoolsForAccount_after_if_else@6:
     frame_dig 3
     frame_bury 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:421
+    // smart_contracts/reti/validatorRegistry.algo.ts:422
     // for (let i: uint64 = 0; i < poolSet.length; i += 1) {
     frame_dig 4
     intc_1 // 1
@@ -1391,7 +1433,7 @@ getStakedPoolsForAccount_after_if_else@6:
     b getStakedPoolsForAccount_while_top@3
 
 getStakedPoolsForAccount_after_while@7:
-    // smart_contracts/reti/validatorRegistry.algo.ts:426
+    // smart_contracts/reti/validatorRegistry.algo.ts:427
     // return retData
     frame_dig 2
     frame_bury 0
@@ -1400,19 +1442,19 @@ getStakedPoolsForAccount_after_while@7:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getTokenPayoutRatio(validatorId: uint64) -> bytes:
 getTokenPayoutRatio:
-    // smart_contracts/reti/validatorRegistry.algo.ts:437
+    // smart_contracts/reti/validatorRegistry.algo.ts:438
     // getTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
     proto 1 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:438
+    // smart_contracts/reti/validatorRegistry.algo.ts:439
     // return this.validatorList(validatorId).value.tokenPayoutRatio
     frame_dig -1
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:438
+    // smart_contracts/reti/validatorRegistry.algo.ts:439
     // return this.validatorList(validatorId).value.tokenPayoutRatio
     box_get
     assert // Box must have value
@@ -1424,25 +1466,25 @@ getTokenPayoutRatio:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.getNodePoolAssignments(validatorId: uint64) -> bytes:
 getNodePoolAssignments:
-    // smart_contracts/reti/validatorRegistry.algo.ts:442
+    // smart_contracts/reti/validatorRegistry.algo.ts:443
     // getNodePoolAssignments(validatorId: uint64): NodePoolAssignmentConfig {
     proto 1 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:443
+    // smart_contracts/reti/validatorRegistry.algo.ts:444
     // assert(this.validatorList(validatorId).exists, "the specified validator id doesn't exist")
     frame_dig -1
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:443
+    // smart_contracts/reti/validatorRegistry.algo.ts:444
     // assert(this.validatorList(validatorId).exists, "the specified validator id doesn't exist")
     dup
     box_len
     bury 1
     assert // the specified validator id doesn't exist
-    // smart_contracts/reti/validatorRegistry.algo.ts:445
+    // smart_contracts/reti/validatorRegistry.algo.ts:446
     // return this.validatorList(validatorId).value.nodePoolAssignments
     box_get
     pop
@@ -1454,12 +1496,12 @@ getNodePoolAssignments:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.addValidator(mbrPayment: uint64, nfdName: bytes, config: bytes) -> uint64:
 addValidator:
-    // smart_contracts/reti/validatorRegistry.algo.ts:460
+    // smart_contracts/reti/validatorRegistry.algo.ts:461
     // addValidator(mbrPayment: gtxn.PaymentTxn, nfdName: string, config: ValidatorConfig): uint64 {
     proto 3 1
     bytec_2 // ""
     dupn 4
-    // smart_contracts/reti/validatorRegistry.algo.ts:1242
+    // smart_contracts/reti/validatorRegistry.algo.ts:1241
     // config.entryGatingType.native >= GATING_TYPE_NONE && config.entryGatingType.native <= GATING_TYPE_CONST_MAX,
     frame_dig -1
     extract 80 1
@@ -1472,13 +1514,13 @@ addValidator:
     intc_1 // 1
 
 addValidator_bool_merge@11:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1241-1244
+    // smart_contracts/reti/validatorRegistry.algo.ts:1240-1243
     // assert(
     //   config.entryGatingType.native >= GATING_TYPE_NONE && config.entryGatingType.native <= GATING_TYPE_CONST_MAX,
     //   'gating type not valid',
     // )
     assert // gating type not valid
-    // smart_contracts/reti/validatorRegistry.algo.ts:1246
+    // smart_contracts/reti/validatorRegistry.algo.ts:1245
     // config.epochRoundLength.native >= MIN_EPOCH_LENGTH && config.epochRoundLength.native <= MAX_EPOCH_LENGTH,
     frame_dig -1
     pushint 169 // 169
@@ -1493,48 +1535,48 @@ addValidator_bool_merge@11:
     intc_1 // 1
 
 addValidator_bool_merge@15:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1245-1248
+    // smart_contracts/reti/validatorRegistry.algo.ts:1244-1247
     // assert(
     //   config.epochRoundLength.native >= MIN_EPOCH_LENGTH && config.epochRoundLength.native <= MAX_EPOCH_LENGTH,
     //   'epoch length not in allowable range',
     // )
     assert // epoch length not in allowable range
-    // smart_contracts/reti/validatorRegistry.algo.ts:1250
+    // smart_contracts/reti/validatorRegistry.algo.ts:1249
     // config.percentToValidator.native >= MIN_PCT_TO_VALIDATOR &&
     frame_dig -1
     pushint 173 // 173
     extract_uint32
     dup
     frame_bury 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:1251
+    // smart_contracts/reti/validatorRegistry.algo.ts:1250
     // config.percentToValidator.native <= MAX_PCT_TO_VALIDATOR,
     intc 12 // 1000000
     <=
-    // smart_contracts/reti/validatorRegistry.algo.ts:1250-1251
+    // smart_contracts/reti/validatorRegistry.algo.ts:1249-1250
     // config.percentToValidator.native >= MIN_PCT_TO_VALIDATOR &&
     //   config.percentToValidator.native <= MAX_PCT_TO_VALIDATOR,
     bz addValidator_bool_false@18
     intc_1 // 1
 
 addValidator_bool_merge@19:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1249-1253
+    // smart_contracts/reti/validatorRegistry.algo.ts:1248-1252
     // assert(
     //   config.percentToValidator.native >= MIN_PCT_TO_VALIDATOR &&
     //     config.percentToValidator.native <= MAX_PCT_TO_VALIDATOR,
     //   'commission percentage not valid',
     // )
     assert // commission percentage not valid
-    // smart_contracts/reti/validatorRegistry.algo.ts:1254
+    // smart_contracts/reti/validatorRegistry.algo.ts:1253
     // if (config.percentToValidator.native !== 0) {
     frame_dig 2
     bz addValidator_after_if_else@21
-    // smart_contracts/reti/validatorRegistry.algo.ts:1256
+    // smart_contracts/reti/validatorRegistry.algo.ts:1255
     // config.validatorCommissionAddress.native !== Global.zeroAddress,
     frame_dig -1
     extract 177 32
     global ZeroAddress
     !=
-    // smart_contracts/reti/validatorRegistry.algo.ts:1255-1258
+    // smart_contracts/reti/validatorRegistry.algo.ts:1254-1257
     // assert(
     //   config.validatorCommissionAddress.native !== Global.zeroAddress,
     //   'validatorCommissionAddress must be set if percent to validator is not 0',
@@ -1542,7 +1584,7 @@ addValidator_bool_merge@19:
     assert // validatorCommissionAddress must be set if percent to validator is not 0
 
 addValidator_after_if_else@21:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1260
+    // smart_contracts/reti/validatorRegistry.algo.ts:1259
     // assert(config.minEntryStake >= MIN_ALGO_STAKE_PER_POOL, 'staking pool must have minimum entry of 1 algo')
     frame_dig -1
     intc 13 // 209
@@ -1550,7 +1592,7 @@ addValidator_after_if_else@21:
     intc 12 // 1000000
     >=
     assert // staking pool must have minimum entry of 1 algo
-    // smart_contracts/reti/validatorRegistry.algo.ts:1263
+    // smart_contracts/reti/validatorRegistry.algo.ts:1262
     // config.poolsPerNode.native > 0 && config.poolsPerNode.native <= MAX_POOLS_PER_NODE,
     frame_dig -1
     pushint 225 // 225
@@ -1565,13 +1607,13 @@ addValidator_after_if_else@21:
     intc_1 // 1
 
 addValidator_bool_merge@25:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1262-1265
+    // smart_contracts/reti/validatorRegistry.algo.ts:1261-1264
     // assert(
     //   config.poolsPerNode.native > 0 && config.poolsPerNode.native <= MAX_POOLS_PER_NODE,
     //   'number of pools per node exceeds allowed number',
     // )
     assert // number of pools per node exceeds allowed number
-    // smart_contracts/reti/validatorRegistry.algo.ts:1266
+    // smart_contracts/reti/validatorRegistry.algo.ts:1265
     // if (config.sunsettingOn !== 0) {
     frame_dig -1
     intc 11 // 226
@@ -1579,7 +1621,7 @@ addValidator_bool_merge@25:
     dup
     frame_bury 4
     bz addValidator_after_if_else@27
-    // smart_contracts/reti/validatorRegistry.algo.ts:1267
+    // smart_contracts/reti/validatorRegistry.algo.ts:1266
     // assert(config.sunsettingOn > Global.latestTimestamp, 'sunsettingOn must be later than now if set')
     frame_dig 4
     global LatestTimestamp
@@ -1587,7 +1629,7 @@ addValidator_bool_merge@25:
     assert // sunsettingOn must be later than now if set
 
 addValidator_after_if_else@27:
-    // smart_contracts/reti/validatorRegistry.algo.ts:462
+    // smart_contracts/reti/validatorRegistry.algo.ts:463
     // assert(config.owner.native !== Global.zeroAddress)
     frame_dig -1
     extract 8 32
@@ -1595,38 +1637,38 @@ addValidator_after_if_else@27:
     global ZeroAddress
     !=
     assert
-    // smart_contracts/reti/validatorRegistry.algo.ts:463
+    // smart_contracts/reti/validatorRegistry.algo.ts:464
     // assert(config.manager.native !== Global.zeroAddress)
     frame_dig -1
     extract 40 32
     global ZeroAddress
     !=
     assert
-    // smart_contracts/reti/validatorRegistry.algo.ts:464
+    // smart_contracts/reti/validatorRegistry.algo.ts:465
     // assert(Txn.sender === config.owner.native, 'sender must be owner to add new validator')
     txn Sender
     ==
     assert // sender must be owner to add new validator
-    // smart_contracts/reti/validatorRegistry.algo.ts:466
+    // smart_contracts/reti/validatorRegistry.algo.ts:467
     // assertMatch(mbrPayment, { amount: this.getMbrAmounts().addValidatorMbr })
     frame_dig -3
     gtxns Amount
     !
     assert // assert target is match for conditions
-    // smart_contracts/reti/validatorRegistry.algo.ts:468
+    // smart_contracts/reti/validatorRegistry.algo.ts:469
     // assert(mbrPayment.fee > 10 * 1000000, 'fee must be 10 ALGO or more to prevent spamming of validators')
     frame_dig -3
     gtxns Fee
     pushint 10000000 // 10000000
     >
     assert // fee must be 10 ALGO or more to prevent spamming of validators
-    // smart_contracts/reti/validatorRegistry.algo.ts:471
+    // smart_contracts/reti/validatorRegistry.algo.ts:472
     // const validatorId: uint64 = this.numValidators.value + 1
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:210
+    // smart_contracts/reti/validatorRegistry.algo.ts:211
     // numValidators = GlobalState<uint64>({ key: 'numV' })
     bytec 9 // "numV"
-    // smart_contracts/reti/validatorRegistry.algo.ts:471
+    // smart_contracts/reti/validatorRegistry.algo.ts:472
     // const validatorId: uint64 = this.numValidators.value + 1
     app_global_get_ex
     assert // check GlobalState exists
@@ -1634,39 +1676,39 @@ addValidator_after_if_else@27:
     +
     dup
     frame_bury 3
-    // smart_contracts/reti/validatorRegistry.algo.ts:210
+    // smart_contracts/reti/validatorRegistry.algo.ts:211
     // numValidators = GlobalState<uint64>({ key: 'numV' })
     bytec 9 // "numV"
-    // smart_contracts/reti/validatorRegistry.algo.ts:472
+    // smart_contracts/reti/validatorRegistry.algo.ts:473
     // this.numValidators.value = validatorId
     dig 1
     app_global_put
-    // smart_contracts/reti/validatorRegistry.algo.ts:474
+    // smart_contracts/reti/validatorRegistry.algo.ts:475
     // this.validatorList(validatorId).create()
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     dig 1
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:474
+    // smart_contracts/reti/validatorRegistry.algo.ts:475
     // this.validatorList(validatorId).create()
     dup
     pushint 1092 // 1092
     box_create
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:475
+    // smart_contracts/reti/validatorRegistry.algo.ts:476
     // this.validatorList(validatorId).value.config = clone(config)
     dup
     intc_0 // 0
     frame_dig -1
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:476
+    // smart_contracts/reti/validatorRegistry.algo.ts:477
     // this.validatorList(validatorId).value.config.id = validatorId
     intc_0 // 0
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:479
+    // smart_contracts/reti/validatorRegistry.algo.ts:480
     // if (config.nfdForInfo !== 0) {
     frame_dig -1
     pushint 72 // 72
@@ -1674,7 +1716,7 @@ addValidator_after_if_else@27:
     dup
     frame_bury 4
     bz addValidator_after_if_else@3
-    // smart_contracts/reti/validatorRegistry.algo.ts:481-487
+    // smart_contracts/reti/validatorRegistry.algo.ts:482-488
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -1683,10 +1725,10 @@ addValidator_after_if_else@27:
     //   })
     //   .submit()
     itxn_begin
-    // smart_contracts/reti/validatorRegistry.algo.ts:483
+    // smart_contracts/reti/validatorRegistry.algo.ts:484
     // appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
     intc 10 // TMPL_NFD_REGISTRY_APP_ID
-    // smart_contracts/reti/validatorRegistry.algo.ts:484
+    // smart_contracts/reti/validatorRegistry.algo.ts:485
     // appArgs: [Bytes('is_valid_nfd_appid'), Bytes(nfdName), op.itob(config.nfdForInfo)],
     frame_dig 4
     dup
@@ -1700,7 +1742,7 @@ addValidator_after_if_else@27:
     itxn_field ApplicationArgs
     swap
     itxn_field ApplicationID
-    // smart_contracts/reti/validatorRegistry.algo.ts:481-486
+    // smart_contracts/reti/validatorRegistry.algo.ts:482-487
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -1711,7 +1753,7 @@ addValidator_after_if_else@27:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/validatorRegistry.algo.ts:481-487
+    // smart_contracts/reti/validatorRegistry.algo.ts:482-488
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -1720,46 +1762,46 @@ addValidator_after_if_else@27:
     //   })
     //   .submit()
     itxn_submit
-    // smart_contracts/reti/validatorRegistry.algo.ts:488
+    // smart_contracts/reti/validatorRegistry.algo.ts:489
     // assert(op.btoi(op.ITxn.lastLog) === 1, "provided NFD isn't valid")
     itxn LastLog
     btoi
     intc_1 // 1
     ==
     assert // provided NFD isn't valid
-    // smart_contracts/reti/validatorRegistry.algo.ts:490
+    // smart_contracts/reti/validatorRegistry.algo.ts:491
     // const [owner] = op.AppGlobal.getExBytes(config.nfdForInfo, Bytes('i.owner.a'))
     bytec 10 // "i.owner.a"
     app_global_get_ex
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:491
+    // smart_contracts/reti/validatorRegistry.algo.ts:492
     // assert(Txn.sender === Account(owner), 'If specifying NFD, account adding validator must be owner')
     txn Sender
     ==
     assert // If specifying NFD, account adding validator must be owner
 
 addValidator_after_if_else@3:
-    // smart_contracts/reti/validatorRegistry.algo.ts:494
+    // smart_contracts/reti/validatorRegistry.algo.ts:495
     // config.entryGatingType === new Uint8(GATING_TYPE_CREATED_BY_NFD_ADDRESSES) ||
     frame_dig 5
     pushbytes 0x03
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:494-495
+    // smart_contracts/reti/validatorRegistry.algo.ts:495-496
     // config.entryGatingType === new Uint8(GATING_TYPE_CREATED_BY_NFD_ADDRESSES) ||
     // config.entryGatingType === new Uint8(GATING_TYPE_SEGMENT_OF_NFD)
     bnz addValidator_if_body@5
-    // smart_contracts/reti/validatorRegistry.algo.ts:495
+    // smart_contracts/reti/validatorRegistry.algo.ts:496
     // config.entryGatingType === new Uint8(GATING_TYPE_SEGMENT_OF_NFD)
     frame_dig 5
     pushbytes 0x04
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:494-495
+    // smart_contracts/reti/validatorRegistry.algo.ts:495-496
     // config.entryGatingType === new Uint8(GATING_TYPE_CREATED_BY_NFD_ADDRESSES) ||
     // config.entryGatingType === new Uint8(GATING_TYPE_SEGMENT_OF_NFD)
     bz addValidator_after_if_else@6
 
 addValidator_if_body@5:
-    // smart_contracts/reti/validatorRegistry.algo.ts:498
+    // smart_contracts/reti/validatorRegistry.algo.ts:499
     // assert(this.isNFDAppIDValid(config.entryGatingAssets[0]), 'provided NFD App id for gating must be valid NFD')
     frame_dig -1
     extract 113 32
@@ -1769,7 +1811,7 @@ addValidator_if_body@5:
     assert // provided NFD App id for gating must be valid NFD
 
 addValidator_after_if_else@6:
-    // smart_contracts/reti/validatorRegistry.algo.ts:501
+    // smart_contracts/reti/validatorRegistry.algo.ts:502
     // return validatorId
     frame_dig 3
     frame_bury 0
@@ -1794,20 +1836,20 @@ addValidator_bool_false@10:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.changeValidatorManager(validatorId: uint64, manager: bytes) -> void:
 changeValidatorManager:
-    // smart_contracts/reti/validatorRegistry.algo.ts:511
+    // smart_contracts/reti/validatorRegistry.algo.ts:512
     // changeValidatorManager(validatorId: ValidatorIdType, manager: Address): void {
     proto 2 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:513
+    // smart_contracts/reti/validatorRegistry.algo.ts:514
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     txn Sender
     frame_dig -2
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:513
+    // smart_contracts/reti/validatorRegistry.algo.ts:514
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     dup
     box_get
@@ -1816,13 +1858,13 @@ changeValidatorManager:
     extract 8 32
     uncover 2
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:512-515
+    // smart_contracts/reti/validatorRegistry.algo.ts:513-516
     // assert(
     //   Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     //   'can only be called by validator owner',
     // )
     assert // can only be called by validator owner
-    // smart_contracts/reti/validatorRegistry.algo.ts:516
+    // smart_contracts/reti/validatorRegistry.algo.ts:517
     // this.validatorList(validatorId).value.config.manager = manager
     pushint 40 // 40
     frame_dig -1
@@ -1832,20 +1874,20 @@ changeValidatorManager:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.changeValidatorSunsetInfo(validatorId: uint64, sunsettingOn: uint64, sunsettingTo: uint64) -> void:
 changeValidatorSunsetInfo:
-    // smart_contracts/reti/validatorRegistry.algo.ts:527
+    // smart_contracts/reti/validatorRegistry.algo.ts:528
     // changeValidatorSunsetInfo(validatorId: ValidatorIdType, sunsettingOn: uint64, sunsettingTo: ValidatorIdType): void {
     proto 3 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:529
+    // smart_contracts/reti/validatorRegistry.algo.ts:530
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     txn Sender
     frame_dig -3
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:529
+    // smart_contracts/reti/validatorRegistry.algo.ts:530
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     dup
     box_get
@@ -1854,13 +1896,13 @@ changeValidatorSunsetInfo:
     extract 8 32
     uncover 2
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:528-531
+    // smart_contracts/reti/validatorRegistry.algo.ts:529-532
     // assert(
     //   Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     //   'can only be called by validator owner',
     // )
     assert // can only be called by validator owner
-    // smart_contracts/reti/validatorRegistry.algo.ts:532
+    // smart_contracts/reti/validatorRegistry.algo.ts:533
     // this.validatorList(validatorId).value.config.sunsettingOn = sunsettingOn
     frame_dig -2
     itob
@@ -1868,7 +1910,7 @@ changeValidatorSunsetInfo:
     intc 11 // 226
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:533
+    // smart_contracts/reti/validatorRegistry.algo.ts:534
     // this.validatorList(validatorId).value.config.sunsettingTo = sunsettingTo
     frame_dig -1
     itob
@@ -1880,20 +1922,20 @@ changeValidatorSunsetInfo:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.changeValidatorNFD(validatorId: uint64, nfdAppID: uint64, nfdName: bytes) -> void:
 changeValidatorNFD:
-    // smart_contracts/reti/validatorRegistry.algo.ts:544
+    // smart_contracts/reti/validatorRegistry.algo.ts:545
     // changeValidatorNFD(validatorId: ValidatorIdType, nfdAppID: uint64, nfdName: string): void {
     proto 3 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:547
+    // smart_contracts/reti/validatorRegistry.algo.ts:548
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     txn Sender
     frame_dig -3
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:547
+    // smart_contracts/reti/validatorRegistry.algo.ts:548
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     dup
     box_get
@@ -1902,13 +1944,13 @@ changeValidatorNFD:
     extract 8 32
     uncover 2
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:546-549
+    // smart_contracts/reti/validatorRegistry.algo.ts:547-550
     // assert(
     //   Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     //   'can only be called by validator owner',
     // )
     assert // can only be called by validator owner
-    // smart_contracts/reti/validatorRegistry.algo.ts:550-557
+    // smart_contracts/reti/validatorRegistry.algo.ts:551-558
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -1918,13 +1960,13 @@ changeValidatorNFD:
     //   })
     //   .submit()
     itxn_begin
-    // smart_contracts/reti/validatorRegistry.algo.ts:552
+    // smart_contracts/reti/validatorRegistry.algo.ts:553
     // appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
     intc 10 // TMPL_NFD_REGISTRY_APP_ID
-    // smart_contracts/reti/validatorRegistry.algo.ts:554
+    // smart_contracts/reti/validatorRegistry.algo.ts:555
     // accounts: [Txn.sender],
     txn Sender
-    // smart_contracts/reti/validatorRegistry.algo.ts:555
+    // smart_contracts/reti/validatorRegistry.algo.ts:556
     // appArgs: [Bytes('is_valid_nfd_appid'), Bytes(nfdName), op.itob(nfdAppID)],
     frame_dig -2
     itob
@@ -1936,13 +1978,13 @@ changeValidatorNFD:
     itxn_field ApplicationArgs
     swap
     itxn_field Accounts
-    // smart_contracts/reti/validatorRegistry.algo.ts:553
+    // smart_contracts/reti/validatorRegistry.algo.ts:554
     // onCompletion: OnCompleteAction.NoOp,
     intc_0 // 0
     itxn_field OnCompletion
     swap
     itxn_field ApplicationID
-    // smart_contracts/reti/validatorRegistry.algo.ts:550-556
+    // smart_contracts/reti/validatorRegistry.algo.ts:551-557
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -1954,7 +1996,7 @@ changeValidatorNFD:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/validatorRegistry.algo.ts:550-557
+    // smart_contracts/reti/validatorRegistry.algo.ts:551-558
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -1964,18 +2006,18 @@ changeValidatorNFD:
     //   })
     //   .submit()
     itxn_submit
-    // smart_contracts/reti/validatorRegistry.algo.ts:559
+    // smart_contracts/reti/validatorRegistry.algo.ts:560
     // const [owner] = op.AppGlobal.getExBytes(nfdAppID, Bytes('i.owner.a'))
     frame_dig -2
     bytec 10 // "i.owner.a"
     app_global_get_ex
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:560
+    // smart_contracts/reti/validatorRegistry.algo.ts:561
     // assert(Txn.sender === Account(owner), 'If specifying NFD, account adding validator must be owner')
     txn Sender
     ==
     assert // If specifying NFD, account adding validator must be owner
-    // smart_contracts/reti/validatorRegistry.algo.ts:561
+    // smart_contracts/reti/validatorRegistry.algo.ts:562
     // this.validatorList(validatorId).value.config.nfdForInfo = nfdAppID
     pushint 72 // 72
     swap
@@ -1985,20 +2027,20 @@ changeValidatorNFD:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.changeValidatorCommissionAddress(validatorId: uint64, commissionAddress: bytes) -> void:
 changeValidatorCommissionAddress:
-    // smart_contracts/reti/validatorRegistry.algo.ts:568
+    // smart_contracts/reti/validatorRegistry.algo.ts:569
     // changeValidatorCommissionAddress(validatorId: ValidatorIdType, commissionAddress: Address): void {
     proto 2 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:570
+    // smart_contracts/reti/validatorRegistry.algo.ts:571
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     txn Sender
     frame_dig -2
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:570
+    // smart_contracts/reti/validatorRegistry.algo.ts:571
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     dup
     box_get
@@ -2007,19 +2049,19 @@ changeValidatorCommissionAddress:
     extract 8 32
     uncover 2
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:569-572
+    // smart_contracts/reti/validatorRegistry.algo.ts:570-573
     // assert(
     //   Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     //   'can only be called by validator owner',
     // )
     assert // can only be called by validator owner
-    // smart_contracts/reti/validatorRegistry.algo.ts:573
+    // smart_contracts/reti/validatorRegistry.algo.ts:574
     // assert(commissionAddress.native !== Global.zeroAddress)
     frame_dig -1
     global ZeroAddress
     !=
     assert
-    // smart_contracts/reti/validatorRegistry.algo.ts:574
+    // smart_contracts/reti/validatorRegistry.algo.ts:575
     // this.validatorList(validatorId).value.config.validatorCommissionAddress = commissionAddress
     pushint 177 // 177
     frame_dig -1
@@ -2029,7 +2071,7 @@ changeValidatorCommissionAddress:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.changeValidatorRewardInfo(validatorId: uint64, EntryGatingType: bytes, EntryGatingAddress: bytes, EntryGatingAssets: bytes, GatingAssetMinBalance: uint64, RewardPerPayout: uint64) -> void:
 changeValidatorRewardInfo:
-    // smart_contracts/reti/validatorRegistry.algo.ts:581-588
+    // smart_contracts/reti/validatorRegistry.algo.ts:582-589
     // changeValidatorRewardInfo(
     //   validatorId: ValidatorIdType,
     //   EntryGatingType: Uint8,
@@ -2039,17 +2081,17 @@ changeValidatorRewardInfo:
     //   RewardPerPayout: uint64,
     // ): void {
     proto 6 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:590
+    // smart_contracts/reti/validatorRegistry.algo.ts:591
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     txn Sender
     frame_dig -6
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:590
+    // smart_contracts/reti/validatorRegistry.algo.ts:591
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     dup
     box_get
@@ -2058,31 +2100,31 @@ changeValidatorRewardInfo:
     extract 8 32
     uncover 2
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:589-592
+    // smart_contracts/reti/validatorRegistry.algo.ts:590-593
     // assert(
     //   Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     //   'can only be called by validator owner',
     // )
     assert // can only be called by validator owner
-    // smart_contracts/reti/validatorRegistry.algo.ts:594
+    // smart_contracts/reti/validatorRegistry.algo.ts:595
     // this.validatorList(validatorId).value.config.entryGatingType = EntryGatingType
     dup
     pushint 80 // 80
     frame_dig -5
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:595
+    // smart_contracts/reti/validatorRegistry.algo.ts:596
     // this.validatorList(validatorId).value.config.entryGatingAddress = EntryGatingAddress
     dup
     pushint 81 // 81
     frame_dig -4
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:596
+    // smart_contracts/reti/validatorRegistry.algo.ts:597
     // this.validatorList(validatorId).value.config.entryGatingAssets = clone(EntryGatingAssets)
     dup
     pushint 113 // 113
     frame_dig -3
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:597
+    // smart_contracts/reti/validatorRegistry.algo.ts:598
     // this.validatorList(validatorId).value.config.gatingAssetMinBalance = GatingAssetMinBalance
     frame_dig -2
     itob
@@ -2090,7 +2132,7 @@ changeValidatorRewardInfo:
     pushint 145 // 145
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:598
+    // smart_contracts/reti/validatorRegistry.algo.ts:599
     // this.validatorList(validatorId).value.config.rewardPerPayout = RewardPerPayout
     frame_dig -1
     itob
@@ -2102,35 +2144,35 @@ changeValidatorRewardInfo:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.addPool(mbrPayment: uint64, validatorId: uint64, nodeNum: uint64) -> bytes:
 addPool:
-    // smart_contracts/reti/validatorRegistry.algo.ts:612
+    // smart_contracts/reti/validatorRegistry.algo.ts:613
     // addPool(mbrPayment: gtxn.PaymentTxn, validatorId: ValidatorIdType, nodeNum: uint64): ValidatorPoolKey {
     proto 3 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:615
+    // smart_contracts/reti/validatorRegistry.algo.ts:616
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     txn Sender
     frame_dig -2
     itob
     dup
     cover 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
     dup
     cover 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:615
+    // smart_contracts/reti/validatorRegistry.algo.ts:616
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     box_get
     assert // Box must have value
     extract 0 242
     extract 8 32
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:615-616
+    // smart_contracts/reti/validatorRegistry.algo.ts:616-617
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     //   Txn.sender === this.validatorList(validatorId).value.config.manager.native,
     bnz addPool_bool_true@2
-    // smart_contracts/reti/validatorRegistry.algo.ts:616
+    // smart_contracts/reti/validatorRegistry.algo.ts:617
     // Txn.sender === this.validatorList(validatorId).value.config.manager.native,
     txn Sender
     frame_dig 1
@@ -2139,7 +2181,7 @@ addPool:
     extract 0 242
     extract 40 32
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:615-616
+    // smart_contracts/reti/validatorRegistry.algo.ts:616-617
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     //   Txn.sender === this.validatorList(validatorId).value.config.manager.native,
     bz addPool_bool_false@3
@@ -2148,28 +2190,28 @@ addPool_bool_true@2:
     intc_1 // 1
 
 addPool_bool_merge@4:
-    // smart_contracts/reti/validatorRegistry.algo.ts:614-618
+    // smart_contracts/reti/validatorRegistry.algo.ts:615-619
     // assert(
     //   Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     //     Txn.sender === this.validatorList(validatorId).value.config.manager.native,
     //   'can only be called by owner or manager of validator',
     // )
     assert // can only be called by owner or manager of validator
-    // smart_contracts/reti/validatorRegistry.algo.ts:621
+    // smart_contracts/reti/validatorRegistry.algo.ts:622
     // assertMatch(mbrPayment, { amount: this.getMbrAmounts().addPoolMbr }) // TODO: fix receiver: Global.currentApplicationAddress })
     frame_dig -3
     gtxns Amount
     pushint 963500 // 963500
     ==
     assert // assert target is match for conditions
-    // smart_contracts/reti/validatorRegistry.algo.ts:623
+    // smart_contracts/reti/validatorRegistry.algo.ts:624
     // assert(this.validatorList(validatorId).exists, "specified validator id isn't valid")
     frame_dig 1
     dup
     box_len
     bury 1
     assert // specified validator id isn't valid
-    // smart_contracts/reti/validatorRegistry.algo.ts:625
+    // smart_contracts/reti/validatorRegistry.algo.ts:626
     // let numPools: uint64 = this.validatorList(validatorId).value.state.numPools.native
     dup
     box_get
@@ -2178,18 +2220,18 @@ addPool_bool_merge@4:
     extract 242 26
     intc_0 // 0
     extract_uint16
-    // smart_contracts/reti/validatorRegistry.algo.ts:626
+    // smart_contracts/reti/validatorRegistry.algo.ts:627
     // if ((numPools as uint64) >= MAX_POOLS) {
     dup
     intc_3 // 24
     >=
     !
     assert // already at max pool size
-    // smart_contracts/reti/validatorRegistry.algo.ts:629
+    // smart_contracts/reti/validatorRegistry.algo.ts:630
     // numPools += 1
     intc_1 // 1
     +
-    // smart_contracts/reti/validatorRegistry.algo.ts:632-652
+    // smart_contracts/reti/validatorRegistry.algo.ts:633-653
     // itxn
     //   .applicationCall({
     //     onCompletion: OnCompleteAction.NoOp,
@@ -2212,47 +2254,47 @@ addPool_bool_merge@4:
     //   })
     //   .submit()
     itxn_begin
-    // smart_contracts/reti/validatorRegistry.algo.ts:206
+    // smart_contracts/reti/validatorRegistry.algo.ts:207
     // stakingPoolApprovalProgram = Box<bytes>({ key: 'poolTemplateApprovalBytes' })
     bytec 4 // "poolTemplateApprovalBytes"
-    // smart_contracts/reti/validatorRegistry.algo.ts:636
+    // smart_contracts/reti/validatorRegistry.algo.ts:637
     // this.stakingPoolApprovalProgram.ref.extract(0, 4096),
     intc_0 // 0
     intc 14 // 4096
     box_extract
-    // smart_contracts/reti/validatorRegistry.algo.ts:206
+    // smart_contracts/reti/validatorRegistry.algo.ts:207
     // stakingPoolApprovalProgram = Box<bytes>({ key: 'poolTemplateApprovalBytes' })
     bytec 4 // "poolTemplateApprovalBytes"
-    // smart_contracts/reti/validatorRegistry.algo.ts:637
+    // smart_contracts/reti/validatorRegistry.algo.ts:638
     // this.stakingPoolApprovalProgram.ref.extract(4096, this.stakingPoolApprovalProgram.ref.length - 4096),
     box_len
     pop
     intc 14 // 4096
     -
-    // smart_contracts/reti/validatorRegistry.algo.ts:206
+    // smart_contracts/reti/validatorRegistry.algo.ts:207
     // stakingPoolApprovalProgram = Box<bytes>({ key: 'poolTemplateApprovalBytes' })
     bytec 4 // "poolTemplateApprovalBytes"
-    // smart_contracts/reti/validatorRegistry.algo.ts:637
+    // smart_contracts/reti/validatorRegistry.algo.ts:638
     // this.stakingPoolApprovalProgram.ref.extract(4096, this.stakingPoolApprovalProgram.ref.length - 4096),
     intc 14 // 4096
     uncover 2
     box_extract
-    // smart_contracts/reti/validatorRegistry.algo.ts:646
+    // smart_contracts/reti/validatorRegistry.algo.ts:647
     // op.itob(Global.currentApplicationId.id),
     global CurrentApplicationID
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:648
+    // smart_contracts/reti/validatorRegistry.algo.ts:649
     // op.itob(numPools as uint64),
     dig 3
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:649
+    // smart_contracts/reti/validatorRegistry.algo.ts:650
     // op.itob(this.validatorList(validatorId).value.config.minEntryStake),
     uncover 5
     extract 0 242
     intc 13 // 209
     extract_uint64
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:645
+    // smart_contracts/reti/validatorRegistry.algo.ts:646
     // methodSelector('createApplication(uint64,uint64,uint64,uint64)void'),
     pushbytes 0x59e90aa6 // method "createApplication(uint64,uint64,uint64,uint64)void"
     itxn_field ApplicationArgs
@@ -2265,7 +2307,7 @@ addPool_bool_merge@4:
     dig 1
     itxn_field ApplicationArgs
     itxn_field ApplicationArgs
-    // smart_contracts/reti/validatorRegistry.algo.ts:642
+    // smart_contracts/reti/validatorRegistry.algo.ts:643
     // extraProgramPages: 3,
     pushint 3 // 3
     itxn_field ExtraProgramPages
@@ -2283,11 +2325,11 @@ addPool_bool_merge@4:
     itxn_field ApprovalProgramPages
     swap
     itxn_field ApprovalProgramPages
-    // smart_contracts/reti/validatorRegistry.algo.ts:634
+    // smart_contracts/reti/validatorRegistry.algo.ts:635
     // onCompletion: OnCompleteAction.NoOp,
     intc_0 // 0
     itxn_field OnCompletion
-    // smart_contracts/reti/validatorRegistry.algo.ts:632-651
+    // smart_contracts/reti/validatorRegistry.algo.ts:633-652
     // itxn
     //   .applicationCall({
     //     onCompletion: OnCompleteAction.NoOp,
@@ -2312,7 +2354,7 @@ addPool_bool_merge@4:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/validatorRegistry.algo.ts:632-652
+    // smart_contracts/reti/validatorRegistry.algo.ts:633-653
     // itxn
     //   .applicationCall({
     //     onCompletion: OnCompleteAction.NoOp,
@@ -2335,7 +2377,7 @@ addPool_bool_merge@4:
     //   })
     //   .submit()
     itxn_submit
-    // smart_contracts/reti/validatorRegistry.algo.ts:654
+    // smart_contracts/reti/validatorRegistry.algo.ts:655
     // this.validatorList(validatorId).value.state.numPools = new Uint16(numPools)
     dup
     bitlen
@@ -2348,10 +2390,10 @@ addPool_bool_merge@4:
     pushint 242 // 242
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:657
+    // smart_contracts/reti/validatorRegistry.algo.ts:658
     // const poolAppId = op.ITxn.createdApplicationId.id
     itxn CreatedApplicationID
-    // smart_contracts/reti/validatorRegistry.algo.ts:658
+    // smart_contracts/reti/validatorRegistry.algo.ts:659
     // this.validatorList(validatorId).value.pools[numPools - 1].poolAppId = poolAppId
     uncover 2
     intc_1 // 1
@@ -2371,13 +2413,13 @@ addPool_bool_merge@4:
     swap
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:659
+    // smart_contracts/reti/validatorRegistry.algo.ts:660
     // this.addPoolToNode(validatorId, poolAppId, nodeNum)
     frame_dig -2
     swap
     frame_dig -1
     callsub addPoolToNode
-    // smart_contracts/reti/validatorRegistry.algo.ts:667
+    // smart_contracts/reti/validatorRegistry.algo.ts:668
     // return { id: validatorId, poolId: numPools as uint64, poolAppId: op.ITxn.createdApplicationId.id }
     itxn CreatedApplicationID
     cover 2
@@ -2395,7 +2437,7 @@ addPool_bool_false@3:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.addStake(stakedAmountPayment: uint64, validatorId: uint64, valueToVerify: uint64) -> bytes:
 addStake:
-    // smart_contracts/reti/validatorRegistry.algo.ts:679-683
+    // smart_contracts/reti/validatorRegistry.algo.ts:680-684
     // addStake(
     //   stakedAmountPayment: gtxn.PaymentTxn,
     //   validatorId: ValidatorIdType,
@@ -2406,22 +2448,22 @@ addStake:
     dupn 7
     bytec_2 // ""
     dupn 13
-    // smart_contracts/reti/validatorRegistry.algo.ts:684
+    // smart_contracts/reti/validatorRegistry.algo.ts:685
     // assert(this.validatorList(validatorId).exists, "specified validator id isn't valid")
     frame_dig -2
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
     dupn 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:684
+    // smart_contracts/reti/validatorRegistry.algo.ts:685
     // assert(this.validatorList(validatorId).exists, "specified validator id isn't valid")
     box_len
     bury 1
     assert // specified validator id isn't valid
-    // smart_contracts/reti/validatorRegistry.algo.ts:687
+    // smart_contracts/reti/validatorRegistry.algo.ts:688
     // if (this.validatorList(validatorId).value.config.sunsettingOn > 0) {
     box_get
     pop
@@ -2429,7 +2471,7 @@ addStake:
     intc 11 // 226
     extract_uint64
     bz addStake_after_if_else@2
-    // smart_contracts/reti/validatorRegistry.algo.ts:689
+    // smart_contracts/reti/validatorRegistry.algo.ts:690
     // this.validatorList(validatorId).value.config.sunsettingOn < Global.latestTimestamp,
     frame_dig 22
     box_get
@@ -2439,7 +2481,7 @@ addStake:
     extract_uint64
     global LatestTimestamp
     <
-    // smart_contracts/reti/validatorRegistry.algo.ts:688-691
+    // smart_contracts/reti/validatorRegistry.algo.ts:689-692
     // assert(
     //   this.validatorList(validatorId).value.config.sunsettingOn < Global.latestTimestamp,
     //   "can't stake with a validator that is past its sunsetting time",
@@ -2447,12 +2489,12 @@ addStake:
     assert // can't stake with a validator that is past its sunsetting time
 
 addStake_after_if_else@2:
-    // smart_contracts/reti/validatorRegistry.algo.ts:694
+    // smart_contracts/reti/validatorRegistry.algo.ts:695
     // const staker = new Address(Txn.sender)
     txn Sender
     dup
     frame_bury 5
-    // smart_contracts/reti/validatorRegistry.algo.ts:698-701
+    // smart_contracts/reti/validatorRegistry.algo.ts:699-702
     // assertMatch(stakedAmountPayment, {
     //   sender: staker.native,
     //   // TODO: FIX receiver: Global.currentApplicationAddress,
@@ -2463,7 +2505,7 @@ addStake_after_if_else@2:
     frame_bury 7
     ==
     assert // assert target is match for conditions
-    // smart_contracts/reti/validatorRegistry.algo.ts:706
+    // smart_contracts/reti/validatorRegistry.algo.ts:707
     // this.validatorList(validatorId).value.state.totalAlgoStaked < this.maxAllowedStake(),
     frame_dig 22
     box_get
@@ -2472,91 +2514,91 @@ addStake_after_if_else@2:
     extract 242 26
     pushint 10 // 10
     extract_uint64
-    // smart_contracts/reti/validatorRegistry.algo.ts:1552
+    // smart_contracts/reti/validatorRegistry.algo.ts:1549
     // return 0
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:706
+    // smart_contracts/reti/validatorRegistry.algo.ts:707
     // this.validatorList(validatorId).value.state.totalAlgoStaked < this.maxAllowedStake(),
     <
-    // smart_contracts/reti/validatorRegistry.algo.ts:705-708
+    // smart_contracts/reti/validatorRegistry.algo.ts:706-709
     // assert(
     //   this.validatorList(validatorId).value.state.totalAlgoStaked < this.maxAllowedStake(),
     //   'total staked for all of a validators pools may not exceed hard cap',
     // )
     assert // total staked for all of a validators pools may not exceed hard cap
-    // smart_contracts/reti/validatorRegistry.algo.ts:1416
+    // smart_contracts/reti/validatorRegistry.algo.ts:1413
     // const type = this.validatorList(validatorId).value.config.entryGatingType.native
     extract 0 242
     pushint 80 // 80
     getbyte
     dup
     frame_bury 20
-    // smart_contracts/reti/validatorRegistry.algo.ts:1417
+    // smart_contracts/reti/validatorRegistry.algo.ts:1414
     // if (type === GATING_TYPE_NONE) {
-    bz addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.doesStakerMeetGating@57
-    // smart_contracts/reti/validatorRegistry.algo.ts:1420
+    bz addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.doesStakerMeetGating@55
+    // smart_contracts/reti/validatorRegistry.algo.ts:1417
     // const staker = Txn.sender
     txn Sender
     frame_bury 6
-    // smart_contracts/reti/validatorRegistry.algo.ts:1421
+    // smart_contracts/reti/validatorRegistry.algo.ts:1418
     // const config = clone(this.validatorList(validatorId).value.config)
     frame_dig 22
     box_get
     swap
     frame_bury 0
     assert // Box must have value
-    // smart_contracts/reti/validatorRegistry.algo.ts:1425
+    // smart_contracts/reti/validatorRegistry.algo.ts:1422
     // type === GATING_TYPE_ASSETS_CREATED_BY ||
     frame_dig 20
     intc_1 // 1
     ==
     dup
     frame_bury 19
-    // smart_contracts/reti/validatorRegistry.algo.ts:1425-1426
+    // smart_contracts/reti/validatorRegistry.algo.ts:1422-1423
     // type === GATING_TYPE_ASSETS_CREATED_BY ||
     // type === GATING_TYPE_ASSET_ID ||
-    bnz addStake_if_body@34
-    // smart_contracts/reti/validatorRegistry.algo.ts:1426
+    bnz addStake_if_body@32
+    // smart_contracts/reti/validatorRegistry.algo.ts:1423
     // type === GATING_TYPE_ASSET_ID ||
     frame_dig 20
     pushint 2 // 2
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:1425-1426
+    // smart_contracts/reti/validatorRegistry.algo.ts:1422-1423
     // type === GATING_TYPE_ASSETS_CREATED_BY ||
     // type === GATING_TYPE_ASSET_ID ||
-    bnz addStake_if_body@34
-    // smart_contracts/reti/validatorRegistry.algo.ts:1427
+    bnz addStake_if_body@32
+    // smart_contracts/reti/validatorRegistry.algo.ts:1424
     // type === GATING_TYPE_CREATED_BY_NFD_ADDRESSES
     frame_dig 20
     pushint 3 // 3
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:1425-1427
+    // smart_contracts/reti/validatorRegistry.algo.ts:1422-1424
     // type === GATING_TYPE_ASSETS_CREATED_BY ||
     // type === GATING_TYPE_ASSET_ID ||
     // type === GATING_TYPE_CREATED_BY_NFD_ADDRESSES
-    bz addStake_after_if_else@37
+    bz addStake_after_if_else@35
 
-addStake_if_body@34:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1429
+addStake_if_body@32:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1426
     // assert(valueToVerify !== 0)
     frame_dig -1
     assert
-    // smart_contracts/reti/validatorRegistry.algo.ts:1434
+    // smart_contracts/reti/validatorRegistry.algo.ts:1431
     // const [assetBalance] = op.AssetHolding.assetBalance(staker, valueToVerify)
     frame_dig 6
     frame_dig -1
     asset_holding_get AssetBalance
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:1435
+    // smart_contracts/reti/validatorRegistry.algo.ts:1432
     // assert(assetBalance, 'must have required minimum balance of validator defined token to add stake')
     assert // must have required minimum balance of validator defined token to add stake
 
-addStake_after_if_else@37:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1437
+addStake_after_if_else@35:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1434
     // if (type === GATING_TYPE_ASSETS_CREATED_BY) {
     frame_dig 19
-    bz addStake_after_if_else@39
-    // smart_contracts/reti/validatorRegistry.algo.ts:1439
+    bz addStake_after_if_else@37
+    // smart_contracts/reti/validatorRegistry.algo.ts:1436
     // Asset(valueToVerify).creator === config.entryGatingAddress.native,
     frame_dig -1
     asset_params_get AssetCreator
@@ -2565,38 +2607,38 @@ addStake_after_if_else@37:
     extract 0 242
     extract 81 32
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:1438-1441
+    // smart_contracts/reti/validatorRegistry.algo.ts:1435-1438
     // assert(
     //   Asset(valueToVerify).creator === config.entryGatingAddress.native,
     //   'specified asset must be created by creator that the validator defined as a requirement to stake',
     // )
     assert // specified asset must be created by creator that the validator defined as a requirement to stake
 
-addStake_after_if_else@39:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1443
+addStake_after_if_else@37:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1440
     // if (type === GATING_TYPE_ASSET_ID) {
     frame_dig 20
     pushint 2 // 2
     ==
-    bz addStake_after_if_else@48
-    // smart_contracts/reti/validatorRegistry.algo.ts:1444
+    bz addStake_after_if_else@46
+    // smart_contracts/reti/validatorRegistry.algo.ts:1441
     // assert(valueToVerify !== 0)
     frame_dig -1
     assert
-    // smart_contracts/reti/validatorRegistry.algo.ts:1445
+    // smart_contracts/reti/validatorRegistry.algo.ts:1442
     // let found = false
     intc_0 // 0
     frame_bury 10
     intc_0 // 0
     frame_bury 15
 
-addStake_for_header@41:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1446
+addStake_for_header@39:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1443
     // for (const assetId of config.entryGatingAssets) {
     frame_dig 15
     pushint 4 // 4
     <
-    bz addStake_block@47
+    bz addStake_block@45
     frame_dig 0
     extract 0 242
     extract 113 32
@@ -2604,30 +2646,30 @@ addStake_for_header@41:
     pushint 8 // 8
     *
     extract_uint64
-    // smart_contracts/reti/validatorRegistry.algo.ts:1447
+    // smart_contracts/reti/validatorRegistry.algo.ts:1444
     // if (valueToVerify === assetId) {
     frame_dig -1
     ==
-    bz addStake_after_if_else@44
-    // smart_contracts/reti/validatorRegistry.algo.ts:1448
+    bz addStake_after_if_else@42
+    // smart_contracts/reti/validatorRegistry.algo.ts:1445
     // found = true
     intc_1 // 1
     frame_bury 10
 
-addStake_block@47:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1452
+addStake_block@45:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1449
     // assert(found, 'specified asset must be identical to the asset id defined as a requirement to stake')
     frame_dig 10
     assert // specified asset must be identical to the asset id defined as a requirement to stake
 
-addStake_after_if_else@48:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1454
+addStake_after_if_else@46:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1451
     // if (type === GATING_TYPE_CREATED_BY_NFD_ADDRESSES) {
     frame_dig 20
     pushint 3 // 3
     ==
-    bz addStake_after_if_else@50
-    // smart_contracts/reti/validatorRegistry.algo.ts:1458
+    bz addStake_after_if_else@48
+    // smart_contracts/reti/validatorRegistry.algo.ts:1455
     // this.isAddressInNFDCAAlgoList(config.entryGatingAssets[0], new Address(Asset(valueToVerify).creator)),
     frame_dig 0
     extract 0 242
@@ -2638,67 +2680,67 @@ addStake_after_if_else@48:
     asset_params_get AssetCreator
     assert // asset exists
     callsub isAddressInNFDCAAlgoList
-    // smart_contracts/reti/validatorRegistry.algo.ts:1457-1460
+    // smart_contracts/reti/validatorRegistry.algo.ts:1454-1457
     // assert(
     //   this.isAddressInNFDCAAlgoList(config.entryGatingAssets[0], new Address(Asset(valueToVerify).creator)),
     //   'specified asset must be created by creator that is one of the linked addresses in an nfd',
     // )
     assert // specified asset must be created by creator that is one of the linked addresses in an nfd
 
-addStake_after_if_else@50:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1462
+addStake_after_if_else@48:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1459
     // if (type === GATING_TYPE_SEGMENT_OF_NFD) {
     frame_dig 20
     pushint 4 // 4
     ==
-    bz addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.doesStakerMeetGating@57
-    // smart_contracts/reti/validatorRegistry.algo.ts:1465
+    bz addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.doesStakerMeetGating@55
+    // smart_contracts/reti/validatorRegistry.algo.ts:1462
     // assert(this.isNFDAppIDValid(userOfferedNFDAppID), 'provided NFD must be valid')
     frame_dig -1
     callsub isNFDAppIDValid
     assert // provided NFD must be valid
-    // smart_contracts/reti/validatorRegistry.algo.ts:1468
+    // smart_contracts/reti/validatorRegistry.algo.ts:1465
     // const [ownerBytes] = op.AppGlobal.getExBytes(userOfferedNFDAppID, Bytes('i.owner.a'))
     frame_dig -1
     bytec 10 // "i.owner.a"
     app_global_get_ex
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:1470
+    // smart_contracts/reti/validatorRegistry.algo.ts:1467
     // new Address(ownerBytes) === new Address(staker) ||
     frame_dig 6
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:1470-1471
+    // smart_contracts/reti/validatorRegistry.algo.ts:1467-1468
     // new Address(ownerBytes) === new Address(staker) ||
     //   this.isAddressInNFDCAAlgoList(userOfferedNFDAppID, new Address(staker)),
-    bnz addStake_bool_true@53
-    // smart_contracts/reti/validatorRegistry.algo.ts:1471
+    bnz addStake_bool_true@51
+    // smart_contracts/reti/validatorRegistry.algo.ts:1468
     // this.isAddressInNFDCAAlgoList(userOfferedNFDAppID, new Address(staker)),
     frame_dig -1
     frame_dig 6
     callsub isAddressInNFDCAAlgoList
-    // smart_contracts/reti/validatorRegistry.algo.ts:1470-1471
+    // smart_contracts/reti/validatorRegistry.algo.ts:1467-1468
     // new Address(ownerBytes) === new Address(staker) ||
     //   this.isAddressInNFDCAAlgoList(userOfferedNFDAppID, new Address(staker)),
-    bz addStake_bool_false@54
+    bz addStake_bool_false@52
 
-addStake_bool_true@53:
+addStake_bool_true@51:
     intc_1 // 1
 
-addStake_bool_merge@55:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1469-1473
+addStake_bool_merge@53:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1466-1470
     // assert(
     //   new Address(ownerBytes) === new Address(staker) ||
     //     this.isAddressInNFDCAAlgoList(userOfferedNFDAppID, new Address(staker)),
     //   "provided nfd for entry isn't owned or linked to the staker",
     // )
     assert // provided nfd for entry isn't owned or linked to the staker
-    // smart_contracts/reti/validatorRegistry.algo.ts:1476
+    // smart_contracts/reti/validatorRegistry.algo.ts:1473
     // const [parentAppId] = op.AppGlobal.getExUint64(userOfferedNFDAppID, Bytes('i.parentAppID'))
     frame_dig -1
     pushbytes "i.parentAppID"
     app_global_get_ex
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:1478
+    // smart_contracts/reti/validatorRegistry.algo.ts:1475
     // parentAppId === config.entryGatingAssets[0],
     frame_dig 0
     extract 0 242
@@ -2706,53 +2748,53 @@ addStake_bool_merge@55:
     intc_0 // 0
     extract_uint64
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:1477-1480
+    // smart_contracts/reti/validatorRegistry.algo.ts:1474-1477
     // assert(
     //   parentAppId === config.entryGatingAssets[0],
     //   'specified nfd must be a segment of the nfd the validator specified as a requirement',
     // )
     assert // specified nfd must be a segment of the nfd the validator specified as a requirement
 
-addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.doesStakerMeetGating@57:
-    // smart_contracts/reti/validatorRegistry.algo.ts:714
+addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.doesStakerMeetGating@55:
+    // smart_contracts/reti/validatorRegistry.algo.ts:715
     // let realAmount = stakedAmountPayment.amount
     frame_dig -3
     gtxns Amount
     dup
     frame_bury 17
-    // smart_contracts/reti/validatorRegistry.algo.ts:715
+    // smart_contracts/reti/validatorRegistry.algo.ts:716
     // let mbrAmtLeftBehind: uint64 = 0
     intc_0 // 0
     frame_bury 16
-    // smart_contracts/reti/validatorRegistry.algo.ts:224
+    // smart_contracts/reti/validatorRegistry.algo.ts:225
     // stakerPoolSet = BoxMap<Address, FixedArray<ValidatorPoolKey, typeof MAX_POOLS_PER_STAKER>>({ keyPrefix: 'sps' })
     bytec 7 // "sps"
     frame_dig 5
     concat
     dup
     frame_bury 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:718
+    // smart_contracts/reti/validatorRegistry.algo.ts:719
     // if (!this.stakerPoolSet(staker).exists) {
     box_len
     bury 1
     swap
     frame_bury 18
     bnz addStake_after_if_else@4
-    // smart_contracts/reti/validatorRegistry.algo.ts:721
+    // smart_contracts/reti/validatorRegistry.algo.ts:722
     // mbrAmtLeftBehind = this.getMbrAmounts().addStakerMbr
     pushint 3700 // 3700
     frame_bury 16
-    // smart_contracts/reti/validatorRegistry.algo.ts:722
+    // smart_contracts/reti/validatorRegistry.algo.ts:723
     // realAmount -= mbrAmtLeftBehind
     frame_dig 17
-    // smart_contracts/reti/validatorRegistry.algo.ts:721
+    // smart_contracts/reti/validatorRegistry.algo.ts:722
     // mbrAmtLeftBehind = this.getMbrAmounts().addStakerMbr
     pushint 3700 // 3700
-    // smart_contracts/reti/validatorRegistry.algo.ts:722
+    // smart_contracts/reti/validatorRegistry.algo.ts:723
     // realAmount -= mbrAmtLeftBehind
     -
     frame_bury 18
-    // smart_contracts/reti/validatorRegistry.algo.ts:723
+    // smart_contracts/reti/validatorRegistry.algo.ts:724
     // this.stakerPoolSet(staker).create()
     frame_dig 2
     pushint 144 // 144
@@ -2760,31 +2802,31 @@ addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::Validator
     pop
 
 addStake_after_if_else@4:
-    // smart_contracts/reti/validatorRegistry.algo.ts:727
+    // smart_contracts/reti/validatorRegistry.algo.ts:728
     // const findRet = this.findPoolForStaker(validatorId, staker, realAmount)
     frame_dig -2
     frame_dig 5
     frame_dig 18
     callsub findPoolForStaker
-    // smart_contracts/reti/validatorRegistry.algo.ts:728
+    // smart_contracts/reti/validatorRegistry.algo.ts:729
     // const poolKey = clone(findRet[0])
     dup
     extract 0 24
     dup
     cover 2
     frame_bury 3
-    // smart_contracts/reti/validatorRegistry.algo.ts:729
+    // smart_contracts/reti/validatorRegistry.algo.ts:730
     // const isNewStakerToValidator = findRet[1]
     dup
     intc 9 // 192
     getbit
     frame_bury 14
-    // smart_contracts/reti/validatorRegistry.algo.ts:730
+    // smart_contracts/reti/validatorRegistry.algo.ts:731
     // const isNewStakerToProtocol = findRet[2]
     pushint 193 // 193
     getbit
     frame_bury 13
-    // smart_contracts/reti/validatorRegistry.algo.ts:731
+    // smart_contracts/reti/validatorRegistry.algo.ts:732
     // if (poolKey.poolId === 0) {
     pushint 8 // 8
     extract_uint64
@@ -2793,29 +2835,29 @@ addStake_after_if_else@4:
     !
     !
     assert // No pool available with free stake.  Validator needs to add another pool
-    // smart_contracts/reti/validatorRegistry.algo.ts:1336
+    // smart_contracts/reti/validatorRegistry.algo.ts:1333
     // assert(this.stakerPoolSet(staker).exists)
     frame_dig 2
     dup
     box_len
     bury 1
     assert
-    // smart_contracts/reti/validatorRegistry.algo.ts:1338
+    // smart_contracts/reti/validatorRegistry.algo.ts:1335
     // const poolSet = clone(this.stakerPoolSet(staker).value)
     box_get
     pop
     frame_bury 4
-    // smart_contracts/reti/validatorRegistry.algo.ts:1339
+    // smart_contracts/reti/validatorRegistry.algo.ts:1336
     // let firstEmpty: uint64 = 0
     intc_0 // 0
     frame_bury 8
-    // smart_contracts/reti/validatorRegistry.algo.ts:1340
+    // smart_contracts/reti/validatorRegistry.algo.ts:1337
     // for (let i: uint64 = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
     intc_0 // 0
     frame_bury 11
 
 addStake_while_top@8:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1340
+    // smart_contracts/reti/validatorRegistry.algo.ts:1337
     // for (let i: uint64 = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
     frame_dig 2
     box_len
@@ -2825,7 +2867,7 @@ addStake_while_top@8:
     pushint 6 // 6
     <
     bz addStake_after_while@15
-    // smart_contracts/reti/validatorRegistry.algo.ts:1341
+    // smart_contracts/reti/validatorRegistry.algo.ts:1338
     // if (encodeArc4(poolSet[i]) === encodeArc4(poolKey)) {
     frame_dig 11
     intc_3 // 24
@@ -2842,7 +2884,7 @@ addStake_while_top@8:
     frame_dig 8
     dup
     frame_bury 9
-    // smart_contracts/reti/validatorRegistry.algo.ts:1345
+    // smart_contracts/reti/validatorRegistry.algo.ts:1342
     // if (firstEmpty === 0 && poolSet[i].id === 0) {
     bnz addStake_after_if_else@14
     frame_dig 1
@@ -2851,7 +2893,7 @@ addStake_while_top@8:
     frame_dig 8
     frame_bury 9
     bnz addStake_after_if_else@14
-    // smart_contracts/reti/validatorRegistry.algo.ts:1346
+    // smart_contracts/reti/validatorRegistry.algo.ts:1343
     // firstEmpty = i + 1
     frame_dig 11
     intc_1 // 1
@@ -2861,7 +2903,7 @@ addStake_while_top@8:
 addStake_after_if_else@14:
     frame_dig 9
     frame_bury 8
-    // smart_contracts/reti/validatorRegistry.algo.ts:1340
+    // smart_contracts/reti/validatorRegistry.algo.ts:1337
     // for (let i: uint64 = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
     frame_dig 11
     intc_1 // 1
@@ -2870,20 +2912,20 @@ addStake_after_if_else@14:
     b addStake_while_top@8
 
 addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.updateStakerPoolSet@18:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1289
+    // smart_contracts/reti/validatorRegistry.algo.ts:1288
     // const poolAppId = this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].poolAppId
     frame_dig 3
     intc_0 // 0
     extract_uint64
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
     dup
     frame_bury 22
-    // smart_contracts/reti/validatorRegistry.algo.ts:1289
+    // smart_contracts/reti/validatorRegistry.algo.ts:1288
     // const poolAppId = this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].poolAppId
     dup
     box_get
@@ -2904,7 +2946,7 @@ addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::Validator
     extract3 // on error: index access is out of bounds
     intc_0 // 0
     extract_uint64
-    // smart_contracts/reti/validatorRegistry.algo.ts:1303-1312
+    // smart_contracts/reti/validatorRegistry.algo.ts:1302-1311
     // abiCall(StakingPool.prototype.addStake, {
     //   appId: poolAppId,
     //   args: [
@@ -2916,7 +2958,7 @@ addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::Validator
     //   ],
     // })
     itxn_begin
-    // smart_contracts/reti/validatorRegistry.algo.ts:1309
+    // smart_contracts/reti/validatorRegistry.algo.ts:1308
     // itxn.payment({ amount: stakedAmountPayment.amount - mbrAmtPaid, receiver: Application(poolAppId).address }),
     frame_dig 17
     frame_dig 16
@@ -2934,7 +2976,7 @@ addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::Validator
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/validatorRegistry.algo.ts:1303-1312
+    // smart_contracts/reti/validatorRegistry.algo.ts:1302-1311
     // abiCall(StakingPool.prototype.addStake, {
     //   appId: poolAppId,
     //   args: [
@@ -2962,20 +3004,25 @@ addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::Validator
     bytec_1 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    // smart_contracts/reti/validatorRegistry.algo.ts:1318
+    // smart_contracts/reti/validatorRegistry.algo.ts:1312
+    // ensureBudget(500)
+    pushint 500 // 500
+    intc_0 // 0
+    callsub ensure_budget
+    // smart_contracts/reti/validatorRegistry.algo.ts:1315
     // const [poolNumStakers] = op.AppGlobal.getExUint64(poolAppId, Bytes('numStakers'))
     dup
     bytec 5 // "numStakers"
     app_global_get_ex
     pop
     swap
-    // smart_contracts/reti/validatorRegistry.algo.ts:1319
+    // smart_contracts/reti/validatorRegistry.algo.ts:1316
     // const [poolAlgoStaked] = op.AppGlobal.getExUint64(poolAppId, Bytes('staked'))
     bytec_3 // "staked"
     app_global_get_ex
     pop
     swap
-    // smart_contracts/reti/validatorRegistry.algo.ts:1321
+    // smart_contracts/reti/validatorRegistry.algo.ts:1318
     // this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalStakers = new Uint16(poolNumStakers)
     itob
     dup
@@ -2995,7 +3042,7 @@ addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::Validator
     swap
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:1322
+    // smart_contracts/reti/validatorRegistry.algo.ts:1319
     // this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalAlgoStaked = poolAlgoStaked
     itob
     swap
@@ -3003,11 +3050,11 @@ addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::Validator
     +
     swap
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:1325
+    // smart_contracts/reti/validatorRegistry.algo.ts:1322
     // if (isNewStakerToValidator) {
     frame_dig 14
-    bz addStake_after_if_else@25
-    // smart_contracts/reti/validatorRegistry.algo.ts:1326
+    bz addStake_after_if_else@23
+    // smart_contracts/reti/validatorRegistry.algo.ts:1323
     // this.validatorList(poolKey.id).value.state.totalStakers += 1
     frame_dig 22
     dup
@@ -3023,33 +3070,33 @@ addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::Validator
     swap
     box_replace
 
-addStake_after_if_else@25:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1328
+addStake_after_if_else@23:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1325
     // if (isNewStakerToProtocol) {
     frame_dig 13
-    bz addStake_after_if_else@27
-    // smart_contracts/reti/validatorRegistry.algo.ts:1329
+    bz addStake_after_if_else@25
+    // smart_contracts/reti/validatorRegistry.algo.ts:1326
     // this.numStakers.value += 1
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:213
+    // smart_contracts/reti/validatorRegistry.algo.ts:214
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 5 // "numStakers"
-    // smart_contracts/reti/validatorRegistry.algo.ts:1329
+    // smart_contracts/reti/validatorRegistry.algo.ts:1326
     // this.numStakers.value += 1
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     +
-    // smart_contracts/reti/validatorRegistry.algo.ts:213
+    // smart_contracts/reti/validatorRegistry.algo.ts:214
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 5 // "numStakers"
-    // smart_contracts/reti/validatorRegistry.algo.ts:1329
+    // smart_contracts/reti/validatorRegistry.algo.ts:1326
     // this.numStakers.value += 1
     swap
     app_global_put
 
-addStake_after_if_else@27:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1331
+addStake_after_if_else@25:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1328
     // this.validatorList(poolKey.id).value.state.totalAlgoStaked += stakedAmountPayment.amount - mbrAmtPaid
     frame_dig 22
     dup
@@ -3067,39 +3114,39 @@ addStake_after_if_else@27:
     intc 16 // 252
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:1332
+    // smart_contracts/reti/validatorRegistry.algo.ts:1329
     // this.totalAlgoStaked.value += stakedAmountPayment.amount - mbrAmtPaid
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:216
+    // smart_contracts/reti/validatorRegistry.algo.ts:217
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec_3 // "staked"
-    // smart_contracts/reti/validatorRegistry.algo.ts:1332
+    // smart_contracts/reti/validatorRegistry.algo.ts:1329
     // this.totalAlgoStaked.value += stakedAmountPayment.amount - mbrAmtPaid
     app_global_get_ex
     assert // check GlobalState exists
     +
-    // smart_contracts/reti/validatorRegistry.algo.ts:216
+    // smart_contracts/reti/validatorRegistry.algo.ts:217
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec_3 // "staked"
-    // smart_contracts/reti/validatorRegistry.algo.ts:1332
+    // smart_contracts/reti/validatorRegistry.algo.ts:1329
     // this.totalAlgoStaked.value += stakedAmountPayment.amount - mbrAmtPaid
     swap
     app_global_put
-    // smart_contracts/reti/validatorRegistry.algo.ts:748
+    // smart_contracts/reti/validatorRegistry.algo.ts:749
     // return poolKey
     frame_dig 3
     frame_bury 0
     retsub
 
 addStake_after_while@15:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1349
+    // smart_contracts/reti/validatorRegistry.algo.ts:1346
     // if (firstEmpty === 0) {
     frame_dig 8
     dup
     !
     !
     assert // No empty slot available in the staker pool set
-    // smart_contracts/reti/validatorRegistry.algo.ts:1352
+    // smart_contracts/reti/validatorRegistry.algo.ts:1349
     // this.stakerPoolSet(staker).value[firstEmpty - 1] = clone(poolKey)
     intc_1 // 1
     -
@@ -3109,40 +3156,40 @@ addStake_after_while@15:
     swap
     frame_dig 3
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:736
+    // smart_contracts/reti/validatorRegistry.algo.ts:737
     // this.updateStakerPoolSet(staker, poolKey)
     b addStake_after_inlined_smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.updateStakerPoolSet@18
 
-addStake_bool_false@54:
+addStake_bool_false@52:
     intc_0 // 0
-    b addStake_bool_merge@55
+    b addStake_bool_merge@53
 
-addStake_after_if_else@44:
+addStake_after_if_else@42:
     frame_dig 15
     intc_1 // 1
     +
     frame_bury 15
-    b addStake_for_header@41
+    b addStake_for_header@39
 
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.setTokenPayoutRatio(validatorId: uint64) -> bytes:
 setTokenPayoutRatio:
-    // smart_contracts/reti/validatorRegistry.algo.ts:766
+    // smart_contracts/reti/validatorRegistry.algo.ts:767
     // setTokenPayoutRatio(validatorId: ValidatorIdType): PoolTokenPayoutRatio {
     proto 1 1
     bytec_2 // ""
     dupn 3
-    // smart_contracts/reti/validatorRegistry.algo.ts:768
+    // smart_contracts/reti/validatorRegistry.algo.ts:769
     // const pool1AppID = this.validatorList(validatorId).value.pools[0].poolAppId
     frame_dig -1
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
     dup
-    // smart_contracts/reti/validatorRegistry.algo.ts:768
+    // smart_contracts/reti/validatorRegistry.algo.ts:769
     // const pool1AppID = this.validatorList(validatorId).value.pools[0].poolAppId
     box_get
     assert // Box must have value
@@ -3153,10 +3200,10 @@ setTokenPayoutRatio:
     intc_0 // 0
     extract_uint64
     dupn 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:769
+    // smart_contracts/reti/validatorRegistry.algo.ts:770
     // assert(pool1AppID !== 0)
     assert
-    // smart_contracts/reti/validatorRegistry.algo.ts:771
+    // smart_contracts/reti/validatorRegistry.algo.ts:772
     // if (Txn.sender !== Application(pool1AppID).address) {
     txn Sender
     swap
@@ -3164,7 +3211,7 @@ setTokenPayoutRatio:
     assert // application exists
     !=
     bz setTokenPayoutRatio_after_if_else@2
-    // smart_contracts/reti/validatorRegistry.algo.ts:772
+    // smart_contracts/reti/validatorRegistry.algo.ts:773
     // return this.validatorList(validatorId).value.tokenPayoutRatio
     frame_dig 4
     box_get
@@ -3176,11 +3223,11 @@ setTokenPayoutRatio:
     retsub
 
 setTokenPayoutRatio_after_if_else@2:
-    // smart_contracts/reti/validatorRegistry.algo.ts:778
+    // smart_contracts/reti/validatorRegistry.algo.ts:779
     // const curRound = Global.round
     global Round
     frame_bury 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:779
+    // smart_contracts/reti/validatorRegistry.algo.ts:780
     // const lastPayoutUpdate = this.validatorList(validatorId).value.tokenPayoutRatio.updatedForPayout
     frame_dig 4
     box_get
@@ -3192,21 +3239,21 @@ setTokenPayoutRatio_after_if_else@2:
     extract_uint64
     dup
     frame_bury 3
-    // smart_contracts/reti/validatorRegistry.algo.ts:780
+    // smart_contracts/reti/validatorRegistry.algo.ts:781
     // if (lastPayoutUpdate !== 0) {
     bz setTokenPayoutRatio_after_if_else@8
-    // smart_contracts/reti/validatorRegistry.algo.ts:781
+    // smart_contracts/reti/validatorRegistry.algo.ts:782
     // const [lastPayout] = op.AppGlobal.getExUint64(pool1AppID, Bytes('lastPayout'))
     frame_dig 5
     pushbytes "lastPayout"
     app_global_get_ex
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:783
+    // smart_contracts/reti/validatorRegistry.algo.ts:784
     // if (lastPayout === lastPayoutUpdate) {
     frame_dig 3
     ==
     bz setTokenPayoutRatio_after_if_else@5
-    // smart_contracts/reti/validatorRegistry.algo.ts:784
+    // smart_contracts/reti/validatorRegistry.algo.ts:785
     // return this.validatorList(validatorId).value.tokenPayoutRatio
     frame_dig 4
     box_get
@@ -3218,7 +3265,7 @@ setTokenPayoutRatio_after_if_else@2:
     retsub
 
 setTokenPayoutRatio_after_if_else@5:
-    // smart_contracts/reti/validatorRegistry.algo.ts:786
+    // smart_contracts/reti/validatorRegistry.algo.ts:787
     // const epochRoundLength = this.validatorList(validatorId).value.config.epochRoundLength.native
     frame_dig 4
     box_get
@@ -3226,7 +3273,7 @@ setTokenPayoutRatio_after_if_else@5:
     extract 0 242
     pushint 169 // 169
     extract_uint32
-    // smart_contracts/reti/validatorRegistry.algo.ts:787
+    // smart_contracts/reti/validatorRegistry.algo.ts:788
     // const thisEpochBegin: uint64 = curRound - (curRound % epochRoundLength)
     frame_dig 1
     dup
@@ -3236,7 +3283,7 @@ setTokenPayoutRatio_after_if_else@5:
     uncover 2
     swap
     -
-    // smart_contracts/reti/validatorRegistry.algo.ts:789
+    // smart_contracts/reti/validatorRegistry.algo.ts:790
     // if (lastPayoutUpdate - (lastPayoutUpdate % epochRoundLength) === thisEpochBegin) {
     frame_dig 3
     dup
@@ -3245,7 +3292,7 @@ setTokenPayoutRatio_after_if_else@5:
     -
     ==
     bz setTokenPayoutRatio_after_if_else@8
-    // smart_contracts/reti/validatorRegistry.algo.ts:790
+    // smart_contracts/reti/validatorRegistry.algo.ts:791
     // return this.validatorList(validatorId).value.tokenPayoutRatio
     frame_dig 4
     box_get
@@ -3257,7 +3304,7 @@ setTokenPayoutRatio_after_if_else@5:
     retsub
 
 setTokenPayoutRatio_after_if_else@8:
-    // smart_contracts/reti/validatorRegistry.algo.ts:793
+    // smart_contracts/reti/validatorRegistry.algo.ts:794
     // this.validatorList(validatorId).value.tokenPayoutRatio.updatedForPayout = curRound
     frame_dig 1
     itob
@@ -3267,7 +3314,7 @@ setTokenPayoutRatio_after_if_else@8:
     pushint 892 // 892
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:795
+    // smart_contracts/reti/validatorRegistry.algo.ts:796
     // const curNumPools = this.validatorList(validatorId).value.state.numPools.native
     box_get
     pop
@@ -3275,19 +3322,19 @@ setTokenPayoutRatio_after_if_else@8:
     intc_0 // 0
     extract_uint16
     frame_bury 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:797
+    // smart_contracts/reti/validatorRegistry.algo.ts:798
     // for (let i: uint64 = 0; i < curNumPools; i += 1) {
     intc_0 // 0
     frame_bury 2
 
 setTokenPayoutRatio_while_top@9:
-    // smart_contracts/reti/validatorRegistry.algo.ts:797
+    // smart_contracts/reti/validatorRegistry.algo.ts:798
     // for (let i: uint64 = 0; i < curNumPools; i += 1) {
     frame_dig 2
     frame_dig 0
     <
     bz setTokenPayoutRatio_after_while@11
-    // smart_contracts/reti/validatorRegistry.algo.ts:807
+    // smart_contracts/reti/validatorRegistry.algo.ts:808
     // this.validatorList(validatorId).value.tokenPayoutRatio.poolPctOfWhole[i] = ourPoolPctOfWhole
     intc_0 // 0
     itob
@@ -3305,7 +3352,7 @@ setTokenPayoutRatio_while_top@9:
     swap
     uncover 3
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:797
+    // smart_contracts/reti/validatorRegistry.algo.ts:798
     // for (let i: uint64 = 0; i < curNumPools; i += 1) {
     intc_1 // 1
     +
@@ -3313,7 +3360,7 @@ setTokenPayoutRatio_while_top@9:
     b setTokenPayoutRatio_while_top@9
 
 setTokenPayoutRatio_after_while@11:
-    // smart_contracts/reti/validatorRegistry.algo.ts:809
+    // smart_contracts/reti/validatorRegistry.algo.ts:810
     // return this.validatorList(validatorId).value.tokenPayoutRatio
     frame_dig 4
     box_get
@@ -3327,7 +3374,7 @@ setTokenPayoutRatio_after_while@11:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.stakeUpdatedViaRewards(poolKey: bytes, algoToAdd: uint64, rewardTokenAmountReserved: uint64, validatorCommission: uint64, saturatedBurnToFeeSink: uint64) -> void:
 stakeUpdatedViaRewards:
-    // smart_contracts/reti/validatorRegistry.algo.ts:823-829
+    // smart_contracts/reti/validatorRegistry.algo.ts:824-830
     // stakeUpdatedViaRewards(
     //   poolKey: ValidatorPoolKey,
     //   algoToAdd: uint64,
@@ -3337,24 +3384,24 @@ stakeUpdatedViaRewards:
     // ): void {
     proto 5 0
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:830
+    // smart_contracts/reti/validatorRegistry.algo.ts:831
     // this.verifyPoolKeyCaller(poolKey)
     frame_dig -5
     callsub verifyPoolKeyCaller
     dup
     frame_bury -5
-    // smart_contracts/reti/validatorRegistry.algo.ts:833
+    // smart_contracts/reti/validatorRegistry.algo.ts:834
     // this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalAlgoStaked += algoToAdd
     intc_0 // 0
     extract_uint64
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
     dupn 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:833
+    // smart_contracts/reti/validatorRegistry.algo.ts:834
     // this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalAlgoStaked += algoToAdd
     box_get
     assert // Box must have value
@@ -3390,7 +3437,7 @@ stakeUpdatedViaRewards:
     swap
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:834
+    // smart_contracts/reti/validatorRegistry.algo.ts:835
     // this.validatorList(poolKey.id).value.state.totalAlgoStaked += algoToAdd
     dup
     box_get
@@ -3405,7 +3452,7 @@ stakeUpdatedViaRewards:
     intc 16 // 252
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:835
+    // smart_contracts/reti/validatorRegistry.algo.ts:836
     // this.validatorList(poolKey.id).value.state.rewardTokenHeldBack += rewardTokenAmountReserved
     dup
     box_get
@@ -3420,41 +3467,41 @@ stakeUpdatedViaRewards:
     pushint 260 // 260
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:837
+    // smart_contracts/reti/validatorRegistry.algo.ts:838
     // this.totalAlgoStaked.value += algoToAdd
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:216
+    // smart_contracts/reti/validatorRegistry.algo.ts:217
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec_3 // "staked"
-    // smart_contracts/reti/validatorRegistry.algo.ts:837
+    // smart_contracts/reti/validatorRegistry.algo.ts:838
     // this.totalAlgoStaked.value += algoToAdd
     app_global_get_ex
     assert // check GlobalState exists
     frame_dig -4
     +
-    // smart_contracts/reti/validatorRegistry.algo.ts:216
+    // smart_contracts/reti/validatorRegistry.algo.ts:217
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec_3 // "staked"
-    // smart_contracts/reti/validatorRegistry.algo.ts:837
+    // smart_contracts/reti/validatorRegistry.algo.ts:838
     // this.totalAlgoStaked.value += algoToAdd
     swap
     app_global_put
-    // smart_contracts/reti/validatorRegistry.algo.ts:1225
+    // smart_contracts/reti/validatorRegistry.algo.ts:1224
     // const validatorConfig = clone(this.validatorList(validatorId).value.config)
     box_get
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:1225-1226
+    // smart_contracts/reti/validatorRegistry.algo.ts:1224-1225
     // const validatorConfig = clone(this.validatorList(validatorId).value.config)
     // if (validatorConfig.nfdForInfo !== 0) {
     extract 0 242
     dup
     pushint 72 // 72
-    // smart_contracts/reti/validatorRegistry.algo.ts:1226
+    // smart_contracts/reti/validatorRegistry.algo.ts:1225
     // if (validatorConfig.nfdForInfo !== 0) {
     extract_uint64
     dup
     bz stakeUpdatedViaRewards_after_if_else@6
-    // smart_contracts/reti/validatorRegistry.algo.ts:1229
+    // smart_contracts/reti/validatorRegistry.algo.ts:1228
     // const [nfdOwnerBytes] = op.AppGlobal.getExBytes(validatorConfig.nfdForInfo, Bytes('i.owner.a'))
     frame_dig 3
     bytec 10 // "i.owner.a"
@@ -3462,7 +3509,7 @@ stakeUpdatedViaRewards:
     pop
     dup
     frame_bury 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:1232
+    // smart_contracts/reti/validatorRegistry.algo.ts:1231
     // if (validatorConfig.owner !== nfdOwner && validatorConfig.manager !== nfdOwner) {
     frame_dig 2
     extract 8 32
@@ -3473,7 +3520,7 @@ stakeUpdatedViaRewards:
     frame_dig 0
     !=
     bz stakeUpdatedViaRewards_after_if_else@6
-    // smart_contracts/reti/validatorRegistry.algo.ts:1234
+    // smart_contracts/reti/validatorRegistry.algo.ts:1233
     // this.validatorList(validatorId).value.config.nfdForInfo = 0
     intc_0 // 0
     itob
@@ -3488,7 +3535,7 @@ stakeUpdatedViaRewards_after_if_else@6:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.stakeRemoved(poolKey: bytes, staker: bytes, amountRemoved: uint64, rewardRemoved: uint64, stakerRemoved: uint64) -> void:
 stakeRemoved:
-    // smart_contracts/reti/validatorRegistry.algo.ts:865-871
+    // smart_contracts/reti/validatorRegistry.algo.ts:866-872
     // stakeRemoved(
     //   poolKey: ValidatorPoolKey,
     //   staker: Address,
@@ -3501,6 +3548,11 @@ stakeRemoved:
     dupn 5
     bytec_2 // ""
     dupn 10
+    // smart_contracts/reti/validatorRegistry.algo.ts:873
+    // ensureBudget(300)
+    pushint 300 // 300
+    intc_0 // 0
+    callsub ensure_budget
     // smart_contracts/reti/validatorRegistry.algo.ts:875
     // this.verifyPoolKeyCaller(poolKey)
     frame_dig -5
@@ -3509,14 +3561,14 @@ stakeRemoved:
     // smart_contracts/reti/validatorRegistry.algo.ts:879
     // assert(amountRemoved > 0 || rewardRemoved > 0, 'should only be called if algo or reward was removed')
     frame_dig -3
-    bnz stakeRemoved_bool_true@4
+    bnz stakeRemoved_bool_true@2
     frame_dig -2
-    bz stakeRemoved_bool_false@5
+    bz stakeRemoved_bool_false@3
 
-stakeRemoved_bool_true@4:
+stakeRemoved_bool_true@2:
     intc_1 // 1
 
-stakeRemoved_bool_merge@6:
+stakeRemoved_bool_merge@4:
     // smart_contracts/reti/validatorRegistry.algo.ts:879
     // assert(amountRemoved > 0 || rewardRemoved > 0, 'should only be called if algo or reward was removed')
     assert // should only be called if algo or reward was removed
@@ -3528,7 +3580,7 @@ stakeRemoved_bool_merge@6:
     itob
     dup
     frame_bury 4
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
@@ -3593,7 +3645,7 @@ stakeRemoved_bool_merge@6:
     // smart_contracts/reti/validatorRegistry.algo.ts:884
     // this.totalAlgoStaked.value -= amountRemoved
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:216
+    // smart_contracts/reti/validatorRegistry.algo.ts:217
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec_3 // "staked"
     // smart_contracts/reti/validatorRegistry.algo.ts:884
@@ -3602,7 +3654,7 @@ stakeRemoved_bool_merge@6:
     assert // check GlobalState exists
     frame_dig -3
     -
-    // smart_contracts/reti/validatorRegistry.algo.ts:216
+    // smart_contracts/reti/validatorRegistry.algo.ts:217
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec_3 // "staked"
     // smart_contracts/reti/validatorRegistry.algo.ts:884
@@ -3612,7 +3664,7 @@ stakeRemoved_bool_merge@6:
     // smart_contracts/reti/validatorRegistry.algo.ts:886
     // if (rewardRemoved > 0) {
     frame_dig -2
-    bz stakeRemoved_after_if_else@12
+    bz stakeRemoved_after_if_else@10
     // smart_contracts/reti/validatorRegistry.algo.ts:887
     // const rewardTokenID = this.validatorList(poolKey.id).value.config.rewardTokenId
     frame_dig 2
@@ -3656,7 +3708,7 @@ stakeRemoved_bool_merge@6:
     frame_dig 16
     intc_1 // 1
     !=
-    bz stakeRemoved_after_if_else@12
+    bz stakeRemoved_after_if_else@10
     // smart_contracts/reti/validatorRegistry.algo.ts:901-904
     // abiCall(StakingPoolABI.prototype.payTokenReward, {
     //   appId: this.validatorList(poolKey.id).value.pools[0].poolAppId,
@@ -3683,7 +3735,7 @@ stakeRemoved_bool_merge@6:
     //   appId: this.validatorList(poolKey.id).value.pools[0].poolAppId,
     //   args: [staker, rewardTokenID, rewardRemoved],
     // })
-    bytec 13 // method "payTokenReward(address,uint64,uint64)void"
+    bytec 14 // method "payTokenReward(address,uint64,uint64)void"
     itxn_field ApplicationArgs
     frame_dig -4
     itxn_field ApplicationArgs
@@ -3697,11 +3749,11 @@ stakeRemoved_bool_merge@6:
     itxn_field Fee
     itxn_submit
 
-stakeRemoved_after_if_else@12:
+stakeRemoved_after_if_else@10:
     // smart_contracts/reti/validatorRegistry.algo.ts:928
     // if (stakerRemoved) {
     frame_dig -1
-    bz stakeRemoved_after_if_else@18
+    bz stakeRemoved_after_if_else@16
     // smart_contracts/reti/validatorRegistry.algo.ts:930
     // const totalStakers = this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalStakers.native
     frame_dig 2
@@ -3754,38 +3806,38 @@ stakeRemoved_after_if_else@12:
     itob
     concat
     frame_bury -5
-    // smart_contracts/reti/validatorRegistry.algo.ts:1365
+    // smart_contracts/reti/validatorRegistry.algo.ts:1362
     // let inSameValidatorPoolCount: uint64 = 0
     intc_0 // 0
     frame_bury 12
-    // smart_contracts/reti/validatorRegistry.algo.ts:1366
+    // smart_contracts/reti/validatorRegistry.algo.ts:1363
     // let inAnyPoolCount: uint64 = 0
     intc_0 // 0
     frame_bury 11
-    // smart_contracts/reti/validatorRegistry.algo.ts:1367
+    // smart_contracts/reti/validatorRegistry.algo.ts:1364
     // let found = false
     intc_0 // 0
     frame_bury 8
-    // smart_contracts/reti/validatorRegistry.algo.ts:224
+    // smart_contracts/reti/validatorRegistry.algo.ts:225
     // stakerPoolSet = BoxMap<Address, FixedArray<ValidatorPoolKey, typeof MAX_POOLS_PER_STAKER>>({ keyPrefix: 'sps' })
     bytec 7 // "sps"
     frame_dig -4
     concat
     dup
     frame_bury 3
-    // smart_contracts/reti/validatorRegistry.algo.ts:1369
+    // smart_contracts/reti/validatorRegistry.algo.ts:1366
     // const poolSet = clone(this.stakerPoolSet(staker).value)
     box_get
     swap
     frame_bury 5
     assert // Box must have value
-    // smart_contracts/reti/validatorRegistry.algo.ts:1370
+    // smart_contracts/reti/validatorRegistry.algo.ts:1367
     // for (let i: uint64 = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
     intc_0 // 0
     frame_bury 10
 
-stakeRemoved_while_top@20:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1370
+stakeRemoved_while_top@18:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1367
     // for (let i: uint64 = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
     frame_dig 3
     box_len
@@ -3794,8 +3846,8 @@ stakeRemoved_while_top@20:
     frame_dig 10
     pushint 6 // 6
     <
-    bz stakeRemoved_after_while@30
-    // smart_contracts/reti/validatorRegistry.algo.ts:1371
+    bz stakeRemoved_after_while@28
+    // smart_contracts/reti/validatorRegistry.algo.ts:1368
     // if (poolSet[i].id === 0) {
     frame_dig 10
     intc_3 // 24
@@ -3812,14 +3864,14 @@ stakeRemoved_while_top@20:
     extract_uint64
     dup
     frame_bury 15
-    bz stakeRemoved_block@29
-    // smart_contracts/reti/validatorRegistry.algo.ts:1374
+    bz stakeRemoved_block@27
+    // smart_contracts/reti/validatorRegistry.algo.ts:1371
     // inAnyPoolCount += 1
     frame_dig 11
     intc_1 // 1
     +
     frame_bury 11
-    // smart_contracts/reti/validatorRegistry.algo.ts:1375
+    // smart_contracts/reti/validatorRegistry.algo.ts:1372
     // if (poolSet[i].id === poolKey.id) {
     frame_dig -5
     intc_0 // 0
@@ -3830,60 +3882,60 @@ stakeRemoved_while_top@20:
     frame_bury 9
     frame_dig 12
     frame_bury 13
-    bz stakeRemoved_after_if_else@28
-    // smart_contracts/reti/validatorRegistry.algo.ts:1376
+    bz stakeRemoved_after_if_else@26
+    // smart_contracts/reti/validatorRegistry.algo.ts:1373
     // if (encodeArc4(poolSet[i]) === encodeArc4(poolKey)) {
     frame_dig 0
     frame_dig -5
     ==
-    bz stakeRemoved_else_body@26
-    // smart_contracts/reti/validatorRegistry.algo.ts:1377
+    bz stakeRemoved_else_body@24
+    // smart_contracts/reti/validatorRegistry.algo.ts:1374
     // found = true
     intc_1 // 1
     frame_bury 8
-    // smart_contracts/reti/validatorRegistry.algo.ts:1379
+    // smart_contracts/reti/validatorRegistry.algo.ts:1376
     // this.stakerPoolSet(staker).value[i] = { id: 0, poolId: 0, poolAppId: 0 }
     frame_dig 3
     frame_dig 7
     pushbytes 0x000000000000000000000000000000000000000000000000
     box_replace
 
-stakeRemoved_after_if_else@27:
+stakeRemoved_after_if_else@25:
     frame_dig 8
     frame_bury 9
     frame_dig 12
     frame_bury 13
 
-stakeRemoved_after_if_else@28:
+stakeRemoved_after_if_else@26:
     frame_dig 9
     frame_bury 8
     frame_dig 13
     frame_bury 12
 
-stakeRemoved_block@29:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1370
+stakeRemoved_block@27:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1367
     // for (let i: uint64 = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
     frame_dig 10
     intc_1 // 1
     +
     frame_bury 10
-    b stakeRemoved_while_top@20
+    b stakeRemoved_while_top@18
 
-stakeRemoved_else_body@26:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1381
+stakeRemoved_else_body@24:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1378
     // inSameValidatorPoolCount += 1
     frame_dig 12
     intc_1 // 1
     +
     frame_bury 12
-    b stakeRemoved_after_if_else@27
+    b stakeRemoved_after_if_else@25
 
-stakeRemoved_after_while@30:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1385
+stakeRemoved_after_while@28:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1382
     // if (!found) {
     frame_dig 8
     assert // No matching slot found when told to remove a pool from the stakers set
-    // smart_contracts/reti/validatorRegistry.algo.ts:1389
+    // smart_contracts/reti/validatorRegistry.algo.ts:1386
     // return [inSameValidatorPoolCount === 0, inAnyPoolCount === 0]
     frame_dig 12
     !
@@ -3909,7 +3961,7 @@ stakeRemoved_after_while@30:
     frame_bury 14
     // smart_contracts/reti/validatorRegistry.algo.ts:941
     // if (stakerOutOfThisValidator) {
-    bz stakeRemoved_after_if_else@15
+    bz stakeRemoved_after_if_else@13
     // smart_contracts/reti/validatorRegistry.algo.ts:942
     // this.validatorList(poolKey.id).value.state.totalStakers -= 1
     frame_dig 2
@@ -3926,15 +3978,15 @@ stakeRemoved_after_while@30:
     swap
     box_replace
 
-stakeRemoved_after_if_else@15:
+stakeRemoved_after_if_else@13:
     // smart_contracts/reti/validatorRegistry.algo.ts:945
     // if (stakerOutOfProtocol) {
     frame_dig 14
-    bz stakeRemoved_after_if_else@18
+    bz stakeRemoved_after_if_else@16
     // smart_contracts/reti/validatorRegistry.algo.ts:946
     // this.numStakers.value -= 1
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:213
+    // smart_contracts/reti/validatorRegistry.algo.ts:214
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 5 // "numStakers"
     // smart_contracts/reti/validatorRegistry.algo.ts:946
@@ -3943,7 +3995,7 @@ stakeRemoved_after_if_else@15:
     assert // check GlobalState exists
     intc_1 // 1
     -
-    // smart_contracts/reti/validatorRegistry.algo.ts:213
+    // smart_contracts/reti/validatorRegistry.algo.ts:214
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 5 // "numStakers"
     // smart_contracts/reti/validatorRegistry.algo.ts:946
@@ -3951,12 +4003,12 @@ stakeRemoved_after_if_else@15:
     swap
     app_global_put
 
-stakeRemoved_after_if_else@18:
+stakeRemoved_after_if_else@16:
     retsub
 
-stakeRemoved_bool_false@5:
+stakeRemoved_bool_false@3:
     intc_0 // 0
-    b stakeRemoved_bool_merge@6
+    b stakeRemoved_bool_merge@4
 
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.findPoolForStaker(validatorId: uint64, staker: bytes, amountToStake: uint64) -> bytes:
@@ -3984,7 +4036,7 @@ findPoolForStaker:
     frame_dig -3
     callsub getCurMaxStakePerPool
     cover 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:224
+    // smart_contracts/reti/validatorRegistry.algo.ts:225
     // stakerPoolSet = BoxMap<Address, FixedArray<ValidatorPoolKey, typeof MAX_POOLS_PER_STAKER>>({ keyPrefix: 'sps' })
     bytec 7 // "sps"
     frame_dig -2
@@ -3997,7 +4049,7 @@ findPoolForStaker:
     bury 1
     swap
     cover 2
-    bz findPoolForStaker_after_if_else@14
+    bz findPoolForStaker_after_if_else@12
     // smart_contracts/reti/validatorRegistry.algo.ts:980
     // const poolSet = clone(this.stakerPoolSet(staker).value)
     frame_dig 12
@@ -4020,8 +4072,13 @@ findPoolForStaker_while_top@2:
     frame_dig 6
     pushint 6 // 6
     <
-    bz findPoolForStaker_after_while@13
-    // smart_contracts/reti/validatorRegistry.algo.ts:986
+    bz findPoolForStaker_after_while@11
+    // smart_contracts/reti/validatorRegistry.algo.ts:983
+    // ensureBudget(300)
+    pushint 300 // 300
+    intc_0 // 0
+    callsub ensure_budget
+    // smart_contracts/reti/validatorRegistry.algo.ts:985
     // if (poolSet[i].id === 0) {
     frame_dig 6
     intc_3 // 24
@@ -4036,31 +4093,31 @@ findPoolForStaker_while_top@2:
     extract_uint64
     dup
     frame_bury 8
-    bz findPoolForStaker_block@12
-    // smart_contracts/reti/validatorRegistry.algo.ts:989
+    bz findPoolForStaker_block@10
+    // smart_contracts/reti/validatorRegistry.algo.ts:988
     // isNewStakerToProtocol = false
     intc_0 // 0
     frame_bury 10
-    // smart_contracts/reti/validatorRegistry.algo.ts:990
+    // smart_contracts/reti/validatorRegistry.algo.ts:989
     // if (poolSet[i].id === validatorId) {
     frame_dig 8
     frame_dig -3
     ==
-    bz findPoolForStaker_block@12
-    // smart_contracts/reti/validatorRegistry.algo.ts:992
+    bz findPoolForStaker_block@10
+    // smart_contracts/reti/validatorRegistry.algo.ts:991
     // isNewStakerToValidator = false
     intc_0 // 0
     frame_bury 9
-    // smart_contracts/reti/validatorRegistry.algo.ts:994
+    // smart_contracts/reti/validatorRegistry.algo.ts:993
     // this.validatorList(validatorId).value.pools[poolSet[i].poolId - 1].totalAlgoStaked + amountToStake <=
     frame_dig -3
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:994
+    // smart_contracts/reti/validatorRegistry.algo.ts:993
     // this.validatorList(validatorId).value.pools[poolSet[i].poolId - 1].totalAlgoStaked + amountToStake <=
     box_get
     assert // Box must have value
@@ -4082,18 +4139,18 @@ findPoolForStaker_while_top@2:
     extract_uint64
     frame_dig -1
     +
-    // smart_contracts/reti/validatorRegistry.algo.ts:994-995
+    // smart_contracts/reti/validatorRegistry.algo.ts:993-994
     // this.validatorList(validatorId).value.pools[poolSet[i].poolId - 1].totalAlgoStaked + amountToStake <=
     // maxPerPool
     frame_dig 11
     <=
-    // smart_contracts/reti/validatorRegistry.algo.ts:993-996
+    // smart_contracts/reti/validatorRegistry.algo.ts:992-995
     // if (
     //   this.validatorList(validatorId).value.pools[poolSet[i].poolId - 1].totalAlgoStaked + amountToStake <=
     //   maxPerPool
     // ) {
-    bz findPoolForStaker_block@12
-    // smart_contracts/reti/validatorRegistry.algo.ts:997
+    bz findPoolForStaker_block@10
+    // smart_contracts/reti/validatorRegistry.algo.ts:996
     // return [poolSet[i], isNewStakerToValidator, isNewStakerToProtocol]
     frame_dig 1
     bytec 6 // 0x00
@@ -4101,7 +4158,7 @@ findPoolForStaker_while_top@2:
     frame_bury 0
     retsub
 
-findPoolForStaker_block@12:
+findPoolForStaker_block@10:
     // smart_contracts/reti/validatorRegistry.algo.ts:982
     // for (let i: uint64 = 0; i < poolSet.length; i += 1) {
     frame_dig 6
@@ -4110,29 +4167,29 @@ findPoolForStaker_block@12:
     frame_bury 6
     b findPoolForStaker_while_top@2
 
-findPoolForStaker_after_while@13:
+findPoolForStaker_after_while@11:
     frame_dig 10
     frame_bury 13
     frame_dig 9
     frame_bury 14
 
-findPoolForStaker_after_if_else@14:
+findPoolForStaker_after_if_else@12:
     frame_dig 13
     frame_bury 10
     frame_dig 14
     frame_bury 9
-    // smart_contracts/reti/validatorRegistry.algo.ts:1005
+    // smart_contracts/reti/validatorRegistry.algo.ts:1004
     // amountToStake >= this.validatorList(validatorId).value.config.minEntryStake,
     frame_dig -3
     itob
     dup
     frame_bury 3
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:1005
+    // smart_contracts/reti/validatorRegistry.algo.ts:1004
     // amountToStake >= this.validatorList(validatorId).value.config.minEntryStake,
     box_get
     swap
@@ -4146,31 +4203,31 @@ findPoolForStaker_after_if_else@14:
     extract_uint64
     frame_dig -1
     <=
-    // smart_contracts/reti/validatorRegistry.algo.ts:1004-1007
+    // smart_contracts/reti/validatorRegistry.algo.ts:1003-1006
     // assert(
     //   amountToStake >= this.validatorList(validatorId).value.config.minEntryStake,
     //   'must stake at least the minimum for this pool',
     // )
     assert // must stake at least the minimum for this pool
-    // smart_contracts/reti/validatorRegistry.algo.ts:1011
+    // smart_contracts/reti/validatorRegistry.algo.ts:1010
     // const curNumPools = this.validatorList(validatorId).value.state.numPools.native
     extract 242 26
     intc_0 // 0
     extract_uint16
     frame_bury 5
-    // smart_contracts/reti/validatorRegistry.algo.ts:1012
+    // smart_contracts/reti/validatorRegistry.algo.ts:1011
     // for (let i: uint64 = 0; i < curNumPools; i += 1) {
     intc_0 // 0
     frame_bury 7
 
-findPoolForStaker_while_top@15:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1012
+findPoolForStaker_while_top@13:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1011
     // for (let i: uint64 = 0; i < curNumPools; i += 1) {
     frame_dig 7
     frame_dig 5
     <
-    bz findPoolForStaker_after_while@19
-    // smart_contracts/reti/validatorRegistry.algo.ts:1013
+    bz findPoolForStaker_after_while@17
+    // smart_contracts/reti/validatorRegistry.algo.ts:1012
     // if (pools[i].totalAlgoStaked + amountToStake <= maxPerPool) {
     frame_dig 0
     intc 4 // 268
@@ -4189,8 +4246,8 @@ findPoolForStaker_while_top@15:
     +
     frame_dig 11
     <=
-    bz findPoolForStaker_after_if_else@18
-    // smart_contracts/reti/validatorRegistry.algo.ts:1015
+    bz findPoolForStaker_after_if_else@16
+    // smart_contracts/reti/validatorRegistry.algo.ts:1014
     // { id: validatorId, poolId: i + 1, poolAppId: pools[i].poolAppId },
     frame_dig 7
     intc_1 // 1
@@ -4206,7 +4263,7 @@ findPoolForStaker_while_top@15:
     swap
     itob
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:1014-1018
+    // smart_contracts/reti/validatorRegistry.algo.ts:1013-1017
     // return [
     //   { id: validatorId, poolId: i + 1, poolAppId: pools[i].poolAppId },
     //   isNewStakerToValidator,
@@ -4223,17 +4280,17 @@ findPoolForStaker_while_top@15:
     frame_bury 0
     retsub
 
-findPoolForStaker_after_if_else@18:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1012
+findPoolForStaker_after_if_else@16:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1011
     // for (let i: uint64 = 0; i < curNumPools; i += 1) {
     frame_dig 7
     intc_1 // 1
     +
     frame_bury 7
-    b findPoolForStaker_while_top@15
+    b findPoolForStaker_while_top@13
 
-findPoolForStaker_after_while@19:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1022
+findPoolForStaker_after_while@17:
+    // smart_contracts/reti/validatorRegistry.algo.ts:1021
     // return [{ id: validatorId, poolId: 0, poolAppId: 0 }, isNewStakerToValidator, isNewStakerToProtocol]
     intc_0 // 0
     itob
@@ -4256,36 +4313,36 @@ findPoolForStaker_after_while@19:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.movePoolToNode(validatorId: uint64, poolAppId: uint64, nodeNum: uint64) -> void:
 movePoolToNode:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1036
+    // smart_contracts/reti/validatorRegistry.algo.ts:1035
     // movePoolToNode(validatorId: ValidatorIdType, poolAppId: uint64, nodeNum: uint64): void {
     proto 3 0
     intc_0 // 0
     bytec_2 // ""
     dupn 4
-    // smart_contracts/reti/validatorRegistry.algo.ts:1039
+    // smart_contracts/reti/validatorRegistry.algo.ts:1038
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     txn Sender
     frame_dig -3
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
     dup
     cover 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:1039
+    // smart_contracts/reti/validatorRegistry.algo.ts:1038
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     box_get
     assert // Box must have value
     extract 0 242
     extract 8 32
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:1039-1040
+    // smart_contracts/reti/validatorRegistry.algo.ts:1038-1039
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     //   Txn.sender === this.validatorList(validatorId).value.config.manager.native,
     bnz movePoolToNode_bool_true@2
-    // smart_contracts/reti/validatorRegistry.algo.ts:1040
+    // smart_contracts/reti/validatorRegistry.algo.ts:1039
     // Txn.sender === this.validatorList(validatorId).value.config.manager.native,
     txn Sender
     frame_dig 6
@@ -4294,7 +4351,7 @@ movePoolToNode:
     extract 0 242
     extract 40 32
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:1039-1040
+    // smart_contracts/reti/validatorRegistry.algo.ts:1038-1039
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     //   Txn.sender === this.validatorList(validatorId).value.config.manager.native,
     bz movePoolToNode_bool_false@3
@@ -4303,21 +4360,21 @@ movePoolToNode_bool_true@2:
     intc_1 // 1
 
 movePoolToNode_bool_merge@4:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1038-1042
+    // smart_contracts/reti/validatorRegistry.algo.ts:1037-1041
     // assert(
     //   Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
     //     Txn.sender === this.validatorList(validatorId).value.config.manager.native,
     //   'can only be called by owner or manager of validator',
     // )
     assert // can only be called by owner or manager of validator
-    // smart_contracts/reti/validatorRegistry.algo.ts:1044
+    // smart_contracts/reti/validatorRegistry.algo.ts:1043
     // const nodePoolAssignments = clone(this.validatorList(validatorId).value.nodePoolAssignments)
     frame_dig 6
     box_get
     swap
     frame_bury 0
     assert // Box must have value
-    // smart_contracts/reti/validatorRegistry.algo.ts:1045
+    // smart_contracts/reti/validatorRegistry.algo.ts:1044
     // assert(nodeNum >= 1 && nodeNum <= MAX_NODES, 'node number out of allowable range')
     frame_dig -1
     bz movePoolToNode_bool_false@7
@@ -4328,28 +4385,28 @@ movePoolToNode_bool_merge@4:
     intc_1 // 1
 
 movePoolToNode_bool_merge@8:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1045
+    // smart_contracts/reti/validatorRegistry.algo.ts:1044
     // assert(nodeNum >= 1 && nodeNum <= MAX_NODES, 'node number out of allowable range')
     assert // node number out of allowable range
-    // smart_contracts/reti/validatorRegistry.algo.ts:1047
+    // smart_contracts/reti/validatorRegistry.algo.ts:1046
     // for (let srcNodeIdx: uint64 = 0; srcNodeIdx < MAX_NODES; srcNodeIdx += 1) {
     intc_0 // 0
     frame_bury 4
 
 movePoolToNode_while_top@9:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1047
+    // smart_contracts/reti/validatorRegistry.algo.ts:1046
     // for (let srcNodeIdx: uint64 = 0; srcNodeIdx < MAX_NODES; srcNodeIdx += 1) {
     frame_dig 4
     pushint 8 // 8
     <
     assert // couldn't find pool app id in nodes to move
-    // smart_contracts/reti/validatorRegistry.algo.ts:1048
+    // smart_contracts/reti/validatorRegistry.algo.ts:1047
     // for (let i: uint64 = 0; i < MAX_POOLS_PER_NODE; i += 1) {
     intc_0 // 0
     frame_bury 3
 
 movePoolToNode_while_top@11:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1048
+    // smart_contracts/reti/validatorRegistry.algo.ts:1047
     // for (let i: uint64 = 0; i < MAX_POOLS_PER_NODE; i += 1) {
     frame_dig 3
     pushint 3 // 3
@@ -4357,7 +4414,7 @@ movePoolToNode_while_top@11:
     dup
     frame_bury 5
     bz movePoolToNode_after_while@16
-    // smart_contracts/reti/validatorRegistry.algo.ts:1049
+    // smart_contracts/reti/validatorRegistry.algo.ts:1048
     // if (nodePoolAssignments.nodes[srcNodeIdx].poolAppIds[i] === poolAppId) {
     frame_dig 0
     intc 8 // 900
@@ -4381,7 +4438,7 @@ movePoolToNode_while_top@11:
     frame_dig -2
     ==
     bz movePoolToNode_after_if_else@15
-    // smart_contracts/reti/validatorRegistry.algo.ts:1050
+    // smart_contracts/reti/validatorRegistry.algo.ts:1049
     // assert(nodeNum - 1 !== srcNodeIdx, "can't move to same node")
     frame_dig -1
     intc_1 // 1
@@ -4389,7 +4446,7 @@ movePoolToNode_while_top@11:
     frame_dig 4
     !=
     assert // can't move to same node
-    // smart_contracts/reti/validatorRegistry.algo.ts:1052
+    // smart_contracts/reti/validatorRegistry.algo.ts:1051
     // this.validatorList(validatorId).value.nodePoolAssignments.nodes[srcNodeIdx].poolAppIds[i] = 0
     intc_0 // 0
     itob
@@ -4404,7 +4461,7 @@ movePoolToNode_while_top@11:
     swap
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:1055-1057
+    // smart_contracts/reti/validatorRegistry.algo.ts:1054-1056
     // abiCall(StakingPoolABI.prototype.goOffline, {
     //   appId: poolAppId,
     // })
@@ -4418,18 +4475,18 @@ movePoolToNode_while_top@11:
     intc_0 // 0
     itxn_field Fee
     itxn_submit
-    // smart_contracts/reti/validatorRegistry.algo.ts:1060
+    // smart_contracts/reti/validatorRegistry.algo.ts:1059
     // this.addPoolToNode(validatorId, poolAppId, nodeNum)
     frame_dig -3
     frame_dig -2
     frame_dig -1
     callsub addPoolToNode
-    // smart_contracts/reti/validatorRegistry.algo.ts:1061
+    // smart_contracts/reti/validatorRegistry.algo.ts:1060
     // return
     retsub
 
 movePoolToNode_after_if_else@15:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1048
+    // smart_contracts/reti/validatorRegistry.algo.ts:1047
     // for (let i: uint64 = 0; i < MAX_POOLS_PER_NODE; i += 1) {
     frame_dig 3
     intc_1 // 1
@@ -4438,7 +4495,7 @@ movePoolToNode_after_if_else@15:
     b movePoolToNode_while_top@11
 
 movePoolToNode_after_while@16:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1047
+    // smart_contracts/reti/validatorRegistry.algo.ts:1046
     // for (let srcNodeIdx: uint64 = 0; srcNodeIdx < MAX_NODES; srcNodeIdx += 1) {
     frame_dig 4
     intc_1 // 1
@@ -4457,20 +4514,20 @@ movePoolToNode_bool_false@3:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.emptyTokenRewards(validatorId: uint64, receiver: bytes) -> uint64:
 emptyTokenRewards:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1079
+    // smart_contracts/reti/validatorRegistry.algo.ts:1078
     // emptyTokenRewards(validatorId: ValidatorIdType, receiver: Address): uint64 {
     proto 2 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:1081
+    // smart_contracts/reti/validatorRegistry.algo.ts:1080
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     txn Sender
     frame_dig -2
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
-    // smart_contracts/reti/validatorRegistry.algo.ts:1081
+    // smart_contracts/reti/validatorRegistry.algo.ts:1080
     // Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     box_get
     assert // Box must have value
@@ -4480,30 +4537,30 @@ emptyTokenRewards:
     extract 8 32
     uncover 3
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:1080-1083
+    // smart_contracts/reti/validatorRegistry.algo.ts:1079-1082
     // assert(
     //   Txn.sender === this.validatorList(validatorId).value.config.owner.native,
     //   'can only be called by validator owner',
     // )
     assert // can only be called by validator owner
-    // smart_contracts/reti/validatorRegistry.algo.ts:1084
+    // smart_contracts/reti/validatorRegistry.algo.ts:1083
     // const rewardTokenId = this.validatorList(validatorId).value.config.rewardTokenId
     dup
     extract 153 8
     swap
     pushint 153 // 153
     extract_uint64
-    // smart_contracts/reti/validatorRegistry.algo.ts:1085
+    // smart_contracts/reti/validatorRegistry.algo.ts:1084
     // const rewardTokenHeldBack = this.validatorList(validatorId).value.state.rewardTokenHeldBack
     dig 2
     extract 242 26
     intc_2 // 18
     extract_uint64
-    // smart_contracts/reti/validatorRegistry.algo.ts:1086
+    // smart_contracts/reti/validatorRegistry.algo.ts:1085
     // assert(rewardTokenId !== 0, "this validator doesn't have a reward token defined")
     dig 1
     assert // this validator doesn't have a reward token defined
-    // smart_contracts/reti/validatorRegistry.algo.ts:1087
+    // smart_contracts/reti/validatorRegistry.algo.ts:1086
     // const poolOneAppId = Application(this.validatorList(validatorId).value.pools[0].poolAppId)
     uncover 3
     intc 4 // 268
@@ -4512,7 +4569,7 @@ emptyTokenRewards:
     extract 0 18 // on error: index access is out of bounds
     intc_0 // 0
     extract_uint64
-    // smart_contracts/reti/validatorRegistry.algo.ts:1089
+    // smart_contracts/reti/validatorRegistry.algo.ts:1088
     // let [tokenRewardBal] = op.AssetHolding.assetBalance(poolOneAppId.address, rewardTokenId)
     dup
     app_params_get AppAddress
@@ -4520,26 +4577,26 @@ emptyTokenRewards:
     dig 3
     asset_holding_get AssetBalance
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:1090
+    // smart_contracts/reti/validatorRegistry.algo.ts:1089
     // tokenRewardBal = tokenRewardBal - rewardTokenHeldBack
     dig 2
     -
-    // smart_contracts/reti/validatorRegistry.algo.ts:1092-1095
+    // smart_contracts/reti/validatorRegistry.algo.ts:1091-1094
     // abiCall(StakingPoolABI.prototype.payTokenReward, {
     //   appId: poolOneAppId.id,
     //   args: [receiver, rewardTokenId, tokenRewardBal],
     // })
     itxn_begin
-    // smart_contracts/reti/validatorRegistry.algo.ts:1094
+    // smart_contracts/reti/validatorRegistry.algo.ts:1093
     // args: [receiver, rewardTokenId, tokenRewardBal],
     dup
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:1092-1095
+    // smart_contracts/reti/validatorRegistry.algo.ts:1091-1094
     // abiCall(StakingPoolABI.prototype.payTokenReward, {
     //   appId: poolOneAppId.id,
     //   args: [receiver, rewardTokenId, tokenRewardBal],
     // })
-    bytec 13 // method "payTokenReward(address,uint64,uint64)void"
+    bytec 14 // method "payTokenReward(address,uint64,uint64)void"
     itxn_field ApplicationArgs
     frame_dig -1
     itxn_field ApplicationArgs
@@ -4553,7 +4610,7 @@ emptyTokenRewards:
     intc_0 // 0
     itxn_field Fee
     itxn_submit
-    // smart_contracts/reti/validatorRegistry.algo.ts:1097
+    // smart_contracts/reti/validatorRegistry.algo.ts:1096
     // const [balance] = op.AssetHolding.assetBalance(poolOneAppId.address, rewardTokenId)
     swap
     app_params_get AppAddress
@@ -4561,39 +4618,39 @@ emptyTokenRewards:
     uncover 3
     asset_holding_get AssetBalance
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:1098
+    // smart_contracts/reti/validatorRegistry.algo.ts:1097
     // assert(balance === rewardTokenHeldBack, 'balance of remaining reward tokens should match the held back amount')
     uncover 2
     ==
     assert // balance of remaining reward tokens should match the held back amount
-    // smart_contracts/reti/validatorRegistry.algo.ts:1099
+    // smart_contracts/reti/validatorRegistry.algo.ts:1098
     // return tokenRewardBal
     retsub
 
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.verifyPoolKeyCaller(poolKey: bytes) -> bytes:
 verifyPoolKeyCaller:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1196
+    // smart_contracts/reti/validatorRegistry.algo.ts:1195
     // private verifyPoolKeyCaller(poolKey: ValidatorPoolKey): void {
     proto 1 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:1197
+    // smart_contracts/reti/validatorRegistry.algo.ts:1196
     // assert(this.validatorList(poolKey.id).exists, "the specified validator id isn't valid")
     frame_dig -1
     intc_0 // 0
     extract_uint64
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
     dup
-    // smart_contracts/reti/validatorRegistry.algo.ts:1197
+    // smart_contracts/reti/validatorRegistry.algo.ts:1196
     // assert(this.validatorList(poolKey.id).exists, "the specified validator id isn't valid")
     box_len
     bury 1
     assert // the specified validator id isn't valid
-    // smart_contracts/reti/validatorRegistry.algo.ts:1198
+    // smart_contracts/reti/validatorRegistry.algo.ts:1197
     // assert(poolKey.poolId <= MAX_POOLS, 'pool id not in valid range')
     frame_dig -1
     pushint 8 // 8
@@ -4602,7 +4659,7 @@ verifyPoolKeyCaller:
     intc_3 // 24
     <=
     assert // pool id not in valid range
-    // smart_contracts/reti/validatorRegistry.algo.ts:1200
+    // smart_contracts/reti/validatorRegistry.algo.ts:1199
     // poolKey.poolId > 0 && poolKey.poolId <= this.validatorList(poolKey.id).value.state.numPools.native,
     bz verifyPoolKeyCaller_bool_false@3
     frame_dig 0
@@ -4617,13 +4674,13 @@ verifyPoolKeyCaller:
     intc_1 // 1
 
 verifyPoolKeyCaller_bool_merge@4:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1199-1202
+    // smart_contracts/reti/validatorRegistry.algo.ts:1198-1201
     // assert(
     //   poolKey.poolId > 0 && poolKey.poolId <= this.validatorList(poolKey.id).value.state.numPools.native,
     //   'pool id outside of range of pools created for this validator',
     // )
     assert // pool id outside of range of pools created for this validator
-    // smart_contracts/reti/validatorRegistry.algo.ts:1206
+    // smart_contracts/reti/validatorRegistry.algo.ts:1205
     // poolKey.poolAppId === this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].poolAppId,
     frame_dig -1
     pushint 16 // 16
@@ -4647,13 +4704,13 @@ verifyPoolKeyCaller_bool_merge@4:
     extract_uint64
     dig 1
     ==
-    // smart_contracts/reti/validatorRegistry.algo.ts:1205-1208
+    // smart_contracts/reti/validatorRegistry.algo.ts:1204-1207
     // assert(
     //   poolKey.poolAppId === this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].poolAppId,
     //   "The passed in app id doesn't match the passed in ids",
     // )
     assert // The passed in app id doesn't match the passed in ids
-    // smart_contracts/reti/validatorRegistry.algo.ts:1210
+    // smart_contracts/reti/validatorRegistry.algo.ts:1209
     // assert(Txn.sender === Application(poolKey.poolAppId).address)
     txn Sender
     dig 1
@@ -4661,23 +4718,23 @@ verifyPoolKeyCaller_bool_merge@4:
     assert // application exists
     ==
     assert
-    // smart_contracts/reti/validatorRegistry.algo.ts:1212
+    // smart_contracts/reti/validatorRegistry.algo.ts:1211
     // const [validatorId] = op.AppGlobal.getExUint64(poolKey.poolAppId, Bytes('validatorId'))
     dup
     pushbytes "validatorId"
     app_global_get_ex
     pop
     swap
-    // smart_contracts/reti/validatorRegistry.algo.ts:1213
+    // smart_contracts/reti/validatorRegistry.algo.ts:1212
     // const [poolId] = op.AppGlobal.getExUint64(poolKey.poolAppId, Bytes('poolId'))
     pushbytes "poolId"
     app_global_get_ex
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:1214
+    // smart_contracts/reti/validatorRegistry.algo.ts:1213
     // assert(validatorId)
     swap
     assert
-    // smart_contracts/reti/validatorRegistry.algo.ts:1215
+    // smart_contracts/reti/validatorRegistry.algo.ts:1214
     // assert(poolId)
     assert
     frame_dig -1
@@ -4691,34 +4748,34 @@ verifyPoolKeyCaller_bool_false@3:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.addPoolToNode(validatorId: uint64, poolAppId: uint64, nodeNum: uint64) -> void:
 addPoolToNode:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1392
+    // smart_contracts/reti/validatorRegistry.algo.ts:1389
     // private addPoolToNode(validatorId: ValidatorIdType, poolAppId: uint64, nodeNum: uint64) {
     proto 3 0
     bytec_2 // ""
     dupn 2
-    // smart_contracts/reti/validatorRegistry.algo.ts:1393
+    // smart_contracts/reti/validatorRegistry.algo.ts:1390
     // const nodePoolAssignments = clone(this.validatorList(validatorId).value.nodePoolAssignments)
     frame_dig -3
     itob
-    // smart_contracts/reti/validatorRegistry.algo.ts:220
+    // smart_contracts/reti/validatorRegistry.algo.ts:221
     // validatorList = BoxMap<ValidatorIdType, ValidatorInfo>({ keyPrefix: 'v' })
     bytec_0 // "v"
     swap
     concat
     dup
-    // smart_contracts/reti/validatorRegistry.algo.ts:1393
+    // smart_contracts/reti/validatorRegistry.algo.ts:1390
     // const nodePoolAssignments = clone(this.validatorList(validatorId).value.nodePoolAssignments)
     box_get
     swap
     dup
     uncover 2
     assert // Box must have value
-    // smart_contracts/reti/validatorRegistry.algo.ts:1394
+    // smart_contracts/reti/validatorRegistry.algo.ts:1391
     // const maxPoolsPerNodeForThisValidator = this.validatorList(validatorId).value.config.poolsPerNode.native
     extract 0 242
     pushint 225 // 225
     getbyte
-    // smart_contracts/reti/validatorRegistry.algo.ts:1396
+    // smart_contracts/reti/validatorRegistry.algo.ts:1393
     // assert(nodeNum >= 1 && nodeNum <= MAX_NODES, 'node number not in valid range')
     frame_dig -1
     bz addPoolToNode_bool_false@3
@@ -4729,23 +4786,23 @@ addPoolToNode:
     intc_1 // 1
 
 addPoolToNode_bool_merge@4:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1396
+    // smart_contracts/reti/validatorRegistry.algo.ts:1393
     // assert(nodeNum >= 1 && nodeNum <= MAX_NODES, 'node number not in valid range')
     assert // node number not in valid range
-    // smart_contracts/reti/validatorRegistry.algo.ts:1398
+    // smart_contracts/reti/validatorRegistry.algo.ts:1395
     // for (let i: uint64 = 0; i < maxPoolsPerNodeForThisValidator; i += 1) {
     intc_0 // 0
     frame_bury 2
 
 addPoolToNode_while_top@5:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1398
+    // smart_contracts/reti/validatorRegistry.algo.ts:1395
     // for (let i: uint64 = 0; i < maxPoolsPerNodeForThisValidator; i += 1) {
     frame_dig 2
     dup
     frame_dig 5
     <
     assert // no available space in specified node for this pool
-    // smart_contracts/reti/validatorRegistry.algo.ts:1399
+    // smart_contracts/reti/validatorRegistry.algo.ts:1396
     // if (nodePoolAssignments.nodes[nodeNum - 1].poolAppIds[i] === 0) {
     frame_dig -1
     intc_1 // 1
@@ -4770,7 +4827,7 @@ addPoolToNode_while_top@5:
     frame_bury 1
     extract_uint64
     bnz addPoolToNode_after_if_else@8
-    // smart_contracts/reti/validatorRegistry.algo.ts:1401
+    // smart_contracts/reti/validatorRegistry.algo.ts:1398
     // this.validatorList(validatorId).value.nodePoolAssignments.nodes[nodeNum - 1].poolAppIds[i] = poolAppId
     frame_dig -2
     itob
@@ -4787,12 +4844,12 @@ addPoolToNode_while_top@5:
     swap
     uncover 2
     box_replace
-    // smart_contracts/reti/validatorRegistry.algo.ts:1402
+    // smart_contracts/reti/validatorRegistry.algo.ts:1399
     // return
     retsub
 
 addPoolToNode_after_if_else@8:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1398
+    // smart_contracts/reti/validatorRegistry.algo.ts:1395
     // for (let i: uint64 = 0; i < maxPoolsPerNodeForThisValidator; i += 1) {
     frame_dig 2
     intc_1 // 1
@@ -4807,16 +4864,16 @@ addPoolToNode_bool_false@3:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.isNFDAppIDValid(nfdAppID: uint64) -> uint64:
 isNFDAppIDValid:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1493
+    // smart_contracts/reti/validatorRegistry.algo.ts:1490
     // private isNFDAppIDValid(nfdAppID: uint64): boolean {
     proto 1 1
-    // smart_contracts/reti/validatorRegistry.algo.ts:1495
+    // smart_contracts/reti/validatorRegistry.algo.ts:1492
     // const [userOfferedNFDName] = op.AppGlobal.getExBytes(nfdAppID, Bytes('i.name'))
     frame_dig -1
     pushbytes "i.name"
     app_global_get_ex
     pop
-    // smart_contracts/reti/validatorRegistry.algo.ts:1497-1503
+    // smart_contracts/reti/validatorRegistry.algo.ts:1494-1500
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -4825,11 +4882,11 @@ isNFDAppIDValid:
     //   })
     //   .submit()
     itxn_begin
-    // smart_contracts/reti/validatorRegistry.algo.ts:1499
+    // smart_contracts/reti/validatorRegistry.algo.ts:1496
     // appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
     intc 10 // TMPL_NFD_REGISTRY_APP_ID
     swap
-    // smart_contracts/reti/validatorRegistry.algo.ts:1500
+    // smart_contracts/reti/validatorRegistry.algo.ts:1497
     // appArgs: [Bytes('is_valid_nfd_appid'), Bytes(userOfferedNFDName), op.itob(nfdAppID)],
     frame_dig -1
     itob
@@ -4841,7 +4898,7 @@ isNFDAppIDValid:
     itxn_field ApplicationArgs
     itxn_field ApplicationArgs
     itxn_field ApplicationID
-    // smart_contracts/reti/validatorRegistry.algo.ts:1497-1502
+    // smart_contracts/reti/validatorRegistry.algo.ts:1494-1499
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -4852,7 +4909,7 @@ isNFDAppIDValid:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/validatorRegistry.algo.ts:1497-1503
+    // smart_contracts/reti/validatorRegistry.algo.ts:1494-1500
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -4861,7 +4918,7 @@ isNFDAppIDValid:
     //   })
     //   .submit()
     itxn_submit
-    // smart_contracts/reti/validatorRegistry.algo.ts:1504
+    // smart_contracts/reti/validatorRegistry.algo.ts:1501
     // return op.btoi(op.ITxn.lastLog) === 1
     itxn LastLog
     btoi
@@ -4872,11 +4929,11 @@ isNFDAppIDValid:
 
 // smart_contracts/reti/validatorRegistry.algo.ts::ValidatorRegistry.isAddressInNFDCAAlgoList(nfdAppID: uint64, addrToFind: bytes) -> uint64:
 isAddressInNFDCAAlgoList:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1515
+    // smart_contracts/reti/validatorRegistry.algo.ts:1512
     // private isAddressInNFDCAAlgoList(nfdAppID: uint64, addrToFind: Address): boolean {
     proto 2 1
     intc_0 // 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:1516-1521
+    // smart_contracts/reti/validatorRegistry.algo.ts:1513-1518
     // itxn
     //   .applicationCall({
     //     appId: Application(nfdAppID),
@@ -4884,7 +4941,7 @@ isAddressInNFDCAAlgoList:
     //   })
     //   .submit()
     itxn_begin
-    // smart_contracts/reti/validatorRegistry.algo.ts:1519
+    // smart_contracts/reti/validatorRegistry.algo.ts:1516
     // appArgs: [Bytes('read_property'), Bytes('v.caAlgo.0.as')],
     pushbytes "read_property"
     itxn_field ApplicationArgs
@@ -4892,7 +4949,7 @@ isAddressInNFDCAAlgoList:
     itxn_field ApplicationArgs
     frame_dig -2
     itxn_field ApplicationID
-    // smart_contracts/reti/validatorRegistry.algo.ts:1516-1520
+    // smart_contracts/reti/validatorRegistry.algo.ts:1513-1517
     // itxn
     //   .applicationCall({
     //     appId: Application(nfdAppID),
@@ -4902,7 +4959,7 @@ isAddressInNFDCAAlgoList:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/validatorRegistry.algo.ts:1516-1521
+    // smart_contracts/reti/validatorRegistry.algo.ts:1513-1518
     // itxn
     //   .applicationCall({
     //     appId: Application(nfdAppID),
@@ -4910,22 +4967,22 @@ isAddressInNFDCAAlgoList:
     //   })
     //   .submit()
     itxn_submit
-    // smart_contracts/reti/validatorRegistry.algo.ts:1522
+    // smart_contracts/reti/validatorRegistry.algo.ts:1519
     // const caAlgoData = op.ITxn.lastLog
     itxn LastLog
-    // smart_contracts/reti/validatorRegistry.algo.ts:1523
+    // smart_contracts/reti/validatorRegistry.algo.ts:1520
     // for (let i: uint64 = 0; i < caAlgoData.length; i += 32) {
     intc_0 // 0
 
 isAddressInNFDCAAlgoList_while_top@2:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1523
+    // smart_contracts/reti/validatorRegistry.algo.ts:1520
     // for (let i: uint64 = 0; i < caAlgoData.length; i += 32) {
     frame_dig 1
     len
     frame_dig 2
     >
     bz isAddressInNFDCAAlgoList_after_while@7
-    // smart_contracts/reti/validatorRegistry.algo.ts:1524
+    // smart_contracts/reti/validatorRegistry.algo.ts:1521
     // const addr = new Address(op.extract(caAlgoData, i, 32))
     frame_dig 1
     frame_dig 2
@@ -4933,7 +4990,7 @@ isAddressInNFDCAAlgoList_while_top@2:
     extract3
     dup
     frame_bury 0
-    // smart_contracts/reti/validatorRegistry.algo.ts:1525
+    // smart_contracts/reti/validatorRegistry.algo.ts:1522
     // if (addr.native !== Global.zeroAddress && addr === addrToFind) {
     global ZeroAddress
     !=
@@ -4942,14 +4999,14 @@ isAddressInNFDCAAlgoList_while_top@2:
     frame_dig -1
     ==
     bz isAddressInNFDCAAlgoList_after_if_else@6
-    // smart_contracts/reti/validatorRegistry.algo.ts:1526
+    // smart_contracts/reti/validatorRegistry.algo.ts:1523
     // return true
     intc_1 // 1
     frame_bury 0
     retsub
 
 isAddressInNFDCAAlgoList_after_if_else@6:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1523
+    // smart_contracts/reti/validatorRegistry.algo.ts:1520
     // for (let i: uint64 = 0; i < caAlgoData.length; i += 32) {
     frame_dig 2
     pushint 32 // 32
@@ -4958,7 +5015,7 @@ isAddressInNFDCAAlgoList_after_if_else@6:
     b isAddressInNFDCAAlgoList_while_top@2
 
 isAddressInNFDCAAlgoList_after_while@7:
-    // smart_contracts/reti/validatorRegistry.algo.ts:1529
+    // smart_contracts/reti/validatorRegistry.algo.ts:1526
     // return false
     intc_0 // 0
     frame_bury 0

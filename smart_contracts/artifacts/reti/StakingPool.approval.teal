@@ -3,9 +3,9 @@
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    intcblock 0 1 64 6 200 30857 157 1000000 100000 TMPL_NFD_REGISTRY_APP_ID
-    bytecblock "stakers" "creatorApp" 0x151f7c75 "validatorId" "poolId" "staked" "stakeAccumulator" "roundsPerDay" "binRoundStart" "numStakers" "rewardAccumulator" "lastPayout" 0x75aff61d "minEntryStake" "epochNumber" "ewma" 0x64 0x0c2245e1 0x00000000000000000000000000000000 0xa2dc51b5 0x572767d1 0x4df8d86e TMPL_FEE_SINK_ADDR
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    intcblock 0 1 64 6 200 30857 157 300 1000000 100000 TMPL_NFD_REGISTRY_APP_ID
+    bytecblock "stakers" "creatorApp" 0x151f7c75 "validatorId" "poolId" "staked" "stakeAccumulator" "roundsPerDay" "binRoundStart" "numStakers" "rewardAccumulator" "lastPayout" 0x75aff61d "minEntryStake" "epochNumber" "ewma" 0x64 0x0c2245e1 0x068101 0x00000000000000000000000000000000 0xa2dc51b5 0x572767d1 0x4df8d86e TMPL_FEE_SINK_ADDR
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txn NumAppArgs
     bz main_after_if_else@21
@@ -15,23 +15,23 @@ main:
     match main_updateApplication_route@3 main_createApplication_route@4 main_gas_route@5 main_initStorage_route@6 main_addStake_route@7 main_removeStake_route@8 main_claimTokens_route@9 main_getStakerInfo_route@10 main_payTokenReward_route@11 main_updateAlgodVer_route@12 main_epochBalanceUpdate_route@13 main_goOnline_route@14 main_goOffline_route@15 main_linkToNFD_route@16 main_proxiedSetTokenPayoutRatio_route@17
 
 main_after_if_else@21:
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     intc_0 // 0
     return
 
 main_proxiedSetTokenPayoutRatio_route@17:
-    // smart_contracts/reti/stakingPool.algo.ts:977
+    // smart_contracts/reti/stakingPool.algo.ts:971
     // proxiedSetTokenPayoutRatio(poolKey: ValidatorPoolKey): PoolTokenPayoutRatio {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txna ApplicationArgs 1
-    // smart_contracts/reti/stakingPool.algo.ts:977
+    // smart_contracts/reti/stakingPool.algo.ts:971
     // proxiedSetTokenPayoutRatio(poolKey: ValidatorPoolKey): PoolTokenPayoutRatio {
     callsub proxiedSetTokenPayoutRatio
     bytec_2 // 0x151f7c75
@@ -42,27 +42,27 @@ main_proxiedSetTokenPayoutRatio_route@17:
     return
 
 main_linkToNFD_route@16:
-    // smart_contracts/reti/stakingPool.algo.ts:954
+    // smart_contracts/reti/stakingPool.algo.ts:948
     // linkToNFD(nfdAppId: uint64, nfdName: string): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txna ApplicationArgs 1
     btoi
     txna ApplicationArgs 2
     extract 2 0
-    // smart_contracts/reti/stakingPool.algo.ts:954
+    // smart_contracts/reti/stakingPool.algo.ts:948
     // linkToNFD(nfdAppId: uint64, nfdName: string): void {
     callsub linkToNFD
     intc_1 // 1
     return
 
 main_goOffline_route@15:
-    // smart_contracts/reti/stakingPool.algo.ts:941
+    // smart_contracts/reti/stakingPool.algo.ts:935
     // goOffline(): void {
     txn OnCompletion
     !
@@ -74,7 +74,7 @@ main_goOffline_route@15:
     return
 
 main_goOnline_route@14:
-    // smart_contracts/reti/stakingPool.algo.ts:912-920
+    // smart_contracts/reti/stakingPool.algo.ts:906-914
     // goOnline(
     //   feePayment: gtxn.PaymentTxn,
     //   votePK: bytes,
@@ -89,7 +89,7 @@ main_goOnline_route@14:
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txn GroupIndex
     intc_1 // 1
@@ -111,7 +111,7 @@ main_goOnline_route@14:
     btoi
     txna ApplicationArgs 6
     btoi
-    // smart_contracts/reti/stakingPool.algo.ts:912-920
+    // smart_contracts/reti/stakingPool.algo.ts:906-914
     // goOnline(
     //   feePayment: gtxn.PaymentTxn,
     //   votePK: bytes,
@@ -126,7 +126,7 @@ main_goOnline_route@14:
     return
 
 main_epochBalanceUpdate_route@13:
-    // smart_contracts/reti/stakingPool.algo.ts:544
+    // smart_contracts/reti/stakingPool.algo.ts:540
     // epochBalanceUpdate(): void {
     txn OnCompletion
     !
@@ -138,56 +138,56 @@ main_epochBalanceUpdate_route@13:
     return
 
 main_updateAlgodVer_route@12:
-    // smart_contracts/reti/stakingPool.algo.ts:531
+    // smart_contracts/reti/stakingPool.algo.ts:527
     // updateAlgodVer(algodVer: string): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txna ApplicationArgs 1
     extract 2 0
-    // smart_contracts/reti/stakingPool.algo.ts:531
+    // smart_contracts/reti/stakingPool.algo.ts:527
     // updateAlgodVer(algodVer: string): void {
     callsub updateAlgodVer
     intc_1 // 1
     return
 
 main_payTokenReward_route@11:
-    // smart_contracts/reti/stakingPool.algo.ts:503
+    // smart_contracts/reti/stakingPool.algo.ts:499
     // payTokenReward(staker: Address, rewardToken: uint64, amountToSend: uint64): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txna ApplicationArgs 1
     txna ApplicationArgs 2
     btoi
     txna ApplicationArgs 3
     btoi
-    // smart_contracts/reti/stakingPool.algo.ts:503
+    // smart_contracts/reti/stakingPool.algo.ts:499
     // payTokenReward(staker: Address, rewardToken: uint64, amountToSend: uint64): void {
     callsub payTokenReward
     intc_1 // 1
     return
 
 main_getStakerInfo_route@10:
-    // smart_contracts/reti/stakingPool.algo.ts:481
+    // smart_contracts/reti/stakingPool.algo.ts:479
     // getStakerInfo(staker: Address): StakedInfo {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txna ApplicationArgs 1
-    // smart_contracts/reti/stakingPool.algo.ts:481
+    // smart_contracts/reti/stakingPool.algo.ts:479
     // getStakerInfo(staker: Address): StakedInfo {
     callsub getStakerInfo
     bytec_2 // 0x151f7c75
@@ -198,7 +198,7 @@ main_getStakerInfo_route@10:
     return
 
 main_claimTokens_route@9:
-    // smart_contracts/reti/stakingPool.algo.ts:410
+    // smart_contracts/reti/stakingPool.algo.ts:409
     // claimTokens(): void {
     txn OnCompletion
     !
@@ -217,7 +217,7 @@ main_removeStake_route@8:
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txna ApplicationArgs 1
     txna ApplicationArgs 2
@@ -229,14 +229,14 @@ main_removeStake_route@8:
     return
 
 main_addStake_route@7:
-    // smart_contracts/reti/stakingPool.algo.ts:207
+    // smart_contracts/reti/stakingPool.algo.ts:208
     // addStake(stakedAmountPayment: gtxn.PaymentTxn, staker: Address): uint64 {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txn GroupIndex
     intc_1 // 1
@@ -247,7 +247,7 @@ main_addStake_route@7:
     ==
     assert // transaction type is pay
     txna ApplicationArgs 1
-    // smart_contracts/reti/stakingPool.algo.ts:207
+    // smart_contracts/reti/stakingPool.algo.ts:208
     // addStake(stakedAmountPayment: gtxn.PaymentTxn, staker: Address): uint64 {
     callsub addStake
     itob
@@ -259,14 +259,14 @@ main_addStake_route@7:
     return
 
 main_initStorage_route@6:
-    // smart_contracts/reti/stakingPool.algo.ts:167
+    // smart_contracts/reti/stakingPool.algo.ts:168
     // initStorage(mbrPayment: gtxn.PaymentTxn): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txn GroupIndex
     intc_1 // 1
@@ -276,14 +276,14 @@ main_initStorage_route@6:
     intc_1 // pay
     ==
     assert // transaction type is pay
-    // smart_contracts/reti/stakingPool.algo.ts:167
+    // smart_contracts/reti/stakingPool.algo.ts:168
     // initStorage(mbrPayment: gtxn.PaymentTxn): void {
     callsub initStorage
     intc_1 // 1
     return
 
 main_gas_route@5:
-    // smart_contracts/reti/stakingPool.algo.ts:151
+    // smart_contracts/reti/stakingPool.algo.ts:152
     // gas(): void {}
     txn OnCompletion
     !
@@ -294,7 +294,7 @@ main_gas_route@5:
     return
 
 main_createApplication_route@4:
-    // smart_contracts/reti/stakingPool.algo.ts:122
+    // smart_contracts/reti/stakingPool.algo.ts:123
     // createApplication(creatingContractId: uint64, validatorId: uint64, poolId: uint64, minEntryStake: uint64): void {
     txn OnCompletion
     !
@@ -302,7 +302,7 @@ main_createApplication_route@4:
     txn ApplicationID
     !
     assert // can only call when creating
-    // smart_contracts/reti/stakingPool.algo.ts:59
+    // smart_contracts/reti/stakingPool.algo.ts:60
     // export class StakingPool extends Contract {
     txna ApplicationArgs 1
     btoi
@@ -312,14 +312,14 @@ main_createApplication_route@4:
     btoi
     txna ApplicationArgs 4
     btoi
-    // smart_contracts/reti/stakingPool.algo.ts:122
+    // smart_contracts/reti/stakingPool.algo.ts:123
     // createApplication(creatingContractId: uint64, validatorId: uint64, poolId: uint64, minEntryStake: uint64): void {
     callsub createApplication
     intc_1 // 1
     return
 
 main_updateApplication_route@3:
-    // smart_contracts/reti/stakingPool.algo.ts:108
+    // smart_contracts/reti/stakingPool.algo.ts:109
     // updateApplication(): void {
     txn OnCompletion
     pushint 4 // UpdateApplication
@@ -332,14 +332,56 @@ main_updateApplication_route@3:
     return
 
 
+// _puya_lib.util.ensure_budget(required_budget: uint64, fee_source: uint64) -> void:
+ensure_budget:
+    proto 2 0
+    frame_dig -2
+    pushint 10 // 10
+    +
+
+ensure_budget_while_top@1:
+    frame_dig 0
+    global OpcodeBudget
+    >
+    bz ensure_budget_after_while@7
+    itxn_begin
+    intc_3 // appl
+    itxn_field TypeEnum
+    pushint 5 // DeleteApplication
+    itxn_field OnCompletion
+    bytec 18 // 0x068101
+    itxn_field ApprovalProgram
+    bytec 18 // 0x068101
+    itxn_field ClearStateProgram
+    frame_dig -1
+    switch ensure_budget_switch_case_0@3 ensure_budget_switch_case_1@4
+
+ensure_budget_switch_case_next@6:
+    itxn_submit
+    b ensure_budget_while_top@1
+
+ensure_budget_switch_case_1@4:
+    global MinTxnFee
+    itxn_field Fee
+    b ensure_budget_switch_case_next@6
+
+ensure_budget_switch_case_0@3:
+    intc_0 // 0
+    itxn_field Fee
+    b ensure_budget_switch_case_next@6
+
+ensure_budget_after_while@7:
+    retsub
+
+
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.updateApplication() -> void:
 updateApplication:
-    // smart_contracts/reti/stakingPool.algo.ts:110
+    // smart_contracts/reti/stakingPool.algo.ts:111
     // new Address(Txn.sender) === new Address('LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXZ6ZAFIQ'),
     txn Sender
     pushbytes base32(LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXQ) // addr LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXZ6ZAFIQ
     ==
-    // smart_contracts/reti/stakingPool.algo.ts:109-112
+    // smart_contracts/reti/stakingPool.algo.ts:110-113
     // assert(
     //   new Address(Txn.sender) === new Address('LZ4V2IRVLCXFJK4REJV4TAGEKEYTA2GMR6TC2344OB3L3AF3MWXZ6ZAFIQ'),
     //   'Temporary: contract is upgradeable but only during testing and only from a development account',
@@ -350,141 +392,141 @@ updateApplication:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.createApplication(creatingContractId: uint64, validatorId: uint64, poolId: uint64, minEntryStake: uint64) -> void:
 createApplication:
-    // smart_contracts/reti/stakingPool.algo.ts:122
+    // smart_contracts/reti/stakingPool.algo.ts:123
     // createApplication(creatingContractId: uint64, validatorId: uint64, poolId: uint64, minEntryStake: uint64): void {
     proto 4 0
-    // smart_contracts/reti/stakingPool.algo.ts:123
+    // smart_contracts/reti/stakingPool.algo.ts:124
     // if (creatingContractId === 0) {
     frame_dig -4
     bnz createApplication_else_body@2
-    // smart_contracts/reti/stakingPool.algo.ts:125
+    // smart_contracts/reti/stakingPool.algo.ts:126
     // assert(validatorId === 0)
     frame_dig -3
     !
     assert
-    // smart_contracts/reti/stakingPool.algo.ts:126
+    // smart_contracts/reti/stakingPool.algo.ts:127
     // assert(poolId === 0)
     frame_dig -2
     !
     assert
 
 createApplication_after_if_else@3:
-    // smart_contracts/reti/stakingPool.algo.ts:131
+    // smart_contracts/reti/stakingPool.algo.ts:132
     // assert(minEntryStake >= MIN_ALGO_STAKE_PER_POOL, 'staking pool must have minimum entry of 1 algo')
     frame_dig -1
-    intc 7 // 1000000
+    intc 8 // 1000000
     >=
     assert // staking pool must have minimum entry of 1 algo
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:132
+    // smart_contracts/reti/stakingPool.algo.ts:133
     // this.creatingValidatorContractAppId.value = creatingContractId
     frame_dig -4
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:133
+    // smart_contracts/reti/stakingPool.algo.ts:134
     // this.validatorId.value = validatorId
     frame_dig -3
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:134
+    // smart_contracts/reti/stakingPool.algo.ts:135
     // this.poolId.value = poolId
     frame_dig -2
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:73
+    // smart_contracts/reti/stakingPool.algo.ts:74
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 9 // "numStakers"
-    // smart_contracts/reti/stakingPool.algo.ts:135
+    // smart_contracts/reti/stakingPool.algo.ts:136
     // this.numStakers.value = 0
     intc_0 // 0
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:136
+    // smart_contracts/reti/stakingPool.algo.ts:137
     // this.totalAlgoStaked.value = 0
     intc_0 // 0
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:78
+    // smart_contracts/reti/stakingPool.algo.ts:79
     // minEntryStake = GlobalState<uint64>({ key: 'minEntryStake' })
     bytec 13 // "minEntryStake"
-    // smart_contracts/reti/stakingPool.algo.ts:137
+    // smart_contracts/reti/stakingPool.algo.ts:138
     // this.minEntryStake.value = minEntryStake
     frame_dig -1
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:81
+    // smart_contracts/reti/stakingPool.algo.ts:82
     // lastPayout = GlobalState<uint64>({ key: 'lastPayout' })
     bytec 11 // "lastPayout"
-    // smart_contracts/reti/stakingPool.algo.ts:138
+    // smart_contracts/reti/stakingPool.algo.ts:139
     // this.lastPayout.value = Global.round // set to init block to establish baseline
     global Round
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:84
+    // smart_contracts/reti/stakingPool.algo.ts:85
     // epochNumber = GlobalState<uint64>({ key: 'epochNumber' })
     bytec 14 // "epochNumber"
-    // smart_contracts/reti/stakingPool.algo.ts:139
+    // smart_contracts/reti/stakingPool.algo.ts:140
     // this.epochNumber.value = 0
     intc_0 // 0
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:94
+    // smart_contracts/reti/stakingPool.algo.ts:95
     // roundsPerDay = GlobalState<uint64>({ key: 'roundsPerDay' })
     bytec 7 // "roundsPerDay"
-    // smart_contracts/reti/stakingPool.algo.ts:1076
+    // smart_contracts/reti/stakingPool.algo.ts:1069
     // this.roundsPerDay.value = AVG_ROUNDS_PER_DAY
     intc 5 // 30857
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:142
+    // smart_contracts/reti/stakingPool.algo.ts:143
     // this.binRoundStart.value = Global.round - (Global.round % this.roundsPerDay.value) // place at start of bin
     global Round
     dup
-    // smart_contracts/reti/stakingPool.algo.ts:1076
+    // smart_contracts/reti/stakingPool.algo.ts:1069
     // this.roundsPerDay.value = AVG_ROUNDS_PER_DAY
     intc 5 // 30857
-    // smart_contracts/reti/stakingPool.algo.ts:142
+    // smart_contracts/reti/stakingPool.algo.ts:143
     // this.binRoundStart.value = Global.round - (Global.round % this.roundsPerDay.value) // place at start of bin
     %
     -
-    // smart_contracts/reti/stakingPool.algo.ts:96
+    // smart_contracts/reti/stakingPool.algo.ts:97
     // binRoundStart = GlobalState<uint64>({ key: 'binRoundStart' })
     bytec 8 // "binRoundStart"
-    // smart_contracts/reti/stakingPool.algo.ts:142
+    // smart_contracts/reti/stakingPool.algo.ts:143
     // this.binRoundStart.value = Global.round - (Global.round % this.roundsPerDay.value) // place at start of bin
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:98
+    // smart_contracts/reti/stakingPool.algo.ts:99
     // stakeAccumulator = GlobalState<Uint128>({ key: 'stakeAccumulator' })
     bytec 6 // "stakeAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:143
+    // smart_contracts/reti/stakingPool.algo.ts:144
     // this.stakeAccumulator.value = new Uint128(0)
-    bytec 18 // 0x00000000000000000000000000000000
+    bytec 19 // 0x00000000000000000000000000000000
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:100
+    // smart_contracts/reti/stakingPool.algo.ts:101
     // rewardAccumulator = GlobalState<uint64>({ key: 'rewardAccumulator' })
     bytec 10 // "rewardAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:144
+    // smart_contracts/reti/stakingPool.algo.ts:145
     // this.rewardAccumulator.value = 0
     intc_0 // 0
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:102
+    // smart_contracts/reti/stakingPool.algo.ts:103
     // weightedMovingAverage = GlobalState<Uint128>({ key: 'ewma' })
     bytec 15 // "ewma"
-    // smart_contracts/reti/stakingPool.algo.ts:145
+    // smart_contracts/reti/stakingPool.algo.ts:146
     // this.weightedMovingAverage.value = new Uint128(0)
-    bytec 18 // 0x00000000000000000000000000000000
+    bytec 19 // 0x00000000000000000000000000000000
     app_global_put
     retsub
 
 createApplication_else_body@2:
-    // smart_contracts/reti/stakingPool.algo.ts:128
+    // smart_contracts/reti/stakingPool.algo.ts:129
     // assert(validatorId !== 0)
     frame_dig -3
     assert
-    // smart_contracts/reti/stakingPool.algo.ts:129
+    // smart_contracts/reti/stakingPool.algo.ts:130
     // assert(poolId !== 0)
     frame_dig -2
     assert
@@ -493,46 +535,46 @@ createApplication_else_body@2:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.initStorage(mbrPayment: uint64) -> void:
 initStorage:
-    // smart_contracts/reti/stakingPool.algo.ts:167
+    // smart_contracts/reti/stakingPool.algo.ts:168
     // initStorage(mbrPayment: gtxn.PaymentTxn): void {
     proto 1 0
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:168
+    // smart_contracts/reti/stakingPool.algo.ts:169
     // assert(!this.stakers.exists, 'staking pool already initialized')
     box_len
     bury 1
     !
     assert // staking pool already initialized
-    // smart_contracts/reti/stakingPool.algo.ts:171-174
+    // smart_contracts/reti/stakingPool.algo.ts:172-175
     // const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:172
+    // smart_contracts/reti/stakingPool.algo.ts:173
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:172
+    // smart_contracts/reti/stakingPool.algo.ts:173
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:173
+    // smart_contracts/reti/stakingPool.algo.ts:174
     // args: [this.validatorId.value],
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:173
+    // smart_contracts/reti/stakingPool.algo.ts:174
     // args: [this.validatorId.value],
     app_global_get_ex
     assert // check GlobalState exists
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:171-174
+    // smart_contracts/reti/stakingPool.algo.ts:172-175
     // const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
@@ -553,18 +595,18 @@ initStorage:
     ==
     assert // Bytes has valid prefix
     intc 6 // 157
-    // smart_contracts/reti/stakingPool.algo.ts:176
+    // smart_contracts/reti/stakingPool.algo.ts:177
     // const isTokenEligible = validatorConfig.rewardTokenId !== 0
     extract_uint64
     dup
-    // smart_contracts/reti/stakingPool.algo.ts:177
+    // smart_contracts/reti/stakingPool.algo.ts:178
     // const extraMBR: uint64 = isTokenEligible && this.poolId.value === 1 ? ASSET_HOLDING_FEE : 0
     bz initStorage_bool_false@4
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:177
+    // smart_contracts/reti/stakingPool.algo.ts:178
     // const extraMBR: uint64 = isTokenEligible && this.poolId.value === 1 ? ASSET_HOLDING_FEE : 0
     app_global_get_ex
     assert // check GlobalState exists
@@ -574,15 +616,15 @@ initStorage:
     intc_1 // 1
 
 initStorage_bool_merge@5:
-    // smart_contracts/reti/stakingPool.algo.ts:177
-    // const extraMBR: uint64 = isTokenEligible && this.poolId.value === 1 ? ASSET_HOLDING_FEE : 0
-    intc 8 // 100000
-    *
     // smart_contracts/reti/stakingPool.algo.ts:178
+    // const extraMBR: uint64 = isTokenEligible && this.poolId.value === 1 ? ASSET_HOLDING_FEE : 0
+    intc 9 // 100000
+    *
+    // smart_contracts/reti/stakingPool.algo.ts:179
     // const PoolInitMbr: uint64 = ALGORAND_ACCOUNT_MIN_BALANCE + extraMBR
-    intc 8 // 100000
+    intc 9 // 100000
     +
-    // smart_contracts/reti/stakingPool.algo.ts:182
+    // smart_contracts/reti/stakingPool.algo.ts:183
     // assertMatch(mbrPayment, { receiver: Global.currentApplicationId.address, amount: PoolInitMbr })
     frame_dig -1
     gtxns Receiver
@@ -596,30 +638,30 @@ initStorage_bool_merge@5:
     ==
     &&
     assert // assert target is match for conditions
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:183
+    // smart_contracts/reti/stakingPool.algo.ts:184
     // this.stakers.create()
     pushint 12800 // 12800
     box_create
     pop
-    // smart_contracts/reti/stakingPool.algo.ts:185
+    // smart_contracts/reti/stakingPool.algo.ts:186
     // if (isTokenEligible && this.poolId.value === 1) {
     frame_dig 0
     bz initStorage_after_if_else@9
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:185
+    // smart_contracts/reti/stakingPool.algo.ts:186
     // if (isTokenEligible && this.poolId.value === 1) {
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     ==
     bz initStorage_after_if_else@9
-    // smart_contracts/reti/stakingPool.algo.ts:187-193
+    // smart_contracts/reti/stakingPool.algo.ts:188-194
     // itxn
     //   .assetTransfer({
     //     xferAsset: validatorConfig.rewardTokenId,
@@ -628,19 +670,19 @@ initStorage_bool_merge@5:
     //   })
     //   .submit()
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:190
+    // smart_contracts/reti/stakingPool.algo.ts:191
     // assetReceiver: Global.currentApplicationId.address,
     global CurrentApplicationID
     app_params_get AppAddress
     assert // application exists
-    // smart_contracts/reti/stakingPool.algo.ts:191
+    // smart_contracts/reti/stakingPool.algo.ts:192
     // assetAmount: 0,
     intc_0 // 0
     itxn_field AssetAmount
     itxn_field AssetReceiver
     frame_dig 0
     itxn_field XferAsset
-    // smart_contracts/reti/stakingPool.algo.ts:187-192
+    // smart_contracts/reti/stakingPool.algo.ts:188-193
     // itxn
     //   .assetTransfer({
     //     xferAsset: validatorConfig.rewardTokenId,
@@ -651,7 +693,7 @@ initStorage_bool_merge@5:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/stakingPool.algo.ts:187-193
+    // smart_contracts/reti/stakingPool.algo.ts:188-194
     // itxn
     //   .assetTransfer({
     //     xferAsset: validatorConfig.rewardTokenId,
@@ -671,51 +713,51 @@ initStorage_bool_false@4:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.addStake(stakedAmountPayment: uint64, staker: bytes) -> uint64:
 addStake:
-    // smart_contracts/reti/stakingPool.algo.ts:207
+    // smart_contracts/reti/stakingPool.algo.ts:208
     // addStake(stakedAmountPayment: gtxn.PaymentTxn, staker: Address): uint64 {
     proto 2 1
     intc_0 // 0
     dup
     pushbytes ""
     dup
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:208
+    // smart_contracts/reti/stakingPool.algo.ts:209
     // assert(this.stakers.exists, 'staking pool must be initialized first')
     box_len
     bury 1
     assert // staking pool must be initialized first
-    // smart_contracts/reti/stakingPool.algo.ts:212
+    // smart_contracts/reti/stakingPool.algo.ts:213
     // Txn.sender === Application(this.creatingValidatorContractAppId.value).address,
     txn Sender
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:212
+    // smart_contracts/reti/stakingPool.algo.ts:213
     // Txn.sender === Application(this.creatingValidatorContractAppId.value).address,
     app_global_get_ex
     assert // check GlobalState exists
     app_params_get AppAddress
     assert // application exists
     ==
-    // smart_contracts/reti/stakingPool.algo.ts:211-214
+    // smart_contracts/reti/stakingPool.algo.ts:212-215
     // assert(
     //   Txn.sender === Application(this.creatingValidatorContractAppId.value).address,
     //   'stake can only be added via the validator contract',
     // )
     assert // stake can only be added via the validator contract
-    // smart_contracts/reti/stakingPool.algo.ts:215
+    // smart_contracts/reti/stakingPool.algo.ts:216
     // assert(staker !== new Address(Global.zeroAddress))
     frame_dig -1
     global ZeroAddress
     !=
     assert
-    // smart_contracts/reti/stakingPool.algo.ts:218
+    // smart_contracts/reti/stakingPool.algo.ts:219
     // this.checkIfBinClosed()
     callsub checkIfBinClosed
-    // smart_contracts/reti/stakingPool.algo.ts:222-226
+    // smart_contracts/reti/stakingPool.algo.ts:223-227
     // assertMatch(stakedAmountPayment, {
     //   sender: Application(this.creatingValidatorContractAppId.value).address,
     //   receiver: Global.currentApplicationAddress,
@@ -723,19 +765,19 @@ addStake:
     // })
     frame_dig -2
     gtxns Sender
-    // smart_contracts/reti/stakingPool.algo.ts:223
+    // smart_contracts/reti/stakingPool.algo.ts:224
     // sender: Application(this.creatingValidatorContractAppId.value).address,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:223
+    // smart_contracts/reti/stakingPool.algo.ts:224
     // sender: Application(this.creatingValidatorContractAppId.value).address,
     app_global_get_ex
     assert // check GlobalState exists
     app_params_get AppAddress
     assert // application exists
-    // smart_contracts/reti/stakingPool.algo.ts:222-226
+    // smart_contracts/reti/stakingPool.algo.ts:223-227
     // assertMatch(stakedAmountPayment, {
     //   sender: Application(this.creatingValidatorContractAppId.value).address,
     //   receiver: Global.currentApplicationAddress,
@@ -744,10 +786,10 @@ addStake:
     ==
     frame_dig -2
     gtxns Receiver
-    // smart_contracts/reti/stakingPool.algo.ts:224
+    // smart_contracts/reti/stakingPool.algo.ts:225
     // receiver: Global.currentApplicationAddress,
     global CurrentApplicationAddress
-    // smart_contracts/reti/stakingPool.algo.ts:222-226
+    // smart_contracts/reti/stakingPool.algo.ts:223-227
     // assertMatch(stakedAmountPayment, {
     //   sender: Application(this.creatingValidatorContractAppId.value).address,
     //   receiver: Global.currentApplicationAddress,
@@ -762,63 +804,63 @@ addStake:
     intc_1 // 1
     &&
     assert // assert target is match for conditions
-    // smart_contracts/reti/stakingPool.algo.ts:231
+    // smart_contracts/reti/stakingPool.algo.ts:232
     // const entryRound: uint64 = Global.round + ALGORAND_STAKING_BLOCK_DELAY
     global Round
     pushint 320 // 320
     +
     swap
-    // smart_contracts/reti/stakingPool.algo.ts:232
+    // smart_contracts/reti/stakingPool.algo.ts:233
     // let firstEmpty: uint64 = 0
     intc_0 // 0
     swap
-    // smart_contracts/reti/stakingPool.algo.ts:234
+    // smart_contracts/reti/stakingPool.algo.ts:235
     // this.totalAlgoStaked.value += stakedAmountPayment.amount
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:234
+    // smart_contracts/reti/stakingPool.algo.ts:235
     // this.totalAlgoStaked.value += stakedAmountPayment.amount
     app_global_get_ex
     assert // check GlobalState exists
     dig 1
     +
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:234
+    // smart_contracts/reti/stakingPool.algo.ts:235
     // this.totalAlgoStaked.value += stakedAmountPayment.amount
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:236
+    // smart_contracts/reti/stakingPool.algo.ts:237
     // const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:96
+    // smart_contracts/reti/stakingPool.algo.ts:97
     // binRoundStart = GlobalState<uint64>({ key: 'binRoundStart' })
     bytec 8 // "binRoundStart"
-    // smart_contracts/reti/stakingPool.algo.ts:236
+    // smart_contracts/reti/stakingPool.algo.ts:237
     // const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     app_global_get_ex
     assert // check GlobalState exists
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:94
+    // smart_contracts/reti/stakingPool.algo.ts:95
     // roundsPerDay = GlobalState<uint64>({ key: 'roundsPerDay' })
     bytec 7 // "roundsPerDay"
-    // smart_contracts/reti/stakingPool.algo.ts:236
+    // smart_contracts/reti/stakingPool.algo.ts:237
     // const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     app_global_get_ex
     assert // check GlobalState exists
     +
     global Round
     -
-    // smart_contracts/reti/stakingPool.algo.ts:238
+    // smart_contracts/reti/stakingPool.algo.ts:239
     // this.stakeAccumulator.value.native + BigUint(stakedAmountPayment.amount) * BigUint(roundsLeftInBin),
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:98
+    // smart_contracts/reti/stakingPool.algo.ts:99
     // stakeAccumulator = GlobalState<Uint128>({ key: 'stakeAccumulator' })
     bytec 6 // "stakeAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:238
+    // smart_contracts/reti/stakingPool.algo.ts:239
     // this.stakeAccumulator.value.native + BigUint(stakedAmountPayment.amount) * BigUint(roundsLeftInBin),
     app_global_get_ex
     assert // check GlobalState exists
@@ -830,7 +872,7 @@ addStake:
     itob
     b*
     b+
-    // smart_contracts/reti/stakingPool.algo.ts:237-239
+    // smart_contracts/reti/stakingPool.algo.ts:238-240
     // this.stakeAccumulator.value = new Uint128(
     //   this.stakeAccumulator.value.native + BigUint(stakedAmountPayment.amount) * BigUint(roundsLeftInBin),
     // )
@@ -842,24 +884,24 @@ addStake:
     pushint 16 // 16
     bzero
     b|
-    // smart_contracts/reti/stakingPool.algo.ts:98
+    // smart_contracts/reti/stakingPool.algo.ts:99
     // stakeAccumulator = GlobalState<Uint128>({ key: 'stakeAccumulator' })
     bytec 6 // "stakeAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:237-239
+    // smart_contracts/reti/stakingPool.algo.ts:238-240
     // this.stakeAccumulator.value = new Uint128(
     //   this.stakeAccumulator.value.native + BigUint(stakedAmountPayment.amount) * BigUint(roundsLeftInBin),
     // )
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:242
+    // smart_contracts/reti/stakingPool.algo.ts:243
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     intc_0 // 0
 
 addStake_while_top@1:
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:242
+    // smart_contracts/reti/stakingPool.algo.ts:243
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     box_len
     bury 1
@@ -867,7 +909,12 @@ addStake_while_top@1:
     frame_dig 8
     intc 4 // 200
     <
-    bz addStake_after_while@10
+    bz addStake_after_while@8
+    // smart_contracts/reti/stakingPool.algo.ts:244
+    // ensureBudget(300)
+    intc 7 // 300
+    intc_0 // 0
+    callsub ensure_budget
     // smart_contracts/reti/stakingPool.algo.ts:246
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 8
@@ -875,7 +922,7 @@ addStake_while_top@1:
     *
     dup
     frame_bury 2
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
     // smart_contracts/reti/stakingPool.algo.ts:246
@@ -895,8 +942,8 @@ addStake_while_top@1:
     // if (cmpStaker.account === staker) {
     frame_dig -1
     ==
-    bz addStake_after_if_else@6
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bz addStake_after_if_else@4
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
     // smart_contracts/reti/stakingPool.algo.ts:246
@@ -923,7 +970,7 @@ addStake_while_top@1:
     cover 2
     itob
     replace2 56
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
     // smart_contracts/reti/stakingPool.algo.ts:253
@@ -936,19 +983,19 @@ addStake_while_top@1:
     frame_bury 0
     retsub
 
-addStake_after_if_else@6:
+addStake_after_if_else@4:
     frame_dig 6
     dup
     frame_bury 3
     // smart_contracts/reti/stakingPool.algo.ts:257
     // if (firstEmpty === 0 && cmpStaker.account.native === Global.zeroAddress) {
-    bnz addStake_after_if_else@9
+    bnz addStake_after_if_else@7
     frame_dig 0
     global ZeroAddress
     ==
     frame_dig 6
     frame_bury 3
-    bz addStake_after_if_else@9
+    bz addStake_after_if_else@7
     // smart_contracts/reti/stakingPool.algo.ts:258
     // firstEmpty = i + 1
     frame_dig 8
@@ -956,10 +1003,10 @@ addStake_after_if_else@6:
     +
     frame_bury 3
 
-addStake_after_if_else@9:
+addStake_after_if_else@7:
     frame_dig 3
     frame_bury 6
-    // smart_contracts/reti/stakingPool.algo.ts:242
+    // smart_contracts/reti/stakingPool.algo.ts:243
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     frame_dig 8
     intc_1 // 1
@@ -967,7 +1014,7 @@ addStake_after_if_else@9:
     frame_bury 8
     b addStake_while_top@1
 
-addStake_after_while@10:
+addStake_after_while@8:
     // smart_contracts/reti/stakingPool.algo.ts:262
     // if (firstEmpty === 0) {
     frame_dig 6
@@ -978,7 +1025,7 @@ addStake_after_while@10:
     // smart_contracts/reti/stakingPool.algo.ts:269
     // assert(stakedAmountPayment.amount >= this.minEntryStake.value, 'must stake at least the minimum for this pool')
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:78
+    // smart_contracts/reti/stakingPool.algo.ts:79
     // minEntryStake = GlobalState<uint64>({ key: 'minEntryStake' })
     bytec 13 // "minEntryStake"
     // smart_contracts/reti/stakingPool.algo.ts:269
@@ -994,7 +1041,7 @@ addStake_after_while@10:
     -
     intc_2 // 64
     *
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
     // smart_contracts/reti/stakingPool.algo.ts:271
@@ -1039,7 +1086,7 @@ addStake_after_while@10:
     cover 2
     itob
     concat
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
     // smart_contracts/reti/stakingPool.algo.ts:273-279
@@ -1056,7 +1103,7 @@ addStake_after_while@10:
     // smart_contracts/reti/stakingPool.algo.ts:280
     // this.numStakers.value += 1
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:73
+    // smart_contracts/reti/stakingPool.algo.ts:74
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 9 // "numStakers"
     // smart_contracts/reti/stakingPool.algo.ts:280
@@ -1065,7 +1112,7 @@ addStake_after_while@10:
     assert // check GlobalState exists
     intc_1 // 1
     +
-    // smart_contracts/reti/stakingPool.algo.ts:73
+    // smart_contracts/reti/stakingPool.algo.ts:74
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 9 // "numStakers"
     // smart_contracts/reti/stakingPool.algo.ts:280
@@ -1113,7 +1160,7 @@ removeStake_after_if_else@2:
     frame_bury 6
 
 removeStake_while_top@3:
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
     // smart_contracts/reti/stakingPool.algo.ts:307
@@ -1126,66 +1173,71 @@ removeStake_while_top@3:
     intc 4 // 200
     <
     assert // account not found
-    // smart_contracts/reti/stakingPool.algo.ts:311
+    // smart_contracts/reti/stakingPool.algo.ts:308
+    // ensureBudget(300)
+    intc 7 // 300
+    intc_0 // 0
+    callsub ensure_budget
+    // smart_contracts/reti/stakingPool.algo.ts:310
     // const cmpStaker = clone(this.stakers.value[i])
     intc_2 // 64
     *
     dup
     frame_bury 5
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:311
+    // smart_contracts/reti/stakingPool.algo.ts:310
     // const cmpStaker = clone(this.stakers.value[i])
     swap
     intc_2 // 64
     box_extract
     dup
     frame_bury 0
-    // smart_contracts/reti/stakingPool.algo.ts:311-312
+    // smart_contracts/reti/stakingPool.algo.ts:310-311
     // const cmpStaker = clone(this.stakers.value[i])
     // if (cmpStaker.account === staker) {
     extract 0 32
-    // smart_contracts/reti/stakingPool.algo.ts:312
+    // smart_contracts/reti/stakingPool.algo.ts:311
     // if (cmpStaker.account === staker) {
     frame_dig -2
     ==
-    bz removeStake_after_if_else@27
+    bz removeStake_after_if_else@25
     frame_dig -1
     frame_bury 4
-    // smart_contracts/reti/stakingPool.algo.ts:313
+    // smart_contracts/reti/stakingPool.algo.ts:312
     // if (amountToUnstake === 0) {
     frame_dig -1
-    bnz removeStake_after_if_else@9
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bnz removeStake_after_if_else@7
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:311
+    // smart_contracts/reti/stakingPool.algo.ts:310
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 5
     intc_2 // 64
     box_extract
     pushint 32 // 32
-    // smart_contracts/reti/stakingPool.algo.ts:315
+    // smart_contracts/reti/stakingPool.algo.ts:314
     // amountToUnstake = cmpStaker.balance
     extract_uint64
     dup
     frame_bury -1
     frame_bury 4
 
-removeStake_after_if_else@9:
+removeStake_after_if_else@7:
     frame_dig 4
     frame_bury -1
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:311
+    // smart_contracts/reti/stakingPool.algo.ts:310
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 5
     intc_2 // 64
     box_extract
     pushint 32 // 32
-    // smart_contracts/reti/stakingPool.algo.ts:317
+    // smart_contracts/reti/stakingPool.algo.ts:316
     // if (cmpStaker.balance < amountToUnstake) {
     extract_uint64
     dup
@@ -1193,7 +1245,7 @@ removeStake_after_if_else@9:
     <
     !
     assert // Insufficient balance
-    // smart_contracts/reti/stakingPool.algo.ts:320
+    // smart_contracts/reti/stakingPool.algo.ts:319
     // cmpStaker.balance -= amountToUnstake
     frame_dig -1
     -
@@ -1203,30 +1255,30 @@ removeStake_after_if_else@9:
     replace2 32
     dup
     frame_bury 0
-    // smart_contracts/reti/stakingPool.algo.ts:321
+    // smart_contracts/reti/stakingPool.algo.ts:320
     // this.totalAlgoStaked.value -= amountToUnstake
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:321
+    // smart_contracts/reti/stakingPool.algo.ts:320
     // this.totalAlgoStaked.value -= amountToUnstake
     app_global_get_ex
     assert // check GlobalState exists
     frame_dig -1
     -
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:321
+    // smart_contracts/reti/stakingPool.algo.ts:320
     // this.totalAlgoStaked.value -= amountToUnstake
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:323
+    // smart_contracts/reti/stakingPool.algo.ts:322
     // let amountRewardTokenRemoved: uint64 = 0
     intc_0 // 0
     frame_bury 2
-    // smart_contracts/reti/stakingPool.algo.ts:324
+    // smart_contracts/reti/stakingPool.algo.ts:323
     // if (cmpStaker.rewardTokenBalance > 0) {
     dup
     pushint 48 // 48
@@ -1235,48 +1287,48 @@ removeStake_after_if_else@9:
     frame_bury 3
     swap
     frame_bury 1
-    bz removeStake_after_if_else@18
-    // smart_contracts/reti/stakingPool.algo.ts:326
+    bz removeStake_after_if_else@16
+    // smart_contracts/reti/stakingPool.algo.ts:325
     // if (this.poolId.value === 1) {
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:326
+    // smart_contracts/reti/stakingPool.algo.ts:325
     // if (this.poolId.value === 1) {
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     ==
-    bz removeStake_else_body@16
-    // smart_contracts/reti/stakingPool.algo.ts:327-330
+    bz removeStake_else_body@14
+    // smart_contracts/reti/stakingPool.algo.ts:326-329
     // const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:328
+    // smart_contracts/reti/stakingPool.algo.ts:327
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:328
+    // smart_contracts/reti/stakingPool.algo.ts:327
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:329
+    // smart_contracts/reti/stakingPool.algo.ts:328
     // args: [this.validatorId.value],
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:329
+    // smart_contracts/reti/stakingPool.algo.ts:328
     // args: [this.validatorId.value],
     app_global_get_ex
     assert // check GlobalState exists
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:327-330
+    // smart_contracts/reti/stakingPool.algo.ts:326-329
     // const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
@@ -1296,7 +1348,7 @@ removeStake_after_if_else@9:
     bytec_2 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    // smart_contracts/reti/stakingPool.algo.ts:334-340
+    // smart_contracts/reti/stakingPool.algo.ts:333-339
     // itxn
     //   .assetTransfer({
     //     xferAsset: validatorConfig.rewardTokenId,
@@ -1306,7 +1358,7 @@ removeStake_after_if_else@9:
     //   .submit()
     itxn_begin
     intc 6 // 157
-    // smart_contracts/reti/stakingPool.algo.ts:336
+    // smart_contracts/reti/stakingPool.algo.ts:335
     // xferAsset: validatorConfig.rewardTokenId,
     extract_uint64
     frame_dig 3
@@ -1314,7 +1366,7 @@ removeStake_after_if_else@9:
     frame_dig -2
     itxn_field AssetReceiver
     itxn_field XferAsset
-    // smart_contracts/reti/stakingPool.algo.ts:334-339
+    // smart_contracts/reti/stakingPool.algo.ts:333-338
     // itxn
     //   .assetTransfer({
     //     xferAsset: validatorConfig.rewardTokenId,
@@ -1325,7 +1377,7 @@ removeStake_after_if_else@9:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/stakingPool.algo.ts:334-340
+    // smart_contracts/reti/stakingPool.algo.ts:333-339
     // itxn
     //   .assetTransfer({
     //     xferAsset: validatorConfig.rewardTokenId,
@@ -1334,7 +1386,7 @@ removeStake_after_if_else@9:
     //   })
     //   .submit()
     itxn_submit
-    // smart_contracts/reti/stakingPool.algo.ts:343
+    // smart_contracts/reti/stakingPool.algo.ts:342
     // cmpStaker.rewardTokenBalance = 0
     intc_0 // 0
     itob
@@ -1343,46 +1395,46 @@ removeStake_after_if_else@9:
     replace2 48
     frame_bury 0
 
-removeStake_after_if_else@17:
+removeStake_after_if_else@15:
     frame_dig 3
     frame_bury 2
     frame_dig 0
     frame_bury 1
 
-removeStake_after_if_else@18:
+removeStake_after_if_else@16:
     frame_dig 1
     dup
     frame_bury 0
-    // smart_contracts/reti/stakingPool.algo.ts:355
+    // smart_contracts/reti/stakingPool.algo.ts:354
     // cmpStaker.balance === 0 || cmpStaker.balance >= this.minEntryStake.value,
     pushint 32 // 32
     extract_uint64
     dup
     frame_bury 8
-    bz removeStake_bool_true@20
+    bz removeStake_bool_true@18
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:78
+    // smart_contracts/reti/stakingPool.algo.ts:79
     // minEntryStake = GlobalState<uint64>({ key: 'minEntryStake' })
     bytec 13 // "minEntryStake"
-    // smart_contracts/reti/stakingPool.algo.ts:355
+    // smart_contracts/reti/stakingPool.algo.ts:354
     // cmpStaker.balance === 0 || cmpStaker.balance >= this.minEntryStake.value,
     app_global_get_ex
     assert // check GlobalState exists
     frame_dig 8
     <=
-    bz removeStake_bool_false@21
+    bz removeStake_bool_false@19
 
-removeStake_bool_true@20:
+removeStake_bool_true@18:
     intc_1 // 1
 
-removeStake_bool_merge@22:
-    // smart_contracts/reti/stakingPool.algo.ts:354-357
+removeStake_bool_merge@20:
+    // smart_contracts/reti/stakingPool.algo.ts:353-356
     // assert(
     //   cmpStaker.balance === 0 || cmpStaker.balance >= this.minEntryStake.value,
     //   'cannot reduce balance below minimum allowed stake unless all is removed',
     // )
     assert // cannot reduce balance below minimum allowed stake unless all is removed
-    // smart_contracts/reti/stakingPool.algo.ts:362-368
+    // smart_contracts/reti/stakingPool.algo.ts:361-367
     // itxn
     //   .payment({
     //     amount: amountToUnstake,
@@ -1391,7 +1443,7 @@ removeStake_bool_merge@22:
     //   })
     //   .submit()
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:366
+    // smart_contracts/reti/stakingPool.algo.ts:365
     // note: 'unstaked',
     pushbytes "unstaked"
     itxn_field Note
@@ -1399,7 +1451,7 @@ removeStake_bool_merge@22:
     itxn_field Receiver
     frame_dig -1
     itxn_field Amount
-    // smart_contracts/reti/stakingPool.algo.ts:362-367
+    // smart_contracts/reti/stakingPool.algo.ts:361-366
     // itxn
     //   .payment({
     //     amount: amountToUnstake,
@@ -1410,7 +1462,7 @@ removeStake_bool_merge@22:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/stakingPool.algo.ts:362-368
+    // smart_contracts/reti/stakingPool.algo.ts:361-367
     // itxn
     //   .payment({
     //     amount: amountToUnstake,
@@ -1419,100 +1471,100 @@ removeStake_bool_merge@22:
     //   })
     //   .submit()
     itxn_submit
-    // smart_contracts/reti/stakingPool.algo.ts:370
+    // smart_contracts/reti/stakingPool.algo.ts:369
     // let stakerRemoved = false
     intc_0 // 0
     frame_bury 7
     frame_dig 0
     frame_bury 1
-    // smart_contracts/reti/stakingPool.algo.ts:371
+    // smart_contracts/reti/stakingPool.algo.ts:370
     // if (cmpStaker.balance === 0) {
     frame_dig 8
-    bnz removeStake_after_if_else@25
-    // smart_contracts/reti/stakingPool.algo.ts:373
+    bnz removeStake_after_if_else@23
+    // smart_contracts/reti/stakingPool.algo.ts:372
     // this.numStakers.value -= 1
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:73
+    // smart_contracts/reti/stakingPool.algo.ts:74
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 9 // "numStakers"
-    // smart_contracts/reti/stakingPool.algo.ts:373
+    // smart_contracts/reti/stakingPool.algo.ts:372
     // this.numStakers.value -= 1
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     -
-    // smart_contracts/reti/stakingPool.algo.ts:73
+    // smart_contracts/reti/stakingPool.algo.ts:74
     // numStakers = GlobalState<uint64>({ key: 'numStakers' })
     bytec 9 // "numStakers"
-    // smart_contracts/reti/stakingPool.algo.ts:373
+    // smart_contracts/reti/stakingPool.algo.ts:372
     // this.numStakers.value -= 1
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:374
+    // smart_contracts/reti/stakingPool.algo.ts:373
     // cmpStaker.account = new Address(Global.zeroAddress)
     frame_dig 0
     global ZeroAddress
     replace2 0
-    // smart_contracts/reti/stakingPool.algo.ts:375
+    // smart_contracts/reti/stakingPool.algo.ts:374
     // cmpStaker.totalRewarded = 0
     intc_0 // 0
     itob
     swap
     dig 1
     replace2 40
-    // smart_contracts/reti/stakingPool.algo.ts:376
+    // smart_contracts/reti/stakingPool.algo.ts:375
     // cmpStaker.rewardTokenBalance = 0
     swap
     replace2 48
-    // smart_contracts/reti/stakingPool.algo.ts:377
+    // smart_contracts/reti/stakingPool.algo.ts:376
     // stakerRemoved = true
     intc_1 // 1
     frame_bury 7
     frame_bury 1
 
-removeStake_after_if_else@25:
+removeStake_after_if_else@23:
     frame_dig 1
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:380
+    // smart_contracts/reti/stakingPool.algo.ts:379
     // this.stakers.value[i] = clone(cmpStaker)
     frame_dig 5
     uncover 2
     box_replace
-    // smart_contracts/reti/stakingPool.algo.ts:382
+    // smart_contracts/reti/stakingPool.algo.ts:381
     // const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:96
+    // smart_contracts/reti/stakingPool.algo.ts:97
     // binRoundStart = GlobalState<uint64>({ key: 'binRoundStart' })
     bytec 8 // "binRoundStart"
-    // smart_contracts/reti/stakingPool.algo.ts:382
+    // smart_contracts/reti/stakingPool.algo.ts:381
     // const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     app_global_get_ex
     assert // check GlobalState exists
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:94
+    // smart_contracts/reti/stakingPool.algo.ts:95
     // roundsPerDay = GlobalState<uint64>({ key: 'roundsPerDay' })
     bytec 7 // "roundsPerDay"
-    // smart_contracts/reti/stakingPool.algo.ts:382
+    // smart_contracts/reti/stakingPool.algo.ts:381
     // const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     app_global_get_ex
     assert // check GlobalState exists
     +
     global Round
     -
-    // smart_contracts/reti/stakingPool.algo.ts:383
+    // smart_contracts/reti/stakingPool.algo.ts:382
     // const subtractAmount = BigUint(amountToUnstake * roundsLeftInBin)
     frame_dig -1
     *
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:384
+    // smart_contracts/reti/stakingPool.algo.ts:383
     // this.stakeAccumulator.value = new Uint128(this.stakeAccumulator.value.native - subtractAmount)
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:98
+    // smart_contracts/reti/stakingPool.algo.ts:99
     // stakeAccumulator = GlobalState<Uint128>({ key: 'stakeAccumulator' })
     bytec 6 // "stakeAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:384
+    // smart_contracts/reti/stakingPool.algo.ts:383
     // this.stakeAccumulator.value = new Uint128(this.stakeAccumulator.value.native - subtractAmount)
     app_global_get_ex
     assert // check GlobalState exists
@@ -1526,14 +1578,14 @@ removeStake_after_if_else@25:
     pushint 16 // 16
     bzero
     b|
-    // smart_contracts/reti/stakingPool.algo.ts:98
+    // smart_contracts/reti/stakingPool.algo.ts:99
     // stakeAccumulator = GlobalState<Uint128>({ key: 'stakeAccumulator' })
     bytec 6 // "stakeAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:384
+    // smart_contracts/reti/stakingPool.algo.ts:383
     // this.stakeAccumulator.value = new Uint128(this.stakeAccumulator.value.native - subtractAmount)
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:389-398
+    // smart_contracts/reti/stakingPool.algo.ts:388-397
     // abiCall(ValidatorRegistryABI.prototype.stakeRemoved, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [
@@ -1545,31 +1597,31 @@ removeStake_after_if_else@25:
     //   ],
     // })
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:390
+    // smart_contracts/reti/stakingPool.algo.ts:389
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:390
+    // smart_contracts/reti/stakingPool.algo.ts:389
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:392
+    // smart_contracts/reti/stakingPool.algo.ts:391
     // { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:392
+    // smart_contracts/reti/stakingPool.algo.ts:391
     // { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
     app_global_get_ex
     assert // check GlobalState exists
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:392
+    // smart_contracts/reti/stakingPool.algo.ts:391
     // { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
     app_global_get_ex
     assert // check GlobalState exists
@@ -1582,21 +1634,21 @@ removeStake_after_if_else@25:
     swap
     itob
     concat
-    // smart_contracts/reti/stakingPool.algo.ts:394
+    // smart_contracts/reti/stakingPool.algo.ts:393
     // amountToUnstake,
     frame_dig -1
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:395
+    // smart_contracts/reti/stakingPool.algo.ts:394
     // amountRewardTokenRemoved,
     frame_dig 2
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:396
+    // smart_contracts/reti/stakingPool.algo.ts:395
     // stakerRemoved,
     pushbytes 0x00
     intc_0 // 0
     frame_dig 7
     setbit
-    // smart_contracts/reti/stakingPool.algo.ts:389-398
+    // smart_contracts/reti/stakingPool.algo.ts:388-397
     // abiCall(ValidatorRegistryABI.prototype.stakeRemoved, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [
@@ -1607,7 +1659,7 @@ removeStake_after_if_else@25:
     //     stakerRemoved,
     //   ],
     // })
-    bytec 19 // method "stakeRemoved((uint64,uint64,uint64),address,uint64,uint64,bool)void"
+    bytec 20 // method "stakeRemoved((uint64,uint64,uint64),address,uint64,uint64,bool)void"
     itxn_field ApplicationArgs
     uncover 3
     itxn_field ApplicationArgs
@@ -1624,16 +1676,16 @@ removeStake_after_if_else@25:
     intc_0 // 0
     itxn_field Fee
     itxn_submit
-    // smart_contracts/reti/stakingPool.algo.ts:399
+    // smart_contracts/reti/stakingPool.algo.ts:398
     // return
     retsub
 
-removeStake_bool_false@21:
+removeStake_bool_false@19:
     intc_0 // 0
-    b removeStake_bool_merge@22
+    b removeStake_bool_merge@20
 
-removeStake_else_body@16:
-    // smart_contracts/reti/stakingPool.algo.ts:349
+removeStake_else_body@14:
+    // smart_contracts/reti/stakingPool.algo.ts:348
     // cmpStaker.rewardTokenBalance = 0
     intc_0 // 0
     itob
@@ -1641,9 +1693,9 @@ removeStake_else_body@16:
     swap
     replace2 48
     frame_bury 0
-    b removeStake_after_if_else@17
+    b removeStake_after_if_else@15
 
-removeStake_after_if_else@27:
+removeStake_after_if_else@25:
     // smart_contracts/reti/stakingPool.algo.ts:307
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     frame_dig 6
@@ -1655,25 +1707,25 @@ removeStake_after_if_else@27:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.claimTokens() -> void:
 claimTokens:
-    // smart_contracts/reti/stakingPool.algo.ts:410
+    // smart_contracts/reti/stakingPool.algo.ts:409
     // claimTokens(): void {
     proto 0 0
     intc_0 // 0
     dup
     pushbytes ""
     dup
-    // smart_contracts/reti/stakingPool.algo.ts:414
+    // smart_contracts/reti/stakingPool.algo.ts:413
     // const staker = Txn.sender
     txn Sender
-    // smart_contracts/reti/stakingPool.algo.ts:416
+    // smart_contracts/reti/stakingPool.algo.ts:415
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     intc_0 // 0
 
 claimTokens_while_top@1:
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:416
+    // smart_contracts/reti/stakingPool.algo.ts:415
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     box_len
     bury 1
@@ -1683,35 +1735,40 @@ claimTokens_while_top@1:
     intc 4 // 200
     <
     assert // account not found
-    // smart_contracts/reti/stakingPool.algo.ts:420
+    // smart_contracts/reti/stakingPool.algo.ts:416
+    // ensureBudget(300)
+    intc 7 // 300
+    intc_0 // 0
+    callsub ensure_budget
+    // smart_contracts/reti/stakingPool.algo.ts:418
     // const cmpStaker = clone(this.stakers.value[i])
     intc_2 // 64
     *
     dup
     frame_bury 3
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:420
+    // smart_contracts/reti/stakingPool.algo.ts:418
     // const cmpStaker = clone(this.stakers.value[i])
     swap
     intc_2 // 64
     box_extract
     dup
     frame_bury 1
-    // smart_contracts/reti/stakingPool.algo.ts:420-421
+    // smart_contracts/reti/stakingPool.algo.ts:418-419
     // const cmpStaker = clone(this.stakers.value[i])
     // if (cmpStaker.account.native === staker) {
     extract 0 32
-    // smart_contracts/reti/stakingPool.algo.ts:421
+    // smart_contracts/reti/stakingPool.algo.ts:419
     // if (cmpStaker.account.native === staker) {
     frame_dig 4
     ==
-    bz claimTokens_after_if_else@14
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bz claimTokens_after_if_else@12
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:420
+    // smart_contracts/reti/stakingPool.algo.ts:418
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 3
     intc_2 // 64
@@ -1720,58 +1777,58 @@ claimTokens_while_top@1:
     extract 48 8
     frame_bury 0
     pushint 48 // 48
-    // smart_contracts/reti/stakingPool.algo.ts:422
+    // smart_contracts/reti/stakingPool.algo.ts:420
     // if (cmpStaker.rewardTokenBalance === 0) {
     extract_uint64
     dup
     frame_bury 2
-    bnz claimTokens_after_if_else@7
-    // smart_contracts/reti/stakingPool.algo.ts:423
+    bnz claimTokens_after_if_else@5
+    // smart_contracts/reti/stakingPool.algo.ts:421
     // return
     retsub
 
-claimTokens_after_if_else@7:
-    // smart_contracts/reti/stakingPool.algo.ts:427
+claimTokens_after_if_else@5:
+    // smart_contracts/reti/stakingPool.algo.ts:425
     // if (this.poolId.value === 1) {
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:427
+    // smart_contracts/reti/stakingPool.algo.ts:425
     // if (this.poolId.value === 1) {
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     ==
-    bz claimTokens_else_body@11
-    // smart_contracts/reti/stakingPool.algo.ts:428-431
+    bz claimTokens_else_body@9
+    // smart_contracts/reti/stakingPool.algo.ts:426-429
     // const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue // ---------
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:429
+    // smart_contracts/reti/stakingPool.algo.ts:427
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:429
+    // smart_contracts/reti/stakingPool.algo.ts:427
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:430
+    // smart_contracts/reti/stakingPool.algo.ts:428
     // args: [this.validatorId.value],
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:430
+    // smart_contracts/reti/stakingPool.algo.ts:428
     // args: [this.validatorId.value],
     app_global_get_ex
     assert // check GlobalState exists
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:428-431
+    // smart_contracts/reti/stakingPool.algo.ts:426-429
     // const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
@@ -1791,7 +1848,7 @@ claimTokens_after_if_else@7:
     bytec_2 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    // smart_contracts/reti/stakingPool.algo.ts:434-440
+    // smart_contracts/reti/stakingPool.algo.ts:432-438
     // itxn
     //   .assetTransfer({
     //     xferAsset: validatorConfig.rewardTokenId,
@@ -1801,7 +1858,7 @@ claimTokens_after_if_else@7:
     //   .submit()
     itxn_begin
     intc 6 // 157
-    // smart_contracts/reti/stakingPool.algo.ts:436
+    // smart_contracts/reti/stakingPool.algo.ts:434
     // xferAsset: validatorConfig.rewardTokenId,
     extract_uint64
     frame_dig 2
@@ -1809,7 +1866,7 @@ claimTokens_after_if_else@7:
     frame_dig 4
     itxn_field AssetReceiver
     itxn_field XferAsset
-    // smart_contracts/reti/stakingPool.algo.ts:434-439
+    // smart_contracts/reti/stakingPool.algo.ts:432-437
     // itxn
     //   .assetTransfer({
     //     xferAsset: validatorConfig.rewardTokenId,
@@ -1820,7 +1877,7 @@ claimTokens_after_if_else@7:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/stakingPool.algo.ts:434-440
+    // smart_contracts/reti/stakingPool.algo.ts:432-438
     // itxn
     //   .assetTransfer({
     //     xferAsset: validatorConfig.rewardTokenId,
@@ -1829,7 +1886,7 @@ claimTokens_after_if_else@7:
     //   })
     //   .submit()
     itxn_submit
-    // smart_contracts/reti/stakingPool.algo.ts:442
+    // smart_contracts/reti/stakingPool.algo.ts:440
     // cmpStaker.rewardTokenBalance = 0
     intc_0 // 0
     itob
@@ -1838,16 +1895,16 @@ claimTokens_after_if_else@7:
     replace2 48
     frame_bury 1
 
-claimTokens_after_if_else@12:
-    // smart_contracts/reti/stakingPool.algo.ts:90
+claimTokens_after_if_else@10:
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:452
+    // smart_contracts/reti/stakingPool.algo.ts:450
     // this.stakers.value[i] = clone(cmpStaker)
     frame_dig 3
     frame_dig 1
     box_replace
-    // smart_contracts/reti/stakingPool.algo.ts:457-466
+    // smart_contracts/reti/stakingPool.algo.ts:455-464
     // abiCall(ValidatorRegistryABI.prototype.stakeRemoved, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [
@@ -1859,31 +1916,31 @@ claimTokens_after_if_else@12:
     //   ],
     // })
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:458
+    // smart_contracts/reti/stakingPool.algo.ts:456
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:458
+    // smart_contracts/reti/stakingPool.algo.ts:456
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:460
+    // smart_contracts/reti/stakingPool.algo.ts:458
     // { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:460
+    // smart_contracts/reti/stakingPool.algo.ts:458
     // { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
     app_global_get_ex
     assert // check GlobalState exists
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:460
+    // smart_contracts/reti/stakingPool.algo.ts:458
     // { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
     app_global_get_ex
     assert // check GlobalState exists
@@ -1896,11 +1953,11 @@ claimTokens_after_if_else@12:
     swap
     itob
     concat
-    // smart_contracts/reti/stakingPool.algo.ts:462
+    // smart_contracts/reti/stakingPool.algo.ts:460
     // 0, // no algo removed
     intc_0 // 0
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:457-466
+    // smart_contracts/reti/stakingPool.algo.ts:455-464
     // abiCall(ValidatorRegistryABI.prototype.stakeRemoved, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [
@@ -1911,7 +1968,7 @@ claimTokens_after_if_else@12:
     //     false, // staker isn't being removed.
     //   ],
     // })
-    bytec 19 // method "stakeRemoved((uint64,uint64,uint64),address,uint64,uint64,bool)void"
+    bytec 20 // method "stakeRemoved((uint64,uint64,uint64),address,uint64,uint64,bool)void"
     itxn_field ApplicationArgs
     swap
     itxn_field ApplicationArgs
@@ -1920,12 +1977,12 @@ claimTokens_after_if_else@12:
     itxn_field ApplicationArgs
     frame_dig 0
     itxn_field ApplicationArgs
-    // smart_contracts/reti/stakingPool.algo.ts:464
+    // smart_contracts/reti/stakingPool.algo.ts:462
     // false, // staker isn't being removed.
     pushbytes 0x00
     itxn_field ApplicationArgs
     itxn_field ApplicationID
-    // smart_contracts/reti/stakingPool.algo.ts:457-466
+    // smart_contracts/reti/stakingPool.algo.ts:455-464
     // abiCall(ValidatorRegistryABI.prototype.stakeRemoved, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [
@@ -1941,12 +1998,12 @@ claimTokens_after_if_else@12:
     intc_0 // 0
     itxn_field Fee
     itxn_submit
-    // smart_contracts/reti/stakingPool.algo.ts:467
+    // smart_contracts/reti/stakingPool.algo.ts:465
     // return
     retsub
 
-claimTokens_else_body@11:
-    // smart_contracts/reti/stakingPool.algo.ts:448
+claimTokens_else_body@9:
+    // smart_contracts/reti/stakingPool.algo.ts:446
     // cmpStaker.rewardTokenBalance = 0
     intc_0 // 0
     itob
@@ -1954,10 +2011,10 @@ claimTokens_else_body@11:
     swap
     replace2 48
     frame_bury 1
-    b claimTokens_after_if_else@12
+    b claimTokens_after_if_else@10
 
-claimTokens_after_if_else@14:
-    // smart_contracts/reti/stakingPool.algo.ts:416
+claimTokens_after_if_else@12:
+    // smart_contracts/reti/stakingPool.algo.ts:415
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     frame_dig 5
     intc_1 // 1
@@ -1968,19 +2025,19 @@ claimTokens_after_if_else@14:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.getStakerInfo(staker: bytes) -> bytes:
 getStakerInfo:
-    // smart_contracts/reti/stakingPool.algo.ts:481
+    // smart_contracts/reti/stakingPool.algo.ts:479
     // getStakerInfo(staker: Address): StakedInfo {
     proto 1 1
     pushbytes ""
-    // smart_contracts/reti/stakingPool.algo.ts:482
+    // smart_contracts/reti/stakingPool.algo.ts:480
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     intc_0 // 0
 
 getStakerInfo_while_top@1:
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:482
+    // smart_contracts/reti/stakingPool.algo.ts:480
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     box_len
     bury 1
@@ -1990,16 +2047,21 @@ getStakerInfo_while_top@1:
     intc 4 // 200
     <
     assert // account not found
-    // smart_contracts/reti/stakingPool.algo.ts:486
+    // smart_contracts/reti/stakingPool.algo.ts:481
+    // ensureBudget(200)
+    intc 4 // 200
+    intc_0 // 0
+    callsub ensure_budget
+    // smart_contracts/reti/stakingPool.algo.ts:482
     // if (this.stakers.value[i].account === staker) {
     intc_2 // 64
     *
     dup
     frame_bury 0
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:486
+    // smart_contracts/reti/stakingPool.algo.ts:482
     // if (this.stakers.value[i].account === staker) {
     swap
     intc_2 // 64
@@ -2007,11 +2069,11 @@ getStakerInfo_while_top@1:
     extract 0 32
     frame_dig -1
     ==
-    bz getStakerInfo_after_if_else@6
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bz getStakerInfo_after_if_else@4
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:487
+    // smart_contracts/reti/stakingPool.algo.ts:483
     // return this.stakers.value[i]
     frame_dig 0
     intc_2 // 64
@@ -2019,8 +2081,8 @@ getStakerInfo_while_top@1:
     frame_bury 0
     retsub
 
-getStakerInfo_after_if_else@6:
-    // smart_contracts/reti/stakingPool.algo.ts:482
+getStakerInfo_after_if_else@4:
+    // smart_contracts/reti/stakingPool.algo.ts:480
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     frame_dig 1
     intc_1 // 1
@@ -2031,47 +2093,47 @@ getStakerInfo_after_if_else@6:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.payTokenReward(staker: bytes, rewardToken: uint64, amountToSend: uint64) -> void:
 payTokenReward:
-    // smart_contracts/reti/stakingPool.algo.ts:503
+    // smart_contracts/reti/stakingPool.algo.ts:499
     // payTokenReward(staker: Address, rewardToken: uint64, amountToSend: uint64): void {
     proto 3 0
-    // smart_contracts/reti/stakingPool.algo.ts:506
+    // smart_contracts/reti/stakingPool.algo.ts:502
     // Txn.sender === Application(this.creatingValidatorContractAppId.value).address,
     txn Sender
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:506
+    // smart_contracts/reti/stakingPool.algo.ts:502
     // Txn.sender === Application(this.creatingValidatorContractAppId.value).address,
     app_global_get_ex
     assert // check GlobalState exists
     app_params_get AppAddress
     assert // application exists
     ==
-    // smart_contracts/reti/stakingPool.algo.ts:505-508
+    // smart_contracts/reti/stakingPool.algo.ts:501-504
     // assert(
     //   Txn.sender === Application(this.creatingValidatorContractAppId.value).address,
     //   'this can only be called via the validator contract',
     // )
     assert // this can only be called via the validator contract
-    // smart_contracts/reti/stakingPool.algo.ts:509
+    // smart_contracts/reti/stakingPool.algo.ts:505
     // assert(this.poolId.value === 1, 'must be pool 1 in order to be called to pay out token rewards')
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:509
+    // smart_contracts/reti/stakingPool.algo.ts:505
     // assert(this.poolId.value === 1, 'must be pool 1 in order to be called to pay out token rewards')
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     ==
     assert // must be pool 1 in order to be called to pay out token rewards
-    // smart_contracts/reti/stakingPool.algo.ts:510
+    // smart_contracts/reti/stakingPool.algo.ts:506
     // assert(rewardToken !== 0, 'can only claim token rewards from validator that has them')
     frame_dig -2
     assert // can only claim token rewards from validator that has them
-    // smart_contracts/reti/stakingPool.algo.ts:513-519
+    // smart_contracts/reti/stakingPool.algo.ts:509-515
     // itxn
     //   .assetTransfer({
     //     xferAsset: rewardToken,
@@ -2086,7 +2148,7 @@ payTokenReward:
     itxn_field AssetReceiver
     frame_dig -2
     itxn_field XferAsset
-    // smart_contracts/reti/stakingPool.algo.ts:513-518
+    // smart_contracts/reti/stakingPool.algo.ts:509-514
     // itxn
     //   .assetTransfer({
     //     xferAsset: rewardToken,
@@ -2097,7 +2159,7 @@ payTokenReward:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/stakingPool.algo.ts:513-519
+    // smart_contracts/reti/stakingPool.algo.ts:509-515
     // itxn
     //   .assetTransfer({
     //     xferAsset: rewardToken,
@@ -2111,17 +2173,17 @@ payTokenReward:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.updateAlgodVer(algodVer: bytes) -> void:
 updateAlgodVer:
-    // smart_contracts/reti/stakingPool.algo.ts:531
+    // smart_contracts/reti/stakingPool.algo.ts:527
     // updateAlgodVer(algodVer: string): void {
     proto 1 0
-    // smart_contracts/reti/stakingPool.algo.ts:532
+    // smart_contracts/reti/stakingPool.algo.ts:528
     // assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
     callsub isOwnerOrManagerCaller
     assert // can only be called by owner or manager of validator
-    // smart_contracts/reti/stakingPool.algo.ts:87
+    // smart_contracts/reti/stakingPool.algo.ts:88
     // algodVer = GlobalState<bytes>({ key: 'algodVer' })
     pushbytes "algodVer"
-    // smart_contracts/reti/stakingPool.algo.ts:533
+    // smart_contracts/reti/stakingPool.algo.ts:529
     // this.algodVer.value = Bytes(algodVer)
     frame_dig -1
     app_global_put
@@ -2130,41 +2192,41 @@ updateAlgodVer:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.epochBalanceUpdate() -> void:
 epochBalanceUpdate:
-    // smart_contracts/reti/stakingPool.algo.ts:544
+    // smart_contracts/reti/stakingPool.algo.ts:540
     // epochBalanceUpdate(): void {
     proto 0 0
     intc_0 // 0
     dupn 3
     pushbytes ""
     dupn 16
-    // smart_contracts/reti/stakingPool.algo.ts:546-549
+    // smart_contracts/reti/stakingPool.algo.ts:542-545
     // const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:547
+    // smart_contracts/reti/stakingPool.algo.ts:543
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:547
+    // smart_contracts/reti/stakingPool.algo.ts:543
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:548
+    // smart_contracts/reti/stakingPool.algo.ts:544
     // args: [this.validatorId.value],
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:548
+    // smart_contracts/reti/stakingPool.algo.ts:544
     // args: [this.validatorId.value],
     app_global_get_ex
     assert // check GlobalState exists
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:546-549
+    // smart_contracts/reti/stakingPool.algo.ts:542-545
     // const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
@@ -2185,39 +2247,39 @@ epochBalanceUpdate:
     ==
     assert // Bytes has valid prefix
     pushint 173 // 173
-    // smart_contracts/reti/stakingPool.algo.ts:555
+    // smart_contracts/reti/stakingPool.algo.ts:551
     // const epochRoundLength = validatorConfig.epochRoundLength.native
     extract_uint32
     dup
-    // smart_contracts/reti/stakingPool.algo.ts:556
+    // smart_contracts/reti/stakingPool.algo.ts:552
     // const curRound = Global.round
     global Round
     dup
     cover 2
-    // smart_contracts/reti/stakingPool.algo.ts:557
+    // smart_contracts/reti/stakingPool.algo.ts:553
     // const thisEpochBegin: uint64 = curRound - (curRound % epochRoundLength)
     dup
     uncover 2
     %
     -
-    // smart_contracts/reti/stakingPool.algo.ts:560
+    // smart_contracts/reti/stakingPool.algo.ts:556
     // if (this.lastPayout.hasValue) {
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:81
+    // smart_contracts/reti/stakingPool.algo.ts:82
     // lastPayout = GlobalState<uint64>({ key: 'lastPayout' })
     bytec 11 // "lastPayout"
-    // smart_contracts/reti/stakingPool.algo.ts:560
+    // smart_contracts/reti/stakingPool.algo.ts:556
     // if (this.lastPayout.hasValue) {
     app_global_get_ex
     bury 1
     bz epochBalanceUpdate_after_if_else@3
-    // smart_contracts/reti/stakingPool.algo.ts:561
+    // smart_contracts/reti/stakingPool.algo.ts:557
     // const lastPayoutEpoch: uint64 = this.lastPayout.value - (this.lastPayout.value % epochRoundLength)
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:81
+    // smart_contracts/reti/stakingPool.algo.ts:82
     // lastPayout = GlobalState<uint64>({ key: 'lastPayout' })
     bytec 11 // "lastPayout"
-    // smart_contracts/reti/stakingPool.algo.ts:561
+    // smart_contracts/reti/stakingPool.algo.ts:557
     // const lastPayoutEpoch: uint64 = this.lastPayout.value - (this.lastPayout.value % epochRoundLength)
     app_global_get_ex
     assert // check GlobalState exists
@@ -2225,102 +2287,102 @@ epochBalanceUpdate:
     frame_dig 22
     %
     -
-    // smart_contracts/reti/stakingPool.algo.ts:565
+    // smart_contracts/reti/stakingPool.algo.ts:561
     // assert(lastPayoutEpoch !== thisEpochBegin, "can't call epochBalanceUpdate in same epoch as prior call")
     frame_dig 24
     !=
     assert // can't call epochBalanceUpdate in same epoch as prior call
 
 epochBalanceUpdate_after_if_else@3:
-    // smart_contracts/reti/stakingPool.algo.ts:568
+    // smart_contracts/reti/stakingPool.algo.ts:564
     // this.checkIfBinClosed()
     callsub checkIfBinClosed
-    // smart_contracts/reti/stakingPool.algo.ts:81
+    // smart_contracts/reti/stakingPool.algo.ts:82
     // lastPayout = GlobalState<uint64>({ key: 'lastPayout' })
     bytec 11 // "lastPayout"
-    // smart_contracts/reti/stakingPool.algo.ts:571
+    // smart_contracts/reti/stakingPool.algo.ts:567
     // this.lastPayout.value = curRound
     frame_dig 23
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:572
+    // smart_contracts/reti/stakingPool.algo.ts:568
     // this.epochNumber.value += 1
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:84
+    // smart_contracts/reti/stakingPool.algo.ts:85
     // epochNumber = GlobalState<uint64>({ key: 'epochNumber' })
     bytec 14 // "epochNumber"
-    // smart_contracts/reti/stakingPool.algo.ts:572
+    // smart_contracts/reti/stakingPool.algo.ts:568
     // this.epochNumber.value += 1
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     +
-    // smart_contracts/reti/stakingPool.algo.ts:84
+    // smart_contracts/reti/stakingPool.algo.ts:85
     // epochNumber = GlobalState<uint64>({ key: 'epochNumber' })
     bytec 14 // "epochNumber"
-    // smart_contracts/reti/stakingPool.algo.ts:572
+    // smart_contracts/reti/stakingPool.algo.ts:568
     // this.epochNumber.value += 1
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:577
+    // smart_contracts/reti/stakingPool.algo.ts:573
     // const isTokenEligible = validatorConfig.rewardTokenId !== 0
     frame_dig 21
     intc 6 // 157
     extract_uint64
-    // smart_contracts/reti/stakingPool.algo.ts:578
+    // smart_contracts/reti/stakingPool.algo.ts:574
     // let poolOneAppID = Global.currentApplicationId.id
     global CurrentApplicationID
     frame_bury 15
-    // smart_contracts/reti/stakingPool.algo.ts:584
+    // smart_contracts/reti/stakingPool.algo.ts:580
     // if (isTokenEligible) {
     bz epochBalanceUpdate_after_if_else@13
-    // smart_contracts/reti/stakingPool.algo.ts:585
+    // smart_contracts/reti/stakingPool.algo.ts:581
     // if (this.poolId.value !== 1) {
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:585
+    // smart_contracts/reti/stakingPool.algo.ts:581
     // if (this.poolId.value !== 1) {
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     !=
     bz epochBalanceUpdate_after_if_else@7
-    // smart_contracts/reti/stakingPool.algo.ts:587-590
+    // smart_contracts/reti/stakingPool.algo.ts:583-586
     // poolOneAppID = abiCall(ValidatorRegistryABI.prototype.getPoolAppId, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value, 1],
     // }).returnValue
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:588
+    // smart_contracts/reti/stakingPool.algo.ts:584
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:588
+    // smart_contracts/reti/stakingPool.algo.ts:584
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:589
+    // smart_contracts/reti/stakingPool.algo.ts:585
     // args: [this.validatorId.value, 1],
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:589
+    // smart_contracts/reti/stakingPool.algo.ts:585
     // args: [this.validatorId.value, 1],
     app_global_get_ex
     assert // check GlobalState exists
     itob
     intc_1 // 1
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:587-590
+    // smart_contracts/reti/stakingPool.algo.ts:583-586
     // poolOneAppID = abiCall(ValidatorRegistryABI.prototype.getPoolAppId, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value, 1],
     // }).returnValue
-    bytec 20 // method "getPoolAppId(uint64,uint64)uint64"
+    bytec 21 // method "getPoolAppId(uint64,uint64)uint64"
     itxn_field ApplicationArgs
     swap
     itxn_field ApplicationArgs
@@ -2342,59 +2404,59 @@ epochBalanceUpdate_after_if_else@3:
     btoi
     dup
     frame_bury 15
-    // smart_contracts/reti/stakingPool.algo.ts:591
+    // smart_contracts/reti/stakingPool.algo.ts:587
     // poolOneAddress = Application(poolOneAppID).address
     app_params_get AppAddress
     bury 1
     assert // application exists
 
 epochBalanceUpdate_after_if_else@7:
-    // smart_contracts/reti/stakingPool.algo.ts:596
+    // smart_contracts/reti/stakingPool.algo.ts:592
     // if (this.poolId.value === 1) {
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:596
+    // smart_contracts/reti/stakingPool.algo.ts:592
     // if (this.poolId.value === 1) {
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     ==
     bz epochBalanceUpdate_else_body@10
-    // smart_contracts/reti/stakingPool.algo.ts:597-600
+    // smart_contracts/reti/stakingPool.algo.ts:593-596
     // tokenPayoutRatio = abiCall(ValidatorRegistryABI.prototype.setTokenPayoutRatio, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:598
+    // smart_contracts/reti/stakingPool.algo.ts:594
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:598
+    // smart_contracts/reti/stakingPool.algo.ts:594
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:599
+    // smart_contracts/reti/stakingPool.algo.ts:595
     // args: [this.validatorId.value],
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:599
+    // smart_contracts/reti/stakingPool.algo.ts:595
     // args: [this.validatorId.value],
     app_global_get_ex
     assert // check GlobalState exists
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:597-600
+    // smart_contracts/reti/stakingPool.algo.ts:593-596
     // tokenPayoutRatio = abiCall(ValidatorRegistryABI.prototype.setTokenPayoutRatio, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
-    bytec 21 // method "setTokenPayoutRatio(uint64)(uint64[24],uint64)"
+    bytec 22 // method "setTokenPayoutRatio(uint64)(uint64[24],uint64)"
     itxn_field ApplicationArgs
     itxn_field ApplicationArgs
     itxn_field ApplicationID
@@ -2410,34 +2472,34 @@ epochBalanceUpdate_after_if_else@7:
     assert // Bytes has valid prefix
 
 epochBalanceUpdate_after_if_else@13:
-    // smart_contracts/reti/stakingPool.algo.ts:612-615
+    // smart_contracts/reti/stakingPool.algo.ts:608-611
     // const validatorState = abiCall(ValidatorRegistryABI.prototype.getValidatorState, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:613
+    // smart_contracts/reti/stakingPool.algo.ts:609
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:613
+    // smart_contracts/reti/stakingPool.algo.ts:609
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:614
+    // smart_contracts/reti/stakingPool.algo.ts:610
     // args: [this.validatorId.value],
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:614
+    // smart_contracts/reti/stakingPool.algo.ts:610
     // args: [this.validatorId.value],
     app_global_get_ex
     assert // check GlobalState exists
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:612-615
+    // smart_contracts/reti/stakingPool.algo.ts:608-611
     // const validatorState = abiCall(ValidatorRegistryABI.prototype.getValidatorState, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
@@ -2457,83 +2519,83 @@ epochBalanceUpdate_after_if_else@13:
     bytec_2 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    // smart_contracts/reti/stakingPool.algo.ts:623
+    // smart_contracts/reti/stakingPool.algo.ts:619
     // Global.currentApplicationAddress.balance -
     global CurrentApplicationAddress
     acct_params_get AcctBalance
     assert // account funded
-    // smart_contracts/reti/stakingPool.algo.ts:624
+    // smart_contracts/reti/stakingPool.algo.ts:620
     // this.totalAlgoStaked.value -
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:624
+    // smart_contracts/reti/stakingPool.algo.ts:620
     // this.totalAlgoStaked.value -
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:623-624
+    // smart_contracts/reti/stakingPool.algo.ts:619-620
     // Global.currentApplicationAddress.balance -
     // this.totalAlgoStaked.value -
     -
-    // smart_contracts/reti/stakingPool.algo.ts:625
+    // smart_contracts/reti/stakingPool.algo.ts:621
     // Global.currentApplicationAddress.minBalance
     global CurrentApplicationAddress
     acct_params_get AcctMinBalance
     assert // account funded
-    // smart_contracts/reti/stakingPool.algo.ts:623-625
+    // smart_contracts/reti/stakingPool.algo.ts:619-621
     // Global.currentApplicationAddress.balance -
     // this.totalAlgoStaked.value -
     // Global.currentApplicationAddress.minBalance
     -
     frame_bury 4
-    // smart_contracts/reti/stakingPool.algo.ts:626
+    // smart_contracts/reti/stakingPool.algo.ts:622
     // let isPoolSaturated = false
     intc_0 // 0
     frame_bury 11
     pushint 14 // 14
-    // smart_contracts/reti/stakingPool.algo.ts:635
+    // smart_contracts/reti/stakingPool.algo.ts:631
     // if (validatorState.totalAlgoStaked > algoSaturationAmt) {
     extract_uint64
     bz epochBalanceUpdate_after_if_else@16
-    // smart_contracts/reti/stakingPool.algo.ts:636
+    // smart_contracts/reti/stakingPool.algo.ts:632
     // isPoolSaturated = true
     intc_1 // 1
     frame_bury 11
 
 epochBalanceUpdate_after_if_else@16:
-    // smart_contracts/reti/stakingPool.algo.ts:642
+    // smart_contracts/reti/stakingPool.algo.ts:638
     // let tokenRewardAvail: uint64 = 0
     intc_0 // 0
     frame_bury 16
-    // smart_contracts/reti/stakingPool.algo.ts:643
+    // smart_contracts/reti/stakingPool.algo.ts:639
     // let tokenRewardPaidOut: uint64 = 0
     intc_0 // 0
     frame_bury 17
-    // smart_contracts/reti/stakingPool.algo.ts:645
+    // smart_contracts/reti/stakingPool.algo.ts:641
     // let excessToFeeSink: uint64 = 0
     intc_0 // 0
     frame_bury 7
-    // smart_contracts/reti/stakingPool.algo.ts:668
+    // smart_contracts/reti/stakingPool.algo.ts:664
     // if (algoRewardAvail < 1_000_000) {
     frame_dig 4
-    intc 7 // 1000000
+    intc 8 // 1000000
     <
     bz epochBalanceUpdate_after_if_else@23
-    // smart_contracts/reti/stakingPool.algo.ts:669
+    // smart_contracts/reti/stakingPool.algo.ts:665
     // log('!token&&!noalgo to pay')
     pushbytes "!token&&!noalgo to pay"
     log
-    // smart_contracts/reti/stakingPool.algo.ts:670
+    // smart_contracts/reti/stakingPool.algo.ts:666
     // return
     retsub
 
 epochBalanceUpdate_after_if_else@23:
-    // smart_contracts/reti/stakingPool.algo.ts:674
+    // smart_contracts/reti/stakingPool.algo.ts:670
     // if (isPoolSaturated) {
     frame_dig 11
     bz epochBalanceUpdate_after_if_else@39
-    // smart_contracts/reti/stakingPool.algo.ts:681-687
+    // smart_contracts/reti/stakingPool.algo.ts:677-683
     // itxn
     //   .payment({
     //     amount: excessToFeeSink,
@@ -2542,10 +2604,10 @@ epochBalanceUpdate_after_if_else@23:
     //   })
     //   .submit()
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:1005
+    // smart_contracts/reti/stakingPool.algo.ts:999
     // return TemplateVar<Address>('FEE_SINK_ADDR')
-    bytec 22 // TMPL_FEE_SINK_ADDR
-    // smart_contracts/reti/stakingPool.algo.ts:685
+    bytec 23 // TMPL_FEE_SINK_ADDR
+    // smart_contracts/reti/stakingPool.algo.ts:681
     // note: 'pool saturated, excess to fee sink',
     pushbytes "pool saturated, excess to fee sink"
     itxn_field Note
@@ -2553,7 +2615,7 @@ epochBalanceUpdate_after_if_else@23:
     frame_dig 4
     dup
     itxn_field Amount
-    // smart_contracts/reti/stakingPool.algo.ts:681-686
+    // smart_contracts/reti/stakingPool.algo.ts:677-682
     // itxn
     //   .payment({
     //     amount: excessToFeeSink,
@@ -2564,7 +2626,7 @@ epochBalanceUpdate_after_if_else@23:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/stakingPool.algo.ts:681-687
+    // smart_contracts/reti/stakingPool.algo.ts:677-683
     // itxn
     //   .payment({
     //     amount: excessToFeeSink,
@@ -2573,35 +2635,35 @@ epochBalanceUpdate_after_if_else@23:
     //   })
     //   .submit()
     itxn_submit
-    // smart_contracts/reti/stakingPool.algo.ts:689
+    // smart_contracts/reti/stakingPool.algo.ts:685
     // algoRewardAvail = diminishedReward
     intc_0 // 0
     frame_bury 4
     frame_bury 7
 
 epochBalanceUpdate_after_if_else@39:
-    // smart_contracts/reti/stakingPool.algo.ts:741
+    // smart_contracts/reti/stakingPool.algo.ts:737
     // let increasedStake: uint64 = 0
     intc_0 // 0
     frame_bury 9
-    // smart_contracts/reti/stakingPool.algo.ts:765
+    // smart_contracts/reti/stakingPool.algo.ts:761
     // if (algoRewardAvail !== 0 || tokenRewardAvail !== 0) {
     frame_dig 4
-    bz epochBalanceUpdate_after_if_else@74
-    // smart_contracts/reti/stakingPool.algo.ts:766
+    bz epochBalanceUpdate_after_if_else@70
+    // smart_contracts/reti/stakingPool.algo.ts:762
     // let partialStakersTotalStake: uint64 = 0
     intc_0 // 0
     frame_bury 13
-    // smart_contracts/reti/stakingPool.algo.ts:767
+    // smart_contracts/reti/stakingPool.algo.ts:763
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     intc_0 // 0
     frame_bury 8
 
 epochBalanceUpdate_while_top@42:
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:767
+    // smart_contracts/reti/stakingPool.algo.ts:763
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     box_len
     bury 1
@@ -2609,76 +2671,81 @@ epochBalanceUpdate_while_top@42:
     frame_dig 8
     intc 4 // 200
     <
-    bz epochBalanceUpdate_after_while@57
-    // smart_contracts/reti/stakingPool.algo.ts:771
+    bz epochBalanceUpdate_after_while@55
+    // smart_contracts/reti/stakingPool.algo.ts:764
+    // ensureBudget(400)
+    pushint 400 // 400
+    intc_0 // 0
+    callsub ensure_budget
+    // smart_contracts/reti/stakingPool.algo.ts:766
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 8
     intc_2 // 64
     *
     dup
     frame_bury 5
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:771
+    // smart_contracts/reti/stakingPool.algo.ts:766
     // const cmpStaker = clone(this.stakers.value[i])
     swap
     intc_2 // 64
     box_extract
     dup
     frame_bury 0
-    // smart_contracts/reti/stakingPool.algo.ts:771-772
+    // smart_contracts/reti/stakingPool.algo.ts:766-767
     // const cmpStaker = clone(this.stakers.value[i])
     // if (cmpStaker.account.native !== Global.zeroAddress) {
     extract 0 32
-    // smart_contracts/reti/stakingPool.algo.ts:772
+    // smart_contracts/reti/stakingPool.algo.ts:767
     // if (cmpStaker.account.native !== Global.zeroAddress) {
     global ZeroAddress
     !=
     frame_dig 13
     frame_bury 14
-    bz epochBalanceUpdate_after_if_else@56
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bz epochBalanceUpdate_after_if_else@54
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:771
+    // smart_contracts/reti/stakingPool.algo.ts:766
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 5
     intc_2 // 64
     box_extract
     pushint 56 // 56
-    // smart_contracts/reti/stakingPool.algo.ts:773
+    // smart_contracts/reti/stakingPool.algo.ts:768
     // if (cmpStaker.entryRound >= thisEpochBegin) {
     extract_uint64
     dup
     frame_bury 20
     frame_dig 24
     >=
-    bz epochBalanceUpdate_else_body@48
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bz epochBalanceUpdate_else_body@46
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:771
+    // smart_contracts/reti/stakingPool.algo.ts:766
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 5
     intc_2 // 64
     box_extract
     pushint 32 // 32
-    // smart_contracts/reti/stakingPool.algo.ts:776
+    // smart_contracts/reti/stakingPool.algo.ts:771
     // partialStakersTotalStake += cmpStaker.balance
     extract_uint64
     frame_dig 13
     +
     frame_bury 13
 
-epochBalanceUpdate_after_if_else@55:
+epochBalanceUpdate_after_if_else@53:
     frame_dig 13
     frame_bury 14
 
-epochBalanceUpdate_after_if_else@56:
+epochBalanceUpdate_after_if_else@54:
     frame_dig 14
     frame_bury 13
-    // smart_contracts/reti/stakingPool.algo.ts:767
+    // smart_contracts/reti/stakingPool.algo.ts:763
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     frame_dig 8
     intc_1 // 1
@@ -2686,29 +2753,29 @@ epochBalanceUpdate_after_if_else@56:
     frame_bury 8
     b epochBalanceUpdate_while_top@42
 
-epochBalanceUpdate_else_body@48:
-    // smart_contracts/reti/stakingPool.algo.ts:780
+epochBalanceUpdate_else_body@46:
+    // smart_contracts/reti/stakingPool.algo.ts:775
     // const timeInPool: uint64 = thisEpochBegin - cmpStaker.entryRound
     frame_dig 24
     frame_dig 20
     -
-    // smart_contracts/reti/stakingPool.algo.ts:784
+    // smart_contracts/reti/stakingPool.algo.ts:779
     // if (timeInPool < epochRoundLength) {
     frame_dig 22
     <
     frame_dig 13
     frame_bury 14
-    bz epochBalanceUpdate_after_if_else@54
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bz epochBalanceUpdate_after_if_else@52
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:771
+    // smart_contracts/reti/stakingPool.algo.ts:766
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 5
     intc_2 // 64
     box_extract
     pushint 32 // 32
-    // smart_contracts/reti/stakingPool.algo.ts:785
+    // smart_contracts/reti/stakingPool.algo.ts:780
     // partialStakersTotalStake += cmpStaker.balance
     extract_uint64
     frame_dig 13
@@ -2716,54 +2783,54 @@ epochBalanceUpdate_else_body@48:
     frame_bury 13
     frame_dig 0
     frame_bury 1
-    // smart_contracts/reti/stakingPool.algo.ts:788
+    // smart_contracts/reti/stakingPool.algo.ts:783
     // if (tokenRewardAvail > 0) {
     frame_dig 16
-    bz epochBalanceUpdate_after_if_else@51
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bz epochBalanceUpdate_after_if_else@49
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:771
+    // smart_contracts/reti/stakingPool.algo.ts:766
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 5
     intc_2 // 64
     box_extract
     extract 48 8
-    // smart_contracts/reti/stakingPool.algo.ts:799
+    // smart_contracts/reti/stakingPool.algo.ts:794
     // cmpStaker.rewardTokenBalance += stakerTokenReward
     frame_dig 0
     swap
     replace2 48
     frame_bury 1
 
-epochBalanceUpdate_after_if_else@51:
+epochBalanceUpdate_after_if_else@49:
     frame_dig 1
     dup
     frame_bury 0
     frame_bury 1
-    // smart_contracts/reti/stakingPool.algo.ts:802
+    // smart_contracts/reti/stakingPool.algo.ts:797
     // if (algoRewardAvail > 0) {
     frame_dig 4
-    bz epochBalanceUpdate_after_if_else@53
-    // smart_contracts/reti/stakingPool.algo.ts:815
+    bz epochBalanceUpdate_after_if_else@51
+    // smart_contracts/reti/stakingPool.algo.ts:810
     // cmpStaker.balance += stakerReward
     frame_dig 0
     dup
     extract 32 8
     replace2 32
-    // smart_contracts/reti/stakingPool.algo.ts:816
+    // smart_contracts/reti/stakingPool.algo.ts:811
     // cmpStaker.totalRewarded += stakerReward
     dup
     extract 40 8
     replace2 40
     frame_bury 1
 
-epochBalanceUpdate_after_if_else@53:
+epochBalanceUpdate_after_if_else@51:
     frame_dig 1
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:820
+    // smart_contracts/reti/stakingPool.algo.ts:815
     // this.stakers.value[i] = clone(cmpStaker)
     frame_dig 5
     uncover 2
@@ -2771,19 +2838,19 @@ epochBalanceUpdate_after_if_else@53:
     frame_dig 13
     frame_bury 14
 
-epochBalanceUpdate_after_if_else@54:
+epochBalanceUpdate_after_if_else@52:
     frame_dig 14
     frame_bury 13
-    b epochBalanceUpdate_after_if_else@55
+    b epochBalanceUpdate_after_if_else@53
 
-epochBalanceUpdate_after_while@57:
-    // smart_contracts/reti/stakingPool.algo.ts:828
+epochBalanceUpdate_after_while@55:
+    // smart_contracts/reti/stakingPool.algo.ts:823
     // const newPoolTotalStake: uint64 = this.totalAlgoStaked.value - partialStakersTotalStake
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:828
+    // smart_contracts/reti/stakingPool.algo.ts:823
     // const newPoolTotalStake: uint64 = this.totalAlgoStaked.value - partialStakersTotalStake
     app_global_get_ex
     assert // check GlobalState exists
@@ -2793,19 +2860,19 @@ epochBalanceUpdate_after_while@57:
     frame_bury 18
     frame_dig 9
     frame_bury 10
-    // smart_contracts/reti/stakingPool.algo.ts:832
+    // smart_contracts/reti/stakingPool.algo.ts:827
     // if (newPoolTotalStake > 0) {
-    bz epochBalanceUpdate_after_if_else@73
-    // smart_contracts/reti/stakingPool.algo.ts:834
+    bz epochBalanceUpdate_after_if_else@69
+    // smart_contracts/reti/stakingPool.algo.ts:829
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     intc_0 // 0
     frame_bury 12
 
-epochBalanceUpdate_while_top@59:
-    // smart_contracts/reti/stakingPool.algo.ts:90
+epochBalanceUpdate_while_top@57:
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:834
+    // smart_contracts/reti/stakingPool.algo.ts:829
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     box_len
     bury 1
@@ -2813,166 +2880,171 @@ epochBalanceUpdate_while_top@59:
     frame_dig 12
     intc 4 // 200
     <
-    bz epochBalanceUpdate_after_while@72
-    // smart_contracts/reti/stakingPool.algo.ts:838
+    bz epochBalanceUpdate_after_while@68
+    // smart_contracts/reti/stakingPool.algo.ts:830
+    // ensureBudget(200)
+    intc 4 // 200
+    intc_0 // 0
+    callsub ensure_budget
+    // smart_contracts/reti/stakingPool.algo.ts:832
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 12
     intc_2 // 64
     *
     dup
     frame_bury 6
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:838
+    // smart_contracts/reti/stakingPool.algo.ts:832
     // const cmpStaker = clone(this.stakers.value[i])
     swap
     intc_2 // 64
     box_extract
     dup
     frame_bury 2
-    // smart_contracts/reti/stakingPool.algo.ts:838-839
+    // smart_contracts/reti/stakingPool.algo.ts:832-833
     // const cmpStaker = clone(this.stakers.value[i])
     // if (cmpStaker.account.native !== Global.zeroAddress && cmpStaker.entryRound < thisEpochBegin) {
     extract 0 32
-    // smart_contracts/reti/stakingPool.algo.ts:839
+    // smart_contracts/reti/stakingPool.algo.ts:833
     // if (cmpStaker.account.native !== Global.zeroAddress && cmpStaker.entryRound < thisEpochBegin) {
     global ZeroAddress
     !=
-    bz epochBalanceUpdate_after_if_else@71
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bz epochBalanceUpdate_after_if_else@67
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:838-839
+    // smart_contracts/reti/stakingPool.algo.ts:832-833
     // const cmpStaker = clone(this.stakers.value[i])
     // if (cmpStaker.account.native !== Global.zeroAddress && cmpStaker.entryRound < thisEpochBegin) {
     frame_dig 6
     intc_2 // 64
     box_extract
     pushint 56 // 56
-    // smart_contracts/reti/stakingPool.algo.ts:839
+    // smart_contracts/reti/stakingPool.algo.ts:833
     // if (cmpStaker.account.native !== Global.zeroAddress && cmpStaker.entryRound < thisEpochBegin) {
     extract_uint64
     dup
     frame_bury 19
     frame_dig 24
     <
-    bz epochBalanceUpdate_after_if_else@71
-    // smart_contracts/reti/stakingPool.algo.ts:840
+    bz epochBalanceUpdate_after_if_else@67
+    // smart_contracts/reti/stakingPool.algo.ts:834
     // const timeInPool: uint64 = thisEpochBegin - cmpStaker.entryRound
     frame_dig 24
     frame_dig 19
     -
-    // smart_contracts/reti/stakingPool.algo.ts:842
+    // smart_contracts/reti/stakingPool.algo.ts:836
     // if (timeInPool >= epochRoundLength) {
     frame_dig 22
     >=
-    bz epochBalanceUpdate_after_if_else@71
+    bz epochBalanceUpdate_after_if_else@67
     frame_dig 2
     frame_bury 3
-    // smart_contracts/reti/stakingPool.algo.ts:847
+    // smart_contracts/reti/stakingPool.algo.ts:841
     // if (tokenRewardAvail > 0) {
     frame_dig 16
-    bz epochBalanceUpdate_after_if_else@67
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    bz epochBalanceUpdate_after_if_else@63
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:838
+    // smart_contracts/reti/stakingPool.algo.ts:832
     // const cmpStaker = clone(this.stakers.value[i])
     frame_dig 6
     intc_2 // 64
     box_extract
     extract 48 8
-    // smart_contracts/reti/stakingPool.algo.ts:852
+    // smart_contracts/reti/stakingPool.algo.ts:846
     // cmpStaker.rewardTokenBalance += stakerTokenReward
     frame_dig 2
     swap
     replace2 48
     frame_bury 3
 
-epochBalanceUpdate_after_if_else@67:
+epochBalanceUpdate_after_if_else@63:
     frame_dig 3
     dup
     frame_bury 2
     frame_bury 3
-    // smart_contracts/reti/stakingPool.algo.ts:855
+    // smart_contracts/reti/stakingPool.algo.ts:849
     // if (algoRewardAvail > 0) {
     frame_dig 4
-    bz epochBalanceUpdate_after_if_else@69
-    // smart_contracts/reti/stakingPool.algo.ts:860
+    bz epochBalanceUpdate_after_if_else@65
+    // smart_contracts/reti/stakingPool.algo.ts:854
     // cmpStaker.balance += stakerReward
     frame_dig 2
     dup
     extract 32 8
     replace2 32
-    // smart_contracts/reti/stakingPool.algo.ts:861
+    // smart_contracts/reti/stakingPool.algo.ts:855
     // cmpStaker.totalRewarded += stakerReward
     dup
     extract 40 8
     replace2 40
     frame_bury 3
 
-epochBalanceUpdate_after_if_else@69:
+epochBalanceUpdate_after_if_else@65:
     frame_dig 3
-    // smart_contracts/reti/stakingPool.algo.ts:90
+    // smart_contracts/reti/stakingPool.algo.ts:91
     // stakers = Box<FixedArray<StakedInfo, typeof MAX_STAKERS_PER_POOL>>({ key: 'stakers' })
     bytec_0 // "stakers"
-    // smart_contracts/reti/stakingPool.algo.ts:866
+    // smart_contracts/reti/stakingPool.algo.ts:860
     // this.stakers.value[i] = clone(cmpStaker)
     frame_dig 6
     uncover 2
     box_replace
 
-epochBalanceUpdate_after_if_else@71:
-    // smart_contracts/reti/stakingPool.algo.ts:834
+epochBalanceUpdate_after_if_else@67:
+    // smart_contracts/reti/stakingPool.algo.ts:829
     // for (let i: uint64 = 0; i < this.stakers.value.length; i += 1) {
     frame_dig 12
     intc_1 // 1
     +
     frame_bury 12
-    b epochBalanceUpdate_while_top@59
+    b epochBalanceUpdate_while_top@57
 
-epochBalanceUpdate_after_while@72:
+epochBalanceUpdate_after_while@68:
     frame_dig 17
     frame_bury 18
     frame_dig 9
     frame_bury 10
 
-epochBalanceUpdate_after_if_else@73:
+epochBalanceUpdate_after_if_else@69:
     frame_dig 18
     frame_bury 17
     frame_dig 10
     frame_bury 9
 
-epochBalanceUpdate_after_if_else@74:
-    // smart_contracts/reti/stakingPool.algo.ts:876
+epochBalanceUpdate_after_if_else@70:
+    // smart_contracts/reti/stakingPool.algo.ts:870
     // const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:96
+    // smart_contracts/reti/stakingPool.algo.ts:97
     // binRoundStart = GlobalState<uint64>({ key: 'binRoundStart' })
     bytec 8 // "binRoundStart"
-    // smart_contracts/reti/stakingPool.algo.ts:876
+    // smart_contracts/reti/stakingPool.algo.ts:870
     // const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     app_global_get_ex
     assert // check GlobalState exists
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:94
+    // smart_contracts/reti/stakingPool.algo.ts:95
     // roundsPerDay = GlobalState<uint64>({ key: 'roundsPerDay' })
     bytec 7 // "roundsPerDay"
-    // smart_contracts/reti/stakingPool.algo.ts:876
+    // smart_contracts/reti/stakingPool.algo.ts:870
     // const roundsLeftInBin: uint64 = this.binRoundStart.value + this.roundsPerDay.value - Global.round
     app_global_get_ex
     assert // check GlobalState exists
     +
     global Round
     -
-    // smart_contracts/reti/stakingPool.algo.ts:877
+    // smart_contracts/reti/stakingPool.algo.ts:871
     // this.totalAlgoStaked.value += increasedStake
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:877
+    // smart_contracts/reti/stakingPool.algo.ts:871
     // this.totalAlgoStaked.value += increasedStake
     app_global_get_ex
     assert // check GlobalState exists
@@ -2980,20 +3052,20 @@ epochBalanceUpdate_after_if_else@74:
     dup
     cover 2
     +
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:877
+    // smart_contracts/reti/stakingPool.algo.ts:871
     // this.totalAlgoStaked.value += increasedStake
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:879
+    // smart_contracts/reti/stakingPool.algo.ts:873
     // this.stakeAccumulator.value.native + BigUint(increasedStake) * BigUint(roundsLeftInBin),
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:98
+    // smart_contracts/reti/stakingPool.algo.ts:99
     // stakeAccumulator = GlobalState<Uint128>({ key: 'stakeAccumulator' })
     bytec 6 // "stakeAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:879
+    // smart_contracts/reti/stakingPool.algo.ts:873
     // this.stakeAccumulator.value.native + BigUint(increasedStake) * BigUint(roundsLeftInBin),
     app_global_get_ex
     assert // check GlobalState exists
@@ -3005,7 +3077,7 @@ epochBalanceUpdate_after_if_else@74:
     b*
     uncover 2
     b+
-    // smart_contracts/reti/stakingPool.algo.ts:878-880
+    // smart_contracts/reti/stakingPool.algo.ts:872-874
     // this.stakeAccumulator.value = new Uint128(
     //   this.stakeAccumulator.value.native + BigUint(increasedStake) * BigUint(roundsLeftInBin),
     // )
@@ -3017,35 +3089,35 @@ epochBalanceUpdate_after_if_else@74:
     pushint 16 // 16
     bzero
     b|
-    // smart_contracts/reti/stakingPool.algo.ts:98
+    // smart_contracts/reti/stakingPool.algo.ts:99
     // stakeAccumulator = GlobalState<Uint128>({ key: 'stakeAccumulator' })
     bytec 6 // "stakeAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:878-880
+    // smart_contracts/reti/stakingPool.algo.ts:872-874
     // this.stakeAccumulator.value = new Uint128(
     //   this.stakeAccumulator.value.native + BigUint(increasedStake) * BigUint(roundsLeftInBin),
     // )
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:881
+    // smart_contracts/reti/stakingPool.algo.ts:875
     // this.rewardAccumulator.value = this.rewardAccumulator.value + increasedStake
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:100
+    // smart_contracts/reti/stakingPool.algo.ts:101
     // rewardAccumulator = GlobalState<uint64>({ key: 'rewardAccumulator' })
     bytec 10 // "rewardAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:881
+    // smart_contracts/reti/stakingPool.algo.ts:875
     // this.rewardAccumulator.value = this.rewardAccumulator.value + increasedStake
     app_global_get_ex
     assert // check GlobalState exists
     uncover 2
     +
-    // smart_contracts/reti/stakingPool.algo.ts:100
+    // smart_contracts/reti/stakingPool.algo.ts:101
     // rewardAccumulator = GlobalState<uint64>({ key: 'rewardAccumulator' })
     bytec 10 // "rewardAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:881
+    // smart_contracts/reti/stakingPool.algo.ts:875
     // this.rewardAccumulator.value = this.rewardAccumulator.value + increasedStake
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:887-896
+    // smart_contracts/reti/stakingPool.algo.ts:881-890
     // abiCall(ValidatorRegistryABI.prototype.stakeUpdatedViaRewards, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [
@@ -3057,31 +3129,31 @@ epochBalanceUpdate_after_if_else@74:
     //   ],
     // })
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:888
+    // smart_contracts/reti/stakingPool.algo.ts:882
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:888
+    // smart_contracts/reti/stakingPool.algo.ts:882
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:890
+    // smart_contracts/reti/stakingPool.algo.ts:884
     // { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:890
+    // smart_contracts/reti/stakingPool.algo.ts:884
     // { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
     app_global_get_ex
     assert // check GlobalState exists
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:890
+    // smart_contracts/reti/stakingPool.algo.ts:884
     // { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
     app_global_get_ex
     assert // check GlobalState exists
@@ -3094,21 +3166,21 @@ epochBalanceUpdate_after_if_else@74:
     swap
     itob
     concat
-    // smart_contracts/reti/stakingPool.algo.ts:892
+    // smart_contracts/reti/stakingPool.algo.ts:886
     // tokenRewardPaidOut,
     frame_dig 17
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:644
+    // smart_contracts/reti/stakingPool.algo.ts:640
     // let validatorCommissionPaidOut: uint64 = 0
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:893
+    // smart_contracts/reti/stakingPool.algo.ts:887
     // validatorCommissionPaidOut,
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:894
+    // smart_contracts/reti/stakingPool.algo.ts:888
     // excessToFeeSink,
     frame_dig 7
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:887-896
+    // smart_contracts/reti/stakingPool.algo.ts:881-890
     // abiCall(ValidatorRegistryABI.prototype.stakeUpdatedViaRewards, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [
@@ -3139,27 +3211,27 @@ epochBalanceUpdate_after_if_else@74:
     retsub
 
 epochBalanceUpdate_else_body@10:
-    // smart_contracts/reti/stakingPool.algo.ts:603-606
+    // smart_contracts/reti/stakingPool.algo.ts:599-602
     // abiCall(StakingPool.prototype.proxiedSetTokenPayoutRatio, {
     //   appId: poolOneAppID,
     //   args: [{ id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id }],
     // })
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:605
+    // smart_contracts/reti/stakingPool.algo.ts:601
     // args: [{ id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id }],
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:605
+    // smart_contracts/reti/stakingPool.algo.ts:601
     // args: [{ id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id }],
     app_global_get_ex
     assert // check GlobalState exists
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:605
+    // smart_contracts/reti/stakingPool.algo.ts:601
     // args: [{ id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id }],
     app_global_get_ex
     assert // check GlobalState exists
@@ -3172,7 +3244,7 @@ epochBalanceUpdate_else_body@10:
     swap
     itob
     concat
-    // smart_contracts/reti/stakingPool.algo.ts:603-606
+    // smart_contracts/reti/stakingPool.algo.ts:599-602
     // abiCall(StakingPool.prototype.proxiedSetTokenPayoutRatio, {
     //   appId: poolOneAppID,
     //   args: [{ id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id }],
@@ -3197,7 +3269,7 @@ epochBalanceUpdate_else_body@10:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.goOnline(feePayment: uint64, votePK: bytes, selectionPK: bytes, stateProofPK: bytes, voteFirst: uint64, voteLast: uint64, voteKeyDilution: uint64) -> void:
 goOnline:
-    // smart_contracts/reti/stakingPool.algo.ts:912-920
+    // smart_contracts/reti/stakingPool.algo.ts:906-914
     // goOnline(
     //   feePayment: gtxn.PaymentTxn,
     //   votePK: bytes,
@@ -3208,11 +3280,11 @@ goOnline:
     //   voteKeyDilution: uint64,
     // ): void {
     proto 7 0
-    // smart_contracts/reti/stakingPool.algo.ts:921
+    // smart_contracts/reti/stakingPool.algo.ts:915
     // assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
     callsub isOwnerOrManagerCaller
     assert // can only be called by owner or manager of validator
-    // smart_contracts/reti/stakingPool.algo.ts:923
+    // smart_contracts/reti/stakingPool.algo.ts:917
     // assertMatch(feePayment, { receiver: Global.currentApplicationAddress, amount: extraFee })
     frame_dig -7
     gtxns Receiver
@@ -3220,10 +3292,10 @@ goOnline:
     ==
     frame_dig -7
     gtxns Amount
-    // smart_contracts/reti/stakingPool.algo.ts:1028
+    // smart_contracts/reti/stakingPool.algo.ts:1022
     // return 2_000_000
     pushint 2000000 // 2000000
-    // smart_contracts/reti/stakingPool.algo.ts:923
+    // smart_contracts/reti/stakingPool.algo.ts:917
     // assertMatch(feePayment, { receiver: Global.currentApplicationAddress, amount: extraFee })
     ==
     &&
@@ -3233,14 +3305,14 @@ goOnline:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.goOffline() -> void:
 goOffline:
-    // smart_contracts/reti/stakingPool.algo.ts:944
+    // smart_contracts/reti/stakingPool.algo.ts:938
     // if (Txn.sender !== Application(this.creatingValidatorContractAppId.value).address) {
     txn Sender
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:944
+    // smart_contracts/reti/stakingPool.algo.ts:938
     // if (Txn.sender !== Application(this.creatingValidatorContractAppId.value).address) {
     app_global_get_ex
     assert // check GlobalState exists
@@ -3248,13 +3320,13 @@ goOffline:
     assert // application exists
     !=
     bz goOffline_after_if_else@2
-    // smart_contracts/reti/stakingPool.algo.ts:945
+    // smart_contracts/reti/stakingPool.algo.ts:939
     // assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
     callsub isOwnerOrManagerCaller
     assert // can only be called by owner or manager of validator
 
 goOffline_after_if_else@2:
-    // smart_contracts/reti/stakingPool.algo.ts:948
+    // smart_contracts/reti/stakingPool.algo.ts:942
     // itxn.keyRegistration({}).submit()
     itxn_begin
     pushint 2 // 2
@@ -3267,14 +3339,14 @@ goOffline_after_if_else@2:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.linkToNFD(nfdAppId: uint64, nfdName: bytes) -> void:
 linkToNFD:
-    // smart_contracts/reti/stakingPool.algo.ts:954
+    // smart_contracts/reti/stakingPool.algo.ts:948
     // linkToNFD(nfdAppId: uint64, nfdName: string): void {
     proto 2 0
-    // smart_contracts/reti/stakingPool.algo.ts:955
+    // smart_contracts/reti/stakingPool.algo.ts:949
     // assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
     callsub isOwnerOrManagerCaller
     assert // can only be called by owner or manager of validator
-    // smart_contracts/reti/stakingPool.algo.ts:957-968
+    // smart_contracts/reti/stakingPool.algo.ts:951-962
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -3288,19 +3360,19 @@ linkToNFD:
     //   })
     //   .submit()
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:959
+    // smart_contracts/reti/stakingPool.algo.ts:953
     // appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
-    intc 9 // TMPL_NFD_REGISTRY_APP_ID
-    // smart_contracts/reti/stakingPool.algo.ts:963
+    intc 10 // TMPL_NFD_REGISTRY_APP_ID
+    // smart_contracts/reti/stakingPool.algo.ts:957
     // op.itob(nfdAppId),
     frame_dig -2
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:964
+    // smart_contracts/reti/stakingPool.algo.ts:958
     // new Address(Global.currentApplicationAddress).bytes,
     global CurrentApplicationAddress
     frame_dig -2
     itxn_field Applications
-    // smart_contracts/reti/stakingPool.algo.ts:961
+    // smart_contracts/reti/stakingPool.algo.ts:955
     // Bytes('verify_nfd_addr'),
     pushbytes "verify_nfd_addr"
     itxn_field ApplicationArgs
@@ -3310,7 +3382,7 @@ linkToNFD:
     itxn_field ApplicationArgs
     itxn_field ApplicationArgs
     itxn_field ApplicationID
-    // smart_contracts/reti/stakingPool.algo.ts:957-967
+    // smart_contracts/reti/stakingPool.algo.ts:951-961
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -3326,7 +3398,7 @@ linkToNFD:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/reti/stakingPool.algo.ts:957-968
+    // smart_contracts/reti/stakingPool.algo.ts:951-962
     // itxn
     //   .applicationCall({
     //     appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
@@ -3345,16 +3417,16 @@ linkToNFD:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.proxiedSetTokenPayoutRatio(poolKey: bytes) -> bytes:
 proxiedSetTokenPayoutRatio:
-    // smart_contracts/reti/stakingPool.algo.ts:977
+    // smart_contracts/reti/stakingPool.algo.ts:971
     // proxiedSetTokenPayoutRatio(poolKey: ValidatorPoolKey): PoolTokenPayoutRatio {
     proto 1 1
-    // smart_contracts/reti/stakingPool.algo.ts:978
+    // smart_contracts/reti/stakingPool.algo.ts:972
     // assert(this.validatorId.value === poolKey.id, 'caller must be part of same validator set!')
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:978
+    // smart_contracts/reti/stakingPool.algo.ts:972
     // assert(this.validatorId.value === poolKey.id, 'caller must be part of same validator set!')
     app_global_get_ex
     assert // check GlobalState exists
@@ -3366,20 +3438,20 @@ proxiedSetTokenPayoutRatio:
     dig 2
     ==
     assert // caller must be part of same validator set!
-    // smart_contracts/reti/stakingPool.algo.ts:979
+    // smart_contracts/reti/stakingPool.algo.ts:973
     // assert(this.poolId.value === 1, 'callee must be pool 1')
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:70
+    // smart_contracts/reti/stakingPool.algo.ts:71
     // poolId = GlobalState<uint64>({ key: 'poolId' })
     bytec 4 // "poolId"
-    // smart_contracts/reti/stakingPool.algo.ts:979
+    // smart_contracts/reti/stakingPool.algo.ts:973
     // assert(this.poolId.value === 1, 'callee must be pool 1')
     app_global_get_ex
     assert // check GlobalState exists
     intc_1 // 1
     ==
     assert // callee must be pool 1
-    // smart_contracts/reti/stakingPool.algo.ts:980
+    // smart_contracts/reti/stakingPool.algo.ts:974
     // assert(poolKey.poolId !== 1, 'caller must NOT be pool 1')
     frame_dig -1
     extract 8 8
@@ -3389,28 +3461,28 @@ proxiedSetTokenPayoutRatio:
     intc_1 // 1
     !=
     assert // caller must NOT be pool 1
-    // smart_contracts/reti/stakingPool.algo.ts:982-985
+    // smart_contracts/reti/stakingPool.algo.ts:976-979
     // const callerPoolAppID = abiCall(ValidatorRegistryABI.prototype.getPoolAppId, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [poolKey.id, poolKey.poolId],
     // }).returnValue
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:983
+    // smart_contracts/reti/stakingPool.algo.ts:977
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:983
+    // smart_contracts/reti/stakingPool.algo.ts:977
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:982-985
+    // smart_contracts/reti/stakingPool.algo.ts:976-979
     // const callerPoolAppID = abiCall(ValidatorRegistryABI.prototype.getPoolAppId, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [poolKey.id, poolKey.poolId],
     // }).returnValue
-    bytec 20 // method "getPoolAppId(uint64,uint64)uint64"
+    bytec 21 // method "getPoolAppId(uint64,uint64)uint64"
     itxn_field ApplicationArgs
     uncover 2
     itxn_field ApplicationArgs
@@ -3432,7 +3504,7 @@ proxiedSetTokenPayoutRatio:
     ==
     assert // Bytes has valid prefix
     btoi
-    // smart_contracts/reti/stakingPool.algo.ts:987
+    // smart_contracts/reti/stakingPool.algo.ts:981
     // assert(callerPoolAppID === poolKey.poolAppId)
     frame_dig -1
     pushint 16 // 16
@@ -3441,7 +3513,7 @@ proxiedSetTokenPayoutRatio:
     dig 1
     ==
     assert
-    // smart_contracts/reti/stakingPool.algo.ts:988
+    // smart_contracts/reti/stakingPool.algo.ts:982
     // assert(Txn.sender === Application(poolKey.poolAppId).address)
     txn Sender
     swap
@@ -3449,22 +3521,22 @@ proxiedSetTokenPayoutRatio:
     assert // application exists
     ==
     assert
-    // smart_contracts/reti/stakingPool.algo.ts:990-993
+    // smart_contracts/reti/stakingPool.algo.ts:984-987
     // return abiCall(ValidatorRegistryABI.prototype.setTokenPayoutRatio, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:992
+    // smart_contracts/reti/stakingPool.algo.ts:986
     // args: [this.validatorId.value],
     swap
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:990-993
+    // smart_contracts/reti/stakingPool.algo.ts:984-987
     // return abiCall(ValidatorRegistryABI.prototype.setTokenPayoutRatio, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
-    bytec 21 // method "setTokenPayoutRatio(uint64)(uint64[24],uint64)"
+    bytec 22 // method "setTokenPayoutRatio(uint64)(uint64[24],uint64)"
     itxn_field ApplicationArgs
     itxn_field ApplicationArgs
     itxn_field ApplicationID
@@ -3486,37 +3558,37 @@ proxiedSetTokenPayoutRatio:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.isOwnerOrManagerCaller() -> uint64:
 isOwnerOrManagerCaller:
-    // smart_contracts/reti/stakingPool.algo.ts:996
+    // smart_contracts/reti/stakingPool.algo.ts:990
     // private isOwnerOrManagerCaller(): boolean {
     proto 0 1
-    // smart_contracts/reti/stakingPool.algo.ts:997-1000
+    // smart_contracts/reti/stakingPool.algo.ts:991-994
     // const OwnerAndManager = abiCall(ValidatorRegistryABI.prototype.getValidatorOwnerAndManager, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
     itxn_begin
-    // smart_contracts/reti/stakingPool.algo.ts:998
+    // smart_contracts/reti/stakingPool.algo.ts:992
     // appId: this.creatingValidatorContractAppId.value,
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:64
+    // smart_contracts/reti/stakingPool.algo.ts:65
     // creatingValidatorContractAppId = GlobalState<uint64>({ key: 'creatorApp' })
     bytec_1 // "creatorApp"
-    // smart_contracts/reti/stakingPool.algo.ts:998
+    // smart_contracts/reti/stakingPool.algo.ts:992
     // appId: this.creatingValidatorContractAppId.value,
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:999
+    // smart_contracts/reti/stakingPool.algo.ts:993
     // args: [this.validatorId.value],
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:67
+    // smart_contracts/reti/stakingPool.algo.ts:68
     // validatorId = GlobalState<uint64>({ key: 'validatorId' })
     bytec_3 // "validatorId"
-    // smart_contracts/reti/stakingPool.algo.ts:999
+    // smart_contracts/reti/stakingPool.algo.ts:993
     // args: [this.validatorId.value],
     app_global_get_ex
     assert // check GlobalState exists
     itob
-    // smart_contracts/reti/stakingPool.algo.ts:997-1000
+    // smart_contracts/reti/stakingPool.algo.ts:991-994
     // const OwnerAndManager = abiCall(ValidatorRegistryABI.prototype.getValidatorOwnerAndManager, {
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
@@ -3536,7 +3608,7 @@ isOwnerOrManagerCaller:
     bytec_2 // 0x151f7c75
     ==
     assert // Bytes has valid prefix
-    // smart_contracts/reti/stakingPool.algo.ts:1001
+    // smart_contracts/reti/stakingPool.algo.ts:995
     // return Txn.sender === OwnerAndManager[0].native || Txn.sender === OwnerAndManager[1].native
     txn Sender
     swap
@@ -3553,7 +3625,7 @@ isOwnerOrManagerCaller_bool_true@3:
     intc_1 // 1
 
 isOwnerOrManagerCaller_bool_merge@5:
-    // smart_contracts/reti/stakingPool.algo.ts:1001
+    // smart_contracts/reti/stakingPool.algo.ts:995
     // return Txn.sender === OwnerAndManager[0].native || Txn.sender === OwnerAndManager[1].native
     swap
     retsub
@@ -3565,52 +3637,57 @@ isOwnerOrManagerCaller_bool_false@4:
 
 // smart_contracts/reti/stakingPool.algo.ts::StakingPool.checkIfBinClosed() -> void:
 checkIfBinClosed:
-    // smart_contracts/reti/stakingPool.algo.ts:1041
+    // smart_contracts/reti/stakingPool.algo.ts:1035
     // private checkIfBinClosed() {
     proto 0 0
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:1042
+    // smart_contracts/reti/stakingPool.algo.ts:1036
     // const currentBinSize = BigUint(this.roundsPerDay.value)
     dupn 4
-    // smart_contracts/reti/stakingPool.algo.ts:94
+    // smart_contracts/reti/stakingPool.algo.ts:95
     // roundsPerDay = GlobalState<uint64>({ key: 'roundsPerDay' })
     bytec 7 // "roundsPerDay"
-    // smart_contracts/reti/stakingPool.algo.ts:1042
+    // smart_contracts/reti/stakingPool.algo.ts:1036
     // const currentBinSize = BigUint(this.roundsPerDay.value)
     app_global_get_ex
     assert // check GlobalState exists
     dup
     itob
     swap
-    // smart_contracts/reti/stakingPool.algo.ts:1043
+    // smart_contracts/reti/stakingPool.algo.ts:1037
     // if (Global.round >= this.binRoundStart.value + this.roundsPerDay.value) {
     global Round
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:96
+    // smart_contracts/reti/stakingPool.algo.ts:97
     // binRoundStart = GlobalState<uint64>({ key: 'binRoundStart' })
     bytec 8 // "binRoundStart"
-    // smart_contracts/reti/stakingPool.algo.ts:1043
+    // smart_contracts/reti/stakingPool.algo.ts:1037
     // if (Global.round >= this.binRoundStart.value + this.roundsPerDay.value) {
     app_global_get_ex
     assert // check GlobalState exists
     uncover 2
     +
     >=
-    bz checkIfBinClosed_after_if_else@8
-    // smart_contracts/reti/stakingPool.algo.ts:1047
+    bz checkIfBinClosed_after_if_else@6
+    // smart_contracts/reti/stakingPool.algo.ts:1038
+    // ensureBudget(300)
+    intc 7 // 300
+    intc_0 // 0
+    callsub ensure_budget
+    // smart_contracts/reti/stakingPool.algo.ts:1040
     // const approxRoundsPerYear: biguint = currentBinSize * BigUint(365)
     frame_dig 4
     dup
     pushbytes 0x016d
     b*
     frame_bury 1
-    // smart_contracts/reti/stakingPool.algo.ts:1048
+    // smart_contracts/reti/stakingPool.algo.ts:1041
     // const avgStake: biguint = this.stakeAccumulator.value.native / currentBinSize
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:98
+    // smart_contracts/reti/stakingPool.algo.ts:99
     // stakeAccumulator = GlobalState<Uint128>({ key: 'stakeAccumulator' })
     bytec 6 // "stakeAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:1048
+    // smart_contracts/reti/stakingPool.algo.ts:1041
     // const avgStake: biguint = this.stakeAccumulator.value.native / currentBinSize
     app_global_get_ex
     assert // check GlobalState exists
@@ -3618,18 +3695,18 @@ checkIfBinClosed:
     b/
     dup
     frame_bury 3
-    // smart_contracts/reti/stakingPool.algo.ts:1049
+    // smart_contracts/reti/stakingPool.algo.ts:1042
     // if (avgStake !== BigUint(0)) {
     pushbytes 0x
     b!=
-    bz checkIfBinClosed_after_if_else@7
-    // smart_contracts/reti/stakingPool.algo.ts:1054
+    bz checkIfBinClosed_after_if_else@5
+    // smart_contracts/reti/stakingPool.algo.ts:1047
     // ((BigUint(this.rewardAccumulator.value) * BigUint(10000)) / avgStake) * (approxRoundsPerYear / currentBinSize)
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:100
+    // smart_contracts/reti/stakingPool.algo.ts:101
     // rewardAccumulator = GlobalState<uint64>({ key: 'rewardAccumulator' })
     bytec 10 // "rewardAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:1054
+    // smart_contracts/reti/stakingPool.algo.ts:1047
     // ((BigUint(this.rewardAccumulator.value) * BigUint(10000)) / avgStake) * (approxRoundsPerYear / currentBinSize)
     app_global_get_ex
     assert // check GlobalState exists
@@ -3645,28 +3722,28 @@ checkIfBinClosed:
     b/
     b*
     frame_bury 2
-    // smart_contracts/reti/stakingPool.algo.ts:1056
+    // smart_contracts/reti/stakingPool.algo.ts:1049
     // let alpha = BigUint(10) // .1
     pushbytes 0x0a
     frame_bury 0
-    // smart_contracts/reti/stakingPool.algo.ts:1058
+    // smart_contracts/reti/stakingPool.algo.ts:1051
     // if (avgStake > BigUint(300000000000)) {
     pushbytes 0x45d964b800
     b>
-    bz checkIfBinClosed_after_if_else@6
-    // smart_contracts/reti/stakingPool.algo.ts:1059
+    bz checkIfBinClosed_after_if_else@4
+    // smart_contracts/reti/stakingPool.algo.ts:1052
     // alpha = BigUint(90) // .9
     pushbytes 0x5a
     frame_bury 0
 
-checkIfBinClosed_after_if_else@6:
-    // smart_contracts/reti/stakingPool.algo.ts:1062
+checkIfBinClosed_after_if_else@4:
+    // smart_contracts/reti/stakingPool.algo.ts:1055
     // (this.weightedMovingAverage.value.native * (BigUint(100) - alpha)) / BigUint(100) +
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:102
+    // smart_contracts/reti/stakingPool.algo.ts:103
     // weightedMovingAverage = GlobalState<Uint128>({ key: 'ewma' })
     bytec 15 // "ewma"
-    // smart_contracts/reti/stakingPool.algo.ts:1062
+    // smart_contracts/reti/stakingPool.algo.ts:1055
     // (this.weightedMovingAverage.value.native * (BigUint(100) - alpha)) / BigUint(100) +
     app_global_get_ex
     assert // check GlobalState exists
@@ -3678,18 +3755,18 @@ checkIfBinClosed_after_if_else@6:
     b*
     bytec 16 // 0x64
     b/
-    // smart_contracts/reti/stakingPool.algo.ts:1063
+    // smart_contracts/reti/stakingPool.algo.ts:1056
     // (apr * alpha) / BigUint(100),
     frame_dig 2
     uncover 2
     b*
     bytec 16 // 0x64
     b/
-    // smart_contracts/reti/stakingPool.algo.ts:1062-1063
+    // smart_contracts/reti/stakingPool.algo.ts:1055-1056
     // (this.weightedMovingAverage.value.native * (BigUint(100) - alpha)) / BigUint(100) +
     //   (apr * alpha) / BigUint(100),
     b+
-    // smart_contracts/reti/stakingPool.algo.ts:1061-1064
+    // smart_contracts/reti/stakingPool.algo.ts:1054-1057
     // this.weightedMovingAverage.value = new Uint128(
     //   (this.weightedMovingAverage.value.native * (BigUint(100) - alpha)) / BigUint(100) +
     //     (apr * alpha) / BigUint(100),
@@ -3702,10 +3779,10 @@ checkIfBinClosed_after_if_else@6:
     pushint 16 // 16
     bzero
     b|
-    // smart_contracts/reti/stakingPool.algo.ts:102
+    // smart_contracts/reti/stakingPool.algo.ts:103
     // weightedMovingAverage = GlobalState<Uint128>({ key: 'ewma' })
     bytec 15 // "ewma"
-    // smart_contracts/reti/stakingPool.algo.ts:1061-1064
+    // smart_contracts/reti/stakingPool.algo.ts:1054-1057
     // this.weightedMovingAverage.value = new Uint128(
     //   (this.weightedMovingAverage.value.native * (BigUint(100) - alpha)) / BigUint(100) +
     //     (apr * alpha) / BigUint(100),
@@ -3713,69 +3790,69 @@ checkIfBinClosed_after_if_else@6:
     swap
     app_global_put
 
-checkIfBinClosed_after_if_else@7:
-    // smart_contracts/reti/stakingPool.algo.ts:94
+checkIfBinClosed_after_if_else@5:
+    // smart_contracts/reti/stakingPool.algo.ts:95
     // roundsPerDay = GlobalState<uint64>({ key: 'roundsPerDay' })
     bytec 7 // "roundsPerDay"
-    // smart_contracts/reti/stakingPool.algo.ts:1076
+    // smart_contracts/reti/stakingPool.algo.ts:1069
     // this.roundsPerDay.value = AVG_ROUNDS_PER_DAY
     intc 5 // 30857
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:1069
+    // smart_contracts/reti/stakingPool.algo.ts:1062
     // this.stakeAccumulator.value = new Uint128(this.totalAlgoStaked.value * this.roundsPerDay.value)
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:76
+    // smart_contracts/reti/stakingPool.algo.ts:77
     // totalAlgoStaked = GlobalState<uint64>({ key: 'staked' })
     bytec 5 // "staked"
-    // smart_contracts/reti/stakingPool.algo.ts:1069
+    // smart_contracts/reti/stakingPool.algo.ts:1062
     // this.stakeAccumulator.value = new Uint128(this.totalAlgoStaked.value * this.roundsPerDay.value)
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/reti/stakingPool.algo.ts:1076
+    // smart_contracts/reti/stakingPool.algo.ts:1069
     // this.roundsPerDay.value = AVG_ROUNDS_PER_DAY
     intc 5 // 30857
-    // smart_contracts/reti/stakingPool.algo.ts:1069
+    // smart_contracts/reti/stakingPool.algo.ts:1062
     // this.stakeAccumulator.value = new Uint128(this.totalAlgoStaked.value * this.roundsPerDay.value)
     *
     itob
     pushint 16 // 16
     bzero
     b|
-    // smart_contracts/reti/stakingPool.algo.ts:98
+    // smart_contracts/reti/stakingPool.algo.ts:99
     // stakeAccumulator = GlobalState<Uint128>({ key: 'stakeAccumulator' })
     bytec 6 // "stakeAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:1069
+    // smart_contracts/reti/stakingPool.algo.ts:1062
     // this.stakeAccumulator.value = new Uint128(this.totalAlgoStaked.value * this.roundsPerDay.value)
     swap
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:100
+    // smart_contracts/reti/stakingPool.algo.ts:101
     // rewardAccumulator = GlobalState<uint64>({ key: 'rewardAccumulator' })
     bytec 10 // "rewardAccumulator"
-    // smart_contracts/reti/stakingPool.algo.ts:1070
+    // smart_contracts/reti/stakingPool.algo.ts:1063
     // this.rewardAccumulator.value = 0
     intc_0 // 0
     app_global_put
-    // smart_contracts/reti/stakingPool.algo.ts:1071
+    // smart_contracts/reti/stakingPool.algo.ts:1064
     // this.binRoundStart.value = Global.round - (Global.round % this.roundsPerDay.value)
     global Round
     dup
     intc_0 // 0
-    // smart_contracts/reti/stakingPool.algo.ts:94
+    // smart_contracts/reti/stakingPool.algo.ts:95
     // roundsPerDay = GlobalState<uint64>({ key: 'roundsPerDay' })
     bytec 7 // "roundsPerDay"
-    // smart_contracts/reti/stakingPool.algo.ts:1071
+    // smart_contracts/reti/stakingPool.algo.ts:1064
     // this.binRoundStart.value = Global.round - (Global.round % this.roundsPerDay.value)
     app_global_get_ex
     assert // check GlobalState exists
     %
     -
-    // smart_contracts/reti/stakingPool.algo.ts:96
+    // smart_contracts/reti/stakingPool.algo.ts:97
     // binRoundStart = GlobalState<uint64>({ key: 'binRoundStart' })
     bytec 8 // "binRoundStart"
-    // smart_contracts/reti/stakingPool.algo.ts:1071
+    // smart_contracts/reti/stakingPool.algo.ts:1064
     // this.binRoundStart.value = Global.round - (Global.round % this.roundsPerDay.value)
     swap
     app_global_put
 
-checkIfBinClosed_after_if_else@8:
+checkIfBinClosed_after_if_else@6:
     retsub
