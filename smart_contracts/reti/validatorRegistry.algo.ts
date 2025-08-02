@@ -55,7 +55,7 @@ import {
   SSC_VALUE_UINT,
 } from './constants.algo'
 import { stakingPool } from './compiled.algo'
-import { StakingPoolABI } from './interfaces.algo'
+import { StakingPoolABI } from './interfaces'
 
 const MAX_NODES = 8 // more just as a reasonable limit and cap on contract storage
 const MAX_POOLS_PER_NODE = 3 // max number of pools per node
@@ -547,12 +547,14 @@ export class ValidatorRegistry extends Contract {
       Txn.sender === this.validatorList(validatorId).value.config.owner.native,
       'can only be called by validator owner',
     )
-    itxn.applicationCall({
-      appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
-      onCompletion: OnCompleteAction.NoOp,
-      accounts: [Txn.sender],
-      appArgs: [Bytes('is_valid_nfd_appid'), Bytes(nfdName), op.itob(nfdAppID)],
-    })
+    itxn
+      .applicationCall({
+        appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
+        onCompletion: OnCompleteAction.NoOp,
+        accounts: [Txn.sender],
+        appArgs: [Bytes('is_valid_nfd_appid'), Bytes(nfdName), op.itob(nfdAppID)],
+      })
+      .submit()
     // we know sender is owner or manager - so if sender is owner of nfd - we're fine.
     const [owner] = op.AppGlobal.getExBytes(nfdAppID, Bytes('i.owner.a'))
     assert(Txn.sender === Account(owner), 'If specifying NFD, account adding validator must be owner')
@@ -627,25 +629,27 @@ export class ValidatorRegistry extends Contract {
     numPools += 1
 
     // Create the actual staker pool contract instance
-    itxn.applicationCall({
-      onCompletion: OnCompleteAction.NoOp,
-      approvalProgram: [
-        this.stakingPoolApprovalProgram.ref.extract(0, 4096),
-        this.stakingPoolApprovalProgram.ref.extract(4096, this.stakingPoolApprovalProgram.ref.length - 4096),
-      ],
-      clearStateProgram: stakingPool().clearStateProgram,
-      globalNumUint: stakingPool().globalUints,
-      globalNumBytes: stakingPool().globalBytes,
-      extraProgramPages: 3,
-      appArgs: [
-        // creatingContractID, validatorId, poolId, minEntryStake
-        methodSelector('createApplication(uint64,uint64,uint64,uint64)void'),
-        op.itob(Global.currentApplicationId.id),
-        op.itob(validatorId),
-        op.itob(numPools as uint64),
-        op.itob(this.validatorList(validatorId).value.config.minEntryStake),
-      ],
-    })
+    itxn
+      .applicationCall({
+        onCompletion: OnCompleteAction.NoOp,
+        approvalProgram: [
+          this.stakingPoolApprovalProgram.ref.extract(0, 4096),
+          this.stakingPoolApprovalProgram.ref.extract(4096, this.stakingPoolApprovalProgram.ref.length - 4096),
+        ],
+        clearStateProgram: stakingPool().clearStateProgram,
+        globalNumUint: stakingPool().globalUints,
+        globalNumBytes: stakingPool().globalBytes,
+        extraProgramPages: 3,
+        appArgs: [
+          // creatingContractID, validatorId, poolId, minEntryStake
+          methodSelector('createApplication(uint64,uint64,uint64,uint64)void'),
+          op.itob(Global.currentApplicationId.id),
+          op.itob(validatorId),
+          op.itob(numPools as uint64),
+          op.itob(this.validatorList(validatorId).value.config.minEntryStake),
+        ],
+      })
+      .submit()
 
     this.validatorList(validatorId).value.state.numPools = new Uint16(numPools)
     // We don't need to manipulate anything in the pools array as the '0' values are all correct for PoolInfo
@@ -1490,11 +1494,13 @@ export class ValidatorRegistry extends Contract {
     // verify NFD user wants to offer up for testing is at least 'real' - since we just have app id - fetch its name then do is valid call
     const [userOfferedNFDName] = op.AppGlobal.getExBytes(nfdAppID, Bytes('i.name'))
 
-    itxn.applicationCall({
-      appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
-      appArgs: [Bytes('is_valid_nfd_appid'), Bytes(userOfferedNFDName), op.itob(nfdAppID)],
-      apps: [nfdAppID],
-    })
+    itxn
+      .applicationCall({
+        appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
+        appArgs: [Bytes('is_valid_nfd_appid'), Bytes(userOfferedNFDName), op.itob(nfdAppID)],
+        apps: [nfdAppID],
+      })
+      .submit()
     return op.btoi(op.ITxn.lastLog) === 1
   }
 
@@ -1507,10 +1513,12 @@ export class ValidatorRegistry extends Contract {
    * @return {boolean} - `true` if the address is present, `false` otherwise.
    */
   private isAddressInNFDCAAlgoList(nfdAppID: uint64, addrToFind: Address): boolean {
-    itxn.applicationCall({
-      appId: Application(nfdAppID),
-      appArgs: [Bytes('read_property'), Bytes('v.caAlgo.0.as')],
-    })
+    itxn
+      .applicationCall({
+        appId: Application(nfdAppID),
+        appArgs: [Bytes('read_property'), Bytes('v.caAlgo.0.as')],
+      })
+      .submit()
     const caAlgoData = op.ITxn.lastLog
     for (let i: uint64 = 0; i < caAlgoData.length; i += 32) {
       const addr = new Address(op.extract(caAlgoData, i, 32))

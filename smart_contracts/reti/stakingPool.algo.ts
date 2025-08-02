@@ -31,7 +31,7 @@ import {
   MAX_VALIDATOR_SOFT_PCT_OF_ONLINE_1DECIMAL,
   MIN_ALGO_STAKE_PER_POOL,
 } from './constants.algo'
-import { ValidatorRegistryABI } from './interfaces.algo'
+import { ValidatorRegistryABI } from './interfaces'
 
 const ALGORAND_STAKING_BLOCK_DELAY = 320 // # of blocks until algorand sees online balance changes in staking
 const AVG_ROUNDS_PER_DAY = 30857 // approx 'daily' rounds for APR bins (60*60*24/2.8)
@@ -431,11 +431,13 @@ export class StakingPool extends Contract {
           }).returnValue // ---------
           // SEND THE REWARD TOKEN NOW - it's in our pool
           // ---------
-          itxn.assetTransfer({
-            xferAsset: validatorConfig.rewardTokenId,
-            assetReceiver: staker,
-            assetAmount: cmpStaker.rewardTokenBalance,
-          })
+          itxn
+            .assetTransfer({
+              xferAsset: validatorConfig.rewardTokenId,
+              assetReceiver: staker,
+              assetAmount: cmpStaker.rewardTokenBalance,
+            })
+            .submit()
           amountRewardTokenRemoved = cmpStaker.rewardTokenBalance
           cmpStaker.rewardTokenBalance = 0
         } else {
@@ -676,11 +678,13 @@ export class StakingPool extends Contract {
       const diminishedReward = 0
       // send excess to fee sink...
       excessToFeeSink = algoRewardAvail - diminishedReward
-      itxn.payment({
-        amount: excessToFeeSink,
-        receiver: this.getFeeSink().native,
-        note: 'pool saturated, excess to fee sink',
-      })
+      itxn
+        .payment({
+          amount: excessToFeeSink,
+          receiver: this.getFeeSink().native,
+          note: 'pool saturated, excess to fee sink',
+        })
+        .submit()
       // then distribute the smaller reward amount like normal (skipping validator payout entirely)
       algoRewardAvail = diminishedReward
     } else if (validatorConfig.percentToValidator.native !== 0) {
@@ -708,18 +712,22 @@ export class StakingPool extends Contract {
           validatorConfig.manager.native.balance - validatorConfig.manager.native.minBalance < 2_100_000
         ) {
           managerTopOff = validatorCommissionPaidOut < 2_100_000 ? validatorCommissionPaidOut : 2_100_000
-          itxn.payment({
-            amount: managerTopOff,
-            receiver: validatorConfig.manager.native,
-            note: 'validator reward to manager for funding epoch updates',
-          })
+          itxn
+            .payment({
+              amount: managerTopOff,
+              receiver: validatorConfig.manager.native,
+              note: 'validator reward to manager for funding epoch updates',
+            })
+            .submit()
         }
         if (validatorCommissionPaidOut - managerTopOff > 0) {
-          itxn.payment({
-            amount: validatorCommissionPaidOut - managerTopOff,
-            receiver: validatorConfig.validatorCommissionAddress.native,
-            note: 'validator reward',
-          })
+          itxn
+            .payment({
+              amount: validatorCommissionPaidOut - managerTopOff,
+              receiver: validatorConfig.validatorCommissionAddress.native,
+              note: 'validator reward',
+            })
+            .submit()
         }
       }
     }
@@ -913,15 +921,16 @@ export class StakingPool extends Contract {
     assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
     const extraFee = this.getGoOnlineFee()
     assertMatch(feePayment, { receiver: Global.currentApplicationAddress, amount: extraFee })
-    itxn.keyRegistration({
-      voteKey: Bytes<32>(votePK),
-      selectionKey: Bytes<32>(selectionPK),
-      stateProofKey: Bytes<64>(stateProofPK),
-      voteFirst: voteFirst,
-      voteLast: voteLast,
-      voteKeyDilution: voteKeyDilution,
-      fee: this.getGoOnlineFee(),
-    })
+    // TODO: https://github.com/algorandfoundation/puya-ts/issues/244
+    // itxn.keyRegistration({
+    //   voteKey: Bytes<32>(votePK),
+    //   selectionKey: Bytes<32>(selectionPK),
+    //   stateProofKey: Bytes<64>(stateProofPK),
+    //   voteFirst: voteFirst,
+    //   voteLast: voteLast,
+    //   voteKeyDilution: voteKeyDilution,
+    //   fee: this.getGoOnlineFee(),
+    // })
   }
 
   /**
@@ -936,7 +945,7 @@ export class StakingPool extends Contract {
       assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
     }
 
-    itxn.keyRegistration({})
+    itxn.keyRegistration({}).submit()
   }
 
   // Links the staking pool's account address to an NFD
@@ -945,16 +954,18 @@ export class StakingPool extends Contract {
   linkToNFD(nfdAppId: uint64, nfdName: string): void {
     assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
 
-    itxn.applicationCall({
-      appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
-      appArgs: [
-        Bytes('verify_nfd_addr'),
-        Bytes(nfdName),
-        op.itob(nfdAppId),
-        new Address(Global.currentApplicationAddress).bytes,
-      ],
-      apps: [nfdAppId],
-    })
+    itxn
+      .applicationCall({
+        appId: TemplateVar<uint64>('NFD_REGISTRY_APP_ID'),
+        appArgs: [
+          Bytes('verify_nfd_addr'),
+          Bytes(nfdName),
+          op.itob(nfdAppId),
+          new Address(Global.currentApplicationAddress).bytes,
+        ],
+        apps: [nfdAppId],
+      })
+      .submit()
   }
 
   /**
