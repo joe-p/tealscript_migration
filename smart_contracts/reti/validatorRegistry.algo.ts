@@ -47,6 +47,7 @@ import {
   SSC_VALUE_UINT,
 } from './constants.algo'
 import { stakingPool } from './compiled.algo'
+import { StakingPoolABI } from './interfaces.algo'
 
 const MAX_NODES = 8 // more just as a reasonable limit and cap on contract storage
 const MAX_POOLS_PER_NODE = 3 // max number of pools per node
@@ -59,7 +60,7 @@ const MIN_EPOCH_LENGTH = 1 // 1 round is technical minimum but its absurd - 20 w
 const MAX_EPOCH_LENGTH = 1000000 // 1 million rounds or.. just over a month ?
 const MAX_POOLS_PER_STAKER = 6
 
-type ValidatorIdType = uint64
+export type ValidatorIdType = uint64
 export type ValidatorPoolKey = {
   id: ValidatorIdType // 0 is invalid - should start at 1 (but is direct key in box)
   poolId: uint64 // 0 means INVALID ! - so 1 is index, technically of [0]
@@ -118,7 +119,7 @@ export type ValidatorConfig = {
   sunsettingTo: ValidatorIdType // [CHANGEABLE] validator id that validator is 'moving' to (if known)
 }
 
-type ValidatorCurState = {
+export type ValidatorCurState = {
   numPools: Uint16 // current number of pools this validator has - capped at MaxPools
   totalStakers: uint64 // total number of stakers across all pools of THIS validator
   totalAlgoStaked: uint64 // total amount staked to this validator across ALL of its pools
@@ -885,7 +886,7 @@ export class ValidatorRegistry extends Contract {
       // rewardTokenHeldBack value and then call method in the pool that can only be called by us (the
       // validator), and can only be called on pool 1 [Index 0] - to have it do the token payout.
       if (poolKey.poolId !== 1) {
-        abiCall(StakingPool.prototype.payTokenReward, {
+        abiCall(StakingPoolABI.prototype.payTokenReward, {
           appId: this.validatorList(poolKey.id).value.pools[0].poolAppId,
           args: [staker, rewardTokenID, rewardRemoved],
         })
@@ -1039,7 +1040,7 @@ export class ValidatorRegistry extends Contract {
           this.validatorList(validatorId).value.nodePoolAssignments.nodes[srcNodeIdx].poolAppIds[i] = 0
 
           // Force that pool offline since it's moving nodes !
-          abiCall(StakingPool.prototype.goOffline, {
+          abiCall(StakingPoolABI.prototype.goOffline, {
             appId: poolAppId,
           })
 
@@ -1076,7 +1077,7 @@ export class ValidatorRegistry extends Contract {
     let [tokenRewardBal] = op.AssetHolding.assetBalance(poolOneAppId.address, rewardTokenId)
     tokenRewardBal = tokenRewardBal - rewardTokenHeldBack
 
-    abiCall(StakingPool.prototype.payTokenReward, {
+    abiCall(StakingPoolABI.prototype.payTokenReward, {
       appId: poolOneAppId.id,
       args: [receiver, rewardTokenId, tokenRewardBal],
     })

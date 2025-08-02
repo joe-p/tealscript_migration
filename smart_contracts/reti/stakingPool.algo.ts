@@ -31,6 +31,7 @@ import {
   MAX_VALIDATOR_SOFT_PCT_OF_ONLINE_1DECIMAL,
   MIN_ALGO_STAKE_PER_POOL,
 } from './constants.algo'
+import { ValidatorRegistryABI } from './interfaces.algo'
 
 const ALGORAND_STAKING_BLOCK_DELAY = 320 // # of blocks until algorand sees online balance changes in staking
 const AVG_ROUNDS_PER_DAY = 30857 // approx 'daily' rounds for APR bins (60*60*24/2.8)
@@ -167,7 +168,7 @@ export class StakingPool extends Contract {
     assert(!this.stakers.exists, 'staking pool already initialized')
 
     // Get the config of our validator to determine if we issue reward tokens
-    const validatorConfig = abiCall(ValidatorRegistry.prototype.getValidatorConfig, {
+    const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
@@ -323,7 +324,7 @@ export class StakingPool extends Contract {
         if (cmpStaker.rewardTokenBalance > 0) {
           // If and only if this is pool 1 (where the reward token is held - then we can pay it out)
           if (this.poolId.value === 1) {
-            const validatorConfig = abiCall(ValidatorRegistry.prototype.getValidatorConfig, {
+            const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
               appId: this.creatingValidatorContractAppId.value,
               args: [this.validatorId.value],
             }).returnValue
@@ -385,7 +386,7 @@ export class StakingPool extends Contract {
         // Call the validator contract and tell it we're removing stake
         // It'll verify we're a valid staking pool id and update it
         // stakeRemoved(poolKey: ValidatorPoolKey, staker: Address, amountRemoved: uint64, rewardRemoved: uint64, stakerRemoved: boolean): void
-        abiCall(ValidatorRegistry.prototype.stakeRemoved, {
+        abiCall(ValidatorRegistryABI.prototype.stakeRemoved, {
           appId: this.creatingValidatorContractAppId.value,
           args: [
             { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
@@ -424,7 +425,7 @@ export class StakingPool extends Contract {
         let amountRewardTokenRemoved: uint64 = 0
         // If and only if this is pool 1 (where the reward token is held - then we can pay it out)
         if (this.poolId.value === 1) {
-          const validatorConfig = abiCall(ValidatorRegistry.prototype.getValidatorConfig, {
+          const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
             appId: this.creatingValidatorContractAppId.value,
             args: [this.validatorId.value],
           }).returnValue // ---------
@@ -451,7 +452,7 @@ export class StakingPool extends Contract {
         // Call the validator contract and tell it we're removing stake
         // It'll verify we're a valid staking pool id and update it
         // stakeRemoved(poolKey: ValidatorPoolKey, staker: Address, amountRemoved: uint64, rewardRemoved: uint64, stakerRemoved: boolean): void
-        abiCall(ValidatorRegistry.prototype.stakeRemoved, {
+        abiCall(ValidatorRegistryABI.prototype.stakeRemoved, {
           appId: this.creatingValidatorContractAppId.value,
           args: [
             { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
@@ -540,7 +541,7 @@ export class StakingPool extends Contract {
    */
   epochBalanceUpdate(): void {
     // call the validator contract to get our payout config data
-    const validatorConfig = abiCall(ValidatorRegistry.prototype.getValidatorConfig, {
+    const validatorConfig = abiCall(ValidatorRegistryABI.prototype.getValidatorConfig, {
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
@@ -581,11 +582,7 @@ export class StakingPool extends Contract {
     if (isTokenEligible) {
       if (this.poolId.value !== 1) {
         // If we're not pool 1 - figure out its address..
-        // poolOneAppID = sendMethodCall<typeof ValidatorRegistry.prototype.getPoolAppId>({
-        //   applicationID: AppID.fromUint64(this.creatingValidatorContractAppId.value),
-        //   methodArgs: [this.validatorId.value, 1],
-        // })
-        poolOneAppID = abiCall(ValidatorRegistry.prototype.getPoolAppId, {
+        poolOneAppID = abiCall(ValidatorRegistryABI.prototype.getPoolAppId, {
           appId: this.creatingValidatorContractAppId.value,
           args: [this.validatorId.value, 1],
         }).returnValue
@@ -595,7 +592,7 @@ export class StakingPool extends Contract {
       // Snapshot the ratio of token stake per pool across the pools so the token rewards across pools
       // can be based on a stable cross-pool ratio.
       if (this.poolId.value === 1) {
-        tokenPayoutRatio = abiCall(ValidatorRegistry.prototype.setTokenPayoutRatio, {
+        tokenPayoutRatio = abiCall(ValidatorRegistryABI.prototype.setTokenPayoutRatio, {
           appId: this.creatingValidatorContractAppId.value,
           args: [this.validatorId.value],
         }).returnValue
@@ -610,7 +607,7 @@ export class StakingPool extends Contract {
 
     // Get the validator state as well - so we know the total staked for the entire validator, and how much token
     // has been held back
-    const validatorState = abiCall(ValidatorRegistry.prototype.getValidatorState, {
+    const validatorState = abiCall(ValidatorRegistryABI.prototype.getValidatorState, {
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
@@ -879,7 +876,7 @@ export class StakingPool extends Contract {
     // It'll verify we're a valid staking pool id and update the various stats, also logging an event to
     // track the data.
     // stakeUpdatedViaRewards(poolKey,algoToAdd,rewardTokenAmountReserved,validatorCommission,saturatedBurnToFeeSink)
-    abiCall(ValidatorRegistry.prototype.stakeUpdatedViaRewards, {
+    abiCall(ValidatorRegistryABI.prototype.stakeUpdatedViaRewards, {
       appId: this.creatingValidatorContractAppId.value,
       args: [
         { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
@@ -971,7 +968,7 @@ export class StakingPool extends Contract {
     assert(this.poolId.value === 1, 'callee must be pool 1')
     assert(poolKey.poolId !== 1, 'caller must NOT be pool 1')
 
-    const callerPoolAppID = abiCall(ValidatorRegistry.prototype.getPoolAppId, {
+    const callerPoolAppID = abiCall(ValidatorRegistryABI.prototype.getPoolAppId, {
       appId: this.creatingValidatorContractAppId.value,
       args: [poolKey.id, poolKey.poolId],
     }).returnValue
@@ -979,14 +976,14 @@ export class StakingPool extends Contract {
     assert(callerPoolAppID === poolKey.poolAppId)
     assert(Txn.sender === Application(poolKey.poolAppId).address)
 
-    return abiCall(ValidatorRegistry.prototype.setTokenPayoutRatio, {
+    return abiCall(ValidatorRegistryABI.prototype.setTokenPayoutRatio, {
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
   }
 
   private isOwnerOrManagerCaller(): boolean {
-    const OwnerAndManager = abiCall(ValidatorRegistry.prototype.getValidatorOwnerAndManager, {
+    const OwnerAndManager = abiCall(ValidatorRegistryABI.prototype.getValidatorOwnerAndManager, {
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
