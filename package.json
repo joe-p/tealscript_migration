@@ -42,7 +42,7 @@
     "esbuild": "0.25.0"
   },
   "dependencies": {
-    "@algorandfoundation/algorand-typescript": "^1.0.0-alpha.65",
-    "@algorandfoundation/puya-ts": "^1.0.0-alpha.65"
+    "@algorandfoundation/algorand-typescript": "^1.0.0-alpha.69",
+    "@algorandfoundation/puya-ts": "^1.0.0-alpha.69"
   }
 }
