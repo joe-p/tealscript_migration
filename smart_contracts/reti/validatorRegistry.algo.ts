@@ -58,6 +58,7 @@ import {
 } from './constants.algo'
 import { stakingPool } from './compiled.algo'
 import { StakingPoolABI } from './interfaces'
+import { wideRatio } from './utils.algo'
 
 const MAX_NODES = 8 // more just as a reasonable limit and cap on contract storage
 const MAX_POOLS_PER_NODE = 3 // max number of pools per node
@@ -808,11 +809,10 @@ export class ValidatorRegistry extends Contract {
       // so this pool is 10% of the total and thus it gets 10% of the avail community token reward.
       // Get our pools pct of all stake w/ 4 decimals
       // ie, based on prior eg  - (1000 * 1e6) / 10000 = 100,000 (or 10%)
-      // TODO: wideRatio const ourPoolPctOfWhole = wideRatio(
-      //   [this.validatorList(validatorId).value.pools[i].totalAlgoStaked, 1_000_000],
-      //   [totalStakeForValidator],
-      // )
-      const ourPoolPctOfWhole = 0
+      const ourPoolPctOfWhole = wideRatio(
+        [this.validatorList(validatorId).value.pools[i].totalAlgoStaked, 1_000_000],
+        [totalStakeForValidator],
+      )
       this.validatorList(validatorId).value.tokenPayoutRatio.poolPctOfWhole[i] = ourPoolPctOfWhole
     }
     return this.validatorList(validatorId).value.tokenPayoutRatio
@@ -1542,8 +1542,7 @@ export class ValidatorRegistry extends Contract {
   private algoSaturationLevel(): uint64 {
     const online = this.getCurrentOnlineStake()
 
-    // TODO: wideRatio return wideRatio([online, MAX_VALIDATOR_SOFT_PCT_OF_ONLINE_1DECIMAL], [1000])
-    return 0
+    return wideRatio([online, MAX_VALIDATOR_SOFT_PCT_OF_ONLINE_1DECIMAL], [1000])
   }
 
   /**
@@ -1553,8 +1552,7 @@ export class ValidatorRegistry extends Contract {
   private maxAllowedStake(): uint64 {
     const online = this.getCurrentOnlineStake()
 
-    // TODO: wideRatio return wideRatio([online, MAX_VALIDATOR_HARD_PCT_OF_ONLINE_1DECIMAL], [1000])
-    return 0
+    return wideRatio([online, MAX_VALIDATOR_HARD_PCT_OF_ONLINE_1DECIMAL], [1000])
   }
 
   /**

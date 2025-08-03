@@ -33,6 +33,7 @@ import {
   MIN_ALGO_STAKE_PER_POOL,
 } from './constants.algo'
 import { ValidatorRegistryABI } from './interfaces'
+import { wideRatio } from './utils.algo'
 
 const ALGORAND_STAKING_BLOCK_DELAY = 320 // # of blocks until algorand sees online balance changes in staking
 const AVG_ROUNDS_PER_DAY = 30857 // approx 'daily' rounds for APR bins (60*60*24/2.8)
@@ -653,9 +654,9 @@ export class StakingPool extends Contract {
         // ignore is because ts thinks tokenPayoutRatio might not be set prior to this call, but it has to be,
         // based on isTokenEligible
         // @ts-ignore typescript
-        // const ourPoolPctOfWhole = tokenPayoutRatio.poolPctOfWhole[this.poolId.value - 1]
+        const ourPoolPctOfWhole = tokenPayoutRatio.poolPctOfWhole[this.poolId.value - 1]
         // now adjust the total reward to hand out for this pool based on the pools % of the whole
-        // TODO: wideratio tokenRewardAvail = wideRatio([validatorConfig.rewardPerPayout, ourPoolPctOfWhole], [1_000_000])
+        tokenRewardAvail = wideRatio([validatorConfig.rewardPerPayout, ourPoolPctOfWhole], [1_000_000])
       }
     }
     if (tokenRewardAvail === 0) {
@@ -672,8 +673,7 @@ export class StakingPool extends Contract {
     if (isPoolSaturated) {
       // see comment where isPoolSaturated is set for changes in rewards...
       // diminishedReward = (reward * maxStakePerPool) / stakeForValidator
-      // TODO: wideRatio const diminishedReward = wideRatio([algoRewardAvail, algoSaturationAmt], [validatorState.totalAlgoStaked])
-      const diminishedReward = 0
+      const diminishedReward = wideRatio([algoRewardAvail, algoSaturationAmt], [validatorState.totalAlgoStaked])
       // send excess to fee sink...
       excessToFeeSink = algoRewardAvail - diminishedReward
       itxn
@@ -688,10 +688,7 @@ export class StakingPool extends Contract {
     } else if (validatorConfig.percentToValidator.native !== 0) {
       // determine the % that goes to validator...
       // ie: 100[algo] * 50_000 (5% w/4 decimals) / 1_000_000 == 5 [algo]
-      // TODO: wideRatio validatorCommissionPaidOut = wideRatio(
-      //   [algoRewardAvail, validatorConfig.percentToValidator as uint64],
-      //   [1_000_000],
-      // )
+      validatorCommissionPaidOut = wideRatio([algoRewardAvail, validatorConfig.percentToValidator.native], [1_000_000])
 
       // and adjust reward for entire pool accordingly
       algoRewardAvail -= validatorCommissionPaidOut
@@ -784,11 +781,10 @@ export class StakingPool extends Contract {
 
               if (tokenRewardAvail > 0) {
                 // calc: (balance * avail reward * percent in tenths) / (total staked * 1000)
-                // TODO: wideRatio const stakerTokenReward = wideRatio(
-                //   [cmpStaker.balance, tokenRewardAvail, timePercentage],
-                //   [this.totalAlgoStaked.value, 1000],
-                // )
-                const stakerTokenReward = 0
+                const stakerTokenReward = wideRatio(
+                  [cmpStaker.balance, tokenRewardAvail, timePercentage],
+                  [this.totalAlgoStaked.value, 1000],
+                )
 
                 // reduce the reward available (that we're accounting for) so that the subsequent
                 // 'full' pays are based on what's left
@@ -798,11 +794,10 @@ export class StakingPool extends Contract {
               }
               if (algoRewardAvail > 0) {
                 // calc: (balance * avail reward * percent in tenths) / (total staked * 1000)
-                // TODO: wideRatio const stakerReward = wideRatio(
-                //   [cmpStaker.balance, algoRewardAvail, timePercentage],
-                //   [this.totalAlgoStaked.value, 1000],
-                // )
-                const stakerReward = 0
+                const stakerReward = wideRatio(
+                  [cmpStaker.balance, algoRewardAvail, timePercentage],
+                  [this.totalAlgoStaked.value, 1000],
+                )
 
                 // reduce the reward available (that we're accounting for) so that the subsequent
                 // 'full' pays are based on what's left
@@ -841,16 +836,14 @@ export class StakingPool extends Contract {
 
               // Handle token payouts first - as we don't want to use existin balance, not post algo-reward balance
               if (tokenRewardAvail > 0) {
-                // TODO: wideRatio const stakerTokenReward = wideRatio([cmpStaker.balance, tokenRewardAvail], [newPoolTotalStake])
-                const stakerTokenReward = 0
+                const stakerTokenReward = wideRatio([cmpStaker.balance, tokenRewardAvail], [newPoolTotalStake])
                 // instead of sending them algo now - just increase their ledger balance, so they can claim
                 // it at any time.
                 cmpStaker.rewardTokenBalance += stakerTokenReward
                 tokenRewardPaidOut += stakerTokenReward
               }
               if (algoRewardAvail > 0) {
-                // TODO: wideRatio const stakerReward = wideRatio([cmpStaker.balance, algoRewardAvail], [newPoolTotalStake])
-                const stakerReward = 0
+                const stakerReward = wideRatio([cmpStaker.balance, algoRewardAvail], [newPoolTotalStake])
                 // instead of sending them algo now - just increase their ledger balance, so they can claim
                 // it at any time.
                 cmpStaker.balance += stakerReward
@@ -1008,10 +1001,9 @@ export class StakingPool extends Contract {
    * the validator is considered saturated - where rewards are diminished.
    */
   private algoSaturationLevel(): uint64 {
-    // const online = this.getCurrentOnlineStake()
+    const online = this.getCurrentOnlineStake()
 
-    // TODO: wideRatio return wideRatio([online, MAX_VALIDATOR_SOFT_PCT_OF_ONLINE_1DECIMAL], [1000])
-    return 0
+    return wideRatio([online, MAX_VALIDATOR_SOFT_PCT_OF_ONLINE_1DECIMAL], [1000])
   }
 
   private getGoOnlineFee(): uint64 {
