@@ -628,7 +628,7 @@ export class ValidatorRegistry extends Contract {
     )
 
     // must match MBR exactly
-    assertMatch(mbrPayment, { amount: this.getMbrAmounts().addPoolMbr }) // TODO: fix receiver: Global.currentApplicationAddress })
+    assertMatch(mbrPayment, { amount: this.getMbrAmounts().addPoolMbr, receiver: Global.currentApplicationAddress })
 
     assert(this.validatorList(validatorId).exists, "specified validator id isn't valid")
 
@@ -707,7 +707,7 @@ export class ValidatorRegistry extends Contract {
     // behind in this contract to cover the MBR needed for creating the 'stakerPoolSet' storage.
     assertMatch(stakedAmountPayment, {
       sender: staker.native,
-      // TODO: FIX receiver: Global.currentApplicationAddress,
+      receiver: Global.currentApplicationAddress,
     })
 
     // Ensure we're not over our protocol maximum for combined stake in all pools using the
