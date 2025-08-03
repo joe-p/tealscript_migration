@@ -34,6 +34,7 @@ import {
   methodSelector,
   abiCall,
   encodeArc4,
+  arc4EncodedLength,
 } from '@algorandfoundation/algorand-typescript/arc4'
 import { StakedInfo, StakingPool } from './stakingPool.algo'
 import {
@@ -279,8 +280,9 @@ export class ValidatorRegistry extends Contract {
     // Cost for creator of validator contract itself is (but not really our problem - it's a bootstrap issue only)
     // this.minBalanceForAccount(0, 0, 0, 0, 0, 4, 0)
     return {
-      // TODO: len<TYPE> addValidatorMbr: this.costForBoxStorage(1 /* v prefix */ + len<ValidatorIdType>() + len<ValidatorInfo>()),
-      addValidatorMbr: 0,
+      addValidatorMbr: this.costForBoxStorage(
+        1 /* v prefix */ + arc4EncodedLength<ValidatorIdType>() + arc4EncodedLength<ValidatorInfo>(),
+      ),
       addPoolMbr: this.minBalanceForAccount(
         1,
         // we could calculate this directly by referencing the size of stakingPoolApprovalProgram but it would
@@ -292,10 +294,16 @@ export class ValidatorRegistry extends Contract {
         stakingPool().globalUints,
         stakingPool().globalBytes,
       ),
-      poolInitMbr: ALGORAND_ACCOUNT_MIN_BALANCE + this.costForBoxStorage(7 /* 'stakers' name */), // TODO: len<T> + len<StakedInfo>() * MAX_STAKERS_PER_POOL),
+      poolInitMbr:
+        ALGORAND_ACCOUNT_MIN_BALANCE +
+        this.costForBoxStorage(7 /* 'stakers' name */ + arc4EncodedLength<StakedInfo>() * MAX_STAKERS_PER_POOL),
       addStakerMbr:
         // how much to charge for first time a staker adds stake - since we add a tracking box per staker
-        this.costForBoxStorage(3 /* 'sps' prefix */), // TODO: len<T> + len<Address>() + len<ValidatorPoolKey>() * MAX_POOLS_PER_STAKER), // size of key + all values
+        this.costForBoxStorage(
+          3 /* 'sps' prefix */ +
+            arc4EncodedLength<Address>() +
+            arc4EncodedLength<ValidatorPoolKey>() * MAX_POOLS_PER_STAKER,
+        ), // size of key + all values
     }
   }
 

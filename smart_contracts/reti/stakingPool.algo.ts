@@ -22,7 +22,7 @@ import {
   biguint,
   ensureBudget,
 } from '@algorandfoundation/algorand-typescript'
-import { abiCall, Address, Uint128 } from '@algorandfoundation/algorand-typescript/arc4'
+import { abiCall, Address, arc4EncodedLength, Uint128 } from '@algorandfoundation/algorand-typescript/arc4'
 
 import { PoolTokenPayoutRatio, ValidatorPoolKey, ValidatorRegistry } from './validatorRegistry.algo'
 import {
@@ -176,8 +176,10 @@ export class StakingPool extends Contract {
 
     const isTokenEligible = validatorConfig.rewardTokenId !== 0
     const extraMBR: uint64 = isTokenEligible && this.poolId.value === 1 ? ASSET_HOLDING_FEE : 0
-    const PoolInitMbr: uint64 = ALGORAND_ACCOUNT_MIN_BALANCE + extraMBR
-    // TODO: len<TYPE> + this.costForBoxStorage(7 /* 'stakers' name */ + op.len<StakedInfo>() * MAX_STAKERS_PER_POOL)
+    const PoolInitMbr: uint64 =
+      ALGORAND_ACCOUNT_MIN_BALANCE +
+      extraMBR +
+      this.costForBoxStorage(7 /* 'stakers' name */ + arc4EncodedLength<StakedInfo>() * MAX_STAKERS_PER_POOL)
     // the pay transaction must exactly match our MBR requirement.
 
     assertMatch(mbrPayment, { receiver: Global.currentApplicationId.address, amount: PoolInitMbr })
