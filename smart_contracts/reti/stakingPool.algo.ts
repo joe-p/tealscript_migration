@@ -22,7 +22,7 @@ import {
   biguint,
   ensureBudget,
 } from '@algorandfoundation/algorand-typescript'
-import { abiCall, Address, arc4EncodedLength, Uint128 } from '@algorandfoundation/algorand-typescript/arc4'
+import { abiCall, Address, arc4EncodedLength, StaticBytes, Uint128 } from '@algorandfoundation/algorand-typescript/arc4'
 
 import { PoolTokenPayoutRatio, ValidatorPoolKey, ValidatorRegistry } from './validatorRegistry.algo'
 import {
@@ -900,9 +900,11 @@ export class StakingPool extends Contract {
    */
   goOnline(
     feePayment: gtxn.PaymentTxn,
-    votePK: bytes,
-    selectionPK: bytes,
-    stateProofPK: bytes,
+    // TODO: fix ABI types to just use bytes https://github.com/algorandfoundation/puya-ts/issues/244
+
+    votePK: bytes<32>,
+    selectionPK: bytes<32>,
+    stateProofPK: bytes<64>,
     voteFirst: uint64,
     voteLast: uint64,
     voteKeyDilution: uint64,
@@ -910,16 +912,17 @@ export class StakingPool extends Contract {
     assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
     const extraFee = this.getGoOnlineFee()
     assertMatch(feePayment, { receiver: Global.currentApplicationAddress, amount: extraFee })
-    // TODO: https://github.com/algorandfoundation/puya-ts/issues/244
-    // itxn.keyRegistration({
-    //   voteKey: Bytes<32>(votePK),
-    //   selectionKey: Bytes<32>(selectionPK),
-    //   stateProofKey: Bytes<64>(stateProofPK),
-    //   voteFirst: voteFirst,
-    //   voteLast: voteLast,
-    //   voteKeyDilution: voteKeyDilution,
-    //   fee: this.getGoOnlineFee(),
-    // })
+    itxn
+      .keyRegistration({
+        voteKey: votePK,
+        selectionKey: selectionPK,
+        stateProofKey: stateProofPK,
+        voteFirst: voteFirst,
+        voteLast: voteLast,
+        voteKeyDilution: voteKeyDilution,
+        fee: this.getGoOnlineFee(),
+      })
+      .submit()
   }
 
   /**
