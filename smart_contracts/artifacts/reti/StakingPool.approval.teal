@@ -4,7 +4,7 @@
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
     intcblock 0 1 64 6 200 30857 157 300 2100000 1000000 TMPL_NFD_REGISTRY_APP_ID
-    bytecblock "stakers" "creatorApp" 0x151f7c75 "validatorId" "poolId" "staked" "stakeAccumulator" "roundsPerDay" 0x0002 "binRoundStart" "numStakers" "rewardAccumulator" "lastPayout" 0x75aff61d "minEntryStake" "epochNumber" "ewma" 0x0001 0x64 0x0c2245e1 0x068101 0x00000000000000000000000000000000 0xa2dc51b5 0x572767d1 0x4df8d86e 0x000100000000000f4240 0x0003 TMPL_FEE_SINK_ADDR
+    bytecblock "stakers" "creatorApp" 0x151f7c75 "validatorId" "poolId" "staked" "stakeAccumulator" "roundsPerDay" 0x0002 "binRoundStart" "numStakers" "rewardAccumulator" "lastPayout" 0x75aff61d "minEntryStake" "epochNumber" "ewma" 0x0001 0x64 0x0c2245e1 0x068101 0x00000000000000000000000000000001 0x00000000000000000000000000000000 0xa2dc51b5 0x572767d1 0x4df8d86e 0x000100000000000f4240 0x0003 TMPL_FEE_SINK_ADDR
     // smart_contracts/reti/stakingPool.algo.ts:61
     // export class StakingPool extends Contract {
     txn NumAppArgs
@@ -374,42 +374,128 @@ ensure_budget_after_while@7:
     retsub
 
 
-// smart_contracts/reti/utils.algo.ts::wideRatio(numerators: bytes, denominators: bytes) -> uint64, bytes, bytes:
+// smart_contracts/reti/utils.algo.ts::wideRatio(numeratorFactors: bytes, denominatorFactors: bytes) -> uint64, bytes, bytes:
 wideRatio:
-    // smart_contracts/reti/utils.algo.ts:3
-    // export function wideRatio(numerators: uint64[], denominators: uint64[]): uint64 {
-    proto 2 3
     // smart_contracts/reti/utils.algo.ts:4
-    // const n: uint64 = numerators[numerators.length - 1]
-    frame_dig -2
+    // export function wideRatio(numeratorFactors: uint64[], denominatorFactors: uint64[]): uint64 {
+    proto 2 3
     intc_0 // 0
-    extract_uint16
-    intc_1 // 1
-    -
-    frame_dig -2
-    extract 2 0
-    swap
-    pushint 8 // 8
-    *
-    extract_uint64
+    pushbytes ""
+    dup
     // smart_contracts/reti/utils.algo.ts:5
-    // const d: uint64 = denominators[denominators.length - 1]
-    frame_dig -1
+    // let numerator = new Uint128(1n)
+    bytec 21 // 0x00000000000000000000000000000001
+    // smart_contracts/reti/utils.algo.ts:7
+    // for (const factor of numeratorFactors) {
+    frame_dig -2
     intc_0 // 0
     extract_uint16
-    intc_1 // 1
-    -
-    frame_dig -1
+    intc_0 // 0
+
+wideRatio_for_header@1:
+    // smart_contracts/reti/utils.algo.ts:7
+    // for (const factor of numeratorFactors) {
+    frame_dig 5
+    frame_dig 4
+    <
+    bz wideRatio_after_for@4
+    frame_dig -2
     extract 2 0
-    swap
+    frame_dig 5
+    dup
+    cover 2
     pushint 8 // 8
     *
     extract_uint64
-    // smart_contracts/reti/utils.algo.ts:7
-    // return n / d
-    /
+    // smart_contracts/reti/utils.algo.ts:8
+    // numerator = new Uint128(BigUint(factor) * numerator.native)
+    itob
+    frame_dig 3
+    b*
+    dup
+    len
+    pushint 16 // 16
+    <=
+    assert // overflow
+    pushint 16 // 16
+    bzero
+    b|
+    frame_bury 3
+    intc_1 // 1
+    +
+    frame_bury 5
+    b wideRatio_for_header@1
+
+wideRatio_after_for@4:
+    // smart_contracts/reti/utils.algo.ts:11
+    // let denominator = new Uint128(1n)
+    bytec 21 // 0x00000000000000000000000000000001
+    frame_bury 0
+    // smart_contracts/reti/utils.algo.ts:12
+    // for (const factor of denominatorFactors) {
+    frame_dig -1
+    intc_0 // 0
+    extract_uint16
+    frame_bury 1
+    intc_0 // 0
+    frame_bury 2
+
+wideRatio_for_header@5:
+    // smart_contracts/reti/utils.algo.ts:12
+    // for (const factor of denominatorFactors) {
+    frame_dig 2
+    frame_dig 1
+    <
+    bz wideRatio_after_for@8
+    frame_dig -1
+    extract 2 0
+    frame_dig 2
+    dup
+    cover 2
+    pushint 8 // 8
+    *
+    extract_uint64
+    // smart_contracts/reti/utils.algo.ts:13
+    // denominator = new Uint128(BigUint(factor) * denominator.native)
+    itob
+    frame_dig 0
+    b*
+    dup
+    len
+    pushint 16 // 16
+    <=
+    assert // overflow
+    pushint 16 // 16
+    bzero
+    b|
+    frame_bury 0
+    intc_1 // 1
+    +
+    frame_bury 2
+    b wideRatio_for_header@5
+
+wideRatio_after_for@8:
+    // smart_contracts/reti/utils.algo.ts:16
+    // const ratio: biguint = numerator.native / denominator.native
+    frame_dig 3
+    frame_dig 0
+    b/
+    // smart_contracts/reti/utils.algo.ts:17
+    // return new Uint64(ratio).native
+    dup
+    len
+    pushint 8 // 8
+    <=
+    assert // overflow
+    pushint 8 // 8
+    bzero
+    b|
+    btoi
     frame_dig -2
     frame_dig -1
+    frame_bury 2
+    frame_bury 1
+    frame_bury 0
     retsub
 
 
@@ -542,7 +628,7 @@ createApplication_after_if_else@3:
     bytec 6 // "stakeAccumulator"
     // smart_contracts/reti/stakingPool.algo.ts:145
     // this.stakeAccumulator.value = new Uint128(0)
-    bytec 21 // 0x00000000000000000000000000000000
+    bytec 22 // 0x00000000000000000000000000000000
     app_global_put
     // smart_contracts/reti/stakingPool.algo.ts:102
     // rewardAccumulator = GlobalState<uint64>({ key: 'rewardAccumulator' })
@@ -556,7 +642,7 @@ createApplication_after_if_else@3:
     bytec 16 // "ewma"
     // smart_contracts/reti/stakingPool.algo.ts:147
     // this.weightedMovingAverage.value = new Uint128(0)
-    bytec 21 // 0x00000000000000000000000000000000
+    bytec 22 // 0x00000000000000000000000000000000
     app_global_put
     retsub
 
@@ -1700,7 +1786,7 @@ removeStake_after_if_else@23:
     //     stakerRemoved,
     //   ],
     // })
-    bytec 22 // method "stakeRemoved((uint64,uint64,uint64),address,uint64,uint64,bool)void"
+    bytec 23 // method "stakeRemoved((uint64,uint64,uint64),address,uint64,uint64,bool)void"
     itxn_field ApplicationArgs
     uncover 3
     itxn_field ApplicationArgs
@@ -2009,7 +2095,7 @@ claimTokens_after_if_else@10:
     //     false, // staker isn't being removed.
     //   ],
     // })
-    bytec 22 // method "stakeRemoved((uint64,uint64,uint64),address,uint64,uint64,bool)void"
+    bytec 23 // method "stakeRemoved((uint64,uint64,uint64),address,uint64,uint64,bool)void"
     itxn_field ApplicationArgs
     swap
     itxn_field ApplicationArgs
@@ -2434,7 +2520,7 @@ epochBalanceUpdate_after_if_else@3:
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value, 1],
     // }).returnValue
-    bytec 23 // method "getPoolAppId(uint64,uint64)uint64"
+    bytec 24 // method "getPoolAppId(uint64,uint64)uint64"
     itxn_field ApplicationArgs
     swap
     itxn_field ApplicationArgs
@@ -2509,7 +2595,7 @@ epochBalanceUpdate_after_if_else@7:
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
-    bytec 24 // method "setTokenPayoutRatio(uint64)(uint64[24],uint64)"
+    bytec 25 // method "setTokenPayoutRatio(uint64)(uint64[24],uint64)"
     itxn_field ApplicationArgs
     itxn_field ApplicationArgs
     itxn_field ApplicationID
@@ -2717,7 +2803,7 @@ epochBalanceUpdate_after_if_else@16:
     swap
     itob
     concat
-    bytec 25 // 0x000100000000000f4240
+    bytec 26 // 0x000100000000000f4240
     callsub wideRatio
     popn 2
     frame_bury 32
@@ -2788,7 +2874,7 @@ epochBalanceUpdate_after_if_else@24:
     itxn_begin
     // smart_contracts/reti/stakingPool.algo.ts:994
     // return TemplateVar<Address>('FEE_SINK_ADDR')
-    bytec 27 // TMPL_FEE_SINK_ADDR
+    bytec 28 // TMPL_FEE_SINK_ADDR
     // smart_contracts/reti/stakingPool.algo.ts:683
     // note: 'pool saturated, excess to fee sink',
     pushbytes "pool saturated, excess to fee sink"
@@ -3023,7 +3109,7 @@ epochBalanceUpdate_else_body@46:
     // [cmpStaker.balance, tokenRewardAvail, timePercentage],
     frame_dig 38
     itob
-    bytec 26 // 0x0003
+    bytec 27 // 0x0003
     swap
     concat
     frame_dig 32
@@ -3115,7 +3201,7 @@ epochBalanceUpdate_after_if_else@49:
     extract_uint64
     dup
     itob
-    bytec 26 // 0x0003
+    bytec 27 // 0x0003
     swap
     concat
     frame_dig 10
@@ -3702,7 +3788,7 @@ epochBalanceUpdate_else_body@27:
     frame_dig 30
     itob
     concat
-    bytec 25 // 0x000100000000000f4240
+    bytec 26 // 0x000100000000000f4240
     callsub wideRatio
     popn 2
     dup
@@ -4133,7 +4219,7 @@ proxiedSetTokenPayoutRatio:
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [poolKey.id, poolKey.poolId],
     // }).returnValue
-    bytec 23 // method "getPoolAppId(uint64,uint64)uint64"
+    bytec 24 // method "getPoolAppId(uint64,uint64)uint64"
     itxn_field ApplicationArgs
     uncover 2
     itxn_field ApplicationArgs
@@ -4187,7 +4273,7 @@ proxiedSetTokenPayoutRatio:
     //   appId: this.creatingValidatorContractAppId.value,
     //   args: [this.validatorId.value],
     // }).returnValue
-    bytec 24 // method "setTokenPayoutRatio(uint64)(uint64[24],uint64)"
+    bytec 25 // method "setTokenPayoutRatio(uint64)(uint64[24],uint64)"
     itxn_field ApplicationArgs
     itxn_field ApplicationArgs
     itxn_field ApplicationID
