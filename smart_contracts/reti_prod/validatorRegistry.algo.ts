@@ -83,8 +83,6 @@ import { wideRatio } from './utils.algo'
  * See the StakingPool contract comments for details on how this contract creates new instances of them.
  */
 export class ValidatorRegistry extends Contract {
-  programVersion = 11
-
   // ======
   // GLOBAL STATE AND TEMPLATES
   // ======
@@ -272,7 +270,7 @@ export class ValidatorRegistry extends Contract {
    */
   @abimethod({ readonly: true })
   getCurMaxStakePerPool(validatorId: ValidatorIdType): uint64 {
-    const numPools = this.validatorList(validatorId).value.state.numPools as uint64
+    const numPools = this.validatorList(validatorId).value.state.numPools.native
     const hardMaxDividedBetweenPools = this.maxAllowedStake() / numPools
     let maxPerPool: uint64 = this.validatorList(validatorId).value.config.maxAlgoPerPool
     if (maxPerPool === 0) {
@@ -376,8 +374,8 @@ export class ValidatorRegistry extends Contract {
       )
     }
     if (
-      config.entryGatingType === GATING_TYPE_CREATED_BY_NFD_ADDRESSES ||
-      config.entryGatingType === GATING_TYPE_SEGMENT_OF_NFD
+      config.entryGatingType.native === GATING_TYPE_CREATED_BY_NFD_ADDRESSES ||
+      config.entryGatingType.native === GATING_TYPE_SEGMENT_OF_NFD
     ) {
       // verify gating NFD is at least 'real' - since we just have app id - fetch its name then do is valid call
       assert(this.isNFDAppIDValid(config.entryGatingAssets[0]), 'provided NFD App id for gating must be valid NFD')
@@ -498,7 +496,7 @@ export class ValidatorRegistry extends Contract {
 
     assert(this.validatorList(validatorId).exists, "specified validator id isn't valid")
 
-    let numPools: uint64 = this.validatorList(validatorId).value.state.numPools as uint64
+    let numPools: uint64 = this.validatorList(validatorId).value.state.numPools.native
     if ((numPools as uint64) >= MAX_POOLS) {
       throw Error('already at max pool size')
     }
@@ -659,7 +657,7 @@ export class ValidatorRegistry extends Contract {
       if (op.AppGlobal.getExUint64(pool1AppID, Bytes('lastPayout'))[0] === lastPayoutUpdate) {
         return this.validatorList(validatorId).value.tokenPayoutRatio
       }
-      const epochRoundLength = this.validatorList(validatorId).value.config.epochRoundLength as uint64
+      const epochRoundLength = this.validatorList(validatorId).value.config.epochRoundLength.native
       const thisEpochBegin = curRound - (curRound % epochRoundLength)
       // Make sure our last payout epoch isn't still within the current epoch - we need to be at least one epoch past the last payout.
       if (lastPayoutUpdate - (lastPayoutUpdate % epochRoundLength) === thisEpochBegin) {
@@ -668,7 +666,7 @@ export class ValidatorRegistry extends Contract {
     }
     this.validatorList(validatorId).value.tokenPayoutRatio.updatedForPayout = curRound
 
-    const curNumPools = this.validatorList(validatorId).value.state.numPools as uint64
+    const curNumPools = this.validatorList(validatorId).value.state.numPools.native
     const totalStakeForValidator = this.validatorList(validatorId).value.state.totalAlgoStaked
     for (let i = 0; i < curNumPools; i += 1) {
       // ie: this pool 2 has 1000 algo staked and the validator has 10,000 staked total (9000 pool 1, 1000 pool 2)
@@ -800,7 +798,8 @@ export class ValidatorRegistry extends Contract {
 
     if (stakerRemoved) {
       // remove from that pool
-      this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalStakers -= 1
+      const totalStakers = this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalStakers.native
+      this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalStakers = new Uint16(totalStakers - 1)
       // then update the staker set.
       const removeRet = this.removeFromStakerPoolSet(staker, <ValidatorPoolKey>{
         id: poolKey.id,
@@ -879,7 +878,7 @@ export class ValidatorRegistry extends Contract {
 
     // Walk their desired validators pools and find free space
     const pools = clone(this.validatorList(validatorId).value.pools)
-    const curNumPools = this.validatorList(validatorId).value.state.numPools as uint64
+    const curNumPools = this.validatorList(validatorId).value.state.numPools.native
     for (let i = 0; i < curNumPools; i += 1) {
       if (pools[i].totalAlgoStaked + amountToStake <= maxPerPool) {
         return [
@@ -968,13 +967,16 @@ export class ValidatorRegistry extends Contract {
   // Callable only internally
   // ======
   private callerMustBeOwner(validatorId: ValidatorIdType): void {
-    assert(Txn.sender === this.validatorList(validatorId).value.config.owner, 'can only be called by validator owner')
+    assert(
+      Txn.sender === this.validatorList(validatorId).value.config.owner.native,
+      'can only be called by validator owner',
+    )
   }
 
   private callerMustBeOwnerOrManager(validatorId: ValidatorIdType): void {
     assert(
-      Txn.sender === this.validatorList(validatorId).value.config.owner ||
-        Txn.sender === this.validatorList(validatorId).value.config.manager,
+      Txn.sender === this.validatorList(validatorId).value.config.owner.native ||
+        Txn.sender === this.validatorList(validatorId).value.config.manager.native,
       'can only be called by owner or manager of validator',
     )
   }
@@ -988,7 +990,7 @@ export class ValidatorRegistry extends Contract {
     assert(this.validatorList(poolKey.id).exists, "the specified validator id isn't valid")
     assert(poolKey.poolId <= MAX_POOLS, 'pool id not in valid range')
     assert(
-      poolKey.poolId > 0 && poolKey.poolId.native <= this.validatorList(poolKey.id).value.state.numPools,
+      poolKey.poolId > 0 && poolKey.poolId <= this.validatorList(poolKey.id).value.state.numPools.native,
       'pool id outside of range of pools created for this validator',
     )
     // validator id, pool id, pool app id might still be kind of spoofed, but they can't spoof us verifying they called us from
@@ -1000,8 +1002,8 @@ export class ValidatorRegistry extends Contract {
     // Sender has to match the pool app id passed in as well.
     assert(Txn.sender === Application(poolKey.poolAppId).address)
     // verify the state of the specified app (the staking pool itself) state matches as well !
-    assert(poolKey.id === op.AppGlobal.getExUint64(poolKey.poolAppId, Bytes('validatorId')))
-    assert(poolKey.poolId === op.AppGlobal.getExUint64(poolKey.poolAppId, Bytes('poolId')))
+    assert(poolKey.id === op.AppGlobal.getExUint64(poolKey.poolAppId, Bytes('validatorId'))[0])
+    assert(poolKey.poolId === op.AppGlobal.getExUint64(poolKey.poolAppId, Bytes('poolId'))[0])
   }
 
   /**
@@ -1029,30 +1031,31 @@ export class ValidatorRegistry extends Contract {
     // Verify all the values in the ValidatorConfig are correct
     assert(config.owner.native !== Global.zeroAddress)
     assert(config.manager.native !== Global.zeroAddress)
-    assert(Txn.sender === config.owner, 'sender must be owner to add new validator')
+    assert(Txn.sender === config.owner.native, 'sender must be owner to add new validator')
 
     assert(
-      config.entryGatingType >= GATING_TYPE_NONE && config.entryGatingType <= GATING_TYPE_CONST_MAX,
+      config.entryGatingType.native >= GATING_TYPE_NONE && config.entryGatingType.native <= GATING_TYPE_CONST_MAX,
       'gating type not valid',
     )
     assert(
-      config.epochRoundLength >= MIN_EPOCH_LENGTH && config.epochRoundLength <= MAX_EPOCH_LENGTH,
+      config.epochRoundLength.native >= MIN_EPOCH_LENGTH && config.epochRoundLength.native <= MAX_EPOCH_LENGTH,
       'epoch length not in allowable range',
     )
     assert(
-      config.percentToValidator >= MIN_PCT_TO_VALIDATOR && config.percentToValidator <= MAX_PCT_TO_VALIDATOR,
+      config.percentToValidator.native >= MIN_PCT_TO_VALIDATOR &&
+        config.percentToValidator.native <= MAX_PCT_TO_VALIDATOR,
       'commission percentage not valid',
     )
-    if (config.percentToValidator !== 0) {
+    if (config.percentToValidator.native !== 0) {
       assert(
-        config.validatorCommissionAddress !== Global.zeroAddress,
+        config.validatorCommissionAddress.native !== Global.zeroAddress,
         'validatorCommissionAddress must be set if percent to validator is not 0',
       )
     }
     assert(config.minEntryStake >= MIN_ALGO_STAKE_PER_POOL, 'staking pool must have minimum entry of 1 algo')
     // we don't care about maxAlgoPerPool - if set to 0 it floats w/ network incentive values: maxAlgoAllowedPerPool()
     assert(
-      config.poolsPerNode > 0 && config.poolsPerNode <= MAX_POOLS_PER_NODE,
+      config.poolsPerNode.native > 0 && config.poolsPerNode.native <= MAX_POOLS_PER_NODE,
       'number of pools per node must be be between 1 and the maximum allowed number',
     )
     if (config.sunsettingOn !== 0) {
@@ -1173,11 +1176,11 @@ export class ValidatorRegistry extends Contract {
 
   private addPoolToNode(validatorId: ValidatorIdType, poolAppId: uint64, nodeNum: uint64) {
     const nodePoolAssignments = clone(this.validatorList(validatorId).value.nodePoolAssignments)
-    const maxPoolsPerNodeForThisValidator = this.validatorList(validatorId).value.config.poolsPerNode as uint64
+    const maxPoolsPerNodeForThisValidator = this.validatorList(validatorId).value.config.poolsPerNode
     // add the new staking pool to the specified node number - if there is room
     assert(nodeNum >= 1 && nodeNum <= MAX_NODES, 'node number not in valid range')
     // iterate all the poolAppIds slots to see if any are free (appid of 0)
-    for (let i = 0; i < maxPoolsPerNodeForThisValidator; i += 1) {
+    for (let i: uint64 = 0; i < maxPoolsPerNodeForThisValidator.native; i += 1) {
       if (nodePoolAssignments.nodes[nodeNum - 1].poolAppIds[i] === 0) {
         // update box data
         this.validatorList(validatorId).value.nodePoolAssignments.nodes[nodeNum - 1].poolAppIds[i] = poolAppId
@@ -1196,7 +1199,7 @@ export class ValidatorRegistry extends Contract {
    */
   private doesStakerMeetGating(validatorId: ValidatorIdType, valueToVerify: uint64): void {
     const type = this.validatorList(validatorId).value.config.entryGatingType
-    if (type === GATING_TYPE_NONE) {
+    if (type.native === GATING_TYPE_NONE) {
       return
     }
     const staker = Txn.sender
@@ -1204,9 +1207,9 @@ export class ValidatorRegistry extends Contract {
 
     // If an asset gating - check the balance requirement - can handle whether right asset afterward
     if (
-      type === GATING_TYPE_ASSETS_CREATED_BY ||
-      type === GATING_TYPE_ASSET_ID ||
-      type === GATING_TYPE_CREATED_BY_NFD_ADDRESSES
+      type.native === GATING_TYPE_ASSETS_CREATED_BY ||
+      type.native === GATING_TYPE_ASSET_ID ||
+      type.native === GATING_TYPE_CREATED_BY_NFD_ADDRESSES
     ) {
       assert(valueToVerify !== 0)
       let balRequired = this.validatorList(validatorId).value.config.gatingAssetMinBalance
@@ -1218,13 +1221,13 @@ export class ValidatorRegistry extends Contract {
         'must have required minimum balance of validator defined token to add stake',
       )
     }
-    if (type === GATING_TYPE_ASSETS_CREATED_BY) {
+    if (type.native === GATING_TYPE_ASSETS_CREATED_BY) {
       assert(
-        Asset(valueToVerify).creator === config.entryGatingAddress,
+        Asset(valueToVerify).creator === config.entryGatingAddress.native,
         'specified asset must be created by creator that the validator defined as a requirement to stake',
       )
     }
-    if (type === GATING_TYPE_ASSET_ID) {
+    if (type.native === GATING_TYPE_ASSET_ID) {
       let found = false
       for (const assetId of config.entryGatingAssets) {
         if (valueToVerify === assetId) {
@@ -1234,7 +1237,7 @@ export class ValidatorRegistry extends Contract {
       }
       assert(found, 'specified asset must be identical to the asset id defined as a requirement to stake')
     }
-    if (type === GATING_TYPE_CREATED_BY_NFD_ADDRESSES) {
+    if (type.native === GATING_TYPE_CREATED_BY_NFD_ADDRESSES) {
       // Walk all the linked addresses defined by the gating NFD (stored packed in v.caAlgo.0.as as a 'set' of 32-byte PKs)
       // if any are the creator of the specified asset then we pass.
       assert(
@@ -1242,7 +1245,7 @@ export class ValidatorRegistry extends Contract {
         'specified asset must be created by creator that is one of the linked addresses in an nfd',
       )
     }
-    if (type === GATING_TYPE_SEGMENT_OF_NFD) {
+    if (type.native === GATING_TYPE_SEGMENT_OF_NFD) {
       // verify nfd is real...
       const userOfferedNFDAppID = valueToVerify
       assert(this.isNFDAppIDValid(userOfferedNFDAppID), 'provided NFD must be valid')

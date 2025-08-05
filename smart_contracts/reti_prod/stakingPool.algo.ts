@@ -63,8 +63,6 @@ export type StakedInfo = {
  * validate coming from the validator are only allowed if it matches the validator id it was created with.
  */
 export class StakingPool extends Contract {
-  programVersion = 11
-
   // When created, we track our creating validator contract so that only this contract can call us.  Independent
   // copies of this contract could be created but only the 'official' validator contract would be considered valid
   // and official.  Calls from these pools back to the validator contract are also validated, ensuring the pool
@@ -452,7 +450,7 @@ export class StakingPool extends Contract {
           appId: this.creatingValidatorContractAppId.value,
           args: [
             { id: this.validatorId.value, poolId: this.poolId.value, poolAppId: Global.currentApplicationId.id },
-            staker,
+            new Address(staker),
             0, // no algo removed
             amountRewardTokenRemoved,
             false, // staker isn't being removed.
@@ -666,7 +664,7 @@ export class StakingPool extends Contract {
       //  since validator gets nothing and stakers get a reward amount calculated differently we need to make
       //  sure it's always <= reward they would've received had the validator taken their cut.
       const normalValidatorCommission = wideRatio(
-        [algoRewardAvail, validatorConfig.percentToValidator as uint64],
+        [algoRewardAvail, validatorConfig.percentToValidator.native],
         [1_000_000],
       )
       // diminishedReward = (reward * maxStakePerPool) / stakeForValidator
@@ -686,13 +684,10 @@ export class StakingPool extends Contract {
         .submit()
       // then distribute the smaller reward amount like normal (skipping validator payout entirely)
       algoRewardAvail = diminishedReward
-    } else if (validatorConfig.percentToValidator !== 0) {
+    } else if (validatorConfig.percentToValidator.native !== 0) {
       // determine the % that goes to validator...
       // ie: 100[algo] * 50_000 (5% w/4 decimals) / 1_000_000 == 5 [algo]
-      validatorCommissionPaidOut = wideRatio(
-        [algoRewardAvail, validatorConfig.percentToValidator as uint64],
-        [1_000_000],
-      )
+      validatorCommissionPaidOut = wideRatio([algoRewardAvail, validatorConfig.percentToValidator.native], [1_000_000])
 
       // and adjust reward for entire pool accordingly
       algoRewardAvail -= validatorCommissionPaidOut
@@ -708,21 +703,23 @@ export class StakingPool extends Contract {
         let managerTopOff = 0
         if (
           validatorConfig.manager !== validatorConfig.validatorCommissionAddress &&
-          validatorConfig.manager.balance - validatorConfig.manager.minBalance < 2_100_000
+          validatorConfig.manager.native.balance - validatorConfig.manager.native.minBalance < 2_100_000
         ) {
           managerTopOff = validatorCommissionPaidOut < 2_100_000 ? validatorCommissionPaidOut : 2_100_000
           itxn.payment({
             amount: managerTopOff,
-            receiver: validatorConfig.manager,
+            receiver: validatorConfig.manager.native,
             note: 'validator reward to manager for funding epoch updates',
           })
         }
         if (validatorCommissionPaidOut - managerTopOff > 0) {
-          itxn.payment({
-            amount: validatorCommissionPaidOut - managerTopOff,
-            receiver: validatorConfig.validatorCommissionAddress,
-            note: 'validator reward',
-          })
+          itxn
+            .payment({
+              amount: validatorCommissionPaidOut - managerTopOff,
+              receiver: validatorConfig.validatorCommissionAddress.native,
+              note: 'validator reward',
+            })
+            .submit()
         }
       }
     }
@@ -977,7 +974,7 @@ export class StakingPool extends Contract {
       appId: this.creatingValidatorContractAppId.value,
       args: [this.validatorId.value],
     }).returnValue
-    return Txn.sender === OwnerAndManager[0] || Txn.sender === OwnerAndManager[1]
+    return Txn.sender === OwnerAndManager[0].native || Txn.sender === OwnerAndManager[1].native
   }
 
   /**
