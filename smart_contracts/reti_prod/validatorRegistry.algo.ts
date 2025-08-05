@@ -38,6 +38,7 @@ import {
   ValidatorInfo,
   ValidatorPoolKey,
 } from './validatorConfigs.algo'
+import { uint64 } from '@algorandfoundation/algorand-typescript'
 
 // eslint-disable-next-line no-unused-vars
 /**
