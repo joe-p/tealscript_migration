@@ -264,7 +264,7 @@ export class StakingPool extends Contract {
 
     if (firstEmpty === 0) {
       // nothing was found - pool is full and this staker can't fit
-      throw Error('Staking pool full')
+      assert(false, 'Staking pool full')
     }
     // This is a new staker to the pool, so first ensure they're adding required minimum, then
     // initialize slot and add to the stakers.
@@ -315,7 +315,7 @@ export class StakingPool extends Contract {
           amountToUnstake = cmpStaker.balance
         }
         if (cmpStaker.balance < amountToUnstake) {
-          throw Error('Insufficient balance')
+          assert(false, 'Insufficient balance')
         }
         cmpStaker.balance -= amountToUnstake
         this.totalAlgoStaked.value -= amountToUnstake
@@ -394,7 +394,7 @@ export class StakingPool extends Contract {
         return
       }
     }
-    throw Error('account not found')
+    assert(false, 'account not found')
   }
 
   /**
@@ -459,7 +459,7 @@ export class StakingPool extends Contract {
         return
       }
     }
-    throw Error('account not found')
+    assert(false, 'account not found')
   }
 
   /**
@@ -477,7 +477,7 @@ export class StakingPool extends Contract {
         return this.stakers.value[i]
       }
     }
-    throw Error('account not found')
+    assert(false, 'account not found')
   }
 
   /**

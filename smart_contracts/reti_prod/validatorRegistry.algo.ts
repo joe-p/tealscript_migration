@@ -498,7 +498,7 @@ export class ValidatorRegistry extends Contract {
 
     let numPools: uint64 = this.validatorList(validatorId).value.state.numPools.native
     if ((numPools as uint64) >= MAX_POOLS) {
-      throw Error('already at max pool size')
+      assert(false, 'already at max pool size')
     }
     numPools += 1
 
@@ -604,7 +604,7 @@ export class ValidatorRegistry extends Contract {
     const isNewStakerToValidator = findRet[1]
     const isNewStakerToProtocol = findRet[2]
     if (poolKey.poolId === 0) {
-      throw Error('No pool available with free stake.  Validator needs to add another pool')
+      assert(false, 'No pool available with free stake.  Validator needs to add another pool')
     }
 
     // Update StakerPoolList for this found pool (new or existing)
@@ -927,7 +927,7 @@ export class ValidatorRegistry extends Contract {
         }
       }
     }
-    throw Error("couldn't find pool app id in nodes to move")
+    assert(false, "couldn't find pool app id in nodes to move")
   }
 
   /**
@@ -1132,7 +1132,7 @@ export class ValidatorRegistry extends Contract {
       }
     }
     if (firstEmpty === 0) {
-      throw Error('No empty slot available in the staker pool set')
+      assert(false, 'No empty slot available in the staker pool set')
     }
     this.stakerPoolSet(staker).value[firstEmpty - 1] = poolKey
   }
@@ -1168,7 +1168,7 @@ export class ValidatorRegistry extends Contract {
       }
     }
     if (!found) {
-      throw Error('No matching slot found when told to remove a pool from the stakers set')
+      assert(false, 'No matching slot found when told to remove a pool from the stakers set')
     }
     // Are they completely out of the staking pool ?
     return [inSameValidatorPoolCount === 0, inAnyPoolCount === 0]
@@ -1187,7 +1187,7 @@ export class ValidatorRegistry extends Contract {
         return
       }
     }
-    throw Error('no available space in specified node for this pool')
+    assert(false, 'no available space in specified node for this pool')
   }
 
   /**
