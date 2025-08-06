@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@algorandfoundation/algorand-typescript": "^1.0.0-alpha.69",
-    "@algorandfoundation/puya-ts": "^1.0.0-alpha.69"
+    "@algorandfoundation/puya-ts": "^1.0.0-alpha.69",
+    "@types/bun": "^1.2.19"
   }
 }

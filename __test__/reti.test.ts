@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { AlgorandClient } from '@algorandfoundation/algokit-utils/types/algorand-client'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'bun:test'
 import stakingPoolTealScript from './StakingPoolTEALScript.arc56.json'
 import validatorRegistryTealScript from './ValidatorRegistryTEALScript.arc56.json'
 import stakingPoolPuya from '../smart_contracts/artifacts/reti/StakingPool.arc56.json'
 import validatorRegistryPuya from '../smart_contracts/artifacts/reti/ValidatorRegistry.arc56.json'
 import { AppClient } from '@algorandfoundation/algokit-utils/types/app-client'
 import { Arc56Contract } from '@algorandfoundation/algokit-utils/types/app-arc56'
+import * as fs from 'fs'
 
 async function testBytecodeComparison(
   puyaSpec: Arc56Contract,
@@ -36,6 +37,21 @@ async function testBytecodeComparison(
     algorand,
     defaultSender,
   })
+
+  if (!tealScriptSpec.source?.approval) {
+    throw new Error('TealScript source code not found')
+  }
+
+  if (!puyaSpec.source?.approval) {
+    throw new Error('Puya source code not found')
+  }
+
+  const tealscriptTeal = atob(tealScriptSpec.source.approval)
+  const puyaTeal = atob(puyaSpec.source.approval)
+
+  // write TEAL to file
+  fs.writeFileSync(`test_artifacts/tealscript-${tealScriptSpec.name}.teal`, tealscriptTeal)
+  fs.writeFileSync(`test_artifacts/puya-${puyaSpec.name}.teal`, puyaTeal)
 
   const tealScriptResult = await tealScriptClient.compile({
     deployTimeParams: tealScriptDeployParams,
