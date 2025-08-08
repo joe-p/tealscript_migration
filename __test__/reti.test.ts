@@ -2,8 +2,8 @@
 
 import { AlgorandClient } from '@algorandfoundation/algokit-utils/types/algorand-client'
 import { describe, expect, it } from 'bun:test'
-import stakingPoolTealScript from './StakingPoolTEALScript.arc56.json'
-import validatorRegistryTealScript from './ValidatorRegistryTEALScript.arc56.json'
+import stakingPoolTealScript from '../tealscript/reti_prod/StakingPool.arc56.json'
+import validatorRegistryTealScript from '../tealscript/reti_prod/ValidatorRegistry.arc56.json'
 import stakingPoolPuya from '../smart_contracts/artifacts/reti/StakingPool.arc56.json'
 import validatorRegistryPuya from '../smart_contracts/artifacts/reti/ValidatorRegistry.arc56.json'
 import { AppClient } from '@algorandfoundation/algokit-utils/types/app-client'
@@ -67,6 +67,12 @@ async function testBytecodeComparison(
   console.debug(
     `${contractName} - Puya bytecode is ${((puyaSize / tealscriptSize) * 100).toFixed(2)}% of TealScript bytecode (NOTE: Some TEALScript code has not been converted yet)`,
   )
+
+  const disassembledTealscript = (await algorand.client.algod.disassemble(tealScriptResult.approvalProgram).do()).result
+  const disassembledPuya = (await algorand.client.algod.disassemble(puyaResult.approvalProgram).do()).result
+
+  fs.writeFileSync(`test_artifacts/tealscript-${tealScriptSpec.name}.disassembled.teal`, disassembledTealscript)
+  fs.writeFileSync(`test_artifacts/puya-${puyaSpec.name}.disassembled.teal`, disassembledPuya)
 
   expect(puyaSize).toBeLessThanOrEqual(tealscriptSize)
 }
