@@ -940,7 +940,12 @@ export class StakingPool extends Contract {
 
     itxn.applicationCall({
       appId: Application(nfdRegistryAppId),
-      appArgs: ['verify_nfd_addr', nfdName, op.itob(nfdAppId), encodeArc4(Global.currentApplicationAddress)],
+      appArgs: [
+        Bytes('verify_nfd_addr'),
+        Bytes(nfdName),
+        op.itob(nfdAppId),
+        encodeArc4(Global.currentApplicationAddress),
+      ],
       apps: [Application(nfdAppId)],
     })
   }

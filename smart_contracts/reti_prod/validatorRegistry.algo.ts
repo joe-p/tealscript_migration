@@ -426,7 +426,7 @@ export class ValidatorRegistry extends Contract {
     assert(this.isNFDAppIDValid(nfdAppID), 'provided NFD must be valid')
     // we know sender is owner or manager - so if sender is owner of nfd - we're fine.
     assert(
-      Txn.sender == Account(op.AppGlobal.getExBytes(nfdAppID, Bytes('i.owner.a'))[0]),
+      Txn.sender === Account(op.AppGlobal.getExBytes(nfdAppID, Bytes('i.owner.a'))[0]),
       'If specifying NFD, account adding validator must be owner',
     )
     this.validatorList(validatorId).value.config.nfdForInfo = nfdAppID
@@ -471,7 +471,7 @@ export class ValidatorRegistry extends Contract {
     }
     this.validatorList(validatorId).value.config.entryGatingType = EntryGatingType
     this.validatorList(validatorId).value.config.entryGatingAddress = EntryGatingAddress
-    this.validatorList(validatorId).value.config.entryGatingAssets = EntryGatingAssets
+    this.validatorList(validatorId).value.config.entryGatingAssets = clone(EntryGatingAssets)
     this.validatorList(validatorId).value.config.gatingAssetMinBalance = GatingAssetMinBalance
     this.validatorList(validatorId).value.config.rewardPerPayout = RewardPerPayout
   }
@@ -600,7 +600,7 @@ export class ValidatorRegistry extends Contract {
     // find existing slot where staker is already in a pool w/ this validator, or if none found, then ensure they're
     // putting in minimum amount for this validator.
     const findRet = this.findPoolForStaker(validatorId, staker, realAmount)
-    const poolKey = findRet[0]
+    const poolKey = clone(findRet[0])
     const isNewStakerToValidator = findRet[1]
     const isNewStakerToProtocol = findRet[2]
     if (poolKey.poolId === 0) {
@@ -801,7 +801,7 @@ export class ValidatorRegistry extends Contract {
       const totalStakers = this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalStakers.native
       this.validatorList(poolKey.id).value.pools[poolKey.poolId - 1].totalStakers = new Uint16(totalStakers - 1)
       // then update the staker set.
-      const removeRet = this.removeFromStakerPoolSet(staker, <ValidatorPoolKey>{
+      const removeRet = this.removeFromStakerPoolSet(staker, {
         id: poolKey.id,
         poolId: poolKey.poolId,
         poolAppId: poolKey.poolAppId,
@@ -1013,7 +1013,7 @@ export class ValidatorRegistry extends Contract {
    * @param {ValidatorIdType} validatorId - The id of the validator whose data should be re-evaluated.
    */
   private reverifyNFDOwnership(validatorId: ValidatorIdType): void {
-    const validatorConfig = this.validatorList(validatorId).value.config
+    const validatorConfig = clone(this.validatorList(validatorId).value.config)
     if (validatorConfig.nfdForInfo !== 0) {
       // We already verified the nfd id and name were correct at creation time - so we don't need to verify
       // the nfd is real anymore, just that its still owned by the validator.
@@ -1302,7 +1302,7 @@ export class ValidatorRegistry extends Contract {
   private isAddressInNFDCAAlgoList(nfdAppID: uint64, addrToFind: Address): boolean {
     itxn.applicationCall({
       appId: Application(nfdAppID),
-      appArgs: ['read_property', 'v.caAlgo.0.as'],
+      appArgs: [Bytes('read_property'), Bytes('v.caAlgo.0.as')],
     })
     const caAlgoData = op.ITxn.lastLog
     for (let i = 0; i < caAlgoData.length; i += 32) {
