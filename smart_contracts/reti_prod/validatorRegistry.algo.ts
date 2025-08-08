@@ -75,6 +75,8 @@ import {
 import { ITxn } from '@algorandfoundation/algorand-typescript/op'
 import { wideRatio } from './utils.algo'
 
+const nfdRegistryAppId = TemplateVar<uint64>('NFD_REGISTRY_APP_ID')
+
 /**
  * ValidatorRegistry is the 'master contract' for the reti pooling protocol.
  * A single immutable instance of this is deployed.  All state for all validators including information about their
@@ -105,8 +107,6 @@ export class ValidatorRegistry extends Contract {
   // For given user staker address, which of up to MAX_POOLS_PER_STAKER validator/pools are they in
   // We use this to find a particular addresses deposits (in up to X independent pools w/ any validators)
   stakerPoolSet = BoxMap<Address, FixedArray<ValidatorPoolKey, typeof MAX_POOLS_PER_STAKER>>({ keyPrefix: 'sps' })
-
-  nfdRegistryAppId = TemplateVar<uint64>('NFD_REGISTRY_APP_ID')
 
   // ======
   // PUBLIC CONTRACT METHODS
@@ -333,7 +333,7 @@ export class ValidatorRegistry extends Contract {
 
   @abimethod({ readonly: true })
   getNFDRegistryID(): uint64 {
-    return this.nfdRegistryAppId
+    return nfdRegistryAppId
   }
 
   /** Adds a new validator

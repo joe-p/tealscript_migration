@@ -50,6 +50,8 @@ export type StakedInfo = {
   entryRound: uint64 // round number of entry (320 added to entry round to accommodate consensus balance delay)
 }
 
+const nfdRegistryAppId = TemplateVar<uint64>('NFD_REGISTRY_APP_ID')
+
 /**
  * StakingPool contract has a new instance deployed per staking pool added by any validator.  A single instance
  * is initially immutably deployed, and the id of that instance is used as a construction parameter in the immutable
@@ -114,8 +116,6 @@ export class StakingPool extends Contract {
   weightedMovingAverage = GlobalState<Uint128>({ key: 'ewma' })
 
   // ---
-
-  nfdRegistryAppId = TemplateVar<uint64>('NFD_REGISTRY_APP_ID')
 
   /**
    * Initialize the staking pool w/ owner and manager, but can only be created by the validator contract.
@@ -939,7 +939,7 @@ export class StakingPool extends Contract {
     assert(this.isOwnerOrManagerCaller(), 'can only be called by owner or manager of validator')
 
     itxn.applicationCall({
-      appId: Application(this.nfdRegistryAppId),
+      appId: Application(nfdRegistryAppId),
       appArgs: ['verify_nfd_addr', nfdName, op.itob(nfdAppId), encodeArc4(Global.currentApplicationAddress)],
       apps: [Application(nfdAppId)],
     })
