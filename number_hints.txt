@@ -1,0 +1,271 @@
+You are using AlgoKit version 2.7.0, however version 2.8.0 is available. Please update using the tool used to install AlgoKit.
+Running `build` command in /Users/joe/git/joe-p/tealscript_migration...
+
+····················· project run 'build' command output: ······················
+
+> smart_contracts@1.0.0 build
+> algokit compile ts smart_contracts --output-source-map --out-dir artifacts && algokit generate client smart_contracts/artifacts --output {app_spec_dir}/{contract_name}Client.ts
+
+You are using AlgoKit version 2.7.0, however version 2.8.0 is available. Please update using the tool used to install AlgoKit.
+smart_contracts/reti_prod/stakingPool.algo.ts:182:11 error: `0 | 100000` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             const extraMBR = isTokenEligible && this.poolId.value === 1 ? ASSET_HOLDING_FEE : 0
+                                                                   ^~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:185:7 error: `0 | 100000` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            extraMBR +
+                                                            ^~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:189:83 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             assertMatch(mbrPayment, { receiver: Global.currentApplicationAddress, amount: PoolInitMbr })
+                                                                                                                                           ^~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:236:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             const entryRound = Global.round + ALGORAND_STAKING_BLOCK_DELAY
+                                                                   ^~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:237:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            let firstEmpty = 0
+                                                                ^~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:241:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             const roundsLeftInBin = this.binRoundStart.value + this.roundsPerDay.value - Global.round
+                                                                   ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:243:90 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             this.stakeAccumulator.value.native + BigUint(stakedAmountPayment.amount) * BigUint(roundsLeftInBin),
+                                                                                                                                                ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:247:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             for (let i = 0; i < this.stakers.value.length; i += 1) {
+                                                                      ^
+smart_contracts/reti_prod/stakingPool.algo.ts:265:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            if (firstEmpty === 0) {
+                                                                ^~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:274:31 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             assert(this.stakers.value[firstEmpty - 1].account.native === Global.zeroAddress)
+                                                                                       ^~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:275:24 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             this.stakers.value[firstEmpty - 1] = {
+                                                                                ^~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:283:12 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             return entryRound
+                                                                    ^~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:309:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             for (let i = 0; i < this.stakers.value.length; i += 1) {
+                                                                      ^
+smart_contracts/reti_prod/stakingPool.algo.ts:411:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             for (let i = 0; i < this.stakers.value.length; i += 1) {
+                                                                      ^
+smart_contracts/reti_prod/stakingPool.algo.ts:474:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             for (let i = 0; i < this.stakers.value.length; i += 1) {
+                                                                      ^
+smart_contracts/reti_prod/stakingPool.algo.ts:545:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             const thisEpochBegin = curRound - (curRound % epochRoundLength)
+                                                                   ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:548:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             const lastPayoutEpoch = this.lastPayout.value - (this.lastPayout.value % epochRoundLength)
+                                                                   ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:550:12 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             assert(lastPayoutEpoch !== thisEpochBegin, "can't call epochBalanceUpdate in same epoch as prior call")
+                                                                    ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:607:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            let algoRewardAvail =
+                                                                ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:627:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            let tokenRewardAvail = 0
+                                                                ^~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:628:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            let tokenRewardPaidOut = 0
+                                                                ^~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:629:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            let validatorCommissionPaidOut = 0
+                                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:630:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            let excessToFeeSink = 0
+                                                                ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:632:13 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             const tokenRewardBal =
+                                                                   ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:638:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             if (tokenRewardBal >= validatorConfig.rewardPerPayout) {
+                                                                 ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:650:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            if (tokenRewardAvail === 0) {
+                                                                ^~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:668:10 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             [algoRewardAvail, validatorConfig.percentToValidator.native],
+                                                              ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:673:10 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             [algoRewardAvail, algoSaturationAmt],
+                                                              ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:677:30 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             if (diminishedReward > algoRewardAvail - normalValidatorCommission) {
+                                                                                    ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:681:7 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            excessToFeeSink = algoRewardAvail - diminishedReward
+                                                            ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:684:19 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             amount: excessToFeeSink,
+                                                                     ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:690:7 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            algoRewardAvail = diminishedReward
+                                                            ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:694:7 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            validatorCommissionPaidOut = wideRatio([algoRewardAvail, validatorConfig.percentToValidator.native], [1_000_000])
+                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:697:7 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            algoRewardAvail -= validatorCommissionPaidOut
+                                                            ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:704:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             if (validatorCommissionPaidOut > 0) {
+                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:737:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            let increasedStake = 0
+                                                                ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:761:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            if (algoRewardAvail !== 0 || tokenRewardAvail !== 0) {
+                                                                ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:863:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             const roundsLeftInBin = this.binRoundStart.value + this.roundsPerDay.value - Global.round
+                                                                   ^~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:864:35 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             this.totalAlgoStaked.value += increasedStake
+                                                                                           ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:866:52 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             this.stakeAccumulator.value.native + BigUint(increasedStake) * BigUint(roundsLeftInBin),
+                                                                                                          ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:868:67 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             this.rewardAccumulator.value = this.rewardAccumulator.value + increasedStake
+                                                                                                                           ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:878:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                            increasedStake,
+                                                            ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:1032:13 error: `bigint` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                              let alpha = 10n // .1
+                                                                  ^~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:1035:11 error: `bigint` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                              alpha = 90n // .9
+                                                              ^~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:1043:64 error: `bigint` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                              (this.weightedMovingAverage.value.native * (100n - alpha)) / 100n + (apr * alpha) / 100n,
+                                                                                                                 ^~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:1067:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                              const avgBlockTimeTenths = op.Block.blkTimestamp(Txn.firstValid - 1) - op.Block.blkTimestamp(Txn.firstValid - 11)
+                                                                    ^~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:1068:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                             if (avgBlockTimeTenths === 0) {
+                                                                 ^~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/stakingPool.algo.ts:1076:53 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                              this.roundsPerDay.value = (24 * 60 * 60 * 10) / avgBlockTimeTenths
+                                                                                                              ^~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:235:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   for (let i = 0; i < poolSet.length; i += 1) {
+                                                                            ^
+smart_contracts/reti_prod/validatorRegistry.algo.ts:274:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   const hardMaxDividedBetweenPools = this.maxAllowedStake() / numPools
+                                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:279:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                  if (hardMaxDividedBetweenPools < maxPerPool) {
+                                                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:307:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   for (let i = 0; i < poolSet.length; i += 1) {
+                                                                            ^
+smart_contracts/reti_prod/validatorRegistry.algo.ts:358:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   const validatorId = this.numValidators.value + 1
+                                                                         ^~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:359:32 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   this.numValidators.value = validatorId
+                                                                                              ^~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:361:24 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   this.validatorList(validatorId).create()
+                                                                                      ^~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:362:24 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   this.validatorList(validatorId).value.config = config
+                                                                                      ^~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:363:24 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   this.validatorList(validatorId).value.config.id = validatorId
+                                                                                      ^~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:383:39 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   emit<retiOP_addedValidator>({ id: validatorId, owner: config.owner, manager: config.manager })
+                                                                                                     ^~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:384:12 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   return validatorId
+                                                                          ^~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:661:13 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   const thisEpochBegin = curRound - (curRound % epochRoundLength)
+                                                                         ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:663:72 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   if (lastPayoutUpdate - (lastPayoutUpdate % epochRoundLength) === thisEpochBegin) {
+                                                                                                                                    ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:671:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   for (let i = 0; i < curNumPools; i += 1) {
+                                                                            ^
+smart_contracts/reti_prod/validatorRegistry.algo.ts:854:16 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   for (let i = 0; i < poolSet.length; i += 1) {
+                                                                            ^
+smart_contracts/reti_prod/validatorRegistry.algo.ts:882:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   for (let i = 0; i < curNumPools; i += 1) {
+                                                                            ^
+smart_contracts/reti_prod/validatorRegistry.algo.ts:912:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   for (let srcNodeIdx = 0; srcNodeIdx < MAX_NODES; srcNodeIdx += 1) {
+                                                                            ^~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:951:11 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   const tokenRewardBal = op.AssetHolding.assetBalance(poolOneAppId.address, rewardTokenId)[0] - rewardTokenHeldBack
+                                                                         ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:956:39 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   args: [receiver, rewardTokenId, tokenRewardBal],
+                                                                                                   ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:962:12 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   return tokenRewardBal
+                                                                          ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1124:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   let firstEmpty = 0
+                                                                       ^~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1125:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                    for (let i = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
+                                                                             ^
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1134:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   if (firstEmpty === 0) {
+                                                                       ^~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1137:38 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                    this.stakerPoolSet(staker).value[firstEmpty - 1] = poolKey
+                                                                                                     ^~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1150:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   let inSameValidatorPoolCount = 0
+                                                                       ^~~~~~~~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1151:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   let inAnyPoolCount = 0
+                                                                       ^~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1155:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                    for (let i = 0; i < this.stakerPoolSet(staker).value.length; i += 1) {
+                                                                             ^
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1174:13 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                    return [inSameValidatorPoolCount === 0, inAnyPoolCount === 0]
+                                                                            ^~~~~~~~~~~~~~~~~~~~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1308:14 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                    for (let i = 0; i < caAlgoData.length; i += 32) {
+                                                                             ^
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1358:9 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   let minBal = ALGORAND_ACCOUNT_MIN_BALANCE
+                                                                       ^~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1359:5 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   minBal += contracts * APPLICATION_BASE_FEE
+                                                                   ^~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1360:5 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   minBal += extraPages * APPLICATION_BASE_FEE
+                                                                   ^~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1361:5 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   minBal += assets * ASSET_HOLDING_FEE
+                                                                   ^~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1362:5 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   minBal += localInts * SSC_VALUE_UINT
+                                                                   ^~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1363:5 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   minBal += globalInts * SSC_VALUE_UINT
+                                                                   ^~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1364:5 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   minBal += localBytes * SSC_VALUE_BYTES
+                                                                   ^~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1365:5 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                   minBal += globalBytes * SSC_VALUE_BYTES
+                                                                   ^~~~~~
+smart_contracts/reti_prod/validatorRegistry.algo.ts:1366:12 error: `number` is not valid as a variable, parameter, return, or property type. Please use an algo-ts type such as `biguint` or `uint64`
+                                                                    return minBal
+                                                                           ^~~~~~
+info: Compilation halted due to errors
+
+An error occurred during compile. Please ensure that any supplied arguments are valid and any files passed are valid Algorand TypeScript code before retrying.
+
