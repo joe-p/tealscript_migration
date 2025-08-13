@@ -27,6 +27,7 @@ This document is up-to-date as of TEALScript v0.107.0 and Algorand TypeScript v1
 | `increaseOpcodeBudget()`                | `ensureBudget(requiredBudget: uint64)`                                                             |                                                                                  |
 | `throw Error("My error")`               | `assert(false, "My error")`                                                                        |                                                                                  |
 | `blocks[blk].timestamp`                 | `op.Block.timestamp(blk)`                                                                          | The same pattern applies to all block params                                     |
+| `@abi.readonly`                         | `@abimethod({ readonly: true })`                                                                   |                                                                                  |
 
 ## Migrations
 
