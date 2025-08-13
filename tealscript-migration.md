@@ -386,7 +386,8 @@ add(a: uint64, b: uint64): uint64 {
 #### UintN types
 
 TEALScript supports typed numeric literals for most common uint types, such as `uint8`, `uint16`, `uint256`, etc. In Algorand TypeScript,
-the UintN constructors must be used.
+the UintN constructors must be used. Since UintN types are distinct classes, arithmetic operations must be performed using biguint or uint64,
+which can be accessed via the `.native` property of the UintN type.
 
 ##### TEALScript
 
