@@ -301,14 +301,18 @@ class DangerousPaymentLsig extends LogicSig {
 
 In TEALScript, template variables must be properties of a contract. In Algorand TypeScript, they can be defined like any other variable.
 
+If you want to define a template variable once and re-use it in multiple places, you can define a const outside of the class.
+
+It should also be noted that template variables must be uppercase in Algorand TypeScript, while they can be lowercase in TEALScript.
+
 ###### TEALScript
 
 ```ts
 class AppCaller extends LogicSig {
-  APP_ID = TemplateVar<AppID>()
+  appId = TemplateVar<AppID>()
 
   logic(): void {
-    assert(this.txn.applicationID === this.APP_ID)
+    assert(this.txn.applicationID === this.appId)
   }
 }
 ```
@@ -316,9 +320,11 @@ class AppCaller extends LogicSig {
 ###### Algorand TypeScript
 
 ```ts
+const appId = TemplateVar<uint64>('APP_ID')
+
 class AppCaller extends LogicSig {
   logic(): void {
-    assert(this.txn.applicationID === TemplateVar<uint64>('APP_ID'))
+    assert(this.txn.applicationID === appId 
   }
 }
 ```
