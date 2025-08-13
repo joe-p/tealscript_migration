@@ -520,3 +520,22 @@ function(asa: Asset, expectedName: string) {
 ### Circular Compilation
 
 TODO
+
+### Program Version
+
+In TEALScript, the `programVersion` property can be set on a class to change the `#pragma version` of the compiled program. In Algorand TypeScript, the `@contract` decorator is used.
+
+##### TEALScript
+
+```ts
+class MyContract extends Contract {
+  programVersion = 11
+}
+```
+
+##### Algorand TypeScript
+
+```ts
+@contract({ avmVersion: 11 })
+class MyContract extends Contract {}
+```
