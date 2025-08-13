@@ -8,12 +8,12 @@ This document is up-to-date as of TEALScript v0.107.0 and Algorand TypeScript v1
 | --------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `EventLogger`                           | [`emit`](https://dev.algorand.co/reference/algorand-typescript/api-reference/index/functions/emit) |                                                                                  |
 | `BoxKey`                                | \[`Box`\](TOOD: link to box docs)                                                                  | The crate method has new parameters as shown \[here\](TODO: link to box section) |
-| `Txn`                                   | `Transaction`                                                                                      |                                                                                  |
-| `PayTxn`                                | `PaymentTxn`                                                                                       |                                                                                  |
-| `AppCallTxn`                            | `ApplicationCallTxn`                                                                               |                                                                                  |
-| `KeyRegTxn`                             | `KeyRegistrationTxn`                                                                               |                                                                                  |
-| `OnCompletion`                          | `OnCompleteAction`                                                                                 |                                                                                  |
-| Eliptic curve opcodes (i.e `ecAdd`)     | Now under \[`ElipticCurve`\](TODO: link to EC docs) (i.e. `ElipticCurve.add`)                      |                                                                                  |
+| `Txn`                                   | `gtxn.Transaction`                                                                                 |                                                                                  |
+| `PayTxn`                                | `gtxn.PaymentTxn`                                                                                  |                                                                                  |
+| `AppCallTxn`                            | `gtxn.ApplicationCallTxn`                                                                          |                                                                                  |
+| `KeyRegTxn`                             | `gtxn.KeyRegistrationTxn`                                                                          |                                                                                  |
+| `OnCompletion`                          | `gtxn.OnCompleteAction`                                                                            |                                                                                  |
+| Elliptic curve opcodes (i.e `ecAdd`)    | Now under \[`ElipticCurve`\](TODO: link to EC docs) (i.e. `ElipticCurve.add`)                      |                                                                                  |
 | `GlobalStateKey`                        | `GlobalState`                                                                                      |                                                                                  |
 | `LocalStateKey`                         | `LocalState`                                                                                       |                                                                                  |
 | `GlobalStateMap`                        | Not yet supported                                                                                  |                                                                                  |
@@ -24,6 +24,9 @@ This document is up-to-date as of TEALScript v0.107.0 and Algorand TypeScript v1
 | `globals`                               | \[`Global`\](TODO: link to Global docs)                                                            |                                                                                  |
 | `StaticArray`                           | `FixedArray`                                                                                       |                                                                                  |
 | `Box.create(size?: uint64)`             | `Box.create(options?: { size?: uint64 })`                                                          | In both cases the compiler will infer the size for fixed-length types            |
+| `increaseOpcodeBudget()`                | `ensureBudget(requiredBudget: uint64)`                                                             |                                                                                  |
+| `throw Error("My error")`               | `assert(false, "My error")`                                                                        |                                                                                  |
+| `blocks[blk].timestamp`                 | `op.Block.timestamp(blk)`                                                                          | The same pattern applies to all block params                                     |
 
 ## Migrations
 
