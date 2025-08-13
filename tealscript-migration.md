@@ -6,8 +6,6 @@ This document is up-to-date as of TEALScript v0.107.0 and Algorand TypeScript v1
 
 | TEALScript                              | Algorand TypeScript                                                                                | Notes                                                                                                                                                                          |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| JS Object                               | JS Object                                                                                          | Algorand TypeScript does not yet support nested dynamic types in JavaScript objects. TEALScript allows one level of nesting. For nested dynamic types, see [Objects](#objects) |
-| JS Array                                | JS Array                                                                                           | Algorand TypeScript does not yet support nested dynamic types in JavaScript arrays. TEALScript allows one level ofnesting. For nested dynamic types, see [Arrays](#arrays)     |
 | `EventLogger`                           | [`emit`](https://dev.algorand.co/reference/algorand-typescript/api-reference/index/functions/emit) |                                                                                                                                                                                |
 | `BoxKey`                                | [`Box`](TOOD: link to box docs)                                                                    | The crate method has new parameters as shown [here](TODO: link to box section)                                                                                                 |
 | `Txn`                                   | `Transaction`                                                                                      |                                                                                                                                                                                |
@@ -24,7 +22,8 @@ This document is up-to-date as of TEALScript v0.107.0 and Algorand TypeScript v1
 | `this.txn`                              | [`Txn`](TOOD: link to Txn docs)                                                                    |                                                                                                                                                                                |
 | `verify...Txn`                          | `assertMatch`                                                                                      | `assertMatch` can be used on any txn type or any object                                                                                                                        |
 | `globals`                               | [`Global`](TODO: link to Global docs)                                                              |                                                                                                                                                                                |
-| `StaticArray`                           | `FixedArray`                                                                                       | May not cover all cases. See the array section for more details                                                                                                                |
+| `StaticArray`                           | `FixedArray`                                                                                       |
+| `Box.create(size?: uint64)` | `Box.create(options?: { size?: uint64 })`                                                         | In both cases the compiler will infer the size for fixed-length types
 
 ## Migrations
 
@@ -68,14 +67,6 @@ class Swapper
   }
 }
 ```
-
-### Box Creation
-
-In TEALScript boxes are created via the create method: `create(size?: uint64)`.
-
-In Algorand TypeScript the create method uses an object with a size parameter: `create(options?: { size?: uint64 })`
-
-In both, the size will automatically be determined for fixed-length types, thus the size parameter is optional
 
 ### Inner Transactions
 
